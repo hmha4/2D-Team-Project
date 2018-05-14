@@ -59,7 +59,7 @@ void zOrderManager::Update()
 			{
 				//===============그림자를 사용할시=====================//
 				//그림자1의 바텀이 그림자2의 탑보다 작을경우
-				if (zVec[j]->getRc().bottom < zVec[j + 1]->getRc().top)
+				if (zVec[j]->getRc().bottom > zVec[j + 1]->getRc().top)
 				{
 					gameNode*temp = zVec[j];
 					zVec[j] = zVec[j + 1];
