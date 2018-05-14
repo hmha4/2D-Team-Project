@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="gameFrameWork">
+      <UniqueIdentifier>{3ecd586b-d0e6-4e4b-bbb7-5c2b37b56d52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround">
+      <UniqueIdentifier>{17f87004-b127-44c0-8acf-0add1f3a7562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameFrameWork\SingleTonBase">
+      <UniqueIdentifier>{8b0dd189-3f8e-4328-ab04-631844636c76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameFrameWork\Manager">
+      <UniqueIdentifier>{e159088f-e289-4473-8c26-44bc56f680e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="gameFrameWork\Image">
+      <UniqueIdentifier>{baa06b4d-f206-4d37-bfa8-c0ca3c815fb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameFrameWork\timer">
+      <UniqueIdentifier>{e3bf106c-d485-4452-9cac-56e9bb6989c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameFrameWork\animation">
+      <UniqueIdentifier>{ac130414-c429-4346-9a72-c35e18bab0a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameFrameWork\effect">
+      <UniqueIdentifier>{7da615c9-5a2b-4a11-871c-9d2885bf3192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameFrameWork\txtData">
+      <UniqueIdentifier>{d8172af8-3486-49ca-91d6-5ddad36a0e56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameFrameWork\PixelCollision">
+      <UniqueIdentifier>{d4a7fcf7-24e4-42fb-9fab-897a86dc8562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameFrameWork\interpolation">
+      <UniqueIdentifier>{a892d122-b509-4249-95aa-c6b0c26514a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameFrameWork\Button">
+      <UniqueIdentifier>{952836c5-69c3-4795-85bd-c23ab94d7c70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameFrameWork\BULLET">
+      <UniqueIdentifier>{d1267e0d-1bb2-48df-9db0-4e3ffd429221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameFrameWork\TileMap">
+      <UniqueIdentifier>{14f327de-5879-4255-99a5-be995b02b0e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameFrameWork\Light">
+      <UniqueIdentifier>{b92ebfc7-563a-4d51-a22d-f61e6095fcab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameFrameWork\BULLET\Bullet">
+      <UniqueIdentifier>{e19a61ea-e688-4d02-9090-ae2248ed1a4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage1-3">
+      <UniqueIdentifier>{85c400d7-4955-4f8f-95ae-97efa023dae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage1-2">
+      <UniqueIdentifier>{f7b85b82-0609-401e-8f35-24f043b04077}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage1-1">
+      <UniqueIdentifier>{e6a34ac9-8b7b-4cac-9ba4-d8c9ab98ac2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage1-1\Enemy">
+      <UniqueIdentifier>{cec808eb-e995-4b1b-9d0a-473afd3bc06f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage1-1\Player">
+      <UniqueIdentifier>{8d82e422-6fe4-4dd6-b6b2-de800faf034d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="mymecro.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround.h">
+      <Filter>PlayGround</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTonBase.h">
+      <Filter>gameFrameWork\SingleTonBase</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomManager.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="image.h">
+      <Filter>gameFrameWork\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>gameFrameWork\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="animation.h">
+      <Filter>gameFrameWork\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="effectManager.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="soundManager.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="effect.h">
+      <Filter>gameFrameWork\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="txtData.h">
+      <Filter>gameFrameWork\txtData</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelCollision.h">
+      <Filter>gameFrameWork\PixelCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="iniDataManager.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneManager.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="zOrderManager.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="interAction.h">
+      <Filter>gameFrameWork\interpolation</Filter>
+    </ClInclude>
+    <ClInclude Include="button.h">
+      <Filter>gameFrameWork\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyAniManager.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="gameNode.h">
+      <Filter>gameFrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletManager.h">
+      <Filter>gameFrameWork\BULLET</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.h">
+      <Filter>gameFrameWork\txtData</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>gameFrameWork\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>gameFrameWork\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>gameFrameWork\BULLET\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_1.h">
+      <Filter>PlayGround\Stage1-1</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="1.5게임루프.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="gameNode.cpp">
+      <Filter>gameFrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround.cpp">
+      <Filter>PlayGround</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomManager.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>gameFrameWork\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="timer.cpp">
+      <Filter>gameFrameWork\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="animation.cpp">
+      <Filter>gameFrameWork\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="effectManager.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="soundManager.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="effect.cpp">
+      <Filter>gameFrameWork\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="txtData.cpp">
+      <Filter>gameFrameWork\txtData</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelCollision.cpp">
+      <Filter>gameFrameWork\PixelCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="iniDataManager.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneManager.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="zOrderManager.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="interAction.cpp">
+      <Filter>gameFrameWork\interpolation</Filter>
+    </ClCompile>
+    <ClCompile Include="button.cpp">
+      <Filter>gameFrameWork\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyAniManager.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletManager.cpp">
+      <Filter>gameFrameWork\BULLET</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>gameFrameWork\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>gameFrameWork\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>gameFrameWork\BULLET\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_1.cpp">
+      <Filter>PlayGround\Stage1-1</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="1.5게임루프.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="1.5게임루프.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
