@@ -76,11 +76,8 @@
     <Filter Include="PlayGround\Stage1-1\Player">
       <UniqueIdentifier>{8d82e422-6fe4-4dd6-b6b2-de800faf034d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PlayGround\Stage1-1\Manager">
-      <UniqueIdentifier>{0aeff5f6-bacc-49bd-8bfe-c595cde0c555}</UniqueIdentifier>
-    </Filter>
     <Filter Include="PlayGround\Stage1-1\MapObject">
-      <UniqueIdentifier>{3702c6a1-ec60-4f65-8a6f-f420274d9e12}</UniqueIdentifier>
+      <UniqueIdentifier>{9e847463-e5ac-422a-b818-d5bcc2f4ab80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -183,11 +180,14 @@
     <ClInclude Include="Stage1_1.h">
       <Filter>PlayGround\Stage1-1</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyManager.h">
-      <Filter>PlayGround\Stage1-1\Manager</Filter>
+    <ClInclude Include="Character.h">
+      <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+    <ClInclude Include="Warrior.h">
+      <Filter>PlayGround\Stage1-1\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Magician.h">
+      <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClInclude>
     <ClInclude Include="MapObject.h">
       <Filter>PlayGround\Stage1-1\MapObject</Filter>
@@ -278,11 +278,14 @@
     <ClCompile Include="Stage1_1.cpp">
       <Filter>PlayGround\Stage1-1</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyManager.cpp">
-      <Filter>PlayGround\Stage1-1\Manager</Filter>
+    <ClCompile Include="Character.cpp">
+      <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+    <ClCompile Include="Warrior.cpp">
+      <Filter>PlayGround\Stage1-1\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Magician.cpp">
+      <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClCompile>
     <ClCompile Include="MapObject.cpp">
       <Filter>PlayGround\Stage1-1\MapObject</Filter>

@@ -120,7 +120,7 @@ void CameraManager::Update(float x, float y, float speed, bool isPlayer)
             //처음에 캐릭터까지 카메라가 자동으로 이동
             if (_state == MOVE)
             {
-                _cameraSpeed = getDistance(x, y, _x, _y) * 0.035;
+                _cameraSpeed = getDistance(x, y, _x, y) * 0.035;
 
                 dist = x - _x;
                 if (dist < 0) dist = dist * -1;
@@ -158,7 +158,7 @@ void CameraManager::Update(float x, float y, float speed, bool isPlayer)
             //캐릭터에 도착했을 때 카메라
             else if (_state == FOLLOW)
             {
-                _cameraSpeed = getDistance(x, y, x, _y) * 0.035;
+                _cameraSpeed = getDistance(x, y, _x, y) * 0.035;
                 if (x >= WINSIZEX / 2 && x <= backgroundSizeX - WINSIZEX / 2)
                 {
                     if (x <= _cameraRC.left)
@@ -234,7 +234,7 @@ void CameraManager::Update(float x, float y, float speed, bool isPlayer)
 void CameraManager::Render(HDC hdc)
 {
     //LineMake(IMGMANAGER->FindImage(imageName)->GetMemDC(), _probeLX, _y, _lineTo, _y);
-    //Rectangle(IMAGEMANAGER.findImage(imageName)->getMemDC(), _cameraRC.left, _cameraRC.top, _cameraRC.right, _cameraRC.bottom);
+    Rectangle(IMAGEMANAGER.findImage(imageName)->getMemDC(), _cameraRC.left, _cameraRC.top, _cameraRC.right, _cameraRC.bottom);
     //Rectangle(IMAGEMANAGER.findImage(imageName)->getMemDC(), _cameraTotalRC.left, _cameraTotalRC.top, _cameraTotalRC.right, _cameraTotalRC.bottom);
 
     IMAGEMANAGER.findImage(imageName)->Render(hdc, offSetX2, offSetY2);

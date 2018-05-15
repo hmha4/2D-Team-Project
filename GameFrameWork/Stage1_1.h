@@ -1,6 +1,8 @@
 #pragma once
 #include "gameNode.h"
 #include "MapObject.h"
+#include "Warrior.h"
+
 class Stage1_1:public gameNode
 {
 private:
@@ -18,6 +20,7 @@ private:
 	image*fadeOut;
 	int offset;
 
+    Character * _warrior;
 public:
 	Stage1_1();
 	~Stage1_1();

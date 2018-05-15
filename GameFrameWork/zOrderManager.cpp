@@ -3,6 +3,7 @@
 #include "gameNode.h"
 
 zOrderManager::zOrderManager()
+    :useShadowRect(false)
 {
 }
 

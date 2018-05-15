@@ -5,6 +5,7 @@ class MapObject:public gameNode
 private:
 	image*img;
 	int setX, setY;
+    RECT rc;
 public:
 	MapObject(image*img);
 	~MapObject();
@@ -14,5 +15,7 @@ public:
 	void Render();
 	void Update();
 	void Release();
+
+    virtual inline RECT&getRc() { return rc; }
 };
 

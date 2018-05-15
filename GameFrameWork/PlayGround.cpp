@@ -40,7 +40,7 @@ void PlayGround::Update()
     BULLET.BulletUpdate();
     EFFECTMANAGER.update();
 
-    CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, true);
+    //CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, true);
 }
 
 //그려주는

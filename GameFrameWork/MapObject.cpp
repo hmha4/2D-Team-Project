@@ -22,6 +22,7 @@ HRESULT MapObject::Init(int x, int y)
 {
 	setX = x;
 	setY = y;
+    rc = RectMake(setX, setY, img->GetWidth(), img->GetHeight());
 	return S_OK;
 }
 
