@@ -2,7 +2,7 @@
 #include "image.h"
 
 //백버퍼=>실제 이곳에다 앞으로 그림을 그림
-static image* backBuffer = IMAGEMANAGER.addImage("backBuffer", GAMESIZEX, GAMESIZEY);
+static image* backBuffer = IMAGEMANAGER.addImage("backBuffer", GAMESIZEX, WINSIZEY);
 class gameNode
 {
 private:

@@ -234,7 +234,7 @@ void CameraManager::Update(float x, float y, float speed, bool isPlayer)
 void CameraManager::Render(HDC hdc)
 {
     //LineMake(IMGMANAGER->FindImage(imageName)->GetMemDC(), _probeLX, _y, _lineTo, _y);
-    Rectangle(IMAGEMANAGER.findImage(imageName)->getMemDC(), _cameraRC.left, _cameraRC.top, _cameraRC.right, _cameraRC.bottom);
+    //Rectangle(IMAGEMANAGER.findImage(imageName)->getMemDC(), _cameraRC.left, _cameraRC.top, _cameraRC.right, _cameraRC.bottom);
     //Rectangle(IMAGEMANAGER.findImage(imageName)->getMemDC(), _cameraTotalRC.left, _cameraTotalRC.top, _cameraTotalRC.right, _cameraTotalRC.bottom);
 
     IMAGEMANAGER.findImage(imageName)->Render(hdc, offSetX2, offSetY2);
