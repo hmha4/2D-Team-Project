@@ -41,12 +41,12 @@ using namespace std;
 #include "sceneManager.h"
 
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
-#define WINSIZEX 1280
-#define WINSIZEY 800
+#define WINSIZEX 800
+#define WINSIZEY 500
 #define WINPOSX 400
 #define WINPOSY 100
-#define GAMESIZEX 2000
-#define GAMESIZEY 1500
+#define GAMESIZEX 3652
+#define GAMESIZEY 400
 
 #define KEYMANAGER KeyManager::GetInstance()
 #define RND RandomManager::GetInstance()

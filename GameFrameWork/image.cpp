@@ -4,7 +4,7 @@
 #pragma comment(lib, "msimg32.lib")
 
 image::image()
-    :_imageInfo(NULL), _fileName(NULL), _trans(false), _transColor(RGB(0, 0, 0)), _alpha(false)
+    :_imageInfo(NULL), _fileName(NULL), _trans(false), _transColor(RGB(0, 0, 0)), _alpha(true)
 {
 }
 

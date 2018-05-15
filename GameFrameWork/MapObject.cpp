@@ -1,0 +1,39 @@
+#include "stdafx.h"
+#include "MapObject.h"
+
+
+MapObject::MapObject(image*img)
+	:setX(0),setY(0)
+{
+	this->img = img;
+}
+
+
+MapObject::~MapObject()
+{
+}
+
+HRESULT MapObject::Init()
+{
+	return S_OK;
+}
+
+HRESULT MapObject::Init(int x, int y)
+{
+	setX = x;
+	setY = y;
+	return S_OK;
+}
+
+void MapObject::Render()
+{
+	img->Render(getMemDC(), setX, setY);
+}
+
+void MapObject::Update()
+{
+}
+
+void MapObject::Release()
+{
+}

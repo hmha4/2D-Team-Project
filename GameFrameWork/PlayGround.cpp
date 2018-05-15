@@ -16,8 +16,8 @@ PlayGround::~PlayGround()
 HRESULT PlayGround::Init()
 {
     gameNode::init(true);
-
-
+	SCENEMANAGER.addScene("스테이지1.1", new Stage1_1);
+	SCENEMANAGER.changeScene("스테이지1.1");
     return S_OK;
 }
 
