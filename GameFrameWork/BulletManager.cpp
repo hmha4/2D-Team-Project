@@ -78,6 +78,23 @@ void BulletManager::BulletSetting(string bulletName, image * img, int bulletNum,
 	bIdxMap.insert(pair<string, int>(bulletName, 0));
 }
 
+void BulletManager::BulletShadowSetting(string bulletName,image*shadowImg, const RECT & shadowRc,float setY)
+{
+	bulletMapIter bMapIter = bMap.find(bulletName);
+	bulletIter	  bIter;
+	
+	bIter = bMapIter->second.begin();
+
+	for (; bIter != bMapIter->second.end(); bMapIter++)
+	{
+		(*bIter)->useShadow = true;
+		(*bIter)->shadowRc = shadowRc;
+		(*bIter)->ShadowSetY = setY;
+		(*bIter)->shadowImg = shadowImg;
+	}
+	
+}
+
 void BulletManager::BulletUpdate()
 {
 	bulletMapIter bMapIter = bMap.begin();
@@ -102,6 +119,9 @@ void BulletManager::BulletUpdate()
 			}
 			else
 				(*bIter)->rc = RectMakeCenter((*bIter)->x, (*bIter)->y, (*bIter)->img->GetWidth(), (*bIter)->img->GetHeight());
+
+			if ((*bIter)->useShadow)
+				(*bIter)->shadowRc = RectMakeCenter((*bIter)->x, (*bIter)->y + (*bIter)->ShadowSetY, (*bIter)->shadowImg->GetWidth(), (*bIter)->shadowImg->GetHeight());
 
 			if ((*bIter)->useCollision)
 				(*bIter)->pcol->UpdatePosition((*bIter)->x, (*bIter)->y);

@@ -27,6 +27,9 @@ public:
 	//총알 삽입함수
 	void BulletSetting(string bulletName, image*img, int bulletNum, bool isAnim = false, int animSpeed = 60, int frameYnum = 1);
 
+	//그림자 셋팅함수=> 그림자는 단일이미지만 넣으셈
+	void BulletShadowSetting(string bulletName,  image*shadowImg,const RECT&shadowRc,float setY);
+
 	//총알 업데이트 함수
 	void BulletUpdate();
 
