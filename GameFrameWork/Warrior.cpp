@@ -125,10 +125,12 @@ void Warrior::Update()
 
     if (KEYMANAGER.isOnceKeyDown(VK_RIGHT))
     {
+        _speedX = 3;
         ChangeAnim((int)RIGHT_IDLE, "WarriorRightIdle");
     }
     else if (KEYMANAGER.isOnceKeyDown(VK_LEFT))
     {
+        _speedX = 3;
         ChangeAnim((int)LEFT_IDLE, "WarriorLeftIdle");
     }
 
@@ -178,18 +180,22 @@ void Warrior::Update()
         }
         if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
         {
+            _speedX = 3;
             ChangeAnim((int)RIGHT_RUN, "WarriorRightRun");
         }
         if (KEYMANAGER.isStayKeyDown(VK_LEFT))
         {
+            _speedX = 3;
             ChangeAnim((int)LEFT_RUN, "WarriorLeftRun");
         }
         if (KEYMANAGER.isStayKeyDown(VK_UP))
         {
+            _speedY = 1;
             ChangeAnim((int)RIGHT_UP_RUN, "WarriorRightRun");
         }
         if (KEYMANAGER.isStayKeyDown(VK_DOWN))
         {
+            _speedY = 1;
             ChangeAnim((int)RIGHT_DOWN_RUN, "WarriorRightRun");
         }
         break;
@@ -202,24 +208,30 @@ void Warrior::Update()
         }
         if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
         {
+            _speedX = 3;
             ChangeAnim((int)RIGHT_RUN, "WarriorRightRun");
         }
         if (KEYMANAGER.isStayKeyDown(VK_LEFT))
         {
+            _speedX = 3;
             ChangeAnim((int)LEFT_RUN, "WarriorLeftRun");
         }
         if (KEYMANAGER.isStayKeyDown(VK_UP))
         {
+            _speedY = 1;
             ChangeAnim((int)LEFT_UP_RUN, "WarriorLeftRun");
         }
         if (KEYMANAGER.isStayKeyDown(VK_DOWN))
         {
+            _speedY = 1;
             ChangeAnim((int)LEFT_DOWN_RUN, "WarriorLeftRun");
         }
         break;
     case Warrior::RIGHT_RUN:
+        _speedX = 3;
         _x += _speedX;
 
+        _speedY = 1;
         if (KEYMANAGER.isStayKeyDown(VK_UP))
             _y -= _speedY;
         else if (KEYMANAGER.isStayKeyDown(VK_DOWN))
@@ -230,8 +242,10 @@ void Warrior::Update()
         }
         break;
     case Warrior::LEFT_RUN:
+        _speedX = 3;
         _x -= _speedX;
 
+        _speedY = 1;
         if (KEYMANAGER.isStayKeyDown(VK_UP))
             _y -= _speedY;
         else if (KEYMANAGER.isStayKeyDown(VK_DOWN))
@@ -535,7 +549,7 @@ void Warrior::Render()
 {
     Character::Render();
 
-    //Rectangle(GetMemDC(), _colRC.left, _colRC.top, _colRC.right, _colRC.bottom);
+    Rectangle(getMemDC(), _colRC.left, _colRC.top, _colRC.right, _colRC.bottom);
 }
 
 void Warrior::ChangeWeapon()

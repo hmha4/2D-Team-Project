@@ -39,13 +39,15 @@ HRESULT Stage1_1::Init()
 void Stage1_1::Render()
 {
 	IMAGEMANAGER.findImage("1.1뒷배경")->LoopRender(getMemDC(),RectMake(0,0,GAMESIZEX,GAMESIZEY), CAM.GetX()/30,0);
-	IMAGEMANAGER.findImage("1.1앞배경")->Render(getMemDC(), 0,0);
+	IMAGEMANAGER.findImage("1.1앞배경")->Render(getMemDC(), CAM.GetX(), CAM.GetY(), CAM.GetX(), CAM.GetY(), WINSIZEX, GAMESIZEY);
 	fadeOut->alphaRender(getMemDC(), offset);
 }
 
 
 void Stage1_1::Update()
 {
+    _warrior->MovementRestrict((int)s1State);
+
 	switch (s1State)
 	{
 		case OPENNING:
