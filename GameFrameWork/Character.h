@@ -23,6 +23,7 @@ protected:
     float _friction;
 
     WEAPON _weapon;
+	string _weaponEffectName;
 
     RECT _colRC;
     float _colX, _colY;

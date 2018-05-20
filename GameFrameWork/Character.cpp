@@ -17,7 +17,7 @@ HRESULT Character::Init(float x, float y)
 {
     _x = x;
     _y = y;
-
+	_weapon = WEAPON_1;
     return S_OK;
 }
 
@@ -32,6 +32,15 @@ void Character::Release()
 
 void Character::Update()
 {
+	if (KEYMANAGER.isOnceKeyDown('1'))
+		_weapon = WEAPON_1;
+	else if (KEYMANAGER.isOnceKeyDown('2'))
+		_weapon = WEAPON_2;
+	else if (KEYMANAGER.isOnceKeyDown('3'))
+		_weapon = WEAPON_3;
+	else if (KEYMANAGER.isOnceKeyDown('4'))
+		_weapon = WEAPON_4;
+
     _rc = RectMakeCenter(_x, _y, _img->GetFrameWidth(), _img->GetFreamHeight());
 }
 

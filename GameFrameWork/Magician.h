@@ -14,7 +14,6 @@ private:
         RIGHT_FALL, LEFT_FALL,
         RIGHT_ATTACK, LEFT_ATTACK,
         RIGHT_JUMP_ATTACK, LEFT_JUMP_ATTACK,
-        RIGHT_BLOCK, LEFT_BLOCK,
         RIGHT_HIT_1, LEFT_HIT_1,
         RIGHT_HIT_2, LEFT_HIT_2,
         RIGHT_DIE_P1, LEFT_DIE_P1,
@@ -41,5 +40,7 @@ public:
     void ChangeWeapon();
     void ChangeAnim(int state, string animKey);
     void Collision();
+
+	void InitBullet();
 };
 

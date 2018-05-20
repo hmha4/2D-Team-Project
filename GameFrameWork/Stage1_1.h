@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "MapObject.h"
 #include "Warrior.h"
+#include "Magician.h"
 
 class Stage1_1:public gameNode
 {
@@ -21,6 +22,7 @@ private:
 	int offset;
 
     Character * _warrior;
+	Character * _magician;
 public:
 	Stage1_1();
 	~Stage1_1();

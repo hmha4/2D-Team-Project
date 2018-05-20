@@ -20,13 +20,19 @@ void Bullet::Render()
 		img->aniRender(getMemDC(), rc.left, rc.top, &anim[frameYidx]);
 		
 		if (useShadow)
-			shadowImg->Render(getMemDC(), shadowRc.left, shadowRc.top);
+		{
+			if(shadowImg!=NULL)
+				shadowImg->Render(getMemDC(), shadowRc.left, shadowRc.top);
+		}
 	}
 	else
 	{
 		img->frameRender(getMemDC(), rc.left, rc.top, 0, frameYidx);
 
 		if (useShadow)
-			shadowImg->Render(getMemDC(), shadowRc.left, shadowRc.top);
+		{
+			if (shadowImg != NULL)
+				shadowImg->Render(getMemDC(), shadowRc.left, shadowRc.top);
+		}
 	}
 }

@@ -41,5 +41,7 @@ public:
     void ChangeWeapon();
     void ChangeAnim(int state, string animKey);
     void Collision();
+
+	void InitBullet();
 };
 

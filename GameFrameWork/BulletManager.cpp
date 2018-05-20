@@ -47,6 +47,7 @@ void BulletManager::BulletSetting(string bulletName, image * img, int bulletNum,
 			bullet->isShot = false;
 			bullet->isAnimation = isAnim;
 			bullet->useCollision = false;
+			bullet->useShadow = false;
 
 			bVec.push_back(bullet);
 		}
@@ -66,6 +67,7 @@ void BulletManager::BulletSetting(string bulletName, image * img, int bulletNum,
 			bullet->isShot = false;
 			bullet->isAnimation = isAnim;
 			bullet->useCollision = false;
+			bullet->useShadow = false;
 
 			bVec.push_back(bullet);
 		}
@@ -85,7 +87,7 @@ void BulletManager::BulletShadowSetting(string bulletName,image*shadowImg, const
 	
 	bIter = bMapIter->second.begin();
 
-	for (; bIter != bMapIter->second.end(); bMapIter++)
+	for (; bIter != bMapIter->second.end(); bIter++)
 	{
 		(*bIter)->useShadow = true;
 		(*bIter)->shadowRc = shadowRc;
@@ -120,7 +122,7 @@ void BulletManager::BulletUpdate()
 			else
 				(*bIter)->rc = RectMakeCenter((*bIter)->x, (*bIter)->y, (*bIter)->img->GetWidth(), (*bIter)->img->GetHeight());
 
-			if ((*bIter)->useShadow)
+			if ((*bIter)->useShadow && (*bIter)->shadowImg != NULL)
 				(*bIter)->shadowRc = RectMakeCenter((*bIter)->x, (*bIter)->y + (*bIter)->ShadowSetY, (*bIter)->shadowImg->GetWidth(), (*bIter)->shadowImg->GetHeight());
 
 			if ((*bIter)->useCollision)
