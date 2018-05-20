@@ -38,7 +38,7 @@ HRESULT Stage1_1::Init()
 
 void Stage1_1::Render()
 {
-	IMAGEMANAGER.findImage("1.1µÞ¹è°æ")->LoopRender(getMemDC(),RectMake(0,0,GAMESIZEX,GAMESIZEY), CAM.GetX()/30,0);
+	IMAGEMANAGER.findImage("1.1µÞ¹è°æ")->Render(getMemDC(), CAM.GetX(), CAM.GetY(), CAM.GetX() * 0.01, CAM.GetY(), WINSIZEX, GAMESIZEY);
 	IMAGEMANAGER.findImage("1.1¾Õ¹è°æ")->Render(getMemDC(), CAM.GetX(), CAM.GetY(), CAM.GetX(), CAM.GetY(), WINSIZEX, GAMESIZEY);
 	fadeOut->alphaRender(getMemDC(), offset);
 }
