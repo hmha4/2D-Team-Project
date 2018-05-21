@@ -39,11 +39,14 @@ HRESULT PlayerManager::Init()
 			ZORDER.InputObj(_player[i]);
 		}
 	}
+
+	_UI = new PlayUI;
 	return S_OK;
 }
 
 void PlayerManager::Render()
 {
+	_UI->render();
 }
 
 void PlayerManager::Update()

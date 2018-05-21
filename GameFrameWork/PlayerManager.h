@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "Warrior.h"
 #include "Magician.h"
+#include "PlayUI.h"
 
 class PlayerManager :
 	public gameNode
@@ -25,6 +26,8 @@ private:
 	Character * _player[2];
 	PLAYER		_playerNum;
 	CHARACTER	_character[2];
+
+	PlayUI*		_UI;
 public:
 	PlayerManager();
 	~PlayerManager();
