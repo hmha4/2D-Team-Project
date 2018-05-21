@@ -180,23 +180,17 @@
     <ClInclude Include="Stage1_1.h">
       <Filter>PlayGround\Stage1-1</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="MapObject.h">
-      <Filter>PlayGround\Stage1-1\MapObject</Filter>
-    </ClInclude>
     <ClInclude Include="Character.h">
-      <Filter>PlayGround\Stage1-1\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Magician.h">
       <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClInclude>
     <ClInclude Include="Warrior.h">
       <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayUI.h">
-      <Filter>PlayGround</Filter>
+    <ClInclude Include="Magician.h">
+      <Filter>PlayGround\Stage1-1\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject.h">
+      <Filter>PlayGround\Stage1-1\MapObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -284,23 +278,17 @@
     <ClCompile Include="Stage1_1.cpp">
       <Filter>PlayGround\Stage1-1</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="MapObject.cpp">
-      <Filter>PlayGround\Stage1-1\MapObject</Filter>
-    </ClCompile>
     <ClCompile Include="Character.cpp">
-      <Filter>PlayGround\Stage1-1\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Magician.cpp">
       <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClCompile>
     <ClCompile Include="Warrior.cpp">
       <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayUI.cpp">
-      <Filter>PlayGround</Filter>
+    <ClCompile Include="Magician.cpp">
+      <Filter>PlayGround\Stage1-1\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject.cpp">
+      <Filter>PlayGround\Stage1-1\MapObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
