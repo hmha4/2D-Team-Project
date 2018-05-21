@@ -41,6 +41,7 @@ public:
 	Enemy(ENEMYTYPE _eType);
 	~Enemy();
 
+	virtual HRESULT Init();
 	virtual HRESULT Init(int x, int y,ENEMYSTATE eState);
 	void Render();
 	void Update(PlayerManager*pm);

@@ -25,6 +25,9 @@ HRESULT Stage1_1::Init()
 	_pm = new PlayerManager;
 	_pm->Init();
 
+	_em = new EnemyManager;
+	_em->InputEnemy(WAREWOLF, 20);
+
 	//정적 배경은 따로넣어서 렌더에서 처리하면됨
 	fadeOut = IMAGEMANAGER.findImage("페이드아웃");
 	offset = 255;
@@ -57,6 +60,8 @@ void Stage1_1::Update()
 		offset -= 2;
 		if (offset < 0)
 		{
+			for (int i = 0; i < 3; i++)
+				_em->ShowEnemy(WAREWOLF, WINSIZEX / 2 + 250, 200 + i * 50, LEFT_IDLE);
 			s1State = FIRST_STAGE;
 			offset = 0;
 			CAM.SetSize(GAMESIZEX / 2, WINSIZEY);
@@ -66,6 +71,7 @@ void Stage1_1::Update()
 	break;
 	case FIRST_STAGE:
 	{
+		_em->Update(_pm);
 		_pm->Update();
 		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
 
@@ -82,4 +88,7 @@ void Stage1_1::Update()
 void Stage1_1::Release()
 {
 	_pm->Release();
+	_em->Release();
+
+	ZORDER.Release();
 }

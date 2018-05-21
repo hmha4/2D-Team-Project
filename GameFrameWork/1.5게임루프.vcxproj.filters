@@ -213,6 +213,9 @@
     <ClInclude Include="EnemyManager.h">
       <Filter>PlayGround\Stage1-1\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="DataBase.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -328,6 +331,9 @@
     </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
       <Filter>PlayGround\Stage1-1\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBase.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

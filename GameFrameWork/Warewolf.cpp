@@ -83,7 +83,7 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 			if (delayTime > delayCount)
 				//플레이어가 에너미의 왼쪽에 있으면
 			{
-				if (pm->GetWarrior()->GetX() < posX)
+				if (pm->GetPlayer1()->GetX() < posX)
 				{
 					eState = LEFT_MOVE;
 					anim = ANIMATIONKEY.findAnimation("wwLeftMove");
@@ -108,7 +108,7 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 			if (delayTime > delayCount)
 				//플레이어가 에너미의 오른쪽에 있으면
 			{
-				if (pm->GetWarrior()->GetX() > posX)
+				if (pm->GetPlayer1()->GetX() > posX)
 				{
 					eState = RIGHT_MOVE;
 					anim = ANIMATIONKEY.findAnimation("wwRightMove");
@@ -155,7 +155,7 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 		{
 			//거리가 일정범위 밖이면 그냥 앞으로감
 			
-			if (getDistance(pm->GetWarrior()->GetX(), pm->GetWarrior()->GetY(), posX, posY) > attackDistance)
+			if (getDistance(pm->GetPlayer1()->GetX(), pm->GetPlayer1()->GetY(), posX, posY) > attackDistance)
 			{
 				posX -= 1.5;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
@@ -163,9 +163,9 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 			}
 			else
 			{
-				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetWarrior()->getRc()).x, GetCenterPos(pm->GetWarrior()->getRc()).y);
+				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
 				
-				if (GetCenterPos(shadowRc).y > GetCenterPos(pm->GetWarrior()->getRc()).y)
+				if (GetCenterPos(shadowRc).y > GetCenterPos(pm->GetPlayer1()->getRc()).y)
 					posY -= 1.5;
 				else
 					posY += 1.5;
@@ -173,8 +173,8 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3+15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
 
-				if (GetCenterPos(shadowRc).y>GetCenterPos(pm->GetWarrior()->getRc()).y-5&&
-					GetCenterPos(shadowRc).y<GetCenterPos(pm->GetWarrior()->getRc()).y + 5)
+				if (GetCenterPos(shadowRc).y>GetCenterPos(pm->GetPlayer1()->getRc()).y-5&&
+					GetCenterPos(shadowRc).y<GetCenterPos(pm->GetPlayer1()->getRc()).y + 5)
 				{
 					eState = LEFT_ATTACK;
 					anim = ANIMATIONKEY.findAnimation("wwLeftAttack");
@@ -186,7 +186,7 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 		break;
 		case RIGHT_MOVE:
 		{
-			if (getDistance(pm->GetWarrior()->GetX(), pm->GetWarrior()->GetY(), posX, posY) > 300)
+			if (getDistance(pm->GetPlayer1()->GetX(), pm->GetPlayer1()->GetY(), posX, posY) > 300)
 			{
 				posX += 1.5;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
@@ -194,9 +194,9 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 			}
 			else
 			{
-				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetWarrior()->getRc()).x, GetCenterPos(pm->GetWarrior()->getRc()).y);
+				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
 
-				if (GetCenterPos(shadowRc).y > GetCenterPos(pm->GetWarrior()->getRc()).y)
+				if (GetCenterPos(shadowRc).y > GetCenterPos(pm->GetPlayer1()->getRc()).y)
 					posY -= 1.5;
 				else
 					posY += 1.5;
@@ -204,8 +204,8 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
 
-				if (GetCenterPos(shadowRc).y>GetCenterPos(pm->GetWarrior()->getRc()).y - 5 &&
-					GetCenterPos(shadowRc).y<GetCenterPos(pm->GetWarrior()->getRc()).y + 5)
+				if (GetCenterPos(shadowRc).y>GetCenterPos(pm->GetPlayer1()->getRc()).y - 5 &&
+					GetCenterPos(shadowRc).y<GetCenterPos(pm->GetPlayer1()->getRc()).y + 5)
 				{
 					eState = RIGHT_ATTACK;
 					anim = ANIMATIONKEY.findAnimation("wwRightAttack");

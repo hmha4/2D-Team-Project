@@ -12,6 +12,14 @@ Enemy::~Enemy()
 {
 }
 
+HRESULT Enemy::Init()
+{
+	isDie = false;
+	isShow = false;
+	alpha = 0;
+	return S_OK;
+}
+
 HRESULT Enemy::Init(int x, int y, ENEMYSTATE eState)
 {
 	rc = RectMakeCenter(x, y, img->GetFrameWidth(), img->GetFreamHeight());

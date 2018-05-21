@@ -23,6 +23,7 @@ void EnemyManager::InputEnemy(ENEMYTYPE eType, int enemyNum)
 			case WAREWOLF:
 			{
 				Enemy*enemy = new Warewolf(eType);
+				enemy->Init();
 				enemyVec.push_back(enemy);
 			
 			}
@@ -41,7 +42,6 @@ void EnemyManager::InputEnemy(ENEMYTYPE eType, int enemyNum)
 
 void EnemyManager::Update(PlayerManager*pm)
 {
-	printf("%d",checkEnemyNum);
 	enemyMapIter emIter = enemyMap.begin();
 	for (; emIter != enemyMap.end(); emIter++)
 	{
