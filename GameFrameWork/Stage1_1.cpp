@@ -22,15 +22,8 @@ HRESULT Stage1_1::Init()
 	mObj->Init(0, 320);
 	ZORDER.InputObj(mObj);
 
-	_warrior = new Warrior;
-	_warrior->Init(WINSIZEX / 2, WINSIZEY / 2);
-
-	ZORDER.InputObj(_warrior);
-
-	//_magician = new Magician;
-	//_magician->Init(WINSIZEX / 2, WINSIZEY / 2);
-	//
-	//ZORDER.InputObj(_magician);
+	_pm = new PlayerManager;
+	_pm->Init();
 
 	//정적 배경은 따로넣어서 렌더에서 처리하면됨
 	fadeOut = IMAGEMANAGER.findImage("페이드아웃");
@@ -51,17 +44,16 @@ void Stage1_1::Render()
 
 void Stage1_1::Update()
 {
-	_warrior->MovementRestrict((int)s1State);
-	//_magician->MovementRestrict((int)s1State);
+	_pm->GetWarrior()->MovementRestrict((int)s1State);
+	//_pm->GetMagician()->MovementRestrict((int)s1State);
 
 	switch (s1State)
 	{
 	case OPENNING:
 	{
-		_warrior->Update();
-		CAM.Update(_warrior->GetX(), _warrior->GetY(), 5, false);
-		//_magician->Update();
-		//CAM.Update(_magician->GetX(), _magician->GetY(), 5, false);
+		_pm->Update();
+		CAM.Update(_pm->GetWarrior()->GetX(), _pm->GetWarrior()->GetY(), 5, false);
+
 		offset -= 2;
 		if (offset < 0)
 		{
@@ -74,10 +66,9 @@ void Stage1_1::Update()
 	break;
 	case FIRST_STAGE:
 	{
-		_warrior->Update();
-		CAM.Update(_warrior->GetX(), _warrior->GetY(), 5, true);
-		//_magician->Update();
-		//CAM.Update(_magician->GetX(), _magician->GetY(), 5, true);
+		_pm->Update();
+		CAM.Update(_pm->GetWarrior()->GetX(), _pm->GetWarrior()->GetY(), 5, false);
+
 	}
 	break;
 	case SECOND_STAGE:
@@ -90,6 +81,5 @@ void Stage1_1::Update()
 
 void Stage1_1::Release()
 {
-	_warrior->Release();
-	//_magician->Release();
+	_pm->Release();
 }

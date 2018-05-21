@@ -28,6 +28,8 @@ protected:
     RECT _colRC;
     float _colX, _colY;
 
+	RECT _shadow;
+
     int _hp;
 public:
     Character();
@@ -43,7 +45,8 @@ public:
 
 //접근자 설정자
 public:
-    inline RECT&getRc() { return _colRC; }
+	inline RECT GetRC() { return _colRC; }
+    inline RECT&getRc() { return _shadow; }
     inline float GetX() { return _x; }
     inline float GetY() { return _y; }
 //가상함수

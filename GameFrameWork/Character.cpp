@@ -42,11 +42,13 @@ void Character::Update()
 		_weapon = WEAPON_4;
 
     _rc = RectMakeCenter(_x, _y, _img->GetFrameWidth(), _img->GetFreamHeight());
+	_shadow = RectMakeCenter(_x, _y + _img->GetFreamHeight() / 2 - 20, 50, 20);
 }
 
 void Character::Render()
 {
     _img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
+	//Rectangle(getMemDC(), _shadow.left, _shadow.top, _shadow.right, _shadow.bottom);
 }
 
 void Character::MovementRestrict(int stage)
