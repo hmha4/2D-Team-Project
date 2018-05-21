@@ -13,11 +13,32 @@ Character::~Character()
 {
 }
 
-HRESULT Character::Init(float x, float y)
+HRESULT Character::Init(float x, float y, int player)
 {
     _x = x;
     _y = y;
 	_weapon = WEAPON_1;
+
+	if (player == 0)
+	{
+		_mControl.insert(make_pair("Attack", 'A'));
+		_mControl.insert(make_pair("Jump", 'S'));
+		_mControl.insert(make_pair("Block", 'D'));
+		_mControl.insert(make_pair("Up", 'Y'));
+		_mControl.insert(make_pair("Down", 'H'));
+		_mControl.insert(make_pair("Left", 'G'));
+		_mControl.insert(make_pair("Right", 'J'));
+	}
+	else if (player == 1)
+	{
+		_mControl.insert(make_pair("Attack", VK_LEFT));
+		_mControl.insert(make_pair("Jump", VK_DOWN));
+		_mControl.insert(make_pair("Block", VK_RIGHT));
+		_mControl.insert(make_pair("Up", VK_NUMPAD8));
+		_mControl.insert(make_pair("Down", VK_NUMPAD5));
+		_mControl.insert(make_pair("Left", VK_NUMPAD4));
+		_mControl.insert(make_pair("Right", VK_NUMPAD6));
+	}
     return S_OK;
 }
 
@@ -42,49 +63,11 @@ void Character::Update()
 		_weapon = WEAPON_4;
 
     _rc = RectMakeCenter(_x, _y, _img->GetFrameWidth(), _img->GetFreamHeight());
-	_shadow = RectMakeCenter(_x, _y + _img->GetFreamHeight() / 2 - 20, 50, 20);
+	
 }
 
 void Character::Render()
 {
     _img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
-	//Rectangle(getMemDC(), _shadow.left, _shadow.top, _shadow.right, _shadow.bottom);
+	Rectangle(getMemDC(), _shadow.left, _shadow.top, _shadow.right, _shadow.bottom);
 }
-
-void Character::MovementRestrict(int stage)
-{
-    if (stage == 0)
-    {
-        _speedX = 0;
-        _speedY = 0;
-    }
-    else if (stage == 1)
-    {
-        if (_colRC.left < CAM.GetRC().left)
-        {
-            _x = CAM.GetRC().left + (_colRC.right - _colRC.left) / 2;
-            _speedX = 0;
-        }
-        else if (_colRC.right > CAM.GetRC().right)
-        {
-            _x = CAM.GetRC().right - (_colRC.right - _colRC.left) / 2;
-            _speedX = 0;
-        }
-
-        if (_colRC.top < WINSIZEY/2 - 100)
-        {
-            _y = WINSIZEY / 2 - 100 + (_colRC.bottom - _colRC.top) / 2 - 32;
-            _speedY = 0;
-        }
-        else if (_colRC.bottom > 400)
-        {
-            _y = 400 - (_colRC.bottom - _colRC.top) / 2 - 32;
-            _speedY = 0;
-        }
-    }
-    else if (stage == 2)
-    {
-
-    }
-}
-

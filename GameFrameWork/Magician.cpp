@@ -11,9 +11,9 @@ Magician::~Magician()
 {
 }
 
-HRESULT Magician::Init(float x, float y)
+HRESULT Magician::Init(float x, float y, int player)
 {
-    Character::Init(x, y);
+    Character::Init(x, y, player);
 
     IMAGEMANAGER.addFrameImage("Magician1", PathFile("image\\Character", "Magician_Weapon_1").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
     IMAGEMANAGER.addFrameImage("Magician2", PathFile("image\\Character", "Magician_Weapon_2").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
@@ -122,18 +122,18 @@ void Magician::Update()
 
 	ChangeWeapon();
 	
-	if (KEYMANAGER.isOnceKeyDown(VK_RIGHT))
+	if (KEYMANAGER.isOnceKeyDown(_mControl["Right"]))
 	{
 		_speedX = 3;
 		ChangeAnim((int)RIGHT_IDLE, "MagicianRightIdle");
 	}
-	else if (KEYMANAGER.isOnceKeyDown(VK_LEFT))
+	else if (KEYMANAGER.isOnceKeyDown(_mControl["Left"]))
 	{
 		_speedX = 3;
 		ChangeAnim((int)LEFT_IDLE, "MagicianLeftIdle");
 	}
 
-	if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
+	if (KEYMANAGER.isOnceKeyDown(_mControl["Jump"]))
 	{
 		_jumpPower = 7;
 		_gravity = 0.3f;
@@ -144,7 +144,7 @@ void Magician::Update()
 			ChangeAnim((int)LEFT_JUMP, "MagicianLeftJump");
 	}
 
-	if (KEYMANAGER.isOnceKeyDown('Z'))
+	if (KEYMANAGER.isOnceKeyDown(_mControl["Attack"]))
 	{
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN ||
 			_state == RIGHT_JUMP || _state == RIGHT_FALL)
@@ -167,10 +167,10 @@ void Magician::Update()
 			BULLET.GetBulletVec(_weaponEffectName)[0]->ShadowSetY = WINSIZEY/2;
 	}
 
-	if (KEYMANAGER.isOnceKeyDown('C'))
-	{
-		Collision();
-	}
+	//if (KEYMANAGER.isOnceKeyDown('C'))
+	//{
+	//	Collision();
+	//}
 
 	switch (_state)
 	{
@@ -181,22 +181,22 @@ void Magician::Update()
 			ChangeAnim((int)RIGHT_OTHER, "MagicianRightOther");
 			break;
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 		{
 			_speedX = 3;
 			ChangeAnim((int)RIGHT_RUN, "MagicianRightRun");
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_LEFT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 		{
 			_speedX = 3;
 			ChangeAnim((int)LEFT_RUN, "MagicianLeftRun");
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_UP))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Up"]))
 		{
 			_speedY = 1;
 			ChangeAnim((int)RIGHT_UP_RUN, "MagicianRightRun");
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_DOWN))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Down"]))
 		{
 			_speedY = 1;
 			ChangeAnim((int)RIGHT_DOWN_RUN, "MagicianRightRun");
@@ -209,22 +209,22 @@ void Magician::Update()
 			ChangeAnim((int)LEFT_OTHER, "MagicianLeftOther");
 			break;
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 		{
 			_speedX = 3;
 			ChangeAnim((int)RIGHT_RUN, "MagicianRightRun");
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_LEFT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 		{
 			_speedX = 3;
 			ChangeAnim((int)LEFT_RUN, "MagicianLeftRun");
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_UP))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Up"]))
 		{
 			_speedY = 1;
 			ChangeAnim((int)LEFT_UP_RUN, "MagicianLeftRun");
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_DOWN))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Down"]))
 		{
 			_speedY = 1;
 			ChangeAnim((int)LEFT_DOWN_RUN, "MagicianLeftRun");
@@ -235,11 +235,11 @@ void Magician::Update()
 		_x += _speedX;
 
 		_speedY = 1;
-		if (KEYMANAGER.isStayKeyDown(VK_UP))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Up"]))
 			_y -= _speedY;
-		else if (KEYMANAGER.isStayKeyDown(VK_DOWN))
+		else if (KEYMANAGER.isStayKeyDown(_mControl["Down"]))
 			_y += _speedY;
-		if (KEYMANAGER.isOnceKeyUp(VK_RIGHT))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Right"]))
 		{
 			ChangeAnim((int)RIGHT_IDLE, "MagicianRightIdle");
 		}
@@ -249,11 +249,11 @@ void Magician::Update()
 		_x -= _speedX;
 
 		_speedY = 1;
-		if (KEYMANAGER.isStayKeyDown(VK_UP))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Up"]))
 			_y -= _speedY;
-		else if (KEYMANAGER.isStayKeyDown(VK_DOWN))
+		else if (KEYMANAGER.isStayKeyDown(_mControl["Down"]))
 			_y += _speedY;
-		if (KEYMANAGER.isOnceKeyUp(VK_LEFT))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Left"]))
 		{
 			ChangeAnim((int)LEFT_IDLE, "MagicianLeftIdle");
 		}
@@ -261,11 +261,11 @@ void Magician::Update()
 	case Magician::RIGHT_UP_RUN:
 		_y -= _speedY;
 
-		if (KEYMANAGER.isStayKeyDown(VK_LEFT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 			_x -= _speedX;
-		else if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
+		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 			_x += _speedX;
-		if (KEYMANAGER.isOnceKeyUp(VK_UP))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Up"]))
 		{
 			ChangeAnim((int)RIGHT_IDLE, "MagicianRightIdle");
 		}
@@ -273,11 +273,11 @@ void Magician::Update()
 	case Magician::LEFT_UP_RUN:
 		_y -= _speedY;
 
-		if (KEYMANAGER.isStayKeyDown(VK_LEFT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 			_x -= _speedX;
-		else if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
+		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 			_x += _speedX;
-		if (KEYMANAGER.isOnceKeyUp(VK_UP))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Up"]))
 		{
 			ChangeAnim((int)LEFT_IDLE, "MagicianLeftIdle");
 		}
@@ -285,11 +285,11 @@ void Magician::Update()
 	case Magician::RIGHT_DOWN_RUN:
 		_y += _speedY;
 
-		if (KEYMANAGER.isStayKeyDown(VK_LEFT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 			_x -= _speedX;
-		else if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
+		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 			_x += _speedX;
-		if (KEYMANAGER.isOnceKeyUp(VK_DOWN))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Down"]))
 		{
 			ChangeAnim((int)RIGHT_IDLE, "MagicianRightIdle");
 		}
@@ -297,11 +297,11 @@ void Magician::Update()
 	case Magician::LEFT_DOWN_RUN:
 		_y += _speedY;
 
-		if (KEYMANAGER.isStayKeyDown(VK_LEFT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 			_x -= _speedX;
-		else if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
+		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 			_x += _speedX;
-		if (KEYMANAGER.isOnceKeyUp(VK_DOWN))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Down"]))
 		{
 			ChangeAnim((int)LEFT_IDLE, "MagicianLeftIdle");
 		}
@@ -549,6 +549,10 @@ void Magician::Update()
 	_colY = _y + 32;
 
 	_colRC = RectMakeCenter(_colX, _colY, 50, 100);
+	if (_state != RIGHT_JUMP && _state != LEFT_JUMP &&
+		_state != RIGHT_JUMP_ATTACK && _state != LEFT_JUMP_ATTACK &&
+		_state != RIGHT_FALL && _state != LEFT_FALL)
+		_shadow = RectMakeCenter(_x, _y + _img->GetFreamHeight() / 2 - 10, 50, 20);
 }
 
 void Magician::Render()
@@ -629,6 +633,43 @@ void Magician::Collision()
 			ChangeAnim((int)RIGHT_HIT_2, "MagicianRightHit2");
 		else if (_state == LEFT_IDLE || _state == LEFT_RUN || _state == LEFT_ATTACK)
 			ChangeAnim((int)LEFT_HIT_2, "MagicianLeftHit2");
+	}
+}
+
+void Magician::MovementRestrict(int stage)
+{
+	if (stage == 0)
+	{
+		_speedX = 0;
+		_speedY = 0;
+	}
+	else if (stage == 1)
+	{
+		if (_shadow.left < CAM.GetRC().left)
+		{
+			_x = CAM.GetRC().left + (_colRC.right - _colRC.left) / 2;
+			_speedX = 0;
+		}
+		else if (_shadow.right > CAM.GetRC().right)
+		{
+			_x = CAM.GetRC().right - (_colRC.right - _colRC.left) / 2;
+			_speedX = 0;
+		}
+
+		if (_shadow.top < WINSIZEY / 2 - 25)
+		{
+			_y = WINSIZEY / 2 - 25 + (_shadow.bottom - _shadow.top) - _img->GetFreamHeight() / 2;
+			_speedY = 0;
+		}
+		else if (_shadow.bottom > 400)
+		{
+			_y = 400 - _img->GetFreamHeight() / 2;
+			_speedY = 0;
+		}
+	}
+	else if (stage == 2)
+	{
+
 	}
 }
 

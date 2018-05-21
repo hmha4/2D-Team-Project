@@ -59,15 +59,26 @@ void SelectScene::Render()
 
 void SelectScene::Update()
 {
-	if (KEYMANAGER.isOnceKeyDown(VK_RIGHT))
+	if (KEYMANAGER.isOnceKeyDown('J'))
 	{
 		_sel1Index++;
 		ChangeCharacter(0, _sel1Index);
 	}
-	else if (KEYMANAGER.isOnceKeyDown(VK_LEFT))
+	else if (KEYMANAGER.isOnceKeyDown('G'))
 	{
 		_sel1Index--;
 		ChangeCharacter(0, _sel1Index);
+	}
+
+	if (KEYMANAGER.isOnceKeyDown(VK_RIGHT))
+	{
+		_sel2Index++;
+		ChangeCharacter(1, _sel2Index);
+	}
+	else if (KEYMANAGER.isOnceKeyDown(VK_LEFT))
+	{
+		_sel2Index--;
+		ChangeCharacter(1, _sel2Index);
 	}
 
 	if (KEYMANAGER.isOnceKeyDown(VK_RETURN))

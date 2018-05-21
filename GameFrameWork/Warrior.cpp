@@ -11,9 +11,9 @@ Warrior::~Warrior()
 {
 }
 
-HRESULT Warrior::Init(float x, float y)
+HRESULT Warrior::Init(float x, float y, int player)
 {
-	Character::Init(x, y);
+	Character::Init(x, y, player);
 
 	IMAGEMANAGER.addFrameImage("Warrior1", PathFile("image\\Character", "Warrior_Weapon_1").c_str(), 1200, 1400, 10, 7, true, RGB(255, 0, 255));
 	IMAGEMANAGER.addFrameImage("Warrior2", PathFile("image\\Character", "Warrior_Weapon_2").c_str(), 1200, 1400, 10, 7, true, RGB(255, 0, 255));
@@ -127,18 +127,18 @@ void Warrior::Update()
 
 	ChangeWeapon();
 
-	if (KEYMANAGER.isOnceKeyDown(VK_RIGHT))
+	if (KEYMANAGER.isOnceKeyDown(_mControl["Right"]))
 	{
 		_speedX = 3;
 		ChangeAnim((int)RIGHT_IDLE, "WarriorRightIdle");
 	}
-	else if (KEYMANAGER.isOnceKeyDown(VK_LEFT))
+	else if (KEYMANAGER.isOnceKeyDown(_mControl["Left"]))
 	{
 		_speedX = 3;
 		ChangeAnim((int)LEFT_IDLE, "WarriorLeftIdle");
 	}
 
-	if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
+	if (KEYMANAGER.isOnceKeyDown(_mControl["Jump"]))
 	{
 		_jumpPower = 7;
 		_gravity = 0.3f;
@@ -149,7 +149,7 @@ void Warrior::Update()
 			ChangeAnim((int)LEFT_JUMP, "WarriorLeftJump");
 	}
 
-	if (KEYMANAGER.isOnceKeyDown('Z'))
+	if (KEYMANAGER.isOnceKeyDown(_mControl["Attack"]))
 	{
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN ||
 			_state == RIGHT_JUMP || _state == RIGHT_FALL)
@@ -169,17 +169,17 @@ void Warrior::Update()
 	}
 
 
-	if (KEYMANAGER.isOnceKeyDown('X'))
+	if (KEYMANAGER.isOnceKeyDown(_mControl["Block"]))
 	{
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN)
 			ChangeAnim((int)RIGHT_BLOCK, "WarriorRightBlock");
 		else if (_state == LEFT_IDLE || _state == LEFT_RUN)
 			ChangeAnim((int)LEFT_BLOCK, "WarriorLeftBlock");
 	}
-	if (KEYMANAGER.isOnceKeyDown('C'))
-	{
-		Collision();
-	}
+	//if (KEYMANAGER.isOnceKeyDown('C'))
+	//{
+	//	Collision();
+	//}
 
 	switch (_state)
 	{
@@ -190,22 +190,22 @@ void Warrior::Update()
 			ChangeAnim((int)RIGHT_OTHER, "WarriorRightOther");
 			break;
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 		{
 			_speedX = 3;
 			ChangeAnim((int)RIGHT_RUN, "WarriorRightRun");
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_LEFT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 		{
 			_speedX = 3;
 			ChangeAnim((int)LEFT_RUN, "WarriorLeftRun");
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_UP))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Up"]))
 		{
 			_speedY = 1;
 			ChangeAnim((int)RIGHT_UP_RUN, "WarriorRightRun");
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_DOWN))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Down"]))
 		{
 			_speedY = 1;
 			ChangeAnim((int)RIGHT_DOWN_RUN, "WarriorRightRun");
@@ -218,22 +218,22 @@ void Warrior::Update()
 			ChangeAnim((int)LEFT_OTHER, "WarriorLeftOther");
 			break;
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 		{
 			_speedX = 3;
 			ChangeAnim((int)RIGHT_RUN, "WarriorRightRun");
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_LEFT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 		{
 			_speedX = 3;
 			ChangeAnim((int)LEFT_RUN, "WarriorLeftRun");
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_UP))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Up"]))
 		{
 			_speedY = 1;
 			ChangeAnim((int)LEFT_UP_RUN, "WarriorLeftRun");
 		}
-		if (KEYMANAGER.isStayKeyDown(VK_DOWN))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Down"]))
 		{
 			_speedY = 1;
 			ChangeAnim((int)LEFT_DOWN_RUN, "WarriorLeftRun");
@@ -244,11 +244,11 @@ void Warrior::Update()
 		_x += _speedX;
 
 		_speedY = 1;
-		if (KEYMANAGER.isStayKeyDown(VK_UP))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Up"]))
 			_y -= _speedY;
-		else if (KEYMANAGER.isStayKeyDown(VK_DOWN))
+		else if (KEYMANAGER.isStayKeyDown(_mControl["Down"]))
 			_y += _speedY;
-		if (KEYMANAGER.isOnceKeyUp(VK_RIGHT))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Right"]))
 		{
 			ChangeAnim((int)RIGHT_IDLE, "WarriorRightIdle");
 		}
@@ -258,11 +258,11 @@ void Warrior::Update()
 		_x -= _speedX;
 
 		_speedY = 1;
-		if (KEYMANAGER.isStayKeyDown(VK_UP))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Up"]))
 			_y -= _speedY;
-		else if (KEYMANAGER.isStayKeyDown(VK_DOWN))
+		else if (KEYMANAGER.isStayKeyDown(_mControl["Down"]))
 			_y += _speedY;
-		if (KEYMANAGER.isOnceKeyUp(VK_LEFT))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Left"]))
 		{
 			ChangeAnim((int)LEFT_IDLE, "WarriorLeftIdle");
 		}
@@ -270,11 +270,11 @@ void Warrior::Update()
 	case Warrior::RIGHT_UP_RUN:
 		_y -= _speedY;
 
-		if (KEYMANAGER.isStayKeyDown(VK_LEFT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 			_x -= _speedX;
-		else if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
+		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 			_x += _speedX;
-		if (KEYMANAGER.isOnceKeyUp(VK_UP))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Up"]))
 		{
 			ChangeAnim((int)RIGHT_IDLE, "WarriorRightIdle");
 		}
@@ -282,11 +282,11 @@ void Warrior::Update()
 	case Warrior::LEFT_UP_RUN:
 		_y -= _speedY;
 
-		if (KEYMANAGER.isStayKeyDown(VK_LEFT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 			_x -= _speedX;
-		else if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
+		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 			_x += _speedX;
-		if (KEYMANAGER.isOnceKeyUp(VK_UP))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Up"]))
 		{
 			ChangeAnim((int)LEFT_IDLE, "WarriorLeftIdle");
 		}
@@ -294,11 +294,11 @@ void Warrior::Update()
 	case Warrior::RIGHT_DOWN_RUN:
 		_y += _speedY;
 
-		if (KEYMANAGER.isStayKeyDown(VK_LEFT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 			_x -= _speedX;
-		else if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
+		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 			_x += _speedX;
-		if (KEYMANAGER.isOnceKeyUp(VK_DOWN))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Down"]))
 		{
 			ChangeAnim((int)RIGHT_IDLE, "WarriorRightIdle");
 		}
@@ -306,11 +306,11 @@ void Warrior::Update()
 	case Warrior::LEFT_DOWN_RUN:
 		_y += _speedY;
 
-		if (KEYMANAGER.isStayKeyDown(VK_LEFT))
+		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 			_x -= _speedX;
-		else if (KEYMANAGER.isStayKeyDown(VK_RIGHT))
+		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 			_x += _speedX;
-		if (KEYMANAGER.isOnceKeyUp(VK_DOWN))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Down"]))
 		{
 			ChangeAnim((int)LEFT_IDLE, "WarriorLeftIdle");
 		}
@@ -388,11 +388,11 @@ void Warrior::Update()
 		}
 		break;
 	case Warrior::RIGHT_BLOCK:
-		if (KEYMANAGER.isOnceKeyUp('X'))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Block"]))
 			ChangeAnim((int)RIGHT_IDLE, "WarriorRightIdle");
 		break;
 	case Warrior::LEFT_BLOCK:
-		if (KEYMANAGER.isOnceKeyUp('X'))
+		if (KEYMANAGER.isOnceKeyUp(_mControl["Block"]))
 			ChangeAnim((int)LEFT_IDLE, "WarriorLeftIdle");
 		break;
 	case Warrior::RIGHT_HIT_1:
@@ -566,6 +566,10 @@ void Warrior::Update()
 	_colY = _y + 32;
 
 	_colRC = RectMakeCenter(_colX, _colY, 50, 100);
+	if(_state != RIGHT_JUMP && _state != LEFT_JUMP &&
+		_state != RIGHT_JUMP_ATTACK && _state != LEFT_JUMP_ATTACK &&
+		_state != RIGHT_FALL && _state != LEFT_FALL)
+	_shadow = RectMakeCenter(_x, _y + _img->GetFreamHeight() / 2 - 25, 50, 20);
 }
 
 void Warrior::Render()
@@ -649,6 +653,43 @@ void Warrior::Collision()
 			ChangeAnim((int)RIGHT_HIT_2, "WarriorRightHit2");
 		else if (_state == LEFT_IDLE || _state == LEFT_RUN || _state == LEFT_ATTACK)
 			ChangeAnim((int)LEFT_HIT_2, "WarriorLeftHit2");
+	}
+}
+
+void Warrior::MovementRestrict(int stage)
+{
+	if (stage == 0)
+	{
+		_speedX = 0;
+		_speedY = 0;
+	}
+	else if (stage == 1)
+	{
+		if (_shadow.left < CAM.GetRC().left)
+		{
+			_x = CAM.GetRC().left + (_colRC.right - _colRC.left) / 2;
+			_speedX = 0;
+		}
+		else if (_shadow.right > CAM.GetRC().right)
+		{
+			_x = CAM.GetRC().right - (_colRC.right - _colRC.left) / 2;
+			_speedX = 0;
+		}
+
+		if (_shadow.top < WINSIZEY / 2 - 25)
+		{
+			_y = WINSIZEY / 2 - 25 + (_shadow.bottom - _shadow.top) - _img->GetFreamHeight() / 2 + 15;
+			_speedY = 0;
+		}
+		else if (_shadow.bottom > 400)
+		{
+			_y = 400 - _img->GetFreamHeight() / 2 + 15;
+			_speedY = 0;
+		}
+	}
+	else if (stage == 2)
+	{
+
 	}
 }
 

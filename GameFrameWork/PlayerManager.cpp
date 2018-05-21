@@ -27,28 +27,18 @@ HRESULT PlayerManager::Init()
 		if (_character[i] == 1)
 		{
 			_player[i] = new Magician;
-			_player[i]->Init(WINSIZEX / 2, WINSIZEY / 2);
-			//_warrior = new Warrior;
-			//_warrior->Init(WINSIZEX / 2, WINSIZEY / 2);
+			_player[i]->Init(WINSIZEX / 2, WINSIZEY / 2, i);
 
 			ZORDER.InputObj(_player[i]);
 		}
 		else if (_character[i] == 2)
 		{
 			_player[i] = new Warrior;
-			_player[i]->Init(WINSIZEX / 2, WINSIZEY / 2);
-			//_warrior = new Warrior;
-			//_warrior->Init(WINSIZEX / 2, WINSIZEY / 2);
+			_player[i]->Init(WINSIZEX / 2, WINSIZEY / 2, i);
 
 			ZORDER.InputObj(_player[i]);
 		}
 	}
-
-	//_magician = new Magician;
-	//_magician->Init(WINSIZEX / 2, WINSIZEY / 2);
-	//
-	//ZORDER.InputObj(_magician);
-
 	return S_OK;
 }
 

@@ -52,7 +52,7 @@ void Stage1_1::Update()
 	case OPENNING:
 	{
 		_pm->Update();
-		CAM.Update(_pm->GetPlayer()->GetX(), _pm->GetPlayer()->GetY(), 5, false);
+		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
 
 		offset -= 2;
 		if (offset < 0)
@@ -67,7 +67,7 @@ void Stage1_1::Update()
 	case FIRST_STAGE:
 	{
 		_pm->Update();
-		CAM.Update(_pm->GetPlayer()->GetX(), _pm->GetPlayer()->GetY(), 5, false);
+		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
 
 	}
 	break;

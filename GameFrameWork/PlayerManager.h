@@ -34,7 +34,8 @@ public:
 	void Update();
 	void Release();
 
-	inline Character* GetPlayer() { return _player[0]; }
+	inline Character* GetPlayer1() { return _player[0]; }
+	inline Character* GetPlayer2() { return _player[1]; }
 	void MoveRestrict(int stage);
 };
 

@@ -33,7 +33,7 @@ public:
     Warrior();
     ~Warrior();
 
-    HRESULT Init(float x, float y);
+    HRESULT Init(float x, float y, int player);
     void Release();
     void Update();
     void Render();
@@ -41,7 +41,9 @@ public:
     void ChangeWeapon();
     void ChangeAnim(int state, string animKey);
     void Collision();
+	void MovementRestrict(int stage);
 
 	void InitBullet();
+
 };
 

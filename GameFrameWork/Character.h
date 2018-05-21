@@ -1,8 +1,14 @@
 #pragma once
 #include "gameNode.h"
+#include <map>
+
 class Character :
     public gameNode
 {
+protected:
+	typedef map<string, int>	mControl;
+
+	mControl _mControl;
 protected:
     enum WEAPON
     {
@@ -35,13 +41,13 @@ public:
     Character();
     ~Character();
 
-    virtual HRESULT Init(float x, float y);
+    virtual HRESULT Init(float x, float y, int player);
     virtual void Release();
     virtual void Update();
     virtual void Render();
 //베이스 클래스 함수
 public:
-    void MovementRestrict(int stage);
+    
 
 //접근자 설정자
 public:
@@ -51,6 +57,7 @@ public:
     inline float GetY() { return _y; }
 //가상함수
 public:
+	virtual void MovementRestrict(int stage) = 0;
     virtual void ChangeWeapon() = 0;
     virtual void ChangeAnim(int state, string animKey) = 0;
     virtual void Collision() = 0;
