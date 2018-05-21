@@ -115,12 +115,22 @@ void SelectScene::Update()
 	}
 	if (KEYMANAGER.isOnceKeyDown(VK_RETURN))
 	{
-		if ((_sel1Index == 1 || _sel1Index == 2) && (_sel2Index == 1 || _sel2Index == 2))
+		if (_playerNum == 0)
 		{
-			DATABASE.SaveData("1PCharacter", _sel1Index);
-			if (_playerNum == 1)
+			if ((_sel1Index == 1 || _sel1Index == 2))
+			{
+				DATABASE.SaveData("1PCharacter", _sel1Index);
+				SCENEMANAGER.changeScene("스테이지1.1");
+			}
+		}
+		else if (_playerNum == 1)
+		{
+			if ((_sel1Index == 1 || _sel1Index == 2) && (_sel2Index == 1 || _sel2Index == 2))
+			{
+				DATABASE.SaveData("1PCharacter", _sel1Index);
 				DATABASE.SaveData("2PCharacter", _sel2Index);
-			SCENEMANAGER.changeScene("스테이지1.1");
+				SCENEMANAGER.changeScene("스테이지1.1");
+			}
 		}
 	}
 
