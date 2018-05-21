@@ -8,6 +8,7 @@ private:
 	typedef struct tagSELECT
 	{
 		image * img;
+		image * imgName;
 		float x, y;
 		int frameX;
 		int frameY;
@@ -19,14 +20,19 @@ private:
 			int frameX, int frameY, bool select)
 			: x(x), y(y), frameX(frameX), frameY(frameY), isSelect(select)
 		{
-			img = IMAGEMANAGER.findImage("SelectBowman");
+			img = IMAGEMANAGER.findImage(name);
+			imgName = IMAGEMANAGER.findImage("SelectName");
 			rc = RectMakeCenter(x, y, img->GetFrameWidth(), img->GetFreamHeight());
 		}
+
 	} SELECT;
 
 private:
 	SELECT character[5];
-	SELECT * _sel;
+	SELECT _sel[2];
+
+	int _sel1Index;
+	int _sel2Index;
 
 public:
 	SelectScene();
@@ -36,5 +42,7 @@ public:
 	void Render();
 	void Update();
 	void Release();
+
+	void ChangeCharacter(int p1p2, int index);
 };
 

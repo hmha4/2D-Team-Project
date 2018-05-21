@@ -549,9 +549,6 @@ void Magician::Update()
 	_colY = _y + 32;
 
 	_colRC = RectMakeCenter(_colX, _colY, 50, 100);
-
-
-	ANIMATIONKEY.update();
 }
 
 void Magician::Render()

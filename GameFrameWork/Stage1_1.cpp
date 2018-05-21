@@ -44,7 +44,7 @@ void Stage1_1::Render()
 
 void Stage1_1::Update()
 {
-	_pm->GetWarrior()->MovementRestrict((int)s1State);
+	_pm->MoveRestrict((int)s1State);
 	//_pm->GetMagician()->MovementRestrict((int)s1State);
 
 	switch (s1State)
@@ -52,7 +52,7 @@ void Stage1_1::Update()
 	case OPENNING:
 	{
 		_pm->Update();
-		CAM.Update(_pm->GetWarrior()->GetX(), _pm->GetWarrior()->GetY(), 5, false);
+		CAM.Update(_pm->GetPlayer()->GetX(), _pm->GetPlayer()->GetY(), 5, false);
 
 		offset -= 2;
 		if (offset < 0)
@@ -67,7 +67,7 @@ void Stage1_1::Update()
 	case FIRST_STAGE:
 	{
 		_pm->Update();
-		CAM.Update(_pm->GetWarrior()->GetX(), _pm->GetWarrior()->GetY(), 5, false);
+		CAM.Update(_pm->GetPlayer()->GetX(), _pm->GetPlayer()->GetY(), 5, false);
 
 	}
 	break;

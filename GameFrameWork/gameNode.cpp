@@ -44,6 +44,8 @@ void gameNode::Release()
         ZORDER.ReleaseSingleton();
         ANIMATIONKEY.ReleaseSingleton();
         CAM.ReleaseSingleton();
+		DATABASE.Release();
+		DATABASE.ReleaseSingleton();
     }
     ReleaseDC(g_hWnd, hdc);//종료될시 해제해줌
 }

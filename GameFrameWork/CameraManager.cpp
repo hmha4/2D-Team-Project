@@ -194,7 +194,7 @@ void CameraManager::Update(float x, float y, float speed, bool isPlayer)
             //처음에 캐릭터까지 카메라가 자동으로 이동
             if (_state == MOVE)
             {
-                if (offSetX2 <= 0 && offSetX2 > WINSIZEX - backgroundSizeX)
+                if (offSetX2 <= 0 && offSetX2 >= WINSIZEX - backgroundSizeX)
                 {
                     if (x < _cameraRC.left)
                     {
@@ -207,7 +207,7 @@ void CameraManager::Update(float x, float y, float speed, bool isPlayer)
                         if (offSetX2 < WINSIZEX - backgroundSizeX) offSetX2 = WINSIZEX - backgroundSizeX;
                     }
                 }
-                if (offSetY2 <= 0 && offSetY2 > WINSIZEY - backgroundSizeY)
+                if (offSetY2 <= 0 && offSetY2 >= WINSIZEY - backgroundSizeY)
                 {
                     if (y < _cameraRC.top)
                     {

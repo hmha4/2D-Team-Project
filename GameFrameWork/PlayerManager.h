@@ -7,9 +7,24 @@ class PlayerManager :
 	public gameNode
 {
 private:
-	Character * _warrior;
-	Character * _magician;
+	enum PLAYER
+	{
+		PLAYER_1,
+		PLAYER_2,
+		DEFFAULT
+	};
+	enum CHARACTER
+	{
+		BOWMAN,
+		MAGICIAN,
+		WARRIOR,
+		CLERIC,
+		DWARF
+	};
 
+	Character * _player[2];
+	PLAYER		_playerNum;
+	CHARACTER	_character[2];
 public:
 	PlayerManager();
 	~PlayerManager();
@@ -19,7 +34,7 @@ public:
 	void Update();
 	void Release();
 
-	inline Character* GetWarrior() { return _warrior; }
-	inline Character* GetMagician() { return _magician; }
+	inline Character* GetPlayer() { return _player[0]; }
+	void MoveRestrict(int stage);
 };
 
