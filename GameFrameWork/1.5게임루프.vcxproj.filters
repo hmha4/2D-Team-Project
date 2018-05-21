@@ -79,6 +79,9 @@
     <Filter Include="PlayGround\Stage1-1\MapObject">
       <UniqueIdentifier>{9e847463-e5ac-422a-b818-d5bcc2f4ab80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlayGround\SelectScene">
+      <UniqueIdentifier>{1b6ae142-d674-44d3-90a1-25dbc941a6b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -198,6 +201,9 @@
     <ClInclude Include="PlayUI.h">
       <Filter>PlayGround</Filter>
     </ClInclude>
+    <ClInclude Include="SelectScene.h">
+      <Filter>PlayGround\SelectScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -301,6 +307,9 @@
     </ClCompile>
     <ClCompile Include="PlayUI.cpp">
       <Filter>PlayGround</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectScene.cpp">
+      <Filter>PlayGround\SelectScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
