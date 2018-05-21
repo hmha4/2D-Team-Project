@@ -107,6 +107,7 @@ public:
     //알파 프레임 렌더링 함수
     void alphaFrameRender(HDC hdc, BYTE alpha);
     void alphaFrameRender(HDC hdc, int destX, int destY, BYTE alpha);
+	void alphaFrameRender(HDC hdc, int destX, int destY, int frameX, int frameY, BYTE alpha);
     void alphaFrameRender(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight, BYTE alpha);
 
     inline HDC getMemDC() { return _imageInfo->hMemDC; }

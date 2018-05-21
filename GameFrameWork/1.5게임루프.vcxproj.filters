@@ -82,6 +82,9 @@
     <Filter Include="PlayGround\Player">
       <UniqueIdentifier>{8d82e422-6fe4-4dd6-b6b2-de800faf034d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlayGround\StartScene">
+      <UniqueIdentifier>{cd65f3ac-a375-4cdc-b37e-ff77c750fc0c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -216,6 +219,9 @@
     <ClInclude Include="DataBase.h">
       <Filter>gameFrameWork\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="StartScene.h">
+      <Filter>PlayGround\StartScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -334,6 +340,9 @@
     </ClCompile>
     <ClCompile Include="DataBase.cpp">
       <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="StartScene.cpp">
+      <Filter>PlayGround\StartScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

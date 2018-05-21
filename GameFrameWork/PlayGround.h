@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "Stage1_1.h"
 #include "SelectScene.h"
+#include "StartScene.h"
 
 class PlayGround:public gameNode
 {
