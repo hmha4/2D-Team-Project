@@ -146,9 +146,11 @@
     <ClInclude Include="BulletManager.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="gameNode.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="ImageManager.h" />
@@ -157,9 +159,12 @@
     <ClInclude Include="KeyAniManager.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Magician.h" />
+    <ClInclude Include="MapObject.h" />
     <ClInclude Include="mymecro.h" />
     <ClInclude Include="PixelCollision.h" />
     <ClInclude Include="PlayGround.h" />
+    <ClInclude Include="PlayUI.h" />
     <ClInclude Include="RandomManager.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="sceneManager.h" />
@@ -172,6 +177,7 @@
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="txtData.h" />
+    <ClInclude Include="Warrior.h" />
     <ClInclude Include="zOrderManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -181,8 +187,10 @@
     <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="gameNode.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
@@ -191,8 +199,11 @@
     <ClCompile Include="KeyAniManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="Magician.cpp" />
+    <ClCompile Include="MapObject.cpp" />
     <ClCompile Include="PixelCollision.cpp" />
     <ClCompile Include="PlayGround.cpp" />
+    <ClCompile Include="PlayUI.cpp" />
     <ClCompile Include="RandomManager.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="soundManager.cpp" />
@@ -207,6 +218,7 @@
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="txtData.cpp" />
+    <ClCompile Include="Warrior.cpp" />
     <ClCompile Include="zOrderManager.cpp" />
   </ItemGroup>
   <ItemGroup>
