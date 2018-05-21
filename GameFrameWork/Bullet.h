@@ -27,6 +27,9 @@ public:
 	bool		useCollision;	//충돌사용하는지 여부
 	bool		useShadow;		//그림자 사용하는지 여부
 
+	float shadowWidth;
+	float shadowHeight;
+
 	Bullet();
 	~Bullet();
 

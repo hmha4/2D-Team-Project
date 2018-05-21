@@ -23,6 +23,7 @@ HRESULT MapObject::Init(int x, int y)
 	setX = x;
 	setY = y;
     rc = RectMake(setX, setY, img->GetWidth(), img->GetHeight());
+	shadowRc = RectMakeCenter(GetCenterPos(rc).x, GetCenterPos(rc).y + 40, img->GetWidth(), img->GetHeight());
 	return S_OK;
 }
 

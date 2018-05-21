@@ -539,19 +539,19 @@ void image::alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int
     //마젠타 색상처럼 제외시킬 색상이 있다면
     if (_trans)
     {
-        BitBlt(_blendImage->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height,
+        BitBlt(_blendImage->hMemDC, 0, 0, sourWidth, sourHeight,
             hdc, destX, destY, SRCCOPY);
 
-        GdiTransparentBlt(_blendImage->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height,
-            _imageInfo->hMemDC, 0, 0, _imageInfo->width, _imageInfo->height, _transColor);
+        GdiTransparentBlt(_blendImage->hMemDC, 0, 0, sourWidth, sourHeight,
+            _imageInfo->hMemDC, sourX, sourY, sourWidth, sourHeight, _transColor);
 
         AlphaBlend(hdc, destX, destY, sourWidth, sourHeight, _blendImage->hMemDC,
-            sourX, sourY, sourWidth, sourHeight, _blendFunc);
+            0, 0, sourWidth, sourHeight, _blendFunc);
     }
     else
     {
         AlphaBlend(hdc, destX, destY, sourWidth, sourHeight, _imageInfo->hMemDC,
-            sourX, sourY, sourWidth, sourHeight, _blendFunc);
+			sourX, sourY, sourWidth, sourHeight, _blendFunc);
     }
 }
 

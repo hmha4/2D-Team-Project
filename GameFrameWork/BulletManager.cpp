@@ -93,6 +93,8 @@ void BulletManager::BulletShadowSetting(string bulletName,image*shadowImg, const
 		(*bIter)->shadowRc = shadowRc;
 		(*bIter)->ShadowSetY = setY;
 		(*bIter)->shadowImg = shadowImg;
+		(*bIter)->shadowWidth = shadowRc.right - shadowRc.left;
+		(*bIter)->shadowHeight = shadowRc.bottom - shadowRc.top;
 	}
 	
 }
@@ -122,8 +124,14 @@ void BulletManager::BulletUpdate()
 			else
 				(*bIter)->rc = RectMakeCenter((*bIter)->x, (*bIter)->y, (*bIter)->img->GetWidth(), (*bIter)->img->GetHeight());
 
-			if ((*bIter)->useShadow && (*bIter)->shadowImg != NULL)
-				(*bIter)->shadowRc = RectMakeCenter((*bIter)->x, (*bIter)->y + (*bIter)->ShadowSetY, (*bIter)->shadowImg->GetWidth(), (*bIter)->shadowImg->GetHeight());
+			if ((*bIter)->useShadow)
+			{
+				if((*bIter)->shadowImg != NULL)
+					(*bIter)->shadowRc = RectMakeCenter((*bIter)->x, (*bIter)->y + (*bIter)->ShadowSetY, (*bIter)->shadowImg->GetWidth(), (*bIter)->shadowImg->GetHeight());
+				else
+					(*bIter)->shadowRc = RectMakeCenter((*bIter)->x, (*bIter)->y + (*bIter)->ShadowSetY, (*bIter)->shadowWidth, (*bIter)->shadowHeight);
+			}
+				
 
 			if ((*bIter)->useCollision)
 				(*bIter)->pcol->UpdatePosition((*bIter)->x, (*bIter)->y);

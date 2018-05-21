@@ -6,6 +6,7 @@ private:
 	image*img;
 	int setX, setY;
     RECT rc;
+	RECT shadowRc;
 public:
 	MapObject(image*img);
 	~MapObject();
@@ -16,6 +17,6 @@ public:
 	void Update();
 	void Release();
 
-    virtual inline RECT&getRc() { return rc; }
+    virtual inline RECT&getRc() { return shadowRc; }
 };
 
