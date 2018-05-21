@@ -61,23 +61,43 @@ void SelectScene::Update()
 {
 	if (KEYMANAGER.isOnceKeyDown('J'))
 	{
-		_sel1Index++;
+		if(_sel1Index < 4)
+			_sel1Index++;
+		if (_sel2Index == _sel1Index)
+			_sel1Index++;
+		if (_sel1Index > 4)
+			_sel1Index -= 2;
 		ChangeCharacter(0, _sel1Index);
 	}
 	else if (KEYMANAGER.isOnceKeyDown('G'))
 	{
-		_sel1Index--;
+		if (_sel1Index > 0)
+			_sel1Index--;
+		if (_sel2Index == _sel1Index)
+			_sel1Index--;
+		if (_sel1Index < 0)
+			_sel1Index += 2;
 		ChangeCharacter(0, _sel1Index);
 	}
 
-	if (KEYMANAGER.isOnceKeyDown(VK_RIGHT))
+	if (KEYMANAGER.isOnceKeyDown(VK_NUMPAD6))
 	{
-		_sel2Index++;
+		if (_sel2Index < 4)
+			_sel2Index++;
+		if (_sel2Index == _sel1Index)
+			_sel2Index++;
+		if (_sel2Index > 4)
+			_sel2Index -= 2;
 		ChangeCharacter(1, _sel2Index);
 	}
-	else if (KEYMANAGER.isOnceKeyDown(VK_LEFT))
+	else if (KEYMANAGER.isOnceKeyDown(VK_NUMPAD4))
 	{
-		_sel2Index--;
+		if (_sel2Index > 0)
+			_sel2Index--;
+		if (_sel2Index == _sel1Index)
+			_sel2Index--;
+		if (_sel2Index < 0)
+			_sel2Index += 2;
 		ChangeCharacter(1, _sel2Index);
 	}
 
