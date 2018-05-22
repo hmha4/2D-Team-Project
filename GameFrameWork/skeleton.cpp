@@ -291,7 +291,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 
 void Skeleton::DieEnemy()
 {
-	if (hp < 0)
+	if (hp <= 0)
 	{
 		isDie = true;
 	}

@@ -52,9 +52,9 @@ HRESULT Warewolf::Init(int x, int y, ENEMYSTATE eState)
 	anim = new animation;
 
 	if (eState == LEFT_IDLE)
-		anim = ANIMATIONKEY.findAnimation("wwLeftIdle");
+		*anim = *ANIMATIONKEY.findAnimation("wwLeftIdle");
 	else if (eState == RIGHT_IDLE)
-		anim = ANIMATIONKEY.findAnimation("wwRightIdle");
+		*anim = *ANIMATIONKEY.findAnimation("wwRightIdle");
 	anim->start();
 
 	delayTime = 2;
@@ -63,6 +63,7 @@ HRESULT Warewolf::Init(int x, int y, ENEMYSTATE eState)
 	hp = 3;
 	getAlpha = 15;
 
+	speed = 1.4;
 	attackDistance = RND.GetFromTo(100, 600);
 	delayCount = RND.GetFromTo(1, 4);
 	return S_OK;
@@ -74,6 +75,7 @@ void Warewolf::Release()
 
 void Warewolf::EnemyUpdate(PlayerManager*pm)
 {
+	anim->frameUpdate(TIMEMANAGER.getElapsedTime());
 	switch (eState)
 	{
 		case LEFT_IDLE:
@@ -86,14 +88,14 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 				if (pm->GetPlayer1()->GetX() < posX)
 				{
 					eState = LEFT_MOVE;
-					anim = ANIMATIONKEY.findAnimation("wwLeftMove");
+					*anim = *ANIMATIONKEY.findAnimation("wwLeftMove");
 					anim->start();
 					delayTime = 0;
 				}
 				else
 				{
 					eState = RIGHT_MOVE;
-					anim = ANIMATIONKEY.findAnimation("wwRightMove");
+					*anim = *ANIMATIONKEY.findAnimation("wwRightMove");
 					anim->start();
 					delayTime = 0;
 				}
@@ -111,14 +113,14 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 				if (pm->GetPlayer1()->GetX() > posX)
 				{
 					eState = RIGHT_MOVE;
-					anim = ANIMATIONKEY.findAnimation("wwRightMove");
+					*anim = *ANIMATIONKEY.findAnimation("wwRightMove");
 					anim->start();
 					delayTime = 0;
 				}
 				else
 				{
 					eState = LEFT_MOVE;
-					anim = ANIMATIONKEY.findAnimation("wwLeftMove");
+					*anim = *ANIMATIONKEY.findAnimation("wwLeftMove");
 					anim->start();
 					delayTime = 0;
 				}
@@ -132,7 +134,7 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 			{
 				BULLET.Shot("웨어화살", posX, posY, PI, 0, 5, 0);
 				eState = LEFT_IDLE;
-				anim = ANIMATIONKEY.findAnimation("wwLeftIdle");
+				*anim = *ANIMATIONKEY.findAnimation("wwLeftIdle");
 				delayTime = 0;
 			}
 			
@@ -145,7 +147,7 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 			{
 				BULLET.Shot("웨어화살", posX, posY, 0, 0, 5, 1);
 				eState = RIGHT_IDLE;
-				anim = ANIMATIONKEY.findAnimation("wwRightIdle");
+				*anim = *ANIMATIONKEY.findAnimation("wwRightIdle");
 				delayTime = 0;
 			}
 			DieEnemy();
@@ -157,7 +159,7 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 			
 			if (getDistance(pm->GetPlayer1()->GetX(), pm->GetPlayer1()->GetY(), posX, posY) > attackDistance)
 			{
-				posX -= 1.5;
+				posX -= speed;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3+15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
 			}
@@ -166,9 +168,9 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
 				
 				if (GetCenterPos(shadowRc).y > GetCenterPos(pm->GetPlayer1()->getRc()).y)
-					posY -= 1.5;
+					posY -= speed;
 				else
-					posY += 1.5;
+					posY += speed;
 
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3+15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
@@ -177,7 +179,9 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 					GetCenterPos(shadowRc).y<GetCenterPos(pm->GetPlayer1()->getRc()).y + 5)
 				{
 					eState = LEFT_ATTACK;
-					anim = ANIMATIONKEY.findAnimation("wwLeftAttack");
+					attackDistance = RND.GetFromTo(100, 600);
+					speed = RND.GetFromTo(1, 3)*1.4;
+					*anim = *ANIMATIONKEY.findAnimation("wwLeftAttack");
 					anim->start();
 				}
 			}
@@ -188,7 +192,7 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 		{
 			if (getDistance(pm->GetPlayer1()->GetX(), pm->GetPlayer1()->GetY(), posX, posY) > 300)
 			{
-				posX += 1.5;
+				posX += speed;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
 			}
@@ -197,9 +201,9 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
 
 				if (GetCenterPos(shadowRc).y > GetCenterPos(pm->GetPlayer1()->getRc()).y)
-					posY -= 1.5;
+					posY -= speed;
 				else
-					posY += 1.5;
+					posY += speed;
 
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
@@ -208,7 +212,9 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 					GetCenterPos(shadowRc).y<GetCenterPos(pm->GetPlayer1()->getRc()).y + 5)
 				{
 					eState = RIGHT_ATTACK;
-					anim = ANIMATIONKEY.findAnimation("wwRightAttack");
+					attackDistance = RND.GetFromTo(100, 600);
+					speed = RND.GetFromTo(1, 3)*1.4;
+					*anim = *ANIMATIONKEY.findAnimation("wwRightAttack");
 					anim->start();
 				}
 			}
@@ -264,19 +270,19 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 
 void Warewolf::DieEnemy()
 {
-	if (hp<0)
+	if (hp<=0)
 	{
 		initPosY = posY;
 
 		if (eState == LEFT_IDLE || eState == LEFT_ATTACK || eState == LEFT_MOVE)
 		{
 			eState = LEFT_DIE;
-			anim = ANIMATIONKEY.findAnimation("wwLeftDie");
+			*anim = *ANIMATIONKEY.findAnimation("wwLeftDie");
 		}
 		else if (eState == RIGHT_IDLE || eState == RIGHT_ATTACK || eState == RIGHT_MOVE)
 		{
 			eState = RIGHT_DIE;
-			anim = ANIMATIONKEY.findAnimation("wwRightDie");
+			*anim = *ANIMATIONKEY.findAnimation("wwRightDie");
 		}
 		anim->start();
 	}

@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "EnemyManager.h"
-
+#include "Bullet.h"
 
 EnemyManager::EnemyManager()
 	:enemyNum(0)
 {
+	EFFECTMANAGER.addEffect("에너미피격", PathFile("image\\Enemy", "에너미피격").c_str(), 484, 55, 60, 55, 30, 1, 30);
 }
 
 
@@ -56,6 +57,7 @@ void EnemyManager::Update(PlayerManager*pm)
 		}
 	}
 	checkEnemyNum = DieUpdate();
+	EnemyCollision();
 }
 
 void EnemyManager::Release()
@@ -109,5 +111,32 @@ int EnemyManager::DieUpdate()
 		}
 	}
 	return enemyNum;
+}
+
+void EnemyManager::EnemyCollision()
+{
+	enemyMapIter emIter = enemyMap.begin();
+
+	for (; emIter != enemyMap.end(); emIter++)
+	{
+		for (int i = 0; i < emIter->second.size(); i++)
+		{
+			if (!emIter->second[i]->getShowState()||emIter->second[i]->getDie())continue;
+		
+			for (int j = 0; j < BULLET.GetBulletVec("Warrior_Weapon_1_B").size(); j++)
+			{
+				if (!BULLET.GetBulletVec("Warrior_Weapon_1_B")[j]->isShot)continue;
+				RECT rc;
+				if (IntersectRect(&rc, &emIter->second[i]->getRc(), &BULLET.GetBulletVec("Warrior_Weapon_1_B")[j]->getRc()))
+				{
+					int randomSet = RND.GetFromTo(-10, 11);
+					EFFECTMANAGER.play("에너미피격", GetCenterPos(emIter->second[i]->getColRc()).x+ randomSet, GetCenterPos(emIter->second[i]->getColRc()).y+ randomSet);
+					emIter->second[i]->Damaged();
+					BULLET.Destroy("Warrior_Weapon_1_B", j);
+					break;
+				}
+			}
+		}
+	}
 }
 

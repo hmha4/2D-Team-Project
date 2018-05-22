@@ -11,6 +11,8 @@ private:
 
 	int attackDistance;
 	int delayCount;
+
+	float speed;
 public:
 	Warewolf(ENEMYTYPE _eType);
 	~Warewolf();

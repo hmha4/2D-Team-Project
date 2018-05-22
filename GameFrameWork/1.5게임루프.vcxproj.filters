@@ -204,26 +204,26 @@
     <ClInclude Include="PlayUI.h">
       <Filter>PlayGround</Filter>
     </ClInclude>
+    <ClInclude Include="DataBase.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
     <ClInclude Include="EnemyManager.h">
       <Filter>PlayGround\Stage1-1\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Warewolf.h">
       <Filter>PlayGround\Stage1-1\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="DataBase.h">
-      <Filter>gameFrameWork\Manager</Filter>
+    <ClInclude Include="skeleton.h">
+      <Filter>PlayGround\Stage1-1\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
       <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClInclude>
-    <ClInclude Include="skeleton.h">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+    <ClInclude Include="StartScene.h">
+      <Filter>PlayGround\StartScene</Filter>
     </ClInclude>
     <ClInclude Include="SelectScene.h">
       <Filter>PlayGround\SelectScene</Filter>
-    </ClInclude>
-    <ClInclude Include="StartScene.h">
-      <Filter>PlayGround\StartScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -329,26 +329,26 @@
     <ClCompile Include="PlayUI.cpp">
       <Filter>PlayGround</Filter>
     </ClCompile>
+    <ClCompile Include="DataBase.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
       <Filter>PlayGround\Stage1-1\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Warewolf.cpp">
       <Filter>PlayGround\Stage1-1\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="DataBase.cpp">
-      <Filter>gameFrameWork\Manager</Filter>
+    <ClCompile Include="skeleton.cpp">
+      <Filter>PlayGround\Stage1-1\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="PlayerManager.cpp">
       <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClCompile>
-    <ClCompile Include="skeleton.cpp">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+    <ClCompile Include="StartScene.cpp">
+      <Filter>PlayGround\StartScene</Filter>
     </ClCompile>
     <ClCompile Include="SelectScene.cpp">
       <Filter>PlayGround\SelectScene</Filter>
-    </ClCompile>
-    <ClCompile Include="StartScene.cpp">
-      <Filter>PlayGround\StartScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

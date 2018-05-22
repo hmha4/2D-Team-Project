@@ -28,6 +28,8 @@ public:
 	void ShowEnemy(ENEMYTYPE eType,float x,float y,ENEMYSTATE eState);
 	int DieUpdate();
 
+	void EnemyCollision();
+
 	inline vector<Enemy*>&GetEnemyVec(ENEMYTYPE eType) {
 		return enemyMap.find(eType)->second;
 	}
