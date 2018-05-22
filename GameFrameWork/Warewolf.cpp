@@ -6,10 +6,7 @@ Warewolf::Warewolf(ENEMYTYPE _eType)
 	:Enemy(_eType)
 {
 	IMAGEMANAGER.addFrameImage("웨어울프", PathFile("image\\Enemy", "웨어울프").c_str(), 840, 388, 7, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER.addFrameImage("웨어울프화살", PathFile("image\\Enemy", "웨어울프화살").c_str(), 60, 20, 1, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER.addFrameImage("웨어총알그림자", PathFile("image\\Enemy", "웨어총알그림자").c_str(), 60, 10, 1, 1, true, RGB(255, 0, 255));
 }
-
 
 Warewolf::~Warewolf()
 {
@@ -17,11 +14,7 @@ Warewolf::~Warewolf()
 
 HRESULT Warewolf::Init(int x, int y, ENEMYSTATE eState)
 {
-	BULLET.BulletSetting("웨어화살", IMAGEMANAGER.findImage("웨어울프화살"), 30, false, 0, 2);
-	BULLET.BulletShadowSetting("웨어화살", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(posX, posY, 60, 10), 50);
 
-	for (int i = 0; i < 30; i++)
-		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("웨어화살")[i]);
 	int leftIde[] = { 0 };
 	ANIMATIONKEY.addArrayFrameAnimation("wwLeftIdle", "웨어울프", leftIde, 1, 2, true);
 
@@ -48,7 +41,6 @@ HRESULT Warewolf::Init(int x, int y, ENEMYSTATE eState)
 
 	img = IMAGEMANAGER.findImage("웨어울프");
 	Enemy::Init(x, y, eState);
-
 	anim = new animation;
 
 	if (eState == LEFT_IDLE)
@@ -262,6 +254,7 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 			if (dieTime > 1.5)
 			{
 				isDie = true;
+				isShow = false;
 			}
 		}
 		break;

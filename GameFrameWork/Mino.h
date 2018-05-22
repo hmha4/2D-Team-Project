@@ -1,17 +1,12 @@
 #pragma once
 #include "Enemy.h"
-class Skeleton :public Enemy
+class Mino:public Enemy
 {
 private:
-	float totalPower;
-	float Friction;
-	float attackTime;
 
-	int speed;
-	bool isAttack;
 public:
-	Skeleton(ENEMYTYPE _eType);
-	~Skeleton();
+	Mino(ENEMYTYPE _eType);
+	~Mino();
 
 	virtual HRESULT Init(int x, int y, ENEMYSTATE eState);
 
@@ -23,3 +18,4 @@ public:
 
 	virtual void Damaged();
 };
+

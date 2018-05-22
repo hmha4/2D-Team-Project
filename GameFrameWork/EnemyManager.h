@@ -30,6 +30,8 @@ public:
 
 	void EnemyCollision();
 
+	void AllDieInit();
+
 	inline vector<Enemy*>&GetEnemyVec(ENEMYTYPE eType) {
 		return enemyMap.find(eType)->second;
 	}
