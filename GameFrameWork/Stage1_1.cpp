@@ -8,6 +8,7 @@ Stage1_1::Stage1_1()
 	IMAGEMANAGER.addImage("1.1앞배경", PathFile("image", "1-1앞배경").c_str(), 3652, 400, true, RGB(255, 0, 255));
 	IMAGEMANAGER.addImage("1.1뒷배경", PathFile("image", "1-1뒷배경").c_str(), 3652, 400, true, RGB(255, 0, 255));
 	IMAGEMANAGER.addImage("1.1배경오브젝트", PathFile("image", "1-1제트오더").c_str(), 2864, 80, true, RGB(255, 0, 255));
+	EFFECTMANAGER.addEffect("폭발", "생물폭발.bmp", 1653, 90, 1653 / 18, 90, 60, 1, 30);
 }
 
 
@@ -49,6 +50,8 @@ void Stage1_1::Render()
 
 void Stage1_1::Update()
 {
+	if (KEYMANAGER.isOnceKeyDown(VK_LBUTTON))
+		EFFECTMANAGER.play("폭발", WINSIZEX / 2, 300);
 	_pm->MoveRestrict((int)s1State);
 	//_pm->GetMagician()->MovementRestrict((int)s1State);
 
