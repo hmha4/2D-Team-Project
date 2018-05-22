@@ -34,6 +34,7 @@ private:
 	int _sel1Index;
 	int _sel2Index;
 
+	int _playerNum;
 public:
 	SelectScene();
 	~SelectScene();

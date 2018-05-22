@@ -16,11 +16,14 @@ PlayGround::~PlayGround()
 HRESULT PlayGround::Init()
 {
     gameNode::init(true);
+
 	SCENEMANAGER.addScene("스테이지1.1", new Stage1_1);
 	SCENEMANAGER.addScene("SelectScene", new SelectScene);
-	SCENEMANAGER.changeScene("SelectScene");
+	SCENEMANAGER.addScene("StartScene", new StartScene);
 
-	_UI = new PlayUI;
+	SCENEMANAGER.changeScene("StartScene");
+
+	
 
     return S_OK;
 }
@@ -56,6 +59,6 @@ void PlayGround::Render()
     SCENEMANAGER.render();//=>이건 씬에서 제트오더 안쓰는 애들렌더
     ZORDER.Render();//=>제트오더렌더는 여기서쓰니까 씬에서 따로 얘써줄필요없음 제트오더에 객체추가만 하면됨
     EFFECTMANAGER.render();
-	//_UI->render();
+	
     CAM.Render(getHDC());
 }
