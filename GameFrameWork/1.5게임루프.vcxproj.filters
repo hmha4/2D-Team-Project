@@ -225,9 +225,6 @@
     <ClInclude Include="SelectScene.h">
       <Filter>PlayGround\SelectScene</Filter>
     </ClInclude>
-    <ClInclude Include="Stage1_2.h">
-      <Filter>PlayGround\Stage1-2</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -352,9 +349,6 @@
     </ClCompile>
     <ClCompile Include="SelectScene.cpp">
       <Filter>PlayGround\SelectScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage1_2.cpp">
-      <Filter>PlayGround\Stage1-2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
