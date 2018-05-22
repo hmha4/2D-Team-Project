@@ -40,13 +40,13 @@ HRESULT PlayerManager::Init()
 		}
 	}
 
-	_UI = new PlayUI;
+	UI = new PlayUI;
 	return S_OK;
 }
 
 void PlayerManager::Render()
 {
-	_UI->render();
+	UI->render();
 }
 
 void PlayerManager::Update()

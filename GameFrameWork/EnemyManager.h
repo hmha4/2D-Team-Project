@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include "Warewolf.h"
+#include "skeleton.h"
 class EnemyManager:public gameNode
 {
 private:

@@ -30,7 +30,9 @@ void EnemyManager::InputEnemy(ENEMYTYPE eType, int enemyNum)
 			break;
 			case SKELETON:
 			{
-
+				Enemy*enemy = new Skeleton(eType);
+				enemy->Init();
+				enemyVec.push_back(enemy);
 			}
 			break;
 		}

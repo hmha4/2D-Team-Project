@@ -27,7 +27,7 @@ private:
 	PLAYER		_playerNum;
 	CHARACTER	_character[2];
 
-	PlayUI*		_UI;
+	PlayUI*		UI;
 public:
 	PlayerManager();
 	~PlayerManager();
