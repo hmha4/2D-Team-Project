@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PlayerManager.h"
-
+#include "Bullet.h"
 
 PlayerManager::PlayerManager()
 {
@@ -53,6 +53,8 @@ void PlayerManager::Update()
 {
 	for (int i = 0; i < _playerNum + 1; i++)
 	{
+		Collision("웨어화살", i);
+
 		_player[i]->Update();
 	}
 }
@@ -67,4 +69,19 @@ void PlayerManager::MoveRestrict(int stage)
 {
 	for (int i = 0; i < _playerNum + 1; i++)
 		_player[i]->MovementRestrict(stage);
+}
+
+void PlayerManager::Collision(string bulletName, int playerNum)
+{
+	for (int j = 0; j < BULLET.GetBulletVec(bulletName).size(); j++)
+	{
+		if (!BULLET.GetBulletVec(bulletName)[j]->isShot) continue;
+		RECT rc;
+		if (IntersectRect(&rc, &_player[playerNum]->getRc(), &BULLET.GetBulletVec(bulletName)[j]->getRc()))
+		{
+			_player[playerNum]->Collision(BULLET.GetBulletVec(bulletName)[j]->getRc());
+			BULLET.Destroy(bulletName, j);
+			break;
+		}
+	}
 }

@@ -18,7 +18,12 @@ HRESULT Character::Init(float x, float y, int player)
     _x = x;
     _y = y;
 	_weapon = WEAPON_1;
+	_alpha = 255;
+	_alphaCount = 0;
+	_deadTime = 0;
 
+
+	//	1p, 2p 입력 키 조정
 	if (player == 0)
 	{
 		_mControl.insert(make_pair("Attack", 'A'));
@@ -44,6 +49,7 @@ HRESULT Character::Init(float x, float y, int player)
 
 void Character::Release()
 {
+	//	딱히 해줄 필요는 없음
     _x = 0;
     _y = 0;
     _rc = RectMake(0, 0, 0, 0);
@@ -68,6 +74,6 @@ void Character::Update()
 
 void Character::Render()
 {
-    _img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
+    _img->alphaAniRender(getMemDC(), _rc.left, _rc.top, _anim, _alpha);
 	//Rectangle(getMemDC(), _shadow.left, _shadow.top, _shadow.right, _shadow.bottom);
 }

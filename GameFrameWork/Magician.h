@@ -4,6 +4,7 @@ class Magician :
     public Character
 {
 private:
+	//	마법사 상태 정보
     enum STATE
     {
         RIGHT_IDLE, LEFT_IDLE,
@@ -25,23 +26,29 @@ private:
         RIGHT_OTHER, LEFT_OTHER
     };
 
-    STATE _state;
-    float _startY;
-    float _downCount = 0;
+    STATE _state;					//	마법사 상태
+	float _startY;					//	마법사 점프 y좌표
+	float _downCount = 0;			//	마법사 다운 카운트
 public:
     Magician();
     ~Magician();
 
+	//	Init(x좌표, y좌표, 1p인지2p인지);
     HRESULT Init(float x, float y, int player);
     void Release();
     void Update();
     void Render();
 
+	//	캐릭터 무기 변경
     void ChangeWeapon();
+	//	캐릭터 애니메이션 변경(상태, 애니메이션 이름)
     void ChangeAnim(int state, string animKey);
-    void Collision();
+	//	캐릭터 충돌(RECT)
+    void Collision(RECT rc);
+	//	캐릭터 이동 제한(스테이지 번호)
 	void MovementRestrict(int stage);
 
+	//	캐릭터 불릿 초기화
 	void InitBullet();
 };
 

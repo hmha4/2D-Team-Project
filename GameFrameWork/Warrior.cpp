@@ -15,12 +15,15 @@ HRESULT Warrior::Init(float x, float y, int player)
 {
 	Character::Init(x, y, player);
 
+	// ======== 이미지 초기화 ======== //
 	IMAGEMANAGER.addFrameImage("Warrior1", PathFile("image\\Character", "Warrior_Weapon_1").c_str(), 1200, 1400, 10, 7, true, RGB(255, 0, 255));
 	IMAGEMANAGER.addFrameImage("Warrior2", PathFile("image\\Character", "Warrior_Weapon_2").c_str(), 1200, 1400, 10, 7, true, RGB(255, 0, 255));
 	IMAGEMANAGER.addFrameImage("Warrior3", PathFile("image\\Character", "Warrior_Weapon_3").c_str(), 1200, 1400, 10, 7, true, RGB(255, 0, 255));
 	IMAGEMANAGER.addFrameImage("Warrior4", PathFile("image\\Character", "Warrior_Weapon_4").c_str(), 1200, 1400, 10, 7, true, RGB(255, 0, 255));
 	_img = IMAGEMANAGER.findImage("Warrior1");
+	// ============================== //
 
+	// ======== 애니메이션 초기화 ======== //
 	char * warrior = "Warrior1";
 
 	//IDLE
@@ -109,8 +112,11 @@ HRESULT Warrior::Init(float x, float y, int player)
 	_anim = ANIMATIONKEY.findAnimation("WarriorRightIdle");
 	_anim->start();
 
+	// ============================== //
+
 	_hp = 10;
 
+	// 총알 초기화
 	InitBullet();
 
 	return S_OK;
@@ -127,17 +133,7 @@ void Warrior::Update()
 
 	ChangeWeapon();
 
-	if (KEYMANAGER.isOnceKeyDown(_mControl["Right"]))
-	{
-		_speedX = 3;
-		ChangeAnim((int)RIGHT_IDLE, "WarriorRightIdle");
-	}
-	else if (KEYMANAGER.isOnceKeyDown(_mControl["Left"]))
-	{
-		_speedX = 3;
-		ChangeAnim((int)LEFT_IDLE, "WarriorLeftIdle");
-	}
-
+	//	점프
 	if (KEYMANAGER.isOnceKeyDown(_mControl["Jump"]))
 	{
 		_jumpPower = 7;
@@ -149,6 +145,7 @@ void Warrior::Update()
 			ChangeAnim((int)LEFT_JUMP, "WarriorLeftJump");
 	}
 
+	//	공격
 	if (KEYMANAGER.isOnceKeyDown(_mControl["Attack"]))
 	{
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN ||
@@ -168,7 +165,7 @@ void Warrior::Update()
 			ChangeAnim((int)LEFT_JUMP_ATTACK, "WarriorLeftJumpAttack");
 	}
 
-
+	//	방어
 	if (KEYMANAGER.isOnceKeyDown(_mControl["Block"]))
 	{
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN)
@@ -176,11 +173,28 @@ void Warrior::Update()
 		else if (_state == LEFT_IDLE || _state == LEFT_RUN)
 			ChangeAnim((int)LEFT_BLOCK, "WarriorLeftBlock");
 	}
-	//if (KEYMANAGER.isOnceKeyDown('C'))
-	//{
-	//	Collision();
-	//}
 
+	//	죽었을 때 무적 시간
+	if (_deadTime > 0)
+	{
+		_alphaCount += TIMEMANAGER.getElapsedTime();
+		if (_alphaCount >= 0.02)
+		{
+			_alphaCount = 0;
+			if (_alpha == 255)
+				_alpha = 0;
+			else _alpha = 255;
+		}
+
+		_deadTime -= TIMEMANAGER.getElapsedTime();
+		if (_deadTime <= 0)
+		{
+			_alpha = 255;
+			_deadTime = 0;
+		}
+	}
+
+	//	워리어 FSM
 	switch (_state)
 	{
 	case Warrior::RIGHT_IDLE:
@@ -248,7 +262,7 @@ void Warrior::Update()
 			_y -= _speedY;
 		else if (KEYMANAGER.isStayKeyDown(_mControl["Down"]))
 			_y += _speedY;
-		if (KEYMANAGER.isOnceKeyUp(_mControl["Right"]))
+		if (!KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 		{
 			ChangeAnim((int)RIGHT_IDLE, "WarriorRightIdle");
 		}
@@ -262,7 +276,7 @@ void Warrior::Update()
 			_y -= _speedY;
 		else if (KEYMANAGER.isStayKeyDown(_mControl["Down"]))
 			_y += _speedY;
-		if (KEYMANAGER.isOnceKeyUp(_mControl["Left"]))
+		if (!KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 		{
 			ChangeAnim((int)LEFT_IDLE, "WarriorLeftIdle");
 		}
@@ -274,7 +288,7 @@ void Warrior::Update()
 			_x -= _speedX;
 		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 			_x += _speedX;
-		if (KEYMANAGER.isOnceKeyUp(_mControl["Up"]))
+		if (!KEYMANAGER.isStayKeyDown(_mControl["Up"]))
 		{
 			ChangeAnim((int)RIGHT_IDLE, "WarriorRightIdle");
 		}
@@ -286,7 +300,7 @@ void Warrior::Update()
 			_x -= _speedX;
 		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 			_x += _speedX;
-		if (KEYMANAGER.isOnceKeyUp(_mControl["Up"]))
+		if (!KEYMANAGER.isStayKeyDown(_mControl["Up"]))
 		{
 			ChangeAnim((int)LEFT_IDLE, "WarriorLeftIdle");
 		}
@@ -548,12 +562,14 @@ void Warrior::Update()
 	case Warrior::RIGHT_OTHER:
 		if (!_anim->isPlay())
 		{
+			_deadTime = 2.0f;
 			ChangeAnim((int)RIGHT_IDLE, "WarriorRightIdle");
 		}
 		break;
 	case Warrior::LEFT_OTHER:
 		if (!_anim->isPlay())
 		{
+			_deadTime = 2.0f;
 			ChangeAnim((int)LEFT_IDLE, "WarriorLeftIdle");
 		}
 		break;
@@ -609,7 +625,7 @@ void Warrior::ChangeAnim(int state, string animKey)
 	_anim->start();
 }
 
-void Warrior::Collision()
+void Warrior::Collision(RECT rc)
 {
 	if (_state == RIGHT_HIT_1 || _state == LEFT_HIT_1 ||
 		_state == RIGHT_HIT_2 || _state == LEFT_HIT_2 ||
@@ -618,9 +634,15 @@ void Warrior::Collision()
 		_state == RIGHT_DIE_P3 || _state == LEFT_DIE_P3 ||
 		_state == RIGHT_DIE_P4 || _state == LEFT_DIE_P4 ||
 		_state == RIGHT_BLOCK || _state == LEFT_BLOCK ||
-		_state == RIGHT_OTHER || _state == LEFT_OTHER) return;
+		_state == RIGHT_OTHER || _state == LEFT_OTHER || _deadTime > 0) return;
 
 	_hp -= 1;
+
+	POINT pos = GetCenterPos(rc);
+
+	bool isLeft = false;
+	if (pos.x > _x) isLeft = false;
+	else isLeft = true;
 
 	if (_hp <= 0)
 	{
@@ -628,9 +650,9 @@ void Warrior::Collision()
 		_jumpPower = 5;
 		_gravity = 0.3f;
 		_startY = _y;
-		if (_state == RIGHT_IDLE || _state == RIGHT_RUN || _state == RIGHT_ATTACK)
+		if (!isLeft)
 			ChangeAnim((int)RIGHT_DIE_P1, "WarriorRightDie1");
-		else if (_state == LEFT_IDLE || _state == LEFT_RUN || _state == LEFT_ATTACK)
+		else if (isLeft)
 			ChangeAnim((int)LEFT_DIE_P1, "WarriorLeftDie1");
 
 		return;
@@ -642,16 +664,16 @@ void Warrior::Collision()
 
 	if (rnd == 0)
 	{
-		if (_state == RIGHT_IDLE || _state == RIGHT_RUN || _state == RIGHT_ATTACK)
+		if (!isLeft)
 			ChangeAnim((int)RIGHT_HIT_1, "WarriorRightHit1");
-		else if (_state == LEFT_IDLE || _state == LEFT_RUN || _state == LEFT_ATTACK)
+		else if (isLeft)
 			ChangeAnim((int)LEFT_HIT_1, "WarriorLeftHit1");
 	}
 	else
 	{
-		if (_state == RIGHT_IDLE || _state == RIGHT_RUN || _state == RIGHT_ATTACK)
+		if (!isLeft)
 			ChangeAnim((int)RIGHT_HIT_2, "WarriorRightHit2");
-		else if (_state == LEFT_IDLE || _state == LEFT_RUN || _state == LEFT_ATTACK)
+		else if (isLeft)
 			ChangeAnim((int)LEFT_HIT_2, "WarriorLeftHit2");
 	}
 }
@@ -704,10 +726,10 @@ void Warrior::InitBullet()
 	BULLET.BulletSetting("Warrior_Weapon_3_B", IMAGEMANAGER.findImage("Warrior_Weapon_1_B"), 1, true, 10, 2);
 	BULLET.BulletSetting("Warrior_Weapon_4_B", IMAGEMANAGER.findImage("Warrior_Weapon_4_B"), 1, true, 10, 2);
 
-	BULLET.BulletShadowSetting("Warrior_Weapon_1_B", nullptr, RectMake(0, 0, 40, 40), 55);
-	BULLET.BulletShadowSetting("Warrior_Weapon_2_B", nullptr, RectMake(0, 0, 40, 40), 55);
-	BULLET.BulletShadowSetting("Warrior_Weapon_3_B", nullptr, RectMake(0, 0, 40, 40), 55);
-	BULLET.BulletShadowSetting("Warrior_Weapon_4_B", nullptr, RectMake(0, 0, 40, 40), 55);
+	BULLET.BulletShadowSetting("Warrior_Weapon_1_B", nullptr, RectMake(0, 0, 40, 15), 70);
+	BULLET.BulletShadowSetting("Warrior_Weapon_2_B", nullptr, RectMake(0, 0, 40, 15), 70);
+	BULLET.BulletShadowSetting("Warrior_Weapon_3_B", nullptr, RectMake(0, 0, 40, 15), 70);
+	BULLET.BulletShadowSetting("Warrior_Weapon_4_B", nullptr, RectMake(0, 0, 40, 15), 70);
 
 	ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("Warrior_Weapon_1_B")[0]);
 	ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("Warrior_Weapon_2_B")[0]);

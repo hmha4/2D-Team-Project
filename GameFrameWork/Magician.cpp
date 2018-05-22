@@ -15,12 +15,16 @@ HRESULT Magician::Init(float x, float y, int player)
 {
     Character::Init(x, y, player);
 
+	// ======== 이미지 초기화 ======== //
     IMAGEMANAGER.addFrameImage("Magician1", PathFile("image\\Character", "Magician_Weapon_1").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
     IMAGEMANAGER.addFrameImage("Magician2", PathFile("image\\Character", "Magician_Weapon_2").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
     IMAGEMANAGER.addFrameImage("Magician3", PathFile("image\\Character", "Magician_Weapon_3").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
     IMAGEMANAGER.addFrameImage("Magician4", PathFile("image\\Character", "Magician_Weapon_4").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
     _img = IMAGEMANAGER.findImage("Magician1");
+	// ============================== //
 
+
+	// ======== 애니메이션 초기화 ======== //
     char * magician = "Magician1";
 
     //IDLE
@@ -104,8 +108,11 @@ HRESULT Magician::Init(float x, float y, int player)
     _anim = ANIMATIONKEY.findAnimation("MagicianRightIdle");
     _anim->start();
 
+	// ============================== //
+
     _hp = 10;
 
+	//총알 초기화
 	InitBullet();
 
     return S_OK;
@@ -121,18 +128,8 @@ void Magician::Update()
     Character::Update();
 
 	ChangeWeapon();
-	
-	if (KEYMANAGER.isOnceKeyDown(_mControl["Right"]))
-	{
-		_speedX = 3;
-		ChangeAnim((int)RIGHT_IDLE, "MagicianRightIdle");
-	}
-	else if (KEYMANAGER.isOnceKeyDown(_mControl["Left"]))
-	{
-		_speedX = 3;
-		ChangeAnim((int)LEFT_IDLE, "MagicianLeftIdle");
-	}
 
+	//	점프
 	if (KEYMANAGER.isOnceKeyDown(_mControl["Jump"]))
 	{
 		_jumpPower = 7;
@@ -144,6 +141,7 @@ void Magician::Update()
 			ChangeAnim((int)LEFT_JUMP, "MagicianLeftJump");
 	}
 
+	//	공격
 	if (KEYMANAGER.isOnceKeyDown(_mControl["Attack"]))
 	{
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN ||
@@ -167,11 +165,27 @@ void Magician::Update()
 			BULLET.GetBulletVec(_weaponEffectName)[0]->ShadowSetY = WINSIZEY/2;
 	}
 
-	//if (KEYMANAGER.isOnceKeyDown('C'))
-	//{
-	//	Collision();
-	//}
+	//	죽었을 때 무적 시간
+	if (_deadTime > 0)
+	{
+		_alphaCount += TIMEMANAGER.getElapsedTime();
+		if (_alphaCount >= 0.02)
+		{
+			_alphaCount = 0;
+			if (_alpha == 255)
+				_alpha = 0;
+			else _alpha = 255;
+		}
 
+		_deadTime -= TIMEMANAGER.getElapsedTime();
+		if (_deadTime <= 0)
+		{
+			_alpha = 255;
+			_deadTime = 0;
+		}
+	}
+
+	//	마법사 FSM
 	switch (_state)
 	{
 	case Magician::RIGHT_IDLE:
@@ -239,7 +253,7 @@ void Magician::Update()
 			_y -= _speedY;
 		else if (KEYMANAGER.isStayKeyDown(_mControl["Down"]))
 			_y += _speedY;
-		if (KEYMANAGER.isOnceKeyUp(_mControl["Right"]))
+		if (!KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 		{
 			ChangeAnim((int)RIGHT_IDLE, "MagicianRightIdle");
 		}
@@ -253,7 +267,7 @@ void Magician::Update()
 			_y -= _speedY;
 		else if (KEYMANAGER.isStayKeyDown(_mControl["Down"]))
 			_y += _speedY;
-		if (KEYMANAGER.isOnceKeyUp(_mControl["Left"]))
+		if (!KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 		{
 			ChangeAnim((int)LEFT_IDLE, "MagicianLeftIdle");
 		}
@@ -265,7 +279,7 @@ void Magician::Update()
 			_x -= _speedX;
 		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 			_x += _speedX;
-		if (KEYMANAGER.isOnceKeyUp(_mControl["Up"]))
+		if (!KEYMANAGER.isStayKeyDown(_mControl["Up"]))
 		{
 			ChangeAnim((int)RIGHT_IDLE, "MagicianRightIdle");
 		}
@@ -277,7 +291,7 @@ void Magician::Update()
 			_x -= _speedX;
 		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 			_x += _speedX;
-		if (KEYMANAGER.isOnceKeyUp(_mControl["Up"]))
+		if (!KEYMANAGER.isStayKeyDown(_mControl["Up"]))
 		{
 			ChangeAnim((int)LEFT_IDLE, "MagicianLeftIdle");
 		}
@@ -289,7 +303,7 @@ void Magician::Update()
 			_x -= _speedX;
 		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
 			_x += _speedX;
-		if (KEYMANAGER.isOnceKeyUp(_mControl["Down"]))
+		if (!KEYMANAGER.isStayKeyDown(_mControl["Down"]))
 		{
 			ChangeAnim((int)RIGHT_IDLE, "MagicianRightIdle");
 		}
@@ -532,12 +546,14 @@ void Magician::Update()
 	case Magician::RIGHT_OTHER:
 		if (!_anim->isPlay())
 		{
+			_deadTime = 2.0f;
 			ChangeAnim((int)RIGHT_IDLE, "MagicianRightIdle");
 		}
 		break;
 	case Magician::LEFT_OTHER:
 		if (!_anim->isPlay())
 		{
+			_deadTime = 2.0f;
 			ChangeAnim((int)LEFT_IDLE, "MagicianLeftIdle");
 		}
 		break;
@@ -591,7 +607,7 @@ void Magician::ChangeAnim(int state, string animKey)
     _anim->start();
 }
 
-void Magician::Collision()
+void Magician::Collision(RECT rc)
 {
 	if (_state == RIGHT_HIT_1 || _state == LEFT_HIT_1 ||
 		_state == RIGHT_HIT_2 || _state == LEFT_HIT_2 ||
@@ -599,9 +615,15 @@ void Magician::Collision()
 		_state == RIGHT_DIE_P2 || _state == LEFT_DIE_P2 ||
 		_state == RIGHT_DIE_P3 || _state == LEFT_DIE_P3 ||
 		_state == RIGHT_DIE_P4 || _state == LEFT_DIE_P4 ||
-		_state == RIGHT_OTHER || _state == LEFT_OTHER) return;
+		_state == RIGHT_OTHER || _state == LEFT_OTHER || _deadTime > 0) return;
 
-	_hp -= 10;
+	_hp -= 1;
+
+	POINT pos = GetCenterPos(rc);
+
+	bool isLeft = false;
+	if (pos.x > _x) isLeft = false;
+	else isLeft = true;
 
 	if (_hp <= 0)
 	{
@@ -609,9 +631,9 @@ void Magician::Collision()
 		_jumpPower = 5;
 		_gravity = 0.3f;
 		_startY = _y;
-		if (_state == RIGHT_IDLE || _state == RIGHT_RUN || _state == RIGHT_ATTACK)
+		if (!isLeft)
 			ChangeAnim((int)RIGHT_DIE_P1, "MagicianRightDie1");
-		else if (_state == LEFT_IDLE || _state == LEFT_RUN || _state == LEFT_ATTACK)
+		else if (isLeft)
 			ChangeAnim((int)LEFT_DIE_P1, "MagicianLeftDie1");
 
 		return;
@@ -623,16 +645,16 @@ void Magician::Collision()
 
 	if (rnd == 0)
 	{
-		if (_state == RIGHT_IDLE || _state == RIGHT_RUN || _state == RIGHT_ATTACK)
+		if (!isLeft)
 			ChangeAnim((int)RIGHT_HIT_1, "MagicianRightHit1");
-		else if (_state == LEFT_IDLE || _state == LEFT_RUN || _state == LEFT_ATTACK)
+		else if (isLeft)
 			ChangeAnim((int)LEFT_HIT_1, "MagicianLeftHit1");
 	}
 	else
 	{
-		if (_state == RIGHT_IDLE || _state == RIGHT_RUN || _state == RIGHT_ATTACK)
+		if (!isLeft)
 			ChangeAnim((int)RIGHT_HIT_2, "MagicianRightHit2");
-		else if (_state == LEFT_IDLE || _state == LEFT_RUN || _state == LEFT_ATTACK)
+		else if (isLeft)
 			ChangeAnim((int)LEFT_HIT_2, "MagicianLeftHit2");
 	}
 }
@@ -688,10 +710,10 @@ void Magician::InitBullet()
 	
 	IMAGEMANAGER.addImage("Magician_Weapon_1_B_Shandow", PathFile("image\\Character", "Magician_Weapon_1_B_Shandow").c_str(), 24, 12, true, RGB(255, 0, 255));
 
-	BULLET.BulletShadowSetting("Magician_Weapon_1_B", IMAGEMANAGER.findImage("Magician_Weapon_1_B_Shandow"), RectMake(0, 0, 40, 40), 55);
-	BULLET.BulletShadowSetting("Magician_Weapon_2_B", IMAGEMANAGER.findImage("Magician_Weapon_1_B_Shandow"), RectMake(0, 0, 40, 40), 55);
-	BULLET.BulletShadowSetting("Magician_Weapon_3_B", IMAGEMANAGER.findImage("Magician_Weapon_1_B_Shandow"), RectMake(0, 0, 40, 40), 55);
-	BULLET.BulletShadowSetting("Magician_Weapon_4_B", IMAGEMANAGER.findImage("Magician_Weapon_1_B_Shandow"), RectMake(0, 0, 40, 40), 55);
+	BULLET.BulletShadowSetting("Magician_Weapon_1_B", IMAGEMANAGER.findImage("Magician_Weapon_1_B_Shandow"), RectMake(0, 0, 40, 15), 55);
+	BULLET.BulletShadowSetting("Magician_Weapon_2_B", IMAGEMANAGER.findImage("Magician_Weapon_1_B_Shandow"), RectMake(0, 0, 40, 15), 55);
+	BULLET.BulletShadowSetting("Magician_Weapon_3_B", IMAGEMANAGER.findImage("Magician_Weapon_1_B_Shandow"), RectMake(0, 0, 40, 15), 55);
+	BULLET.BulletShadowSetting("Magician_Weapon_4_B", IMAGEMANAGER.findImage("Magician_Weapon_1_B_Shandow"), RectMake(0, 0, 40, 15), 55);
 
 	ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("Magician_Weapon_1_B")[0]);
 	ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("Magician_Weapon_2_B")[0]);
