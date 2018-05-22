@@ -82,7 +82,7 @@
     <Filter Include="PlayGround\MapObject">
       <UniqueIdentifier>{9e847463-e5ac-422a-b818-d5bcc2f4ab80}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PlayGround\Stage1-1\Enemy">
+    <Filter Include="PlayGround\Enemy">
       <UniqueIdentifier>{cec808eb-e995-4b1b-9d0a-473afd3bc06f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -187,7 +187,7 @@
       <Filter>PlayGround\Stage1-1</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+      <Filter>PlayGround\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="MapObject.h">
       <Filter>PlayGround\MapObject</Filter>
@@ -208,13 +208,13 @@
       <Filter>gameFrameWork\Manager</Filter>
     </ClInclude>
     <ClInclude Include="EnemyManager.h">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+      <Filter>PlayGround\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Warewolf.h">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+      <Filter>PlayGround\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="skeleton.h">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+      <Filter>PlayGround\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
       <Filter>PlayGround\Player</Filter>
@@ -315,7 +315,7 @@
       <Filter>PlayGround\Stage1-1</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+      <Filter>PlayGround\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="MapObject.cpp">
       <Filter>PlayGround\MapObject</Filter>
@@ -336,13 +336,13 @@
       <Filter>gameFrameWork\Manager</Filter>
     </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+      <Filter>PlayGround\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Warewolf.cpp">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+      <Filter>PlayGround\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="skeleton.cpp">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+      <Filter>PlayGround\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="PlayerManager.cpp">
       <Filter>PlayGround\Player</Filter>
