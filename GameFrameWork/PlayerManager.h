@@ -3,6 +3,7 @@
 #include "Warrior.h"
 #include "Magician.h"
 #include "PlayUI.h"
+#include "ItemBox.h"
 
 class PlayerManager :
 	public gameNode
@@ -28,6 +29,7 @@ private:
 	CHARACTER	_character[2];
 
 	PlayUI*		_UI;
+	ItemBox*	_box[2];
 public:
 	PlayerManager();
 	~PlayerManager();

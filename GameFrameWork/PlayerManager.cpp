@@ -38,6 +38,7 @@ HRESULT PlayerManager::Init()
 
 			ZORDER.InputObj(_player[i]);
 		}
+		_box[i] = new ItemBox;
 	}
 
 	_UI = new PlayUI;
@@ -47,12 +48,17 @@ HRESULT PlayerManager::Init()
 void PlayerManager::Render()
 {
 	_UI->render();
+	for (int i = 0; i < _playerNum + 1; i++)
+		_box[i]->Render();
 }
 
 void PlayerManager::Update()
 {
 	for (int i = 0; i < _playerNum + 1; i++)
+	{
 		_player[i]->Update();
+		_box[i]->Update(_player[i]->GetX(), _player[i]->GetY());
+	}
 }
 
 void PlayerManager::Release()
