@@ -5,7 +5,23 @@
 EnemyManager::EnemyManager()
 	:enemyNum(0)
 {
+	checkEnemyNum = 1;
 	EFFECTMANAGER.addEffect("에너미피격", PathFile("image\\Enemy", "에너미피격").c_str(), 484, 55, 60, 55, 30, 1, 30);
+	
+	IMAGEMANAGER.addFrameImage("웨어울프화살", PathFile("image\\Enemy", "웨어울프화살").c_str(), 60, 20, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER.addFrameImage("웨어총알그림자", PathFile("image\\Enemy", "웨어총알그림자").c_str(), 60, 10, 1, 1, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("웨어화살", IMAGEMANAGER.findImage("웨어울프화살"), 30, false, 0, 2);
+	BULLET.BulletShadowSetting("웨어화살", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(0, 0, 60, 10), 50);
+	
+	IMAGEMANAGER.addFrameImage("스켈레톤검", PathFile("image\\Enemy", "스켈레톤검").c_str(), 60, 60, 1, 1, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("스켈검", IMAGEMANAGER.findImage("스켈레톤검"), 30, false, 0, 1);
+	BULLET.BulletShadowSetting("스켈검", NULL, RectMake(0, 0, 30, 10), 50);
+
+	for (int i = 0; i < 30; i++)
+	{
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("웨어화살")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("스켈검")[i]);
+	}
 }
 
 
@@ -40,6 +56,15 @@ void EnemyManager::InputEnemy(ENEMYTYPE eType, int enemyNum)
 	}
 	enemyMap[eType] = enemyVec;
 	enemyIdxMap[eType] = 0;
+
+	enemyMapIter emIter = enemyMap.begin();
+	for (; emIter != enemyMap.end(); emIter++)
+	{
+		for (int i = 0; i<emIter->second.size(); i++)
+		{
+			ZORDER.InputObj(emIter->second[i]);
+		}
+	}
 }
 
 
@@ -81,16 +106,16 @@ void EnemyManager::Release()
 
 void EnemyManager::ShowEnemy(ENEMYTYPE eType, float x, float y, ENEMYSTATE eState)
 {
+	AllDieInit();
 	enemyMapIter emIter = enemyMap.find(eType);
 
 	emIter->second[enemyIdxMap[eType]]->Init(x, y, eState);
 	emIter->second[enemyIdxMap[eType]]->getShowState() = true;
-	ZORDER.InputObj(emIter->second[enemyIdxMap[eType]]);
+	emIter->second[enemyIdxMap[eType]]->getDie() = false;
 
 	enemyIdxMap[eType]++;
 	enemyNum++;
 	initEnemyNum = enemyNum;
-	checkEnemyNum = 1;
 
 	if (enemyIdxMap[eType] > emIter->second.size() - 1)
 		enemyIdxMap[eType] = 0;
@@ -136,6 +161,20 @@ void EnemyManager::EnemyCollision()
 					break;
 				}
 			}
+		}
+	}
+}
+
+void EnemyManager::AllDieInit()
+{
+	enemyMapIter emIter = enemyMap.begin();
+	for (; emIter != enemyMap.end(); emIter++)
+	{
+		for (int i = 0; i<emIter->second.size(); i++)
+		{
+			if (!emIter->second[i]->getDie())continue;
+
+			emIter->second[i]->getDie() = false;
 		}
 	}
 }
