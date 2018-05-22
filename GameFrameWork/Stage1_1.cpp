@@ -20,7 +20,7 @@ HRESULT Stage1_1::Init()
 {
 	//맵오브젝트 제트오더 추가
 	MapObject*mObj = new MapObject(IMAGEMANAGER.findImage("1.1배경오브젝트"));
-	mObj->Init(0, 320);
+	mObj->Init(0, 320, 40);
 	ZORDER.InputObj(mObj);
 
 	_pm = new PlayerManager;

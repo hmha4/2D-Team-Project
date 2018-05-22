@@ -12,7 +12,7 @@ public:
 	~MapObject();
 
 	HRESULT Init();
-	HRESULT Init(int x,int y);
+	HRESULT Init(int x,int y, int amount);
 	void Render();
 	void Update();
 	void Release();

@@ -85,5 +85,7 @@ public:
     virtual void ChangeAnim(int state, string animKey) = 0;
 	//	캐릭터 충돌(가상함수)
     virtual void Collision(RECT rc) = 0;
+	//	캐릭터 상태(가상함수)
+	virtual int GetState() = 0;
 };
 

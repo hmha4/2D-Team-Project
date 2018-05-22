@@ -48,6 +48,8 @@ public:
     void Collision(RECT rc);
 	//	캐릭터 이동 제한(스테이지 번호)
 	void MovementRestrict(int stage);
+	//	캐릭터 상태
+	int GetState() { return _state; }
 
 	//	캐릭터 불릿 초기화
 	void InitBullet();

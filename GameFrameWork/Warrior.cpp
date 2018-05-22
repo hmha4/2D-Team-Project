@@ -685,7 +685,12 @@ void Warrior::MovementRestrict(int stage)
 		_speedX = 0;
 		_speedY = 0;
 	}
-	else if (stage == 1)
+	else if (stage == 10)
+	{
+		_gravity = 0.3f;
+		_startY = WINSIZEY + 100;
+	}
+	else
 	{
 		if (_shadow.left < CAM.GetRC().left)
 		{
@@ -708,10 +713,6 @@ void Warrior::MovementRestrict(int stage)
 			_y = 400 - _img->GetFreamHeight() / 2 + 15;
 			_speedY = 0;
 		}
-	}
-	else if (stage == 2)
-	{
-
 	}
 }
 
