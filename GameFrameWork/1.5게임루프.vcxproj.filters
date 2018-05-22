@@ -82,6 +82,9 @@
     <Filter Include="PlayGround\SelectScene">
       <UniqueIdentifier>{1b6ae142-d674-44d3-90a1-25dbc941a6b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlayGround\StartScene">
+      <UniqueIdentifier>{3b9b3107-7bfd-4cc9-adf7-74505e87711c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -207,17 +210,20 @@
     <ClInclude Include="Warewolf.h">
       <Filter>PlayGround\Stage1-1\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="skeleton.h">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="DataBase.h">
-      <Filter>gameFrameWork\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectScene.h">
       <Filter>gameFrameWork\Manager</Filter>
     </ClInclude>
     <ClInclude Include="PlayerManager.h">
       <Filter>PlayGround\Stage1-1\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="skeleton.h">
+      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectScene.h">
+      <Filter>PlayGround\SelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="StartScene.h">
+      <Filter>PlayGround\StartScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -329,17 +335,20 @@
     <ClCompile Include="Warewolf.cpp">
       <Filter>PlayGround\Stage1-1\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="skeleton.cpp">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="DataBase.cpp">
-      <Filter>gameFrameWork\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="SelectScene.cpp">
       <Filter>gameFrameWork\Manager</Filter>
     </ClCompile>
     <ClCompile Include="PlayerManager.cpp">
       <Filter>PlayGround\Stage1-1\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="skeleton.cpp">
+      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectScene.cpp">
+      <Filter>PlayGround\SelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="StartScene.cpp">
+      <Filter>PlayGround\StartScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

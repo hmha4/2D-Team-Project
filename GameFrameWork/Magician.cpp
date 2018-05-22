@@ -371,6 +371,7 @@ void Magician::Update()
 			_gravity = 0;
 			ChangeAnim((int)LEFT_IDLE, "MagicianLeftIdle");
 			BULLET.Destroy(_weaponEffectName, 0);
+			
 			break;
 		}
 		if (!_anim->isPlay())
@@ -697,5 +698,5 @@ void Magician::InitBullet()
 	ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("Magician_Weapon_3_B")[0]);
 	ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("Magician_Weapon_4_B")[0]);
 
-	EFFECTMANAGER.addEffect("Magician_Weapon_1_Effect", "Magician_Weapon_1_Effect", 312, 52, 52, 52, 1, 5, 1);
+	EFFECTMANAGER.addEffect("Magician_Weapon_1_Effect", PathFile("image\\Character", "Magician_Weapon_1_Effect").c_str(), 312, 52, 52, 52, 60, 1, 1);
 }

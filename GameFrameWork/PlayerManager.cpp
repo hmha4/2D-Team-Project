@@ -14,7 +14,7 @@ PlayerManager::~PlayerManager()
 HRESULT PlayerManager::Init()
 {
 	_playerNum = (PLAYER)DATABASE.LoadData("1P2P");
-	if(_playerNum == 0)
+	if (_playerNum == 0)
 		_character[0] = (CHARACTER)DATABASE.LoadData("1PCharacter");
 	else if (_playerNum == 1)
 	{
@@ -39,17 +39,22 @@ HRESULT PlayerManager::Init()
 			ZORDER.InputObj(_player[i]);
 		}
 	}
+
+	_UI = new PlayUI;
 	return S_OK;
 }
 
 void PlayerManager::Render()
 {
+	_UI->render();
 }
 
 void PlayerManager::Update()
 {
 	for (int i = 0; i < _playerNum + 1; i++)
+	{
 		_player[i]->Update();
+	}
 }
 
 void PlayerManager::Release()
@@ -60,6 +65,6 @@ void PlayerManager::Release()
 
 void PlayerManager::MoveRestrict(int stage)
 {
-	for(int i = 0; i < _playerNum + 1; i++)
+	for (int i = 0; i < _playerNum + 1; i++)
 		_player[i]->MovementRestrict(stage);
 }
