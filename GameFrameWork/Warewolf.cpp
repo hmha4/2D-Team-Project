@@ -19,7 +19,6 @@ HRESULT Warewolf::Init(int x, int y, ENEMYSTATE eState)
 {
 	BULLET.BulletSetting("웨어화살", IMAGEMANAGER.findImage("웨어울프화살"), 30, false, 0, 2);
 	BULLET.BulletShadowSetting("웨어화살", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(posX, posY, 60, 10), 50);
-
 	for (int i = 0; i < 30; i++)
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("웨어화살")[i]);
 	int leftIde[] = { 0 };
@@ -52,9 +51,9 @@ HRESULT Warewolf::Init(int x, int y, ENEMYSTATE eState)
 	anim = new animation;
 
 	if (eState == LEFT_IDLE)
-		*anim = *ANIMATIONKEY.findAnimation("wwLeftIdle");
+		anim = ANIMATIONKEY.findAnimation("wwLeftIdle");
 	else if (eState == RIGHT_IDLE)
-		*anim = *ANIMATIONKEY.findAnimation("wwRightIdle");
+		anim = ANIMATIONKEY.findAnimation("wwRightIdle");
 	anim->start();
 
 	delayTime = 2;
