@@ -16,6 +16,8 @@ enum ENEMYSTATE
 	RIGHT_MOVE,
 	LEFT_DIE,
 	RIGHT_DIE,
+	LEFT_DAMAGE,
+	RIGHT_DAMAGE,
 	END
 };
 class Enemy :public gameNode
@@ -48,6 +50,7 @@ public:
 	virtual void Release();
 
 	virtual void DieEnemy() = 0;
+	virtual void Damaged() = 0;
 	virtual void EnemyUpdate(PlayerManager*pm) = 0;
 
 

@@ -22,5 +22,7 @@ public:
 	virtual void EnemyUpdate(PlayerManager*pm);
 
 	virtual void DieEnemy();
+
+	virtual void Damaged() { hp--; }
 };
 

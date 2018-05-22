@@ -20,7 +20,7 @@ HRESULT PlayGround::Init()
 	SCENEMANAGER.addScene("SelectScene", new SelectScene);
 	SCENEMANAGER.changeScene("SelectScene");
 
-	_UI = new PlayUI;
+	UI = new PlayUI;
 
     return S_OK;
 }

@@ -52,9 +52,9 @@ HRESULT Warewolf::Init(int x, int y, ENEMYSTATE eState)
 	anim = new animation;
 
 	if (eState == LEFT_IDLE)
-		*anim = *ANIMATIONKEY.findAnimation("wwLeftIdle");
+		anim = ANIMATIONKEY.findAnimation("wwLeftIdle");
 	else if (eState == RIGHT_IDLE)
-		*anim = *ANIMATIONKEY.findAnimation("wwRightIdle");
+		anim = ANIMATIONKEY.findAnimation("wwRightIdle");
 	anim->start();
 
 	delayTime = 2;
@@ -281,3 +281,4 @@ void Warewolf::DieEnemy()
 		anim->start();
 	}
 }
+
