@@ -225,13 +225,8 @@
     <ClInclude Include="SelectScene.h">
       <Filter>PlayGround\SelectScene</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="Stage1_2.h">
       <Filter>PlayGround\Stage1-2</Filter>
-=======
-    <ClInclude Include="Mino.h">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
->>>>>>> 84f24b077aeb5c90fecd13f4fe105df5f063c22c
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -358,13 +353,8 @@
     <ClCompile Include="SelectScene.cpp">
       <Filter>PlayGround\SelectScene</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="Stage1_2.cpp">
       <Filter>PlayGround\Stage1-2</Filter>
-=======
-    <ClCompile Include="Mino.cpp">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
->>>>>>> 84f24b077aeb5c90fecd13f4fe105df5f063c22c
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

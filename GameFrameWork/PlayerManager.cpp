@@ -51,11 +51,11 @@ void PlayerManager::Render()
 
 void PlayerManager::Update()
 {
-	for (int i = 0; i < _playerNum+1; i++)
+	for (int i = 0; i < _playerNum + 1; i++)
 	{
-		_player[i]->Update();
 		Collision("웨어화살", i);
-		Collision("스켈검", i);
+
+		_player[i]->Update();
 	}
 }
 
