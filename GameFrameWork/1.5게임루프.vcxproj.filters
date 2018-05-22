@@ -73,20 +73,14 @@
     <Filter Include="PlayGround\Stage1-1\Enemy">
       <UniqueIdentifier>{cec808eb-e995-4b1b-9d0a-473afd3bc06f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlayGround\Stage1-1\Player">
+      <UniqueIdentifier>{8d82e422-6fe4-4dd6-b6b2-de800faf034d}</UniqueIdentifier>
+    </Filter>
     <Filter Include="PlayGround\Stage1-1\MapObject">
       <UniqueIdentifier>{9e847463-e5ac-422a-b818-d5bcc2f4ab80}</UniqueIdentifier>
     </Filter>
     <Filter Include="PlayGround\SelectScene">
       <UniqueIdentifier>{1b6ae142-d674-44d3-90a1-25dbc941a6b4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PlayGround\Player">
-      <UniqueIdentifier>{8d82e422-6fe4-4dd6-b6b2-de800faf034d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PlayGround\StartScene">
-      <UniqueIdentifier>{cd65f3ac-a375-4cdc-b37e-ff77c750fc0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PlayGround\UI &amp; ITEM">
-      <UniqueIdentifier>{f342e734-a00c-4a89-b278-acd5521a8ba8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -196,40 +190,31 @@
       <Filter>PlayGround\Stage1-1\MapObject</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
-      <Filter>PlayGround\Player</Filter>
+      <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClInclude>
     <ClInclude Include="Magician.h">
-      <Filter>PlayGround\Player</Filter>
+      <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClInclude>
     <ClInclude Include="Warrior.h">
-      <Filter>PlayGround\Player</Filter>
+      <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerManager.h">
-      <Filter>PlayGround\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyManager.h">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+    <ClInclude Include="PlayUI.h">
+      <Filter>PlayGround</Filter>
     </ClInclude>
     <ClInclude Include="Warewolf.h">
       <Filter>PlayGround\Stage1-1\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="StartScene.h">
-      <Filter>PlayGround\StartScene</Filter>
+    <ClInclude Include="SelectScene.h">
+      <Filter>PlayGround\SelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>PlayGround\Stage1-1\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>PlayGround\Stage1-1\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="DataBase.h">
-      <Filter>PlayGround</Filter>
-    </ClInclude>
-    <ClInclude Include="InGame.h">
-      <Filter>PlayGround</Filter>
-    </ClInclude>
-    <ClInclude Include="SelectScene.h">
-      <Filter>PlayGround</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayUI.h">
-      <Filter>PlayGround\UI &amp; ITEM</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemBox.h">
-      <Filter>PlayGround\UI &amp; ITEM</Filter>
+      <Filter>gameFrameWork\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -324,40 +309,31 @@
       <Filter>PlayGround\Stage1-1\MapObject</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
-      <Filter>PlayGround\Player</Filter>
+      <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClCompile>
     <ClCompile Include="Magician.cpp">
-      <Filter>PlayGround\Player</Filter>
+      <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClCompile>
     <ClCompile Include="Warrior.cpp">
-      <Filter>PlayGround\Player</Filter>
+      <Filter>PlayGround\Stage1-1\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerManager.cpp">
-      <Filter>PlayGround\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyManager.cpp">
-      <Filter>PlayGround\Stage1-1\Enemy</Filter>
+    <ClCompile Include="PlayUI.cpp">
+      <Filter>PlayGround</Filter>
     </ClCompile>
     <ClCompile Include="Warewolf.cpp">
       <Filter>PlayGround\Stage1-1\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="StartScene.cpp">
-      <Filter>PlayGround\StartScene</Filter>
+    <ClCompile Include="SelectScene.cpp">
+      <Filter>PlayGround\SelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>PlayGround\Stage1-1\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>PlayGround\Stage1-1\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="DataBase.cpp">
-      <Filter>PlayGround</Filter>
-    </ClCompile>
-    <ClCompile Include="InGame.cpp">
-      <Filter>PlayGround</Filter>
-    </ClCompile>
-    <ClCompile Include="SelectScene.cpp">
-      <Filter>PlayGround</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayUI.cpp">
-      <Filter>PlayGround\UI &amp; ITEM</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemBox.cpp">
-      <Filter>PlayGround\UI &amp; ITEM</Filter>
+      <Filter>gameFrameWork\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

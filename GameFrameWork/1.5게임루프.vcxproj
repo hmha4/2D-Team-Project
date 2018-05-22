@@ -148,18 +148,14 @@
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Data.h" />
-    <ClInclude Include="DataBase.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="gameNode.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="ImageManager.h" />
-    <ClInclude Include="InGame.h" />
     <ClInclude Include="iniDataManager.h" />
     <ClInclude Include="interAction.h" />
-    <ClInclude Include="ItemBox.h" />
     <ClInclude Include="KeyAniManager.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="Light.h" />
@@ -167,24 +163,20 @@
     <ClInclude Include="MapObject.h" />
     <ClInclude Include="mymecro.h" />
     <ClInclude Include="PixelCollision.h" />
-    <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="PlayGround.h" />
     <ClInclude Include="PlayUI.h" />
     <ClInclude Include="RandomManager.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="sceneManager.h" />
-    <ClInclude Include="SelectScene.h" />
     <ClInclude Include="SingleTonBase.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="Stage1_1.h" />
-    <ClInclude Include="StartScene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="txtData.h" />
-    <ClInclude Include="Warewolf.h" />
     <ClInclude Include="Warrior.h" />
     <ClInclude Include="zOrderManager.h" />
   </ItemGroup>
@@ -196,33 +188,26 @@
     <ClCompile Include="button.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Character.cpp" />
-    <ClCompile Include="DataBase.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
-    <ClCompile Include="InGame.cpp" />
     <ClCompile Include="iniDataManager.cpp" />
     <ClCompile Include="interAction.cpp" />
-    <ClCompile Include="ItemBox.cpp" />
     <ClCompile Include="KeyAniManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Magician.cpp" />
     <ClCompile Include="MapObject.cpp" />
     <ClCompile Include="PixelCollision.cpp" />
-    <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="PlayGround.cpp" />
     <ClCompile Include="PlayUI.cpp" />
     <ClCompile Include="RandomManager.cpp" />
     <ClCompile Include="sceneManager.cpp" />
-    <ClCompile Include="SelectScene.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="Stage1_1.cpp" />
-    <ClCompile Include="StartScene.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -233,7 +218,6 @@
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="txtData.cpp" />
-    <ClCompile Include="Warewolf.cpp" />
     <ClCompile Include="Warrior.cpp" />
     <ClCompile Include="zOrderManager.cpp" />
   </ItemGroup>

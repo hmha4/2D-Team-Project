@@ -42,7 +42,6 @@ void Stage1_1::Render()
 	IMAGEMANAGER.findImage("1.1µŞ¹è°æ")->Render(getMemDC(), CAM.GetX(), CAM.GetY(), CAM.GetX() * 0.01, CAM.GetY(), WINSIZEX, GAMESIZEY);
 	IMAGEMANAGER.findImage("1.1¾Õ¹è°æ")->Render(getMemDC(), CAM.GetX(), CAM.GetY(), CAM.GetX(), CAM.GetY(), WINSIZEX, GAMESIZEY);
 	fadeOut->alphaRender(getMemDC(), offset);
-	_pm->Render();
 }
 
 

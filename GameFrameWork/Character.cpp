@@ -69,5 +69,5 @@ void Character::Update()
 void Character::Render()
 {
     _img->aniRender(getMemDC(), _rc.left, _rc.top, _anim);
-	//Rectangle(getMemDC(), _shadow.left, _shadow.top, _shadow.right, _shadow.bottom);
+	Rectangle(getMemDC(), _shadow.left, _shadow.top, _shadow.right, _shadow.bottom);
 }
