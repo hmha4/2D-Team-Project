@@ -39,16 +39,20 @@ HRESULT PlayerManager::Init()
 		if (_character[i] == 1)
 		{
 			_player[i] = new Magician;
-			_player[i]->Init(WINSIZEX / 2, WINSIZEY / 2, i);
+			_player[i]->Init(-50, WINSIZEY / 2, i);
 
 			ZORDER.InputObj(_player[i]);
+
+			_player[i]->ChangeAnim(0, "MagicianRightRun");
 		}
 		else if (_character[i] == 2)
 		{
 			_player[i] = new Warrior;
-			_player[i]->Init(WINSIZEX / 2, WINSIZEY / 2, i);
+			_player[i]->Init(-50, WINSIZEY / 2, i);
 
 			ZORDER.InputObj(_player[i]);
+
+			_player[i]->ChangeAnim(0, "WarriorRightRun");
 		}
 	}
 

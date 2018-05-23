@@ -14,7 +14,7 @@ private:
 		SECOND_STAGE,		//ÈÄ¹Ý
 		FINAL_STAGE,
 		WIN_STAGE,
-		NEXT_STAGE = 10
+		NEXT_STAGE = 11
 	};
 
 private:
@@ -28,6 +28,8 @@ private:
 
 	float _time;
 	float _totalTime;
+
+	int _playerNum;
 public:
 	Stage1_2();
 	~Stage1_2();

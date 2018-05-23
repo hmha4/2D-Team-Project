@@ -582,10 +582,10 @@ void Warrior::Update()
 	_colY = _y + 32;
 
 	_colRC = RectMakeCenter(_colX, _colY, 50, 100);
-	if(_state != RIGHT_JUMP && _state != LEFT_JUMP &&
+	if (_state != RIGHT_JUMP && _state != LEFT_JUMP &&
 		_state != RIGHT_JUMP_ATTACK && _state != LEFT_JUMP_ATTACK &&
 		_state != RIGHT_FALL && _state != LEFT_FALL)
-	_shadow = RectMakeCenter(_x, _y + _img->GetFreamHeight() / 2 - 25, 50, 20);
+		_shadow = RectMakeCenter(_x, _y + _img->GetFreamHeight() / 2 - 25, 50, 20);
 }
 
 void Warrior::Render()
@@ -682,10 +682,13 @@ void Warrior::MovementRestrict(int stage)
 {
 	if (stage == 0)
 	{
-		_speedX = 0;
-		_speedY = 0;
+		_x += 3;
 	}
 	else if (stage == 10)
+	{
+		_x += 3;
+	}
+	else if (stage == 11)
 	{
 		_gravity = 0.3f;
 		_startY = WINSIZEY + 100;

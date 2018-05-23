@@ -10,7 +10,7 @@ Stage1_2::Stage1_2()
 	IMAGEMANAGER.addImage("1.2¹è°æ¿ÀºêÁ§Æ®", PathFile("image", "1-2Á¦Æ®¿À´õ").c_str(), 143, 400, true, RGB(255, 0, 255));
 	IMAGEMANAGER.addImage("1.2¶¥", PathFile("image", "1-2¶¥").c_str(), 762, 208, true, RGB(255, 0, 255));
 	IMAGEMANAGER.addImage("1.2¶¥ºÎ¼­Áü", PathFile("image", "1-2¶¥ºÎ¼­Áü").c_str(), 762, 208, true, RGB(255, 0, 255));
-	EFFECTMANAGER.addEffect("1.2¶¥ÀÌÆåÆ®", PathFile("image", "1-2¶¥ÀÌÆåÆ®").c_str(), 376, 92, 94, 92, 60, 1, 30);
+	EFFECTMANAGER.addEffect("1.2¶¥ÀÌÆåÆ®", PathFile("image", "1-2¶¥ÀÌÆåÆ®").c_str(), 376, 92, 94, 92, 60, 0.5, 30);
 }
 
 
@@ -32,6 +32,7 @@ HRESULT Stage1_2::Init()
 	s2State = OPENNING;
 	_time = 0;
 	_totalTime = 0;
+	_playerNum = DATABASE.LoadData("1P2P");
 
 	return S_OK;
 }
@@ -39,13 +40,13 @@ HRESULT Stage1_2::Init()
 void Stage1_2::Render()
 {
 	IMAGEMANAGER.findImage("1.2µÞ¹è°æ")->Render(getMemDC(), CAM.GetX(), CAM.GetY(), CAM.GetX() * 0.1, CAM.GetY(), WINSIZEX, 264);
-	IMAGEMANAGER.findImage("1.2¾Õ¹è°æ")->Render(getMemDC(), CAM.GetX(), CAM.GetY(), CAM.GetX(), CAM.GetY()+100, WINSIZEX, GAMESIZEY);
-	
-	if(s2State != WIN_STAGE && s2State != NEXT_STAGE)
+	IMAGEMANAGER.findImage("1.2¾Õ¹è°æ")->Render(getMemDC(), CAM.GetX(), CAM.GetY(), CAM.GetX(), CAM.GetY() + 100, WINSIZEX, GAMESIZEY);
+
+	if (s2State != WIN_STAGE && s2State != NEXT_STAGE)
 		IMAGEMANAGER.findImage("1.2¶¥")->Render(getMemDC(), 3048 - 762, CAM.GetRC().bottom - 308);
-	if(s2State == WIN_STAGE)
+	if (s2State == WIN_STAGE)
 		IMAGEMANAGER.findImage("1.2¶¥ºÎ¼­Áü")->Render(getMemDC(), 3048 - 762, CAM.GetRC().bottom - 308);
-	
+
 	fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
 
 	_pm->Render();
@@ -60,7 +61,7 @@ void Stage1_2::Update()
 	case OPENNING:
 	{
 		_pm->Update();
-		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
+		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
 		offset -= 2;
 		if (offset < 0)
@@ -69,15 +70,15 @@ void Stage1_2::Update()
 			offset = 0;
 			CAM.SetSize(1400, WINSIZEY);
 			CAM.SetState("FOLLOW");
+			_pm->GetPlayer1()->ChangeAnim(0, "WarriorRightIdle");
 		}
-
 	}
 	break;
 	case FIRST_STAGE:
 	{
 		_pm->Update();
 		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
-		
+
 		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
 		{
 			s2State = SECOND_STAGE;
@@ -89,7 +90,7 @@ void Stage1_2::Update()
 	{
 		_pm->Update();
 		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
-		
+
 		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
 		{
 			s2State = FINAL_STAGE;
@@ -98,12 +99,12 @@ void Stage1_2::Update()
 	break;
 	case FINAL_STAGE:
 		_pm->Update();
-		CAM.Update(3048 - WINSIZEX/2, WINSIZEY/2, 5, false);
-		
+		CAM.Update(3048 - WINSIZEX / 2, WINSIZEY / 2, 5, false);
+
 		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
 		{
 			s2State = WIN_STAGE;
-			if(_pm->GetPlayer1()->GetState() == 0)
+			if (_pm->GetPlayer1()->GetState() == 0)
 				_pm->GetPlayer1()->ChangeAnim(34, "WarriorRightOther");
 			else
 				_pm->GetPlayer1()->ChangeAnim(35, "WarriorLeftOther");

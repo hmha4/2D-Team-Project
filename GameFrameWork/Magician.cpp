@@ -13,119 +13,119 @@ Magician::~Magician()
 
 HRESULT Magician::Init(float x, float y, int player)
 {
-    Character::Init(x, y, player);
+	Character::Init(x, y, player);
 
 	// ======== 이미지 초기화 ======== //
-    IMAGEMANAGER.addFrameImage("Magician1", PathFile("image\\Character", "Magician_Weapon_1").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
-    IMAGEMANAGER.addFrameImage("Magician2", PathFile("image\\Character", "Magician_Weapon_2").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
-    IMAGEMANAGER.addFrameImage("Magician3", PathFile("image\\Character", "Magician_Weapon_3").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
-    IMAGEMANAGER.addFrameImage("Magician4", PathFile("image\\Character", "Magician_Weapon_4").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
-    _img = IMAGEMANAGER.findImage("Magician1");
+	IMAGEMANAGER.addFrameImage("Magician1", PathFile("image\\Character", "Magician_Weapon_1").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
+	IMAGEMANAGER.addFrameImage("Magician2", PathFile("image\\Character", "Magician_Weapon_2").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
+	IMAGEMANAGER.addFrameImage("Magician3", PathFile("image\\Character", "Magician_Weapon_3").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
+	IMAGEMANAGER.addFrameImage("Magician4", PathFile("image\\Character", "Magician_Weapon_4").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
+	_img = IMAGEMANAGER.findImage("Magician1");
 	// ============================== //
 
 
 	// ======== 애니메이션 초기화 ======== //
-    char * magician = "Magician1";
+	char * magician = "Magician1";
 
-    //IDLE
-    int rightIdle[] = { 0 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightIdle", magician, rightIdle, 1, 5, true);
-    int leftIdle[] = { 10 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftIdle", magician, leftIdle, 1, 5, true);
-    //RUN
-    int rightRun[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightRun", magician, rightRun, 8, 10, true);
-    int leftRun[] = { 11, 12, 13, 14, 15, 16, 17, 18 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftRun", magician, leftRun, 8, 10, true);
-    //JUMP
-    int rightJump[] = { 20, 21 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightJump", magician, rightJump, 2, 10, false);
-    int leftJump[] = { 24, 25 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftJump", magician, leftJump, 2, 10, false);
-    //FALL
-    int rightFall[] = { 22, 23 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightFall", magician, rightFall, 2, 10, false);
-    int leftFall[] = { 26, 27 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftFall", magician, leftFall, 2, 10, false);
-    //ATTACK
-    int rightAttack[] = { 30, 31, 32 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightAttack", magician, rightAttack, 3, 10, false);
-    int leftAttack[] = { 33, 34, 35 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftAttack", magician, leftAttack, 3, 10, false);
-    //JUMP ATTACK
-    int rightJumpAttack[] = { 40 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightJumpAttack", magician, rightJumpAttack, 1, 10, false);
-    int leftJumpAttack[] = { 41 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftJumpAttack", magician, leftJumpAttack, 1, 10, false);
-    //GET HIT 1
-    int rightHit1[] = { 50 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightHit1", magician, rightHit1, 1, 10, true);
-    int leftHit1[] = { 60 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftHit1", magician, leftHit1, 1, 10, true);
-    //GET HIT 2
-    int rightHit2[] = { 51 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightHit2", magician, rightHit2, 1, 10, true);
-    int leftHit2[] = { 61 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftHit2", magician, leftHit2, 1, 10, true);
-    //DIE PHASE 1
-    int rightDiePhase1[] = { 52 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightDie1", magician, rightDiePhase1, 1, 10, true);
-    int leftDiePhase1[] = { 62 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftDie1", magician, leftDiePhase1, 1, 10, true);
-    //DIE PHASE 1(FIRE)
-    int rightDiePhase1Fire[] = { 42, 43, 44 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightDie1Fire", magician, rightDiePhase1Fire, 3, 10, true);
-    int leftDiePhase1Fire[] = { 45, 46, 47 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftDie1Fire", magician, leftDiePhase1Fire, 3, 10, true);
-    //DIE PHASE 1(ICE)
-    int rightDiePhase1Ice[] = { 29 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightDie1Ice", magician, rightDiePhase1Ice, 1, 1, false);
-    int leftDiePhase1Ice[] = { 39 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftDie1Ice", magician, leftDiePhase1Ice, 1, 1, false);
-    //DIE PHASE 2
-    int rightDiePhase2[] = { 53 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightDie2", magician, rightDiePhase2, 1, 10, true);
-    int leftDiePhase2[] = { 63 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftDie2", magician, leftDiePhase2, 1, 10, true);
-    //DIE PHASE 3
-    int rightDiePhase3[] = { 54 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightDie3", magician, rightDiePhase3, 1, 10, true);
-    int leftDiePhase3[] = { 64 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftDie3", magician, leftDiePhase3, 1, 10, true);
-    //DIE PHASE 4
-    int rightDiePhase4[] = { 55, 56 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightDie4", magician, rightDiePhase4, 2, 10, false);
-    int leftDiePhase4[] = { 65, 66 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftDie4", magician, leftDiePhase4, 2, 10, false);
-    //OTHER
-    int rightOther[] = { 9 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianRightOther", magician, rightOther, 1, 1, false);
-    int leftDieOther[] = { 19 };
-    ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftOther", magician, leftDieOther, 1, 1, false);
+	//IDLE
+	int rightIdle[] = { 0 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightIdle", magician, rightIdle, 1, 5, true);
+	int leftIdle[] = { 10 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftIdle", magician, leftIdle, 1, 5, true);
+	//RUN
+	int rightRun[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightRun", magician, rightRun, 8, 10, true);
+	int leftRun[] = { 11, 12, 13, 14, 15, 16, 17, 18 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftRun", magician, leftRun, 8, 10, true);
+	//JUMP
+	int rightJump[] = { 20, 21 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightJump", magician, rightJump, 2, 10, false);
+	int leftJump[] = { 24, 25 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftJump", magician, leftJump, 2, 10, false);
+	//FALL
+	int rightFall[] = { 22, 23 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightFall", magician, rightFall, 2, 10, false);
+	int leftFall[] = { 26, 27 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftFall", magician, leftFall, 2, 10, false);
+	//ATTACK
+	int rightAttack[] = { 30, 31, 32 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightAttack", magician, rightAttack, 3, 10, false);
+	int leftAttack[] = { 33, 34, 35 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftAttack", magician, leftAttack, 3, 10, false);
+	//JUMP ATTACK
+	int rightJumpAttack[] = { 40 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightJumpAttack", magician, rightJumpAttack, 1, 10, false);
+	int leftJumpAttack[] = { 41 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftJumpAttack", magician, leftJumpAttack, 1, 10, false);
+	//GET HIT 1
+	int rightHit1[] = { 50 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightHit1", magician, rightHit1, 1, 10, true);
+	int leftHit1[] = { 60 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftHit1", magician, leftHit1, 1, 10, true);
+	//GET HIT 2
+	int rightHit2[] = { 51 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightHit2", magician, rightHit2, 1, 10, true);
+	int leftHit2[] = { 61 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftHit2", magician, leftHit2, 1, 10, true);
+	//DIE PHASE 1
+	int rightDiePhase1[] = { 52 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightDie1", magician, rightDiePhase1, 1, 10, true);
+	int leftDiePhase1[] = { 62 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftDie1", magician, leftDiePhase1, 1, 10, true);
+	//DIE PHASE 1(FIRE)
+	int rightDiePhase1Fire[] = { 42, 43, 44 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightDie1Fire", magician, rightDiePhase1Fire, 3, 10, true);
+	int leftDiePhase1Fire[] = { 45, 46, 47 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftDie1Fire", magician, leftDiePhase1Fire, 3, 10, true);
+	//DIE PHASE 1(ICE)
+	int rightDiePhase1Ice[] = { 29 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightDie1Ice", magician, rightDiePhase1Ice, 1, 1, false);
+	int leftDiePhase1Ice[] = { 39 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftDie1Ice", magician, leftDiePhase1Ice, 1, 1, false);
+	//DIE PHASE 2
+	int rightDiePhase2[] = { 53 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightDie2", magician, rightDiePhase2, 1, 10, true);
+	int leftDiePhase2[] = { 63 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftDie2", magician, leftDiePhase2, 1, 10, true);
+	//DIE PHASE 3
+	int rightDiePhase3[] = { 54 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightDie3", magician, rightDiePhase3, 1, 10, true);
+	int leftDiePhase3[] = { 64 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftDie3", magician, leftDiePhase3, 1, 10, true);
+	//DIE PHASE 4
+	int rightDiePhase4[] = { 55, 56 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightDie4", magician, rightDiePhase4, 2, 10, false);
+	int leftDiePhase4[] = { 65, 66 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftDie4", magician, leftDiePhase4, 2, 10, false);
+	//OTHER
+	int rightOther[] = { 9 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianRightOther", magician, rightOther, 1, 1, false);
+	int leftDieOther[] = { 19 };
+	ANIMATIONKEY.addArrayFrameAnimation("MagicianLeftOther", magician, leftDieOther, 1, 1, false);
 
 
-    _state = RIGHT_IDLE;
-    _anim = ANIMATIONKEY.findAnimation("MagicianRightIdle");
-    _anim->start();
+	_state = RIGHT_IDLE;
+	_anim = ANIMATIONKEY.findAnimation("MagicianRightIdle");
+	_anim->start();
 
 	// ============================== //
 
-    _hp = 10;
+	_hp = 10;
 
 	//총알 초기화
 	InitBullet();
 
-    return S_OK;
+	return S_OK;
 }
 
 void Magician::Release()
 {
-    Character::Release();
+	Character::Release();
 }
 
 void Magician::Update()
 {
-    Character::Update();
+	Character::Update();
 
 	ChangeWeapon();
 
@@ -148,7 +148,7 @@ void Magician::Update()
 			_state == RIGHT_JUMP || _state == RIGHT_FALL)
 			BULLET.Shot(_weaponEffectName, _colX + 40, _colY - 20, 0, 0, 7, 0);
 		else if (_state == LEFT_IDLE || _state == LEFT_RUN ||
-				 _state == LEFT_JUMP || _state == LEFT_FALL)
+			_state == LEFT_JUMP || _state == LEFT_FALL)
 			BULLET.Shot(_weaponEffectName, _colX - 40, _colY - 20, 0, 0, -7, 1);
 
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN)
@@ -162,7 +162,7 @@ void Magician::Update()
 
 		if (_state == RIGHT_JUMP || _state == RIGHT_FALL ||
 			_state == LEFT_JUMP || _state == LEFT_FALL)
-			BULLET.GetBulletVec(_weaponEffectName)[0]->ShadowSetY = WINSIZEY/2;
+			BULLET.GetBulletVec(_weaponEffectName)[0]->ShadowSetY = WINSIZEY / 2;
 	}
 
 	//	죽었을 때 무적 시간
@@ -385,7 +385,7 @@ void Magician::Update()
 			_gravity = 0;
 			ChangeAnim((int)LEFT_IDLE, "MagicianLeftIdle");
 			BULLET.Destroy(_weaponEffectName, 0);
-			
+
 			break;
 		}
 		if (!_anim->isPlay())
@@ -574,7 +574,7 @@ void Magician::Update()
 
 void Magician::Render()
 {
-    Character::Render();
+	Character::Render();
 }
 
 void Magician::ChangeWeapon()
@@ -602,9 +602,9 @@ void Magician::ChangeWeapon()
 
 void Magician::ChangeAnim(int state, string animKey)
 {
-    _state = (STATE)state;
-    _anim = ANIMATIONKEY.findAnimation(animKey);
-    _anim->start();
+	_state = (STATE)state;
+	_anim = ANIMATIONKEY.findAnimation(animKey);
+	_anim->start();
 }
 
 void Magician::Collision(RECT rc)
@@ -663,10 +663,13 @@ void Magician::MovementRestrict(int stage)
 {
 	if (stage == 0)
 	{
-		_speedX = 0;
-		_speedY = 0;
+		_x += 3;
 	}
 	else if (stage == 10)
+	{
+		_x += 3;
+	}
+	else if (stage == 11)
 	{
 		_gravity = 0.3f;
 		_startY = WINSIZEY + 100;
@@ -708,7 +711,7 @@ void Magician::InitBullet()
 	BULLET.BulletSetting("Magician_Weapon_2_B", IMAGEMANAGER.findImage("Magician_Weapon_2_B"), 1, true, 15, 2);
 	BULLET.BulletSetting("Magician_Weapon_3_B", IMAGEMANAGER.findImage("Magician_Weapon_3_B"), 1, true, 15, 2);
 	BULLET.BulletSetting("Magician_Weapon_4_B", IMAGEMANAGER.findImage("Magician_Weapon_4_B"), 1, true, 20, 2);
-	
+
 	IMAGEMANAGER.addImage("Magician_Weapon_1_B_Shandow", PathFile("image\\Character", "Magician_Weapon_1_B_Shandow").c_str(), 24, 12, true, RGB(255, 0, 255));
 
 	BULLET.BulletShadowSetting("Magician_Weapon_1_B", IMAGEMANAGER.findImage("Magician_Weapon_1_B_Shandow"), RectMake(0, 0, 40, 15), 55);
