@@ -176,7 +176,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 	{
 		attackTime += TIMEMANAGER.getElapsedTime();
 
-		if (attackTime < 0.8f)
+		if (attackTime < 0.3f)
 		{
 			anim->start();
 		}
@@ -184,7 +184,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 		{
 			if (!isAttack)
 			{
-				BULLET.Shot("½ºÄÌ°Ë", posX, posY, PI, 0, 0, 0);
+				BULLET.Shot("½ºÄÌ°Ë", posX-30, posY, PI, 0, 0, 0);
 				isAttack = true;
 			}
 			if (!anim->isPlay())
@@ -225,7 +225,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 		{
 			if (!isAttack)
 			{
-				BULLET.Shot("½ºÄÌ°Ë", posX, posY, 0, 0, 0, 0);
+				BULLET.Shot("½ºÄÌ°Ë", posX+30, posY, 0, 0, 0, 0);
 				isAttack = true;
 			}
 			if (!anim->isPlay())

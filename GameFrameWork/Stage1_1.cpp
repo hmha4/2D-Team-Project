@@ -54,101 +54,121 @@ void Stage1_1::Render()
 
 void Stage1_1::Update()
 {
+	printf("%f ", _pm->GetPlayer1()->GetX());
 	_pm->MoveRestrict((int)s1State);
-	//_pm->GetMagician()->MovementRestrict((int)s1State);
 
 	switch (s1State)
 	{
-	case OPENNING:
-	{
-		_pm->Update();
-		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
-
-		offset -= 2;
-		if (offset < 0)
+		case OPENNING:
 		{
-			s1State = FIRST_STAGE;
-			offset = 0;
-			CAM.SetSize(GAMESIZEX / 2, WINSIZEY);
-			CAM.SetState("FOLLOW");
-			for (int i = 0; i<3; i++)
-				_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
-		}
+			_pm->Update();
+			CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
 
-	}
-	break;
-	case FIRST_STAGE:
-	{
-		if (_pm->GetPlayer1()->GetX() > 500 && _pm->GetPlayer1()->GetX() <1500)
-		{
-			if (_em->GetEnemyNum() == 0)
+			offset -= 2;
+			if (offset < 0)
 			{
-				static float showTime = 0;
-				showTime += TIMEMANAGER.getElapsedTime();
-
-				if (showTime > 2)
-				{
-					for (int i = 0; i < 3; i++)
-						_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
-
-					showTime = 0;
-				}
+				s1State = FIRST_STAGE;
+				offset = 0;
+				CAM.SetSize(GAMESIZEX / 2, WINSIZEY);
+				CAM.SetState("FOLLOW");
+				for (int i = 0; i<3; i++)
+					_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
 			}
-		}
-		else if (1500 <= _pm->GetPlayer1()->GetX())
-		{
-			if (_em->GetEnemyNum() == 0)
-			{
-				static float showTime1 = 0;
-				showTime1 += TIMEMANAGER.getElapsedTime();
 
-				if (showTime1 > 3.5)
-				{
-					//_em->AllDieInit();
-					s1State = SECOND_STAGE;
-					CAM.SetSize(GAMESIZEX, WINSIZEY);
-					showTime1 = 0;
-				}
-			}
 		}
-		_em->Update(_pm);
-		_pm->Update();
-		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
-	}
-	break;
-	case SECOND_STAGE:
-	{
-		if (_pm->GetPlayer1()->GetX() > 2000 && _pm->GetPlayer1()->GetX() < 3200)
+		break;
+		case FIRST_STAGE:
 		{
-			if (_em->GetEnemyNum() == 0)
+			if (_pm->GetPlayer1()->GetX() > 500 && _pm->GetPlayer1()->GetX() <1500)
 			{
-				static float showTime2 = 0;
-				showTime2 += TIMEMANAGER.getElapsedTime();
-
-				if (showTime2 > 2)
+				if (_em->GetEnemyNum() == 0&& !changeView)
 				{
-					for (int i = 0; i < 3; i++)
-						_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-600, 601), RND.GetFromTo(200, 350), LEFT_IDLE);
-					for (int i = 0; i < 3; i++)
+					static float showTime = 0;
+					showTime += TIMEMANAGER.getElapsedTime();
+
+					if (showTime > 2)
 					{
-						int rndNum = RND.GetFromTo(-1, 2);
-						if (rndNum == 0)
-							rndNum = 1;
-						_em->ShowEnemy(WAREWOLF, _pm->GetPlayer1()->GetX() + 800 * rndNum, RND.GetFromTo(200, 350), LEFT_IDLE);
+						for (int i = 0; i < 3; i++)
+							_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
+
+						showTime = 0;
 					}
-					showTime2 = 0;
 				}
 			}
-		}
-		else if (3200 <= _pm->GetPlayer1()->GetX())
-		{
+			else if (1500 <= _pm->GetPlayer1()->GetX())
+			{
+				changeView = true;
+				if (_em->GetEnemyNum() == 0)
+				{
+					static float showTime1 = 0;
+					showTime1 += TIMEMANAGER.getElapsedTime();
 
+					if (showTime1 > 3.5)
+					{
+						//_em->AllDieInit();
+						s1State = SECOND_STAGE;
+						CAM.SetSize(GAMESIZEX, WINSIZEY);
+						showTime1 = 0;
+						changeView = false;
+					}
+				}
+			}
+			_em->Update(_pm);
+			_pm->Update();
+			CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
 		}
-		_em->Update(_pm);
-		_pm->Update();
-		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
-	}
-	break;
+		break;
+		case SECOND_STAGE:
+		{
+			if (_pm->GetPlayer1()->GetX() > 2000 && _pm->GetPlayer1()->GetX() < 3200)
+			{
+				if (_em->GetEnemyNum() == 0&& !changeView)
+				{
+					static float showTime2 = 0;
+					showTime2 += TIMEMANAGER.getElapsedTime();
+
+					if (showTime2 > 2)
+					{
+						for (int i = 0; i < 3; i++)
+							_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-600, 601), RND.GetFromTo(200, 350), LEFT_IDLE);
+						for (int i = 0; i < 3; i++)
+						{
+							int rndNum = RND.GetFromTo(-1, 2);
+							if (rndNum == 0)
+								rndNum = 1;
+							_em->ShowEnemy(WAREWOLF, _pm->GetPlayer1()->GetX() + 800 * rndNum, RND.GetFromTo(200, 350), LEFT_IDLE);
+						}
+						showTime2 = 0;
+					}
+				}
+			}
+			else if (_pm->GetPlayer1()->GetX() >= 3200&& _pm->GetPlayer1()->GetX()<3600)
+			{
+				changeView = true;
+			}
+			else if (_pm->GetPlayer1()->GetX()>=3600)
+			{
+				if (_em->GetEnemyNum() == 0)
+				{
+					s1State = NEXT_STAGE;
+					changeView = false;
+				}
+			}
+			_em->Update(_pm);
+			_pm->Update();
+			CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
+		}
+		break;
+		case NEXT_STAGE:
+		{
+			offset += 2;
+			if (offset > 255)
+			{
+				SCENEMANAGER.changeScene("스테이지1.2");
+				offset = 0;
+			}
+		}
+		break;
 	}
 }
 
