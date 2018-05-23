@@ -15,6 +15,8 @@ Stage1_3::~Stage1_3()
 
 HRESULT Stage1_3::Init()
 {
+	ZORDER.Release();
+
 	CAM.SetPos(0, 0);
 	CAM.SetSize(WINSIZEX, WINSIZEY);
 
@@ -102,5 +104,5 @@ void Stage1_3::Update()
 void Stage1_3::Release()
 {
 	_pm->Release();
-	ZORDER.Release();
+	SAFE_DELETE(_pm);
 }

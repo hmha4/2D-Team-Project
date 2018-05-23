@@ -20,6 +20,8 @@ Stage1_2::~Stage1_2()
 
 HRESULT Stage1_2::Init()
 {
+	ZORDER.Release();
+
 	MapObject*mObj = new MapObject(IMAGEMANAGER.findImage("1.2배경오브젝트"));
 	mObj->Init(1357, 0, 200);
 	ZORDER.InputObj(mObj);
@@ -148,6 +150,4 @@ void Stage1_2::Release()
 {
 	_pm->Release();
 	SAFE_DELETE(_pm);
-
-	ZORDER.Release();
 }

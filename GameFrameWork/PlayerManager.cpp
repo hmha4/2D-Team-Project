@@ -40,16 +40,13 @@ HRESULT PlayerManager::Init()
 		{
 			_player[i] = new Magician;
 			_player[i]->Init(-50, WINSIZEY / 2, i);
-
-			ZORDER.InputObj(_player[i]);
 		}
 		else if (_character[i] == 2)
 		{
 			_player[i] = new Warrior;
 			_player[i]->Init(-50, WINSIZEY / 2, i);
-
-			ZORDER.InputObj((gameNode*)_player[i]);
 		}
+		ZORDER.InputObj(_player[i]);
 	}
 
 	UI = new PlayUI;

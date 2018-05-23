@@ -18,6 +18,8 @@ Stage1_1::~Stage1_1()
 
 HRESULT Stage1_1::Init()
 {
+	ZORDER.Release();
+
 	//맵오브젝트 제트오더 추가
 	MapObject*mObj = new MapObject(IMAGEMANAGER.findImage("1.1배경오브젝트"));
 	mObj->Init(0, 320, 40);
@@ -176,7 +178,7 @@ void Stage1_1::Update()
 void Stage1_1::Release()
 {
 	_pm->Release();
+	SAFE_DELETE(_pm);
 	_em->Release();
-
-	ZORDER.Release();
+	SAFE_DELETE(_em);
 }
