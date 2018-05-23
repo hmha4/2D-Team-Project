@@ -81,7 +81,7 @@ void PlayerManager::Update()
 	for (int i = 0; i < _playerNum + 1; i++)
 	{
 		Collision("웨어화살", i);
-
+		Collision("스켈검", i);
 		_player[i]->Update();
 		_itemBox[i]->Update(_player[i]->GetX(), _player[i]->GetY());
 		//_skill[i]->Update(_player[i]->GetX(), _player[i]->GetY());

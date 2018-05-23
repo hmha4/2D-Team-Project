@@ -15,7 +15,7 @@ EnemyManager::EnemyManager()
 
 	IMAGEMANAGER.addFrameImage("½ºÄÌ·¹Åæ°Ë", PathFile("image\\Enemy", "½ºÄÌ·¹Åæ°Ë").c_str(), 60, 60, 1, 1, true, RGB(255, 0, 255));
 	BULLET.BulletSetting("½ºÄÌ°Ë", IMAGEMANAGER.findImage("½ºÄÌ·¹Åæ°Ë"), 30, false, 0, 1);
-	BULLET.BulletShadowSetting("½ºÄÌ°Ë", NULL, RectMake(0, 0, 30, 10), 50);
+	BULLET.BulletShadowSetting("½ºÄÌ°Ë", NULL, RectMake(0, 0, 40, 10), 50);
 
 	for (int i = 0; i < 30; i++)
 	{

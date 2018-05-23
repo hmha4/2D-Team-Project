@@ -130,7 +130,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 		posX += cosf(angle) * speed;
 		posY += -sinf(angle) * speed;
 		rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-		shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+		shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 
 		RECT temp;
 		RECT temp2 = RectMakeCenter(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, 10, 10);
@@ -159,7 +159,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 		posX += cosf(angle) * speed;
 		posY += -sinf(angle) * speed;
 		rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-		shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+		shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 
 		RECT temp;
 		RECT temp2 = RectMakeCenter(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, 10, 10);
@@ -260,7 +260,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 		posX += cosf(0) * 6 + Friction;
 		posY += -sinf(0) * 6;
 		rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-		shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+		shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 
 
 		if (Friction*(-1) > totalPower)
@@ -290,7 +290,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 		posX += cosf(PI) * 6 + Friction;
 		posY += -sinf(PI) * 6;
 		rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-		shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+		shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 
 		if (Friction*(-1) < totalPower)
 		{
