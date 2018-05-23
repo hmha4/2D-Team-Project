@@ -53,26 +53,34 @@ HRESULT PlayerManager::Init()
 	}
 
 	UI = new PlayUI;
+	UI->Init();
 	UI->SetLinkItemBox1(_itemBox[0]);
 	UI->SetLinkItemBox2(_itemBox[1]);
+	ZORDER.InputObj(UI);
+
+	_skill[0] = new PlayerSkill;
+	_skill[0]->Init();
 
 	return S_OK;
 }
 
 void PlayerManager::Render()
 {
-	UI->render();
+	//UI->render();
 	_itemBox[0]->Render();
+	_skill[0]->Render();
 }
 
 void PlayerManager::Update()
 {
+	UI->Update();
 	for (int i = 0; i < _playerNum + 1; i++)
 	{
 		Collision("웨어화살", i);
 
 		_player[i]->Update();
 		_itemBox[i]->Update(_player[i]->GetX(), _player[i]->GetY());
+		_skill[i]->Update(_player[i]->GetX(), _player[i]->GetY());
 	}
 }
 

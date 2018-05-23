@@ -4,6 +4,7 @@
 #include "Magician.h"
 #include "PlayUI.h"
 #include "ItemBox.h"
+#include "PlayerSkill.h"
 
 class PlayerManager :
 	public gameNode
@@ -26,12 +27,14 @@ private:
 		DWARF
 	};
 
-	Character * _player[2];			//	플레이어
-	PLAYER		_playerNum;			//	1p2p
-	CHARACTER	_character[2];		//	어떤 캐릭터
+	Character *		_player[2];			//	플레이어
+	PLAYER			_playerNum;			//	1p2p
+	CHARACTER		_character[2];		//	어떤 캐릭터
 
-	PlayUI*		UI;					//	UI
-	ItemBox*	_itemBox[2];		//  아이템 박스
+	PlayUI*			UI;					//	UI
+	ItemBox*		_itemBox[2];		//  아이템 박스
+	PlayerSkill*	_skill[2];			//  스킬
+
 public:
 	PlayerManager();
 	~PlayerManager();

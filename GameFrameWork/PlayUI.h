@@ -26,14 +26,16 @@ private:
 	image*			_UItitle;
 	image*			_hpGauge;
 
+	RECT			_zRC;
+
 public:
 	PlayUI();
 	~PlayUI();
 
-	HRESULT init();
-	void release();
-	void update();
-	void render();
+	HRESULT Init();
+	void Release();
+	void Update();
+	void Render();
 
 	void MakeTable(HDC hdc, int x, int y, tagPlayerInfo player, int itemNum);
 	void DrawClass(HDC hdc, int x, int y, tagPlayerInfo player);
@@ -44,5 +46,7 @@ public:
 	void SetLinkItemBox1(ItemBox* address) { _itemBox[0] = address; }
 	void SetLinkItemBox2(ItemBox* address) { _itemBox[1] = address; }
 
+	//	Z-ORDER¸¦ À§ÇÑ RC
+	inline RECT &getRc() { return _zRC; }
 };
 

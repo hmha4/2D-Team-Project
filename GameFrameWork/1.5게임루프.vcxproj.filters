@@ -85,6 +85,9 @@
     <Filter Include="PlayGround\Enemy">
       <UniqueIdentifier>{cec808eb-e995-4b1b-9d0a-473afd3bc06f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlayGround\Player\Skill">
+      <UniqueIdentifier>{c471bd1b-647a-49a5-b96d-fab3b77adeb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -231,6 +234,12 @@
     <ClInclude Include="Stage1_2.h">
       <Filter>PlayGround\Stage1-2</Filter>
     </ClInclude>
+    <ClInclude Include="ItemBox.h">
+      <Filter>PlayGround\Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSkill.h">
+      <Filter>PlayGround\Player\Skill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -361,6 +370,12 @@
     </ClCompile>
     <ClCompile Include="Stage1_2.cpp">
       <Filter>PlayGround\Stage1-2</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBox.cpp">
+      <Filter>PlayGround\Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSkill.cpp">
+      <Filter>PlayGround\Player\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

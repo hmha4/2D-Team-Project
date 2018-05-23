@@ -19,7 +19,7 @@ PlayUI::~PlayUI()
 {
 }
 
-HRESULT PlayUI::init()
+HRESULT PlayUI::Init()
 {
 	_itemBox[0] = new ItemBox;
 	_itemBox[1] = new ItemBox;
@@ -27,15 +27,18 @@ HRESULT PlayUI::init()
 	return S_OK;
 }
 
-void PlayUI::release()
+void PlayUI::Release()
 {
+	SAFE_DELETE(_itemBox[0]);
+	SAFE_DELETE(_itemBox[1]);
 }
 
-void PlayUI::update()
+void PlayUI::Update()
 {
+	_zRC = RectMake(CAM.GetX(), CAM.GetY() + 600, 800, 100);
 }
 
-void PlayUI::render()
+void PlayUI::Render()
 {
 	_brick->Render(getMemDC(), CAM.GetX(), CAM.GetY() + 400);
 	MakeTable(getMemDC(), 20, 0, _player1, 0);
@@ -137,6 +140,9 @@ void PlayUI::DrawClass(HDC hdc, int x, int y, tagPlayerInfo player)
 	const char* drawClass = tempClass.c_str();
 
 	TextOut(hdc, x, y, drawClass, strlen(drawClass));
+
+	SelectObject(hdc, oldFont);
+	DeleteObject(font);
 }
 
 void PlayUI::DrawScore(HDC hdc, int x, int y, int score)
@@ -163,6 +169,9 @@ void PlayUI::DrawScore(HDC hdc, int x, int y, int score)
 	const char* drawScore = tempScore.c_str();
 
 	TextOut(hdc, x, y, drawScore, strlen(drawScore));
+
+	SelectObject(hdc, oldFont);
+	DeleteObject(font);
 }
 
 void PlayUI::DrawHP(HDC hdc, int x, int y)
@@ -183,6 +192,9 @@ void PlayUI::DrawHP(HDC hdc, int x, int y)
 	const char* score = tempScore.c_str();
 
 	TextOut(hdc, x, y, score, strlen(score));
+
+	SelectObject(hdc, oldFont);
+	DeleteObject(font);
 }
 
 void PlayUI::DrawLevel(HDC hdc, int x, int y, int level)
@@ -208,6 +220,8 @@ void PlayUI::DrawLevel(HDC hdc, int x, int y, int level)
 	TextOut(hdc, x, y + 4, drawL, strlen(drawL));
 	TextOut(hdc, x, y + 22, drawLevel, strlen(drawLevel));
 
+	SelectObject(hdc, oldFont);
+	DeleteObject(font);
 }
 
 void PlayUI::DrawItemStock(HDC hdc, int x, int y, int stock)
