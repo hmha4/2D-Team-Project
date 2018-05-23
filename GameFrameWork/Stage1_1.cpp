@@ -132,9 +132,9 @@ void Stage1_1::Update()
 
 					if (showTime2 > 2)
 					{
-						for (int i = 0; i < 3; i++)
+						for (int i = 0; i < 2; i++)
 							_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-600, 601), RND.GetFromTo(200, 350), LEFT_IDLE);
-						for (int i = 0; i < 3; i++)
+						for (int i = 0; i < 2; i++)
 						{
 							int rndNum = RND.GetFromTo(-1, 2);
 							if (rndNum == 0)

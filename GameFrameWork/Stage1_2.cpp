@@ -30,11 +30,18 @@ HRESULT Stage1_2::Init()
 	_pm->Init();
 	_pm->ChangeAnim(0, "RightRun");
 
+	_em = new EnemyManager;
+	_em->Init();
+	_em->InputEnemy(MINO, 2);
+	_em->InputEnemy(WAREWOLF, 4);
+	_em->InputEnemy(SKELETON, 4);
+
 	fadeOut = IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô");
 	offset = 255;
 	s2State = OPENNING;
 	_time = 0;
 	_totalTime = 0;
+	changeView = false;
 
 	return S_OK;
 }
@@ -63,6 +70,7 @@ void Stage1_2::Update()
 	case OPENNING:
 	{
 		_pm->Update();
+
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
 		offset -= 2;
@@ -73,42 +81,96 @@ void Stage1_2::Update()
 			CAM.SetSize(1400, WINSIZEY);
 			CAM.SetState("FOLLOW");
 			_pm->ChangeAnim(0, "RightIdle");
+			for (int i = 0; i < 3; i++)
+				_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
 		}
 	}
 	break;
 	case FIRST_STAGE:
 	{
 		_pm->Update();
+		_em->Update(_pm);
 		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
 
-		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
+		if (_pm->GetPlayer1()->GetX() > 500 && _pm->GetPlayer1()->GetX() <1000)
 		{
-			s2State = SECOND_STAGE;
-			CAM.SetSize(3048, WINSIZEY);
+			if (_em->GetEnemyNum() == 0 && !changeView)
+			{
+				static float showTime = 0;
+				showTime += TIMEMANAGER.getElapsedTime();
+
+				if (showTime > 2)
+				{
+					for (int i = 0; i < 4; i++)
+						_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
+
+					for (int i = 0; i < 2; i++)
+					{
+						int rndNum = RND.GetFromTo(-1, 2);
+						if (rndNum == 0)
+							rndNum = 1;
+						_em->ShowEnemy(WAREWOLF, _pm->GetPlayer1()->GetX() + 800 * rndNum, RND.GetFromTo(200, 350), LEFT_IDLE);
+					}
+
+					showTime = 0;
+				}
+			}
+		}
+		else if (1000 <= _pm->GetPlayer1()->GetX())
+		{
+			changeView = true;
+			if (_em->GetEnemyNum() == 0)
+			{
+				static float showTime1 = 0;
+				showTime1 += TIMEMANAGER.getElapsedTime();
+
+				if (showTime1 > 3.5)
+				{
+					s2State = SECOND_STAGE;
+					CAM.SetSize(3048, WINSIZEY);
+					showTime1 = 0;
+					changeView = false;
+				}
+			}
 		}
 	}
 	break;
 	case SECOND_STAGE:
 	{
 		_pm->Update();
+		_em->Update(_pm);
 		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
 
-		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
+		if (_pm->GetPlayer1()->GetX() > 1800)
+		{
+			if (_em->GetEnemyNum() == 0 && !changeView)
+			{
+				for (int i = 0; i < 4; i++)
+					_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-600, 601), RND.GetFromTo(200, 350), LEFT_IDLE);
+				changeView = true;
+			}
+		}
+		if (_pm->GetPlayer1()->GetX() > 2300&& _em->GetEnemyNum() == 0)
 		{
 			s2State = FINAL_STAGE;
+			changeView = false;
+			for (int i = 0; i < 2; i++)
+				_em->ShowEnemy(MINO, 2800,150+i*150, LEFT_IDLE);
 		}
+		
 	}
 	break;
 	case FINAL_STAGE:
 		_pm->Update();
+		_em->Update(_pm);
 		CAM.Update(3048 - WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
-		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
+		if (_em->GetEnemyNum()==0)
 		{
 			s2State = WIN_STAGE;
-			
 			_pm->ChangeAnim(34, "RightOther");
 		}
+
 		break;
 	case WIN_STAGE:
 		_pm->Update();

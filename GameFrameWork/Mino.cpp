@@ -117,7 +117,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			posX += cosf(angle) * 2;
 			posY += -sinf(angle) * 2;
 			rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-			shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+			shadowRc = RectMake(rc.right - 130, rc.bottom - img->GetFreamHeight() / 3 + 15, 60, img->GetFreamHeight() / 3);
 		}
 
 		RECT temp;
@@ -154,7 +154,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			posX += cosf(angle) * 2;
 			posY += -sinf(angle) * 2;
 			rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-			shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+			shadowRc = RectMake(rc.right - 130, rc.bottom - img->GetFreamHeight() / 3 + 15, 60, img->GetFreamHeight() / 3);
 		}
 
 		RECT temp;
@@ -313,7 +313,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			{
 				posX += 5;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+				shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 			}
 			else
 			{
@@ -332,7 +332,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 				posX += cosf(angle) * 7;
 				posY += -sinf(angle) * 7;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+				shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 				
 				if (CAM.GetRC().left + 50 > posX)
 				{
@@ -358,7 +358,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			{
 				posX -= 5;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+				shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 			}
 			else
 			{
@@ -377,7 +377,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 				posX += cosf(angle) * 7;
 				posY += -sinf(angle) * 7;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+				shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 
 				if (CAM.GetRC().right - 50 < posX)
 				{
@@ -403,7 +403,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			posX += cosf(0) * 6 + Friction;
 			posY += -sinf(0) * 6;
 			rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-			shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+			shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 		}
 		if (!anim->isPlay())
 		{
@@ -439,7 +439,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			posX += cosf(PI) * 6 + Friction;
 			posY += -sinf(PI) * 6;
 			rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-			shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+			shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 		}
 		if (!anim->isPlay())
 		{
@@ -473,7 +473,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 		posX += cosf(3 / PI) * 10;
 		posY += -sinf(3 / PI) * 10 + gravity;
 		rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-		shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+		shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 
 		if (posY > initPosY)
 		{
@@ -488,7 +488,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 		posX += cosf(PI - 3 / PI) * 10;
 		posY += -sinf(PI - 3 / PI) * 10 + gravity;
 		rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
-		shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+		shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 
 		if (posY > initPosY)
 		{
