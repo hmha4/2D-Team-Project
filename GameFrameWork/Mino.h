@@ -16,6 +16,9 @@ private:
 	float gravity;
 
 	float dieTime;
+	int rndValue;
+	
+	bool isAttack2;
 public:
 	Mino(ENEMYTYPE _eType);
 	~Mino();

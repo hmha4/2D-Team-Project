@@ -34,10 +34,10 @@ HRESULT Mino::Init(int x, int y, ENEMYSTATE eState)
 	ANIMATIONKEY.addArrayFrameAnimation("moRightAttack", "민호", rightAttack, 9, 10, false);
 
 	int leftAttack2[] = { 16,17,18 };
-	ANIMATIONKEY.addArrayFrameAnimation("moLeftAttack2", "민호", leftAttack2, 3, 5, true);
+	ANIMATIONKEY.addArrayFrameAnimation("moLeftAttack2", "민호", leftAttack2, 3, 8, true);
 
 	int rightAttack2[] = { 25,26,27 };
-	ANIMATIONKEY.addArrayFrameAnimation("moRightAttack2", "민호", rightAttack2, 3, 5, true);
+	ANIMATIONKEY.addArrayFrameAnimation("moRightAttack2", "민호", rightAttack2, 3, 8, true);
 
 	int leftDamage[] = { 13,14,15 };
 	ANIMATIONKEY.addArrayFrameAnimation("moLeftDamage", "민호", leftDamage, 3, 6, false);
@@ -68,6 +68,7 @@ HRESULT Mino::Init(int x, int y, ENEMYSTATE eState)
 	anim->start();
 
 	isAttack = false;
+	isAttack2 = false;
 	atkWaitTime = 0;
 	attack1Time = 0;
 	damagedTime = 0;
@@ -77,6 +78,7 @@ HRESULT Mino::Init(int x, int y, ENEMYSTATE eState)
 	gravity = 0;
 	dieTime = 0;
 	hp = 20;
+	rndValue = 0;
 	return S_OK;
 }
 
@@ -131,6 +133,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			atkWaitTime += TIMEMANAGER.getElapsedTime();
 			if (atkWaitTime > 0.5)
 			{
+				rndValue = RND.GetFromTo(0, 10);
 				atkWaitTime = 0;
 				isAttack = false;
 				eState = LEFT_ATTACK;
@@ -167,6 +170,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			atkWaitTime += TIMEMANAGER.getElapsedTime();
 			if (atkWaitTime > 0.5)
 			{
+				rndValue = RND.GetFromTo(0, 10);
 				atkWaitTime = 0;
 				isAttack = false;
 				eState = RIGHT_ATTACK;
@@ -181,22 +185,58 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 	{
 		if (!anim->isPlay())
 		{
-			attack1Time += TIMEMANAGER.getElapsedTime();
-			if (attack1Time > 1)
+			if (hp >= 11)
 			{
-				attack1Time = 0;
-				//플레이어가 왼쪽에있으면
-				if (pm->GetPlayer1()->GetX() < posX)
+				attack1Time += TIMEMANAGER.getElapsedTime();
+				if (attack1Time > 1)
 				{
-					eState = LEFT_MOVE;
-					*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
-					anim->start();
+					attack1Time = 0;
+					//플레이어가 왼쪽에있으면
+					if (pm->GetPlayer1()->GetX() < posX)
+					{
+						eState = LEFT_MOVE;
+						*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
+						anim->start();
+					}
+					else//플레이어가 오른쪽에 있으면
+					{
+						eState = RIGHT_MOVE;
+						*anim = *ANIMATIONKEY.findAnimation("moRightMove");
+						anim->start();
+					}
 				}
-				else//플레이어가 오른쪽에 있으면
+			}
+			else
+			{
+				attack1Time += TIMEMANAGER.getElapsedTime();
+				if (attack1Time > 1)
 				{
-					eState = RIGHT_MOVE;
-					*anim = *ANIMATIONKEY.findAnimation("moRightMove");
-					anim->start();
+					attack1Time = 0;
+					if (rndValue < 7)
+					{
+						eState = LEFT_ATTACK2;
+						*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
+						anim->start();
+						rndValue = 0;
+					}
+					else
+					{
+						//플레이어가 왼쪽에있으면
+						if (pm->GetPlayer1()->GetX() < posX)
+						{
+							eState = LEFT_MOVE;
+							*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
+							anim->start();
+							rndValue = 0;
+						}
+						else//플레이어가 오른쪽에 있으면
+						{
+							eState = RIGHT_MOVE;
+							*anim = *ANIMATIONKEY.findAnimation("moRightMove");
+							anim->start();
+							rndValue = 0;
+						}
+					}
 				}
 			}
 		}
@@ -207,22 +247,58 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 	{
 		if (!anim->isPlay())
 		{
-			attack1Time += TIMEMANAGER.getElapsedTime();
-			if (attack1Time > 1)
+			if (hp >= 11)
 			{
-				attack1Time = 0;
-				//플레이어가 왼쪽에있으면
-				if (pm->GetPlayer1()->GetX() < posX)
+				attack1Time += TIMEMANAGER.getElapsedTime();
+				if (attack1Time > 1)
 				{
-					eState = LEFT_MOVE;
-					*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
-					anim->start();
+					attack1Time = 0;
+					//플레이어가 왼쪽에있으면
+					if (pm->GetPlayer1()->GetX() < posX)
+					{
+						eState = LEFT_MOVE;
+						*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
+						anim->start();
+					}
+					else//플레이어가 오른쪽에 있으면
+					{
+						eState = RIGHT_MOVE;
+						*anim = *ANIMATIONKEY.findAnimation("moRightMove");
+						anim->start();
+					}
 				}
-				else//플레이어가 오른쪽에 있으면
+			}
+			else
+			{
+				attack1Time += TIMEMANAGER.getElapsedTime();
+				if (attack1Time > 1)
 				{
-					eState = RIGHT_MOVE;
-					*anim = *ANIMATIONKEY.findAnimation("moRightMove");
-					anim->start();
+					attack1Time = 0;
+					if (rndValue < 7)
+					{
+						eState = RIGHT_ATTACK2;
+						*anim = *ANIMATIONKEY.findAnimation("moRightMove");
+						anim->start();
+						rndValue = 0;
+					}
+					else
+					{
+						//플레이어가 왼쪽에있으면
+						if (pm->GetPlayer1()->GetX() < posX)
+						{
+							eState = LEFT_MOVE;
+							*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
+							anim->start();
+							rndValue = 0;
+						}
+						else//플레이어가 오른쪽에 있으면
+						{
+							eState = RIGHT_MOVE;
+							*anim = *ANIMATIONKEY.findAnimation("moRightMove");
+							anim->start();
+							rndValue = 0;
+						}
+					}
 				}
 			}
 		}
@@ -231,11 +307,91 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 	break;
 	case LEFT_ATTACK2:
 	{
-
+		if (!isAttack2)
+		{
+			if (CAM.GetRC().right - 50 > posX)
+			{
+				posX += 5;
+				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
+				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+			}
+			else
+			{
+				isAttack2 = true;
+				*anim = *ANIMATIONKEY.findAnimation("moLeftAttack2");
+			}
+		}
+		else
+		{
+			atkWaitTime += TIMEMANAGER.getElapsedTime();
+			if (atkWaitTime > 0.8)
+			{
+				if(!anim->isPlay())
+					anim->start();
+				
+				posX += cosf(angle) * 7;
+				posY += -sinf(angle) * 7;
+				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
+				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+				
+				if (CAM.GetRC().left + 50 > posX)
+				{
+					eState = RIGHT_MOVE;
+					*anim = *ANIMATIONKEY.findAnimation("moRightMove");
+					anim->start();
+					atkWaitTime = 0;
+					isAttack2 = false;
+				}
+			}
+			else
+				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+		
+		}
+		
 	}
 	break;
 	case RIGHT_ATTACK2:
 	{
+		if (!isAttack2)
+		{
+			if (CAM.GetRC().left + 50 < posX)
+			{
+				posX -= 5;
+				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
+				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+			}
+			else
+			{
+				isAttack2 = true;
+				*anim = *ANIMATIONKEY.findAnimation("moRightAttack2");
+			}
+		}
+		else
+		{
+			atkWaitTime += TIMEMANAGER.getElapsedTime();
+			if (atkWaitTime > 0.8)
+			{
+				if (!anim->isPlay())
+					anim->start();
+
+				posX += cosf(angle) * 7;
+				posY += -sinf(angle) * 7;
+				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
+				shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+
+				if (CAM.GetRC().right - 50 < posX)
+				{
+					eState = LEFT_MOVE;
+					*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
+					anim->start();
+					atkWaitTime = 0;
+					isAttack2 = false;
+				}
+			}
+			else
+				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+
+		}
 
 	}
 	break;
