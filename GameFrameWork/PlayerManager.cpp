@@ -13,13 +13,25 @@ PlayerManager::~PlayerManager()
 
 HRESULT PlayerManager::Init()
 {
+	//아이템 박스 이미지
+	IMAGEMANAGER.addImage("ITEM_HEALTH", PathFile("image\\Itembox", "ITEMBOX_HEALTH").c_str(), 40, 40, false, NULL);
+	IMAGEMANAGER.addImage("ITEM_ICE", PathFile("image\\Itembox", "ITEMBOX_ICE").c_str(), 40, 40, false, NULL);
+	IMAGEMANAGER.addImage("ITEM_THUNDER", PathFile("image\\Itembox", "ITEMBOX_THUNDER").c_str(), 40, 40, false, NULL);
+	IMAGEMANAGER.addImage("ITEM_FIRE", PathFile("image\\Itembox", "ITEMBOX_FIRE").c_str(), 40, 40, false, NULL);
+
+
 	_playerNum = (PLAYER)DATABASE.LoadData("1P2P");
 	if (_playerNum == 0)
+	{
 		_character[0] = (CHARACTER)DATABASE.LoadData("1PCharacter");
+		_itemBox[0] = new ItemBox;
+	}
 	else if (_playerNum == 1)
 	{
 		_character[0] = (CHARACTER)DATABASE.LoadData("1PCharacter");
 		_character[1] = (CHARACTER)DATABASE.LoadData("2PCharacter");
+		_itemBox[0] = new ItemBox;
+		_itemBox[1] = new ItemBox;
 	}
 
 	for (int i = 0; i < _playerNum + 1; i++)
@@ -41,12 +53,16 @@ HRESULT PlayerManager::Init()
 	}
 
 	UI = new PlayUI;
+	UI->SetLinkItemBox1(_itemBox[0]);
+	UI->SetLinkItemBox2(_itemBox[1]);
+
 	return S_OK;
 }
 
 void PlayerManager::Render()
 {
 	UI->render();
+	_itemBox[0]->Render();
 }
 
 void PlayerManager::Update()
@@ -56,6 +72,7 @@ void PlayerManager::Update()
 		Collision("웨어화살", i);
 
 		_player[i]->Update();
+		_itemBox[i]->Update(_player[i]->GetX(), _player[i]->GetY());
 	}
 }
 

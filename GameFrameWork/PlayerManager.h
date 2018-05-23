@@ -3,6 +3,7 @@
 #include "Warrior.h"
 #include "Magician.h"
 #include "PlayUI.h"
+#include "ItemBox.h"
 
 class PlayerManager :
 	public gameNode
@@ -30,6 +31,7 @@ private:
 	CHARACTER	_character[2];		//	어떤 캐릭터
 
 	PlayUI*		UI;					//	UI
+	ItemBox*	_itemBox[2];		//  아이템 박스
 public:
 	PlayerManager();
 	~PlayerManager();

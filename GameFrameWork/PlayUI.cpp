@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PlayUI.h"
-
+#include "ItemBox.h"
 
 PlayUI::PlayUI()
 {
@@ -21,6 +21,9 @@ PlayUI::~PlayUI()
 
 HRESULT PlayUI::init()
 {
+	_itemBox[0] = new ItemBox;
+	_itemBox[1] = new ItemBox;
+
 	return S_OK;
 }
 
@@ -35,12 +38,12 @@ void PlayUI::update()
 void PlayUI::render()
 {
 	_brick->Render(getMemDC(), CAM.GetX(), CAM.GetY() + 400);
-	MakeTable(getMemDC(), 20, 0, _player1);
+	MakeTable(getMemDC(), 20, 0, _player1, 0);
 
 	_UItitle->Render(getMemDC(), CAM.GetX() + 400 - (_UItitle->GetWidth() / 2), CAM.GetY() + 450 - (_UItitle->GetHeight() / 2));
 }
 
-void PlayUI::MakeTable(HDC hdc, int x, int y, tagPlayerInfo player)
+void PlayUI::MakeTable(HDC hdc, int x, int y, tagPlayerInfo player, int itemNum)
 {
 	int left = x + CAM.GetX();
 	int top =  y + CAM.GetY() + 400;
@@ -76,6 +79,8 @@ void PlayUI::MakeTable(HDC hdc, int x, int y, tagPlayerInfo player)
 			, equip[ii].bottom - _fighterEquip->GetFreamHeight()
 			, _player1.level, ii);
 	}
+	//선택된 스킬 출력
+	_itemBox[itemNum]->DrawSelectItem(hdc, (equip[2].left + equipTitle[2].left) / 2, (equip[2].top + equip[2].bottom) / 2);
 
 	//HP 게이지 출력
 	_hpGauge->Render(hdc, hpGauge.left - 3, hpGauge.top + 2);
