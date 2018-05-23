@@ -4,6 +4,7 @@
 #include "Warewolf.h"
 #include "skeleton.h"
 #include "Mino.h"
+
 class EnemyManager :public gameNode
 {
 private:

@@ -17,6 +17,9 @@ EnemyManager::EnemyManager()
 	BULLET.BulletSetting("½ºÄÌ°Ë", IMAGEMANAGER.findImage("½ºÄÌ·¹Åæ°Ë"), 30, false, 0, 1);
 	BULLET.BulletShadowSetting("½ºÄÌ°Ë", NULL, RectMake(0, 0, 40, 10), 50);
 
+	BULLET.BulletSetting("¹ÎÈ£°Ë", IMAGEMANAGER.findImage("½ºÄÌ·¹Åæ°Ë"), 30, false, 0, 1);
+	BULLET.BulletShadowSetting("¹ÎÈ£°Ë", NULL, RectMake(0, 0, 120, 20), 50);
+
 	for (int i = 0; i < 30; i++)
 	{
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("¿þ¾îÈ­»ì")[i]);

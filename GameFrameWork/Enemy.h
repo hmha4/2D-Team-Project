@@ -34,6 +34,7 @@ protected:
 
 	RECT rc;
 	RECT shadowRc;
+	RECT shadowColRc;
 
 	float posX, posY;
 	float angle;
@@ -63,5 +64,7 @@ public:
 	inline bool&getShowState() { return isShow; }
 	inline bool&getDie() { return isDie; }
 	inline int&getHp() { return hp; }
+	inline RECT&getShadowColRc() { return shadowColRc; }
+
 };
 

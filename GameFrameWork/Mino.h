@@ -19,6 +19,7 @@ private:
 	int rndValue;
 	
 	bool isAttack2;
+	
 public:
 	Mino(ENEMYTYPE _eType);
 	~Mino();

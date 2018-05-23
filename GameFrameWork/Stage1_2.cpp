@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Stage1_2.h"
-
+#include "Bullet.h"
 
 Stage1_2::Stage1_2()
 {
@@ -154,8 +154,7 @@ void Stage1_2::Update()
 		{
 			s2State = FINAL_STAGE;
 			changeView = false;
-			for (int i = 0; i < 2; i++)
-				_em->ShowEnemy(MINO, 2800,150+i*150, LEFT_IDLE);
+			_em->ShowEnemy(MINO, 2800,230, LEFT_IDLE);
 		}
 		
 	}

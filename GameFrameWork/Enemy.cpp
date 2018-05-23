@@ -17,6 +17,7 @@ HRESULT Enemy::Init()
 	isDie = false;
 	isShow = false;
 	alpha = 0;
+	shadowColRc = RectMake(0, 0, 0, 0);
 	return S_OK;
 }
 

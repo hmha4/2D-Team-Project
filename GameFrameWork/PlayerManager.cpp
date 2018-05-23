@@ -75,6 +75,7 @@ void PlayerManager::Update()
 	{
 		Collision("¿þ¾îÈ­»ì", i);
 		Collision("½ºÄÌ°Ë", i);
+		Collision("¹ÎÈ£°Ë", i);
 		_player[i]->Update();
 		_itemBox[i]->Update(_player[i]->GetX(), _player[i]->GetY());
 		//_skill[i]->Update(_player[i]->GetX(), _player[i]->GetY());

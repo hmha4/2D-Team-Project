@@ -79,6 +79,7 @@ HRESULT Mino::Init(int x, int y, ENEMYSTATE eState)
 	dieTime = 0;
 	hp = 20;
 	rndValue = 0;
+
 	return S_OK;
 }
 
@@ -139,6 +140,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 				eState = LEFT_ATTACK;
 				*anim = *ANIMATIONKEY.findAnimation("moLeftAttack");
 				anim->start();
+				BULLET.Shot("¹ÎÈ£°Ë", posX , posY+20, 0, 0, 0, 0);
 			}
 		}
 		DieEnemy();
@@ -176,6 +178,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 				eState = RIGHT_ATTACK;
 				*anim = *ANIMATIONKEY.findAnimation("moRightAttack");
 				anim->start();
+				BULLET.Shot("¹ÎÈ£°Ë", posX, posY+20,0,0,0,0);
 			}
 		}
 		DieEnemy();
@@ -185,6 +188,8 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 	{
 		if (!anim->isPlay())
 		{
+			for (int i = 0; i < BULLET.GetBulletVec("¹ÎÈ£°Ë").size(); i++)
+				BULLET.Destroy("¹ÎÈ£°Ë", i);
 			if (hp >= 11)
 			{
 				attack1Time += TIMEMANAGER.getElapsedTime();
@@ -245,6 +250,8 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 	break;
 	case RIGHT_ATTACK:
 	{
+		for (int i = 0; i < BULLET.GetBulletVec("¹ÎÈ£°Ë").size(); i++)
+			BULLET.Destroy("¹ÎÈ£°Ë", i);
 		if (!anim->isPlay())
 		{
 			if (hp >= 11)
@@ -333,7 +340,8 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 				posY += -sinf(angle) * 7;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 				shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
-				
+				shadowColRc = RectMakeCenter(posX, posY + 30, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+
 				if (CAM.GetRC().left + 50 > posX)
 				{
 					eState = RIGHT_MOVE;
@@ -341,6 +349,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 					anim->start();
 					atkWaitTime = 0;
 					isAttack2 = false;
+					shadowColRc = RectMake(0, 0, 0, 0);
 				}
 			}
 			else
@@ -378,6 +387,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 				posY += -sinf(angle) * 7;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 				shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
+				shadowColRc = RectMakeCenter(posX, posY + 30, img->GetFrameWidth(), img->GetFreamHeight() / 3);
 
 				if (CAM.GetRC().right - 50 < posX)
 				{
@@ -386,6 +396,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 					anim->start();
 					atkWaitTime = 0;
 					isAttack2 = false;
+					shadowColRc = RectMake(0, 0, 0, 0);
 				}
 			}
 			else
