@@ -23,7 +23,7 @@ HRESULT Enemy::Init()
 HRESULT Enemy::Init(int x, int y, ENEMYSTATE eState)
 {
 	rc = RectMakeCenter(x, y, img->GetFrameWidth(), img->GetFreamHeight());
-	shadowRc = RectMake(rc.right - img->GetFrameWidth(), (rc.bottom - img->GetFreamHeight() / 3)+15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+	shadowRc = RectMake(rc.right - img->GetFrameWidth(), (rc.bottom - img->GetFreamHeight() / 3) + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
 
 	posX = GetCenterPos(rc).x;
 	posY = GetCenterPos(rc).y;

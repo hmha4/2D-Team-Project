@@ -8,6 +8,7 @@ private:
 	float attackTime;
 
 	int speed;
+	bool isAttack;
 public:
 	Skeleton(ENEMYTYPE _eType);
 	~Skeleton();

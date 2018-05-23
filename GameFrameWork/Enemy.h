@@ -4,7 +4,8 @@
 enum ENEMYTYPE
 {
 	WAREWOLF,
-	SKELETON
+	SKELETON,
+	MINO
 };
 enum ENEMYSTATE
 {
@@ -12,6 +13,8 @@ enum ENEMYSTATE
 	RIGHT_IDLE,
 	LEFT_ATTACK,
 	RIGHT_ATTACK,
+	LEFT_ATTACK2,
+	RIGHT_ATTACK2,
 	LEFT_MOVE,
 	RIGHT_MOVE,
 	LEFT_DIE,
@@ -44,7 +47,7 @@ public:
 	~Enemy();
 
 	virtual HRESULT Init();
-	virtual HRESULT Init(int x, int y,ENEMYSTATE eState);
+	virtual HRESULT Init(int x, int y, ENEMYSTATE eState);
 	void Render();
 	void Update(PlayerManager*pm);
 	virtual void Release();

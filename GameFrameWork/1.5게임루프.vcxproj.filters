@@ -204,9 +204,6 @@
     <ClInclude Include="PlayUI.h">
       <Filter>PlayGround</Filter>
     </ClInclude>
-    <ClInclude Include="DataBase.h">
-      <Filter>gameFrameWork\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyManager.h">
       <Filter>PlayGround\Enemy</Filter>
     </ClInclude>
@@ -216,14 +213,20 @@
     <ClInclude Include="skeleton.h">
       <Filter>PlayGround\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerManager.h">
-      <Filter>PlayGround\Player</Filter>
+    <ClInclude Include="Mino.h">
+      <Filter>PlayGround\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="StartScene.h">
       <Filter>PlayGround\StartScene</Filter>
     </ClInclude>
     <ClInclude Include="SelectScene.h">
       <Filter>PlayGround\SelectScene</Filter>
+    </ClInclude>
+    <ClInclude Include="DataBase.h">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerManager.h">
+      <Filter>PlayGround\Player</Filter>
     </ClInclude>
     <ClInclude Include="Stage1_2.h">
       <Filter>PlayGround\Stage1-2</Filter>
@@ -332,9 +335,6 @@
     <ClCompile Include="PlayUI.cpp">
       <Filter>PlayGround</Filter>
     </ClCompile>
-    <ClCompile Include="DataBase.cpp">
-      <Filter>gameFrameWork\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
       <Filter>PlayGround\Enemy</Filter>
     </ClCompile>
@@ -344,14 +344,20 @@
     <ClCompile Include="skeleton.cpp">
       <Filter>PlayGround\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerManager.cpp">
-      <Filter>PlayGround\Player</Filter>
+    <ClCompile Include="Mino.cpp">
+      <Filter>PlayGround\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="StartScene.cpp">
       <Filter>PlayGround\StartScene</Filter>
     </ClCompile>
     <ClCompile Include="SelectScene.cpp">
       <Filter>PlayGround\SelectScene</Filter>
+    </ClCompile>
+    <ClCompile Include="DataBase.cpp">
+      <Filter>gameFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerManager.cpp">
+      <Filter>PlayGround\Player</Filter>
     </ClCompile>
     <ClCompile Include="Stage1_2.cpp">
       <Filter>PlayGround\Stage1-2</Filter>

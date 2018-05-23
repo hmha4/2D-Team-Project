@@ -6,6 +6,7 @@ Skeleton::Skeleton(ENEMYTYPE _eType)
 	:Enemy(_eType)
 {
 	IMAGEMANAGER.addFrameImage("½ºÄÌ·¹Åæ", PathFile("image\\Enemy", "½ºÄÌ·¹Åæ").c_str(), 2226, 194, 14, 2, true, RGB(255, 0, 255));
+	EFFECTMANAGER.addEffect("ÇØ°ñÆø¹ß", PathFile("image\\Enemy", "»ý¹°Æø¹ß").c_str(), 1653, 90, 92, 90, 60, 1, 30);
 }
 
 
@@ -41,7 +42,7 @@ HRESULT Skeleton::Init(int x, int y, ENEMYSTATE eState)
 	ANIMATIONKEY.addArrayFrameAnimation("skRightAttack", "½ºÄÌ·¹Åæ", rightAttack, 5, 7, false);
 
 	img = IMAGEMANAGER.findImage("½ºÄÌ·¹Åæ");
-	Enemy::Init(x, y, eState);
+
 
 	anim = new animation;
 
@@ -58,7 +59,11 @@ HRESULT Skeleton::Init(int x, int y, ENEMYSTATE eState)
 	speed = RND.GetFromTo(1, 4);
 	attackTime = 0;
 	Friction = 0;
+
 	hp = 2;
+	isAttack = false;
+	Enemy::Init(x, y, eState);
+
 	return S_OK;
 }
 
@@ -177,6 +182,11 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 		}
 		else
 		{
+			if (!isAttack)
+			{
+				BULLET.Shot("½ºÄÌ°Ë", posX, posY, PI, 0, 0, 0);
+				isAttack = true;
+			}
 			if (!anim->isPlay())
 			{
 				if (pm->GetPlayer1()->GetX() < posX)
@@ -185,6 +195,9 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 					*anim = *ANIMATIONKEY.findAnimation("skLeftMove");
 					anim->start();
 					attackTime = 0;
+					isAttack = false;
+					for (int i = 0; i < BULLET.GetBulletVec("½ºÄÌ°Ë").size(); i++)
+						BULLET.Destroy("½ºÄÌ°Ë", i);
 				}
 				else
 				{
@@ -192,6 +205,9 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 					*anim = *ANIMATIONKEY.findAnimation("skRightMove");
 					anim->start();
 					attackTime = 0;
+					isAttack = false;
+					for (int i = 0; i < BULLET.GetBulletVec("½ºÄÌ°Ë").size(); i++)
+						BULLET.Destroy("½ºÄÌ°Ë", i);
 				}
 			}
 		}
@@ -207,6 +223,11 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 		}
 		else
 		{
+			if (!isAttack)
+			{
+				BULLET.Shot("½ºÄÌ°Ë", posX, posY, 0, 0, 0, 0);
+				isAttack = true;
+			}
 			if (!anim->isPlay())
 			{
 				if (pm->GetPlayer1()->GetX() < posX)
@@ -215,6 +236,9 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 					*anim = *ANIMATIONKEY.findAnimation("skLeftMove");
 					anim->start();
 					attackTime = 0;
+					isAttack = false;
+					for (int i = 0; i < BULLET.GetBulletVec("½ºÄÌ°Ë").size(); i++)
+						BULLET.Destroy("½ºÄÌ°Ë", i);
 				}
 				else
 				{
@@ -222,6 +246,9 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 					*anim = *ANIMATIONKEY.findAnimation("skRightMove");
 					anim->start();
 					attackTime = 0;
+					isAttack = false;
+					for (int i = 0; i < BULLET.GetBulletVec("½ºÄÌ°Ë").size(); i++)
+						BULLET.Destroy("½ºÄÌ°Ë", i);
 				}
 			}
 		}
@@ -259,13 +286,13 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 	break;
 	case RIGHT_DAMAGE:
 	{
-		Friction -= 0.2;
+		Friction += 0.2;
 		posX += cosf(PI) * 6 + Friction;
 		posY += -sinf(PI) * 6;
 		rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 		shadowRc = RectMake(rc.right - img->GetFrameWidth(), rc.bottom - img->GetFreamHeight() / 3 + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
 
-		if (Friction*(-1) > totalPower)
+		if (Friction*(-1) < totalPower)
 		{
 			totalPower = 0;
 			Friction = 0;
@@ -293,7 +320,9 @@ void Skeleton::DieEnemy()
 {
 	if (hp <= 0)
 	{
+		EFFECTMANAGER.play("ÇØ°ñÆø¹ß", posX, posY);
 		isDie = true;
+		isShow = false;
 	}
 }
 

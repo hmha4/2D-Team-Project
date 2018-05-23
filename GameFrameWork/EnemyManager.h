@@ -3,7 +3,8 @@
 #include <map>
 #include "Warewolf.h"
 #include "skeleton.h"
-class EnemyManager:public gameNode
+#include "Mino.h"
+class EnemyManager :public gameNode
 {
 private:
 	typedef vector<Enemy*>::iterator enemyIter;
@@ -25,10 +26,12 @@ public:
 	void Update(PlayerManager*pm);
 	void Release();
 
-	void ShowEnemy(ENEMYTYPE eType,float x,float y,ENEMYSTATE eState);
+	void ShowEnemy(ENEMYTYPE eType, float x, float y, ENEMYSTATE eState);
 	int DieUpdate();
 
 	void EnemyCollision();
+
+	void AllDieInit();
 
 	inline vector<Enemy*>&GetEnemyVec(ENEMYTYPE eType) {
 		return enemyMap.find(eType)->second;
