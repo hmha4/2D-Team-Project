@@ -28,8 +28,6 @@ private:
 
 	float _time;
 	float _totalTime;
-
-	int _playerNum;
 public:
 	Stage1_2();
 	~Stage1_2();

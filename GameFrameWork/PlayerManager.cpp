@@ -62,8 +62,8 @@ HRESULT PlayerManager::Init()
 	UI->SetLinkItemBox2(_itemBox[1]);
 	ZORDER.InputObj(UI);
 
-	_skill[0] = new PlayerSkill;
-	_skill[0]->Init();
+	//_skill[0] = new PlayerSkill;
+	//_skill[0]->Init();
 
 	return S_OK;
 }
@@ -72,7 +72,7 @@ void PlayerManager::Render()
 {
 	//UI->render();
 	_itemBox[0]->Render();
-	_skill[0]->Render();
+	//_skill[0]->Render();
 }
 
 void PlayerManager::Update()
@@ -84,7 +84,7 @@ void PlayerManager::Update()
 
 		_player[i]->Update();
 		_itemBox[i]->Update(_player[i]->GetX(), _player[i]->GetY());
-		_skill[i]->Update(_player[i]->GetX(), _player[i]->GetY());
+		//_skill[i]->Update(_player[i]->GetX(), _player[i]->GetY());
 	}
 }
 
@@ -92,6 +92,43 @@ void PlayerManager::Release()
 {
 	for (int i = 0; i < _playerNum + 1; i++)
 		_player[i]->Release();
+}
+
+Character * PlayerManager::GetPlayer(string player)
+{
+	CHARACTER playerName;
+
+	if (player == "warrior") playerName = WARRIOR;
+	else if (player == "magician") playerName = MAGICIAN;
+
+	for (int i = 0; i < _playerNum + 1; i++)
+	{
+		if (_character[i] == playerName)
+		{
+			return _player[i];
+		}
+	}
+}
+
+void PlayerManager::ChangeAnim(int state, string anim)
+{
+	string warrior = "Warrior";
+	string magician = "Magician";
+
+	warrior.append(anim);
+	magician.append(anim);
+
+	for (int i = 0; i < _playerNum + 1; i++)
+	{
+		if (_character[i] == 1)
+		{
+			_player[i]->ChangeAnim(0, magician);
+		}
+		else if (_character[i] == 2)
+		{
+			_player[i]->ChangeAnim(0, warrior);
+		}
+	}
 }
 
 void PlayerManager::MoveRestrict(int stage)

@@ -32,7 +32,6 @@ HRESULT Stage1_2::Init()
 	s2State = OPENNING;
 	_time = 0;
 	_totalTime = 0;
-	_playerNum = DATABASE.LoadData("1P2P");
 
 	return S_OK;
 }
@@ -70,7 +69,7 @@ void Stage1_2::Update()
 			offset = 0;
 			CAM.SetSize(1400, WINSIZEY);
 			CAM.SetState("FOLLOW");
-			_pm->GetPlayer1()->ChangeAnim(0, "WarriorRightIdle");
+			_pm->ChangeAnim(0, "RightIdle");
 		}
 	}
 	break;
@@ -104,10 +103,8 @@ void Stage1_2::Update()
 		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
 		{
 			s2State = WIN_STAGE;
-			if (_pm->GetPlayer1()->GetState() == 0)
-				_pm->GetPlayer1()->ChangeAnim(34, "WarriorRightOther");
-			else
-				_pm->GetPlayer1()->ChangeAnim(35, "WarriorLeftOther");
+			
+			_pm->ChangeAnim(34, "RightOther");
 		}
 		break;
 	case WIN_STAGE:
@@ -119,10 +116,9 @@ void Stage1_2::Update()
 		{
 			_totalTime = 0;
 			s2State = NEXT_STAGE;
-			if (_pm->GetPlayer1()->GetState() == 0)
-				_pm->GetPlayer1()->ChangeAnim(10, "WarriorRightFall");
-			else
-				_pm->GetPlayer1()->ChangeAnim(11, "WarriorLeftFall");
+			
+			_pm->ChangeAnim(10, "RightFall");
+
 			break;
 		}
 
