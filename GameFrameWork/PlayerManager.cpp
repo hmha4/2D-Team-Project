@@ -42,17 +42,13 @@ HRESULT PlayerManager::Init()
 			_player[i]->Init(-50, WINSIZEY / 2, i);
 
 			ZORDER.InputObj(_player[i]);
-
-			_player[i]->ChangeAnim(0, "MagicianRightRun");
 		}
 		else if (_character[i] == 2)
 		{
 			_player[i] = new Warrior;
 			_player[i]->Init(-50, WINSIZEY / 2, i);
 
-			ZORDER.InputObj(_player[i]);
-
-			_player[i]->ChangeAnim(0, "WarriorRightRun");
+			ZORDER.InputObj((gameNode*)_player[i]);
 		}
 	}
 
@@ -91,7 +87,10 @@ void PlayerManager::Update()
 void PlayerManager::Release()
 {
 	for (int i = 0; i < _playerNum + 1; i++)
+	{
 		_player[i]->Release();
+		SAFE_DELETE(_player[i]);
+	}
 }
 
 Character * PlayerManager::GetPlayer(string player)
@@ -110,6 +109,21 @@ Character * PlayerManager::GetPlayer(string player)
 	}
 }
 
+void PlayerManager::SetPlayerPos(float x, float y)
+{
+	for (int i = 0; i < _playerNum + 1; i++)
+	{
+		if (_character[i] == 1)
+		{
+			_player[i]->SetPos(x, y);
+		}
+		else if (_character[i] == 2)
+		{
+			_player[i]->SetPos(x, y);
+		}
+	}
+}
+
 void PlayerManager::ChangeAnim(int state, string anim)
 {
 	string warrior = "Warrior";
@@ -122,11 +136,11 @@ void PlayerManager::ChangeAnim(int state, string anim)
 	{
 		if (_character[i] == 1)
 		{
-			_player[i]->ChangeAnim(0, magician);
+			_player[i]->ChangeAnim(state, magician);
 		}
 		else if (_character[i] == 2)
 		{
-			_player[i]->ChangeAnim(0, warrior);
+			_player[i]->ChangeAnim(state, warrior);
 		}
 	}
 }

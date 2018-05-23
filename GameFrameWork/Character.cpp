@@ -53,8 +53,8 @@ void Character::Release()
     _x = 0;
     _y = 0;
     _rc = RectMake(0, 0, 0, 0);
-    _img = NULL;
-    _anim = NULL;
+    //_img = NULL;
+    //_anim = NULL;
 }
 
 void Character::Update()

@@ -25,6 +25,7 @@ HRESULT Stage1_1::Init()
 
 	_pm = new PlayerManager;
 	_pm->Init();
+	_pm->ChangeAnim(0, "RightRun");
 
 	_em = new EnemyManager;
 	_em->InputEnemy(MINO, 1);

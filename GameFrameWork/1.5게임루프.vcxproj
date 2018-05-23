@@ -22,7 +22,7 @@
     <ProjectGuid>{D53A2FE4-48DB-40FF-8117-6C155B169129}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>My15게임루프</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -34,7 +34,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
@@ -180,6 +180,7 @@
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="Stage1_1.h" />
     <ClInclude Include="Stage1_2.h" />
+    <ClInclude Include="Stage1_3.h" />
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="Stage1_1.cpp" />
     <ClCompile Include="Stage1_2.cpp" />
+    <ClCompile Include="Stage1_3.cpp" />
     <ClCompile Include="StartScene.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

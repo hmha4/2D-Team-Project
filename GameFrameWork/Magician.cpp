@@ -663,7 +663,16 @@ void Magician::MovementRestrict(int stage)
 {
 	if (stage == 0)
 	{
-		_x += 3;
+		if (_y > 0)
+		{
+			if (_x < WINSIZEX / 2)
+				_x += 3;
+		}
+		else
+		{
+			_gravity = 0.3f;
+			_startY = WINSIZEY / 2;
+		}
 	}
 	else if (stage == 10)
 	{

@@ -26,6 +26,7 @@ HRESULT Stage1_2::Init()
 
 	_pm = new PlayerManager;
 	_pm->Init();
+	_pm->ChangeAnim(0, "RightRun");
 
 	fadeOut = IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô");
 	offset = 255;
@@ -46,9 +47,9 @@ void Stage1_2::Render()
 	if (s2State == WIN_STAGE)
 		IMAGEMANAGER.findImage("1.2¶¥ºÎ¼­Áü")->Render(getMemDC(), 3048 - 762, CAM.GetRC().bottom - 308);
 
-	fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
-
 	_pm->Render();
+
+	fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
 }
 
 void Stage1_2::Update()
@@ -132,6 +133,8 @@ void Stage1_2::Update()
 			if (offset > 255)
 			{
 				offset = 255;
+				SCENEMANAGER.changeScene("½ºÅ×ÀÌÁö1.3");
+				break;
 			}
 		}
 		_pm->Update();
@@ -144,6 +147,7 @@ void Stage1_2::Update()
 void Stage1_2::Release()
 {
 	_pm->Release();
+	SAFE_DELETE(_pm);
 
 	ZORDER.Release();
 }

@@ -139,9 +139,11 @@ void Warrior::Update()
 		_jumpPower = 7;
 		_gravity = 0.3f;
 		_startY = _y;
-		if (_state == RIGHT_IDLE || _state == RIGHT_RUN)
+		if (_state == RIGHT_IDLE || _state == RIGHT_RUN ||
+			_state == RIGHT_UP_RUN || _state == RIGHT_DOWN_RUN)
 			ChangeAnim((int)RIGHT_JUMP, "WarriorRightJump");
-		else if (_state == LEFT_IDLE || _state == LEFT_RUN)
+		else if (_state == LEFT_IDLE || _state == LEFT_RUN || 
+			_state == LEFT_UP_RUN || _state == LEFT_DOWN_RUN)
 			ChangeAnim((int)LEFT_JUMP, "WarriorLeftJump");
 	}
 
@@ -682,7 +684,16 @@ void Warrior::MovementRestrict(int stage)
 {
 	if (stage == 0)
 	{
-		_x += 3;
+		if (_y > 0)
+		{
+			if(_x < WINSIZEX/2)
+				_x += 3;
+		}
+		else
+		{
+			_gravity = 0.3f;
+			_startY = WINSIZEY / 2;
+		}
 	}
 	else if (stage == 10)
 	{

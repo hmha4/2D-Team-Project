@@ -49,6 +49,7 @@ public:
 	inline Character* GetPlayer2() { return _player[1]; }
 
 	Character* GetPlayer(string player);
+	void SetPlayerPos(float x, float y);
 	void ChangeAnim(int state, string anim);
 	void MoveRestrict(int stage);
 	void Collision(string bulletName, int playerNum);
