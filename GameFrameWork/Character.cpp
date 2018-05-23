@@ -36,13 +36,13 @@ HRESULT Character::Init(float x, float y, int player)
 	}
 	else if (player == 1)
 	{
-		_mControl.insert(make_pair("Attack", VK_LEFT));
-		_mControl.insert(make_pair("Jump", VK_DOWN));
-		_mControl.insert(make_pair("Block", VK_RIGHT));
-		_mControl.insert(make_pair("Up", VK_NUMPAD8));
-		_mControl.insert(make_pair("Down", VK_NUMPAD5));
-		_mControl.insert(make_pair("Left", VK_NUMPAD4));
-		_mControl.insert(make_pair("Right", VK_NUMPAD6));
+		_mControl.insert(make_pair("Attack", VK_NUMPAD4));
+		_mControl.insert(make_pair("Jump", VK_NUMPAD5));
+		_mControl.insert(make_pair("Block", VK_NUMPAD6));
+		_mControl.insert(make_pair("Up", VK_UP));
+		_mControl.insert(make_pair("Down", VK_DOWN));
+		_mControl.insert(make_pair("Left", VK_LEFT));
+		_mControl.insert(make_pair("Right", VK_RIGHT));
 	}
     return S_OK;
 }

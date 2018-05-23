@@ -340,7 +340,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 				posY += -sinf(angle) * 7;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 				shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
-				shadowColRc = RectMakeCenter(posX, posY + 30, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+				shadowColRc = RectMakeCenter(posX, posY + 40, img->GetFrameWidth(), img->GetFreamHeight() / 3);
 
 				if (CAM.GetRC().left + 50 > posX)
 				{

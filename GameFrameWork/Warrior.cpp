@@ -136,15 +136,25 @@ void Warrior::Update()
 	//	점프
 	if (KEYMANAGER.isOnceKeyDown(_mControl["Jump"]))
 	{
-		_jumpPower = 7;
-		_gravity = 0.3f;
-		_startY = _y;
-		if (_state == RIGHT_IDLE || _state == RIGHT_RUN ||
-			_state == RIGHT_UP_RUN || _state == RIGHT_DOWN_RUN)
-			ChangeAnim((int)RIGHT_JUMP, "WarriorRightJump");
-		else if (_state == LEFT_IDLE || _state == LEFT_RUN || 
-			_state == LEFT_UP_RUN || _state == LEFT_DOWN_RUN)
-			ChangeAnim((int)LEFT_JUMP, "WarriorLeftJump");
+		if (_state != RIGHT_HIT_1 && _state != LEFT_HIT_1 &&
+			_state != RIGHT_HIT_2 && _state != LEFT_HIT_2 &&
+			_state != RIGHT_DIE_P1 && _state != LEFT_DIE_P1 &&
+			_state != RIGHT_DIE_P2 && _state != LEFT_DIE_P2 &&
+			_state != RIGHT_DIE_P3 && _state != LEFT_DIE_P3 &&
+			_state != RIGHT_DIE_P4 && _state != LEFT_DIE_P4 &&
+			_state != RIGHT_BLOCK && _state != LEFT_BLOCK &&
+			_state != RIGHT_OTHER && _state != LEFT_OTHER)
+		{
+			_jumpPower = 7;
+			_gravity = 0.3f;
+			_startY = _y;
+			if (_state == RIGHT_IDLE || _state == RIGHT_RUN ||
+				_state == RIGHT_UP_RUN || _state == RIGHT_DOWN_RUN)
+				ChangeAnim((int)RIGHT_JUMP, "WarriorRightJump");
+			else if (_state == LEFT_IDLE || _state == LEFT_RUN ||
+				_state == LEFT_UP_RUN || _state == LEFT_DOWN_RUN)
+				ChangeAnim((int)LEFT_JUMP, "WarriorLeftJump");
+		}
 	}
 
 	//	공격
@@ -152,10 +162,10 @@ void Warrior::Update()
 	{
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN ||
 			_state == RIGHT_JUMP || _state == RIGHT_FALL)
-			BULLET.Shot(_weaponEffectName, _colX + 40, _colY - 20, 0, 0, 0, 0);
+			BULLET.Shot(_weaponEffectName, _colX + 40, _colY - 20, 0, 0, 2, 0);
 		else if (_state == LEFT_IDLE || _state == LEFT_RUN ||
 			_state == LEFT_JUMP || _state == LEFT_FALL)
-			BULLET.Shot(_weaponEffectName, _colX - 40, _colY - 20, 0, 0, 0, 1);
+			BULLET.Shot(_weaponEffectName, _colX - 40, _colY - 20, 0, 0, -2, 1);
 
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN)
 			ChangeAnim((int)RIGHT_ATTACK, "WarriorRightAttack");
@@ -286,6 +296,11 @@ void Warrior::Update()
 	case Warrior::RIGHT_UP_RUN:
 		_y -= _speedY;
 
+		if (KEYMANAGER.isOnceKeyDown(_mControl["Left"]))
+			ChangeAnim((int)LEFT_RUN, "WarriorLeftRun");
+		else if (KEYMANAGER.isOnceKeyDown(_mControl["Right"]))
+			ChangeAnim((int)RIGHT_RUN, "WarriorRightRun");
+
 		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 			_x -= _speedX;
 		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
@@ -297,6 +312,11 @@ void Warrior::Update()
 		break;
 	case Warrior::LEFT_UP_RUN:
 		_y -= _speedY;
+
+		if (KEYMANAGER.isOnceKeyDown(_mControl["Left"]))
+			ChangeAnim((int)LEFT_RUN, "WarriorLeftRun");
+		else if (KEYMANAGER.isOnceKeyDown(_mControl["Right"]))
+			ChangeAnim((int)RIGHT_RUN, "WarriorRightRun");
 
 		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 			_x -= _speedX;
@@ -310,6 +330,11 @@ void Warrior::Update()
 	case Warrior::RIGHT_DOWN_RUN:
 		_y += _speedY;
 
+		if (KEYMANAGER.isOnceKeyDown(_mControl["Left"]))
+			ChangeAnim((int)LEFT_RUN, "WarriorLeftRun");
+		else if (KEYMANAGER.isOnceKeyDown(_mControl["Right"]))
+			ChangeAnim((int)RIGHT_RUN, "WarriorRightRun");
+
 		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 			_x -= _speedX;
 		else if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
@@ -321,6 +346,11 @@ void Warrior::Update()
 		break;
 	case Warrior::LEFT_DOWN_RUN:
 		_y += _speedY;
+
+		if (KEYMANAGER.isOnceKeyDown(_mControl["Left"]))
+			ChangeAnim((int)LEFT_RUN, "WarriorLeftRun");
+		else if (KEYMANAGER.isOnceKeyDown(_mControl["Right"]))
+			ChangeAnim((int)RIGHT_RUN, "WarriorRightRun");
 
 		if (KEYMANAGER.isStayKeyDown(_mControl["Left"]))
 			_x -= _speedX;
@@ -636,7 +666,10 @@ void Warrior::Collision(RECT rc)
 		_state == RIGHT_DIE_P3 || _state == LEFT_DIE_P3 ||
 		_state == RIGHT_DIE_P4 || _state == LEFT_DIE_P4 ||
 		_state == RIGHT_BLOCK || _state == LEFT_BLOCK ||
-		_state == RIGHT_OTHER || _state == LEFT_OTHER || _deadTime > 0) return;
+		_state == RIGHT_OTHER || _state == LEFT_OTHER || 
+		_state == RIGHT_JUMP || _state == LEFT_JUMP ||
+		_state == RIGHT_FALL || _state == LEFT_FALL ||
+		_state == RIGHT_JUMP_ATTACK || _state == LEFT_JUMP_ATTACK || _deadTime > 0) return;
 
 	_hp -= 1;
 
