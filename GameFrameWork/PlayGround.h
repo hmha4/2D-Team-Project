@@ -3,6 +3,11 @@
 #include "Stage1_1.h"
 #include "Stage1_2.h"
 #include "Stage1_3.h"
+#include "Stage2_1.h"
+#include "Stage2_2.h"
+#include "Stage2_3.h"
+#include "Stage2_4.h"
+#include "Stage2_5.h"
 #include "SelectScene.h"
 #include "StartScene.h"
 

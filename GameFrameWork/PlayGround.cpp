@@ -34,6 +34,11 @@ HRESULT PlayGround::Init()
 	SCENEMANAGER.addScene("스테이지1.1", new Stage1_1);
 	SCENEMANAGER.addScene("스테이지1.2", new Stage1_2);
 	SCENEMANAGER.addScene("스테이지1.3", new Stage1_3);
+	SCENEMANAGER.addScene("스테이지2.1", new Stage2_1);
+	SCENEMANAGER.addScene("스테이지2.2", new Stage2_2);
+	SCENEMANAGER.addScene("스테이지2.3", new Stage2_3);
+	SCENEMANAGER.addScene("스테이지2.4", new Stage2_4);
+	SCENEMANAGER.addScene("스테이지2.5", new Stage2_5);
 	SCENEMANAGER.addScene("SelectScene", new SelectScene);
 	SCENEMANAGER.addScene("StartScene", new StartScene);
 

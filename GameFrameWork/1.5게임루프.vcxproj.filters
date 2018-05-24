@@ -61,21 +61,6 @@
     <Filter Include="gameFrameWork\BULLET\Bullet">
       <UniqueIdentifier>{e19a61ea-e688-4d02-9090-ae2248ed1a4d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PlayGround\Stage1-3">
-      <UniqueIdentifier>{85c400d7-4955-4f8f-95ae-97efa023dae9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PlayGround\Stage1-2">
-      <UniqueIdentifier>{f7b85b82-0609-401e-8f35-24f043b04077}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PlayGround\Stage1-1">
-      <UniqueIdentifier>{e6a34ac9-8b7b-4cac-9ba4-d8c9ab98ac2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PlayGround\SelectScene">
-      <UniqueIdentifier>{1b6ae142-d674-44d3-90a1-25dbc941a6b4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PlayGround\StartScene">
-      <UniqueIdentifier>{3b9b3107-7bfd-4cc9-adf7-74505e87711c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="PlayGround\Player">
       <UniqueIdentifier>{8d82e422-6fe4-4dd6-b6b2-de800faf034d}</UniqueIdentifier>
     </Filter>
@@ -87,6 +72,42 @@
     </Filter>
     <Filter Include="PlayGround\Player\Skill">
       <UniqueIdentifier>{c471bd1b-647a-49a5-b96d-fab3b77adeb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage2">
+      <UniqueIdentifier>{3f67a40f-1848-498b-b421-c5c641304c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage2\Stage2-1">
+      <UniqueIdentifier>{3c8ea0bd-cad8-4194-83a8-45baf8fbd58b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage2\Stage2-2">
+      <UniqueIdentifier>{c8d439bc-a960-4016-ad19-f57ef8568b7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage2\Stage2-3">
+      <UniqueIdentifier>{4f121c4d-61d5-4d62-91bc-b7d941083ccd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage2\Stage2-4">
+      <UniqueIdentifier>{5c683f5b-3719-4e96-ad33-c545db11e871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage2\Stage2-5">
+      <UniqueIdentifier>{fa937dac-4b8b-4106-8f4a-a88b761a7935}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage1">
+      <UniqueIdentifier>{b993f0e3-cede-48c9-aaa2-d53c95b3f002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage1\Stage1-1">
+      <UniqueIdentifier>{e6a34ac9-8b7b-4cac-9ba4-d8c9ab98ac2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage1\Stage1-2">
+      <UniqueIdentifier>{f7b85b82-0609-401e-8f35-24f043b04077}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\Stage1\Stage1-3">
+      <UniqueIdentifier>{85c400d7-4955-4f8f-95ae-97efa023dae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\SelectScene">
+      <UniqueIdentifier>{1b6ae142-d674-44d3-90a1-25dbc941a6b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PlayGround\StartScene">
+      <UniqueIdentifier>{3b9b3107-7bfd-4cc9-adf7-74505e87711c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -187,7 +208,7 @@
       <Filter>gameFrameWork\BULLET\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="Stage1_1.h">
-      <Filter>PlayGround\Stage1-1</Filter>
+      <Filter>PlayGround\Stage1\Stage1-1</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>PlayGround\Enemy</Filter>
@@ -232,7 +253,7 @@
       <Filter>PlayGround\Player</Filter>
     </ClInclude>
     <ClInclude Include="Stage1_2.h">
-      <Filter>PlayGround\Stage1-2</Filter>
+      <Filter>PlayGround\Stage1\Stage1-2</Filter>
     </ClInclude>
     <ClInclude Include="ItemBox.h">
       <Filter>PlayGround\Player\Skill</Filter>
@@ -241,7 +262,22 @@
       <Filter>PlayGround\Player\Skill</Filter>
     </ClInclude>
     <ClInclude Include="Stage1_3.h">
-      <Filter>PlayGround\Stage1-3</Filter>
+      <Filter>PlayGround\Stage1\Stage1-3</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_1.h">
+      <Filter>PlayGround\Stage2\Stage2-1</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_2.h">
+      <Filter>PlayGround\Stage2\Stage2-2</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_3.h">
+      <Filter>PlayGround\Stage2\Stage2-3</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_4.h">
+      <Filter>PlayGround\Stage2\Stage2-4</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_5.h">
+      <Filter>PlayGround\Stage2\Stage2-5</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -327,7 +363,7 @@
       <Filter>gameFrameWork\BULLET\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="Stage1_1.cpp">
-      <Filter>PlayGround\Stage1-1</Filter>
+      <Filter>PlayGround\Stage1\Stage1-1</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>PlayGround\Enemy</Filter>
@@ -372,7 +408,7 @@
       <Filter>PlayGround\Player</Filter>
     </ClCompile>
     <ClCompile Include="Stage1_2.cpp">
-      <Filter>PlayGround\Stage1-2</Filter>
+      <Filter>PlayGround\Stage1\Stage1-2</Filter>
     </ClCompile>
     <ClCompile Include="ItemBox.cpp">
       <Filter>PlayGround\Player\Skill</Filter>
@@ -381,7 +417,22 @@
       <Filter>PlayGround\Player\Skill</Filter>
     </ClCompile>
     <ClCompile Include="Stage1_3.cpp">
-      <Filter>PlayGround\Stage1-3</Filter>
+      <Filter>PlayGround\Stage1\Stage1-3</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_1.cpp">
+      <Filter>PlayGround\Stage2\Stage2-1</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_2.cpp">
+      <Filter>PlayGround\Stage2\Stage2-2</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_3.cpp">
+      <Filter>PlayGround\Stage2\Stage2-3</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_4.cpp">
+      <Filter>PlayGround\Stage2\Stage2-4</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_5.cpp">
+      <Filter>PlayGround\Stage2\Stage2-5</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
