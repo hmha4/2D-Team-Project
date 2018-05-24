@@ -288,6 +288,9 @@
     <ClInclude Include="SkillWarrior.h">
       <Filter>PlayGround\Player\Skill</Filter>
     </ClInclude>
+    <ClInclude Include="DragonKnight.h">
+      <Filter>PlayGround\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -451,6 +454,9 @@
     </ClCompile>
     <ClCompile Include="SkillWarrior.cpp">
       <Filter>PlayGround\Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="DragonKnight.cpp">
+      <Filter>PlayGround\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

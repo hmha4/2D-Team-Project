@@ -20,10 +20,19 @@ EnemyManager::EnemyManager()
 	BULLET.BulletSetting("민호검", IMAGEMANAGER.findImage("스켈레톤검"), 30, false, 0, 1);
 	BULLET.BulletShadowSetting("민호검", NULL, RectMake(0, 0, 120, 20), 50);
 
+	BULLET.BulletSetting("용기사검0", IMAGEMANAGER.findImage("스켈레톤검"), 30, false, 0, 1);
+	BULLET.BulletShadowSetting("용기사검0", NULL, RectMake(0, 0, 200, 20), 50);
+
+	IMAGEMANAGER.addFrameImage("용기사검", PathFile("image\\Enemy", "용기사칼").c_str(), 1136, 70, 16, 1, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("용기사검", IMAGEMANAGER.findImage("용기사검"), 30, true, 20, 1);
+	BULLET.BulletShadowSetting("용기사검", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(0, 0, 60, 10), 70);
+
 	for (int i = 0; i < 30; i++)
 	{
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("웨어화살")[i]);
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("스켈검")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("용기사검")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("용기사검0")[i]);
 	}
 }
 
@@ -58,6 +67,13 @@ void EnemyManager::InputEnemy(ENEMYTYPE eType, int enemyNum)
 		case MINO:
 		{
 			Enemy*enemy = new Mino(eType);
+			enemy->Init();
+			enemyVec.push_back(enemy);
+		}
+		break;
+		case DRAGONKNIGHT:
+		{
+			Enemy*enemy = new DragonKnight(eType);
 			enemy->Init();
 			enemyVec.push_back(enemy);
 		}
@@ -165,7 +181,7 @@ void EnemyManager::EnemyCollision()
 				if (IntersectRect(&rc, &emIter->second[i]->getRc(), &BULLET.GetBulletVec("Warrior_Weapon_1_B")[j]->getRc()))
 				{
 					int randomSet = RND.GetFromTo(-10, 11);
-					EFFECTMANAGER.play("에너미피격", GetCenterPos(emIter->second[i]->getColRc()).x + randomSet, GetCenterPos(emIter->second[i]->getColRc()).y + randomSet);
+					EFFECTMANAGER.play("에너미피격", GetCenterPos(emIter->second[i]->getRc()).x + randomSet, GetCenterPos(emIter->second[i]->getRc()).y -40);
 					emIter->second[i]->Damaged();
 					BULLET.Destroy("Warrior_Weapon_1_B", j);
 					break;

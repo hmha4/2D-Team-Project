@@ -32,6 +32,7 @@ HRESULT Enemy::Init(int x, int y, ENEMYSTATE eState)
 	this->eState = eState;
 	isDie = false;
 	isShow = false;
+	isShadow = false;
 	alpha = 0;
 	return S_OK;
 }
@@ -45,6 +46,8 @@ void Enemy::Render()
 		else
 			img->alphaAniRender(getMemDC(), rc.left, rc.top, anim, alpha);
 	}
+	if (isShadow)
+		shadowImg->Render(getMemDC(), shadowRc.left, shadowRc.top);
 	//Rectangle(getMemDC(), shadowRc.left, shadowRc.top, shadowRc.right, shadowRc.bottom);
 }
 

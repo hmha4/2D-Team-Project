@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Stage1_3.h"
-
+#include "Bullet.h"
 
 Stage1_3::Stage1_3()
 {
@@ -26,6 +26,10 @@ HRESULT Stage1_3::Init()
 	_pm->SetPlayerPos(WINSIZEX / 2, -50);
 	_pm->ChangeAnim(10, "RightFall");
 
+	_em = new EnemyManager;
+	_em->Init();
+	_em->InputEnemy(DRAGONKNIGHT, 1);
+
 	fadeOut = IMAGEMANAGER.findImage("페이드아웃");
 	offset = 255;
 	
@@ -44,6 +48,8 @@ void Stage1_3::Render()
 	_pm->Render();
 
 	fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
+
+	Rectangle(getMemDC(), _em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc().left, _em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc().top, _em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc().right, _em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc().bottom);
 }
 
 void Stage1_3::Update()
@@ -57,6 +63,12 @@ void Stage1_3::Update()
 		_pm->Update();
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
+		if (!isOnceShow)
+		{
+			_em->ShowEnemy(DRAGONKNIGHT, WINSIZEX / 2 + 200, WINSIZEY / 2+30 , LEFT_IDLE);
+			isOnceShow = true;
+		}
+
 		offset -= 2;
 		if (offset < 0)
 		{
@@ -68,9 +80,10 @@ void Stage1_3::Update()
 	case FIRST_STAGE:
 	{
 		_pm->Update();
+		_em->Update(_pm);
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
-		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
+		if (_em->GetEnemyNum()==0)
 		{
 			s3State = WIN_STAGE;
 			_pm->ChangeAnim(34, "RightOther");
@@ -96,6 +109,7 @@ void Stage1_3::Update()
 		{
 			offset = 255;
 			SOUNDMANAGER.stop("09Stage1_Boss");
+			SCENEMANAGER.changeScene("스테이지2.1");
 		}
 		_pm->Update();
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);

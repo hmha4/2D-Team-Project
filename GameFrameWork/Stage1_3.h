@@ -1,8 +1,8 @@
 #pragma once
 #include "gameNode.h"
 #include "PlayerManager.h"
-class Stage1_3 :
-	public gameNode
+#include "EnemyManager.h"
+class Stage1_3 :public gameNode
 {
 private:
 	enum STAGE3STATE
@@ -22,10 +22,12 @@ private:
 	int offset;
 
 	PlayerManager * _pm;
+	EnemyManager*_em;
 
 	float _time;
 	float _totalTime;
 
+	bool isOnceShow = false;
 public:
 	Stage1_3();
 	~Stage1_3();

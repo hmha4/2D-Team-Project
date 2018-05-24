@@ -78,6 +78,8 @@ void PlayerManager::Update()
 		Collision("웨어화살", i);
 		Collision("스켈검", i);
 		Collision("민호검", i);
+		Collision("용기사검", i);
+		Collision("용기사검0", i);
 		_player[i]->Update();
 		//플레이어 체력, 레벨 UI로 전달
 		UI->SetLvHp(i, _player[i]->GetHP(), _player[i]->GetWeaponLv());

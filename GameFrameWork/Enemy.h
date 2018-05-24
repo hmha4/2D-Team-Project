@@ -5,7 +5,8 @@ enum ENEMYTYPE
 {
 	WAREWOLF,
 	SKELETON,
-	MINO
+	MINO,
+	DRAGONKNIGHT
 };
 enum ENEMYSTATE
 {
@@ -15,6 +16,8 @@ enum ENEMYSTATE
 	RIGHT_ATTACK,
 	LEFT_ATTACK2,
 	RIGHT_ATTACK2,
+	LEFT_ATTACK3,
+	RIGHT_ATTACK3,
 	LEFT_MOVE,
 	RIGHT_MOVE,
 	LEFT_DIE,
@@ -31,6 +34,9 @@ protected:
 
 	image*img;
 	animation*anim;
+
+	image*shadowImg;
+	bool isShadow;
 
 	RECT rc;
 	RECT shadowRc;
