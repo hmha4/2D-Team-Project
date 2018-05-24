@@ -28,6 +28,9 @@ HRESULT PlayGround::Init()
 	SOUNDMANAGER.addSound("08Stage1_2", "sound\\Stage1_2.mp3", true, true);
 	SOUNDMANAGER.addSound("09Stage1_Boss", "sound\\Stage1_Boss.mp3", true, true);
 	SOUNDMANAGER.addSound("10Victory", "sound\\Victory.mp3", false, false);
+	SOUNDMANAGER.addSound("11Thunder", "sound\\SKILL_THUNDER.mp3", false, false);
+	SOUNDMANAGER.addSound("12Fire", "sound\\SKILL_FIRE.mp3", false, false);
+	SOUNDMANAGER.addSound("13Ice", "sound\\SKILL_ICE.mp3", false, false);
 
 	IMAGEMANAGER.addImage("페이드아웃", PathFile("image", "검은화면").c_str(), 800, 600, false, NULL);
 

@@ -366,11 +366,13 @@ void PlayUI::SetLvHp(int playerNum, int hp, int lv)
 void PlayUI::MakeSkillThunder()
 {
 	_warrior->StartSkill();
+	SOUNDMANAGER.play("11Thunder", 1.0f);
 }
 
 void PlayUI::MakeSkillIce()
 {
 	_ice->StartSkill(_player1.x + 70, _player1.y + 90);
+	SOUNDMANAGER.play("13Ice", 1.0f);
 }
 
 void PlayUI::MakeSkillFire()
@@ -381,19 +383,23 @@ void PlayUI::MakeSkillFire()
 		float angle = PI / 4;
 		_fire[ii]->StartSkill(_player1.x - 23 + cosf(angle * ii) * distance, _player1.y + 75 - sinf(angle * ii) * distance / 4);
 	}
+	SOUNDMANAGER.play("12Fire", 1.0f);
 }
 
-void PlayUI::SetPlayerPos(int playerNum, float x, float y)
+void PlayUI::SetPlayerPos(int playerNum, float x, float y, int state)
 {
+	//State가 2,3,4,5,6,7 이 아니면 스킬 사용 불가
 	if (playerNum == 0)
 	{
 		_player1.x = x;
 		_player1.y = y;
+		_player1.state = state;
 	}
 	else
 	{
 		_player2.x = x;
 		_player2.y = y;
+		_player2.state = state;
 	}
 }
 

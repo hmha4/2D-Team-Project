@@ -8,6 +8,7 @@ struct tagPlayerInfo
 	int		level;
 	int		skill;
 	int		score;
+	int		state;			//State가 2,3,4,5,6,7 이 아니면 스킬 사용 불가
 	float	x;
 	float	y;
 };
@@ -68,7 +69,7 @@ public:
 	void MakeSkillFire();
 
 	void SetLvHp(int playerNum, int hp, int lv);
-	void SetPlayerPos(int playerNum, float x, float y);
+	void SetPlayerPos(int playerNum, float x, float y, int state);
 	void SetPlayerClass(int playerNum, int job);
 
 	void SetLinkItemBox1(ItemBox* address) { _itemBox[0] = address; }

@@ -81,7 +81,7 @@ void PlayerManager::Update()
 		_player[i]->Update();
 		//플레이어 체력, 레벨 UI로 전달
 		UI->SetLvHp(i, _player[i]->GetHP(), _player[i]->GetWeaponLv());
-		UI->SetPlayerPos(i, _player[i]->GetX(), _player[i]->GetY());
+		UI->SetPlayerPos(i, _player[i]->GetX(), _player[i]->GetY(), (int)_player[i]->GetState());
 
 		_itemBox[i]->Update(_player[i]->GetX(), _player[i]->GetY());
 		//_skill[i]->Update(_player[i]->GetX(), _player[i]->GetY());
