@@ -14,6 +14,8 @@ SelectScene::~SelectScene()
 HRESULT SelectScene::Init()
 {
 	CAM.SetPos(0, 0);
+	ZORDER.Release();
+
 	//캐릭터
 	IMAGEMANAGER.addImage("SelectSceneBackground", PathFile("image\\Scene", "SelectScene").c_str(), 800, 500, false, RGB(0, 0, 0));
 	IMAGEMANAGER.addFrameImage("SelectBowman", PathFile("image\\Scene", "SelectBowman").c_str(), 270, 212, 3, 1, true, RGB(255, 0, 255));
@@ -154,7 +156,7 @@ void SelectScene::Update()
 				if ((_sel1Index == 1 || _sel1Index == 2))
 				{
 					DATABASE.SaveData("1PCharacter", _sel1Index);
-					SCENEMANAGER.changeScene("스테이지2.2");
+					SCENEMANAGER.changeScene("스테이지2.1");
 				}
 			}
 			else if (_playerNum == 1)

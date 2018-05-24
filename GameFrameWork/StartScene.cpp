@@ -14,6 +14,7 @@ StartScene::~StartScene()
 HRESULT StartScene::Init()
 {
 	CAM.SetPos(0, 0);
+	ZORDER.Release();
 
 	IMAGEMANAGER.addFrameImage("StartScene_01", PathFile("image\\Scene", "StartScene_01").c_str(), 800, 500, 1, 1, false, RGB(255, 0, 255));
 	IMAGEMANAGER.addFrameImage("StartScene_02", PathFile("image\\Scene", "StartScene_02").c_str(), 8800, 500, 11, 1, false, RGB(255, 0, 255));

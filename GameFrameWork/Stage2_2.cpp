@@ -81,7 +81,7 @@ void Stage2_2::Update()
 		_pm->Update();
 		CAM.Update(2438 - WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
-		if (_pm->GetPlayer1()->GetX() > 2438 - 150 && _pm->GetPlayer1()->GetX() < 2438 - 100 &&
+		if (_pm->GetPlayer1()->GetX() > 2438 - 250 && _pm->GetPlayer1()->GetX() < 2438 - 150 &&
 			_pm->GetPlayer1()->GetY() <= WINSIZEY / 2 - 50)
 		{
 			s2State = NEXT_STAGE;
@@ -93,6 +93,7 @@ void Stage2_2::Update()
 		if (offset > 255)
 		{
 			offset = 255;
+			SCENEMANAGER.changeScene("스테이지2.3");
 			SOUNDMANAGER.stop("15Stage2_2");
 			break;
 		}
@@ -103,4 +104,6 @@ void Stage2_2::Update()
 
 void Stage2_2::Release()
 {
+	_pm->Release();
+	SAFE_DELETE(_pm);
 }
