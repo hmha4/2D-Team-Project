@@ -38,6 +38,12 @@ HRESULT StartScene::Init()
 	
 	_buttonIndex = 0;
 
+	SOUNDMANAGER.play("00StartScene01", 1.0f);
+
+	_fade = IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô");
+	_offSet = 0;
+	_changeScene = false;
+
 	return S_OK;
 }
 
@@ -51,6 +57,8 @@ void StartScene::Render()
 			_button[i].img->alphaFrameRender(getMemDC(), _button[i].rc.left, _button[i].rc.top,
 				0, _button[i].frameY, _button[i].alpha);
 	}
+
+	_fade->alphaRender(getMemDC(), CAM.GetRC().left, CAM.GetRC().top, _offSet);
 }
 
 void StartScene::Update()
@@ -65,9 +73,16 @@ void StartScene::Update()
 		break;
 	case StartScene::STATE_02:
 		if (KEYMANAGER.isOnceKeyDown(VK_RETURN))
+		{
+			SOUNDMANAGER.stop("00StartScene01");
+			SOUNDMANAGER.play("01StartScene02", 0.3f);
 			ChangeAnim(STATE_03, "StartScene_03");
+		}
 		if (!_anim->isPlay())
+		{
+			SOUNDMANAGER.play("01StartScene02", 0.3f);
 			ChangeAnim(STATE_03, "StartScene_03");
+		}
 		break;
 	case StartScene::STATE_03:
 		if (KEYMANAGER.isOnceKeyDown(VK_RETURN))
@@ -77,17 +92,24 @@ void StartScene::Update()
 		break;
 	case StartScene::STATE_04:
 		if (KEYMANAGER.isOnceKeyDown(VK_RETURN))
+		{
+			SOUNDMANAGER.stop("01StartScene02");
+			SOUNDMANAGER.play("02StartScene03", 1.0f);
+			SOUNDMANAGER.play("05StartScene04", 0.3f);
 			ChangeAnim(STATE_05, "StartScene_05");
+		}
 		break;
 	case StartScene::STATE_05:
 		if (KEYMANAGER.isOnceKeyDown(VK_DOWN))
 		{
+			SOUNDMANAGER.play("03StartScene_Button", 1.0f);
 			_button[_buttonIndex].alpha = 255;
 			_buttonIndex++;
 			if (_buttonIndex > 1) _buttonIndex = 0;
 		}
 		else if (KEYMANAGER.isOnceKeyDown(VK_UP))
 		{
+			SOUNDMANAGER.play("03StartScene_Button", 1.0f);
 			_button[_buttonIndex].alpha = 255;
 			_buttonIndex--;
 			if (_buttonIndex < 0) _buttonIndex = 1;
@@ -95,10 +117,10 @@ void StartScene::Update()
 
 		if (KEYMANAGER.isOnceKeyDown(VK_RETURN))
 		{
-			DATABASE.SaveData("1P2P", _buttonIndex);
-			SCENEMANAGER.changeScene("SelectScene");
+			SOUNDMANAGER.play("04ButtonSelect", 1.0f);
+			_changeScene = true;
+			
 		}
-
 
 		_buttonCount += TIMEMANAGER.getElapsedTime();
 		if (_buttonCount >= 0.02)
@@ -107,6 +129,18 @@ void StartScene::Update()
 			if(_button[_buttonIndex].alpha == 255)
 				_button[_buttonIndex].alpha = 0;
 			else _button[_buttonIndex].alpha = 255;
+		}
+
+		if (_changeScene)
+		{
+			_offSet += 2;
+			if (_offSet > 255)
+			{
+				_offSet = 255;
+				DATABASE.SaveData("1P2P", _buttonIndex);
+				SCENEMANAGER.changeScene("SelectScene");
+				SOUNDMANAGER.stop("05StartScene04");
+			}
 		}
 
 		break;

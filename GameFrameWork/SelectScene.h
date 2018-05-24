@@ -27,7 +27,15 @@ private:
 
 	} SELECT;
 
+	enum STATE
+	{
+		FIRST,
+		SECOND,
+		LAST
+	};
 private:
+	STATE _state;
+
 	SELECT character[5];
 	SELECT _sel[2];
 
@@ -35,6 +43,10 @@ private:
 	int _sel2Index;
 
 	int _playerNum;
+
+	image * _fade;
+	int _offSet;
+	bool _changeScene;
 public:
 	SelectScene();
 	~SelectScene();

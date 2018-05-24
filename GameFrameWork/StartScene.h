@@ -39,6 +39,10 @@ private:
 	int _buttonIndex;
 	tagButton _button[2];
 	float _buttonCount;
+
+	image * _fade;
+	int _offSet;
+	bool _changeScene;
 public:
 	StartScene();
 	~StartScene();

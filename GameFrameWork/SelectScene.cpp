@@ -47,6 +47,13 @@ HRESULT SelectScene::Init()
 		_sel[1] = SELECT("Select1P2P", character[_sel2Index].x, character[_sel2Index].y, 1, 0, true);
 	}
 
+	_fade = IMAGEMANAGER.findImage("페이드아웃");
+	_offSet = 255;
+	_changeScene = false;
+
+	_state = FIRST;
+	SOUNDMANAGER.play("06PlayerSelect", 0.3f);
+
 	return S_OK;
 }
 
@@ -63,76 +70,107 @@ void SelectScene::Render()
 
 	for (int i = 0; i < _playerNum + 1; i++)
 		_sel[i].img->frameRender(getMemDC(), _sel[i].rc.left, _sel[i].rc.top, _sel[i].frameX, _sel[i].frameY);
+
+	_fade->alphaRender(getMemDC(), CAM.GetRC().left, CAM.GetRC().top, _offSet);
 }
 
 void SelectScene::Update()
 {
-	if (_playerNum == 0 || _playerNum == 1)
+	switch (_state)
 	{
-		if (KEYMANAGER.isOnceKeyDown('J'))
+	case SelectScene::FIRST:
+		_offSet -= 2;
+		if (_offSet < 0)
 		{
-			if (_sel1Index < 4)
-				_sel1Index++;
-			if (_sel2Index == _sel1Index)
-				_sel1Index++;
-			if (_sel1Index > 4)
-				_sel1Index -= 2;
-			ChangeCharacter(0, _sel1Index);
+			_state = SECOND;
+			_offSet = 0;
 		}
-		else if (KEYMANAGER.isOnceKeyDown('G'))
+		break;
+	case SelectScene::SECOND:
+		if (_playerNum == 0 || _playerNum == 1)
 		{
-			if (_sel1Index > 0)
-				_sel1Index--;
-			if (_sel2Index == _sel1Index)
-				_sel1Index--;
-			if (_sel1Index < 0)
-				_sel1Index += 2;
-			ChangeCharacter(0, _sel1Index);
-		}
-	}
-	if (_playerNum == 1)
-	{
-		if (KEYMANAGER.isOnceKeyDown(VK_NUMPAD6))
-		{
-			if (_sel2Index < 4)
-				_sel2Index++;
-			if (_sel2Index == _sel1Index)
-				_sel2Index++;
-			if (_sel2Index > 4)
-				_sel2Index -= 2;
-			ChangeCharacter(1, _sel2Index);
-		}
-		else if (KEYMANAGER.isOnceKeyDown(VK_NUMPAD4))
-		{
-			if (_sel2Index > 0)
-				_sel2Index--;
-			if (_sel2Index == _sel1Index)
-				_sel2Index--;
-			if (_sel2Index < 0)
-				_sel2Index += 2;
-			ChangeCharacter(1, _sel2Index);
-		}
-	}
-	if (KEYMANAGER.isOnceKeyDown(VK_RETURN))
-	{
-		if (_playerNum == 0)
-		{
-			if ((_sel1Index == 1 || _sel1Index == 2))
+			if (KEYMANAGER.isOnceKeyDown('J'))
 			{
-				DATABASE.SaveData("1PCharacter", _sel1Index);
-				SCENEMANAGER.changeScene("스테이지1.2");
+				if (_sel1Index < 4)
+					_sel1Index++;
+				if (_sel2Index == _sel1Index)
+					_sel1Index++;
+				if (_sel1Index > 4)
+					_sel1Index -= 2;
+				ChangeCharacter(0, _sel1Index);
+				SOUNDMANAGER.play("03StartScene_Button", 1.0f);
+			}
+			else if (KEYMANAGER.isOnceKeyDown('G'))
+			{
+				if (_sel1Index > 0)
+					_sel1Index--;
+				if (_sel2Index == _sel1Index)
+					_sel1Index--;
+				if (_sel1Index < 0)
+					_sel1Index += 2;
+				ChangeCharacter(0, _sel1Index);
+				SOUNDMANAGER.play("03StartScene_Button", 1.0f);
 			}
 		}
-		else if (_playerNum == 1)
+		if (_playerNum == 1)
 		{
-			if ((_sel1Index == 1 || _sel1Index == 2) && (_sel2Index == 1 || _sel2Index == 2))
+			if (KEYMANAGER.isOnceKeyDown(VK_NUMPAD6))
 			{
-				DATABASE.SaveData("1PCharacter", _sel1Index);
-				DATABASE.SaveData("2PCharacter", _sel2Index);
-				SCENEMANAGER.changeScene("스테이지1.2");
+				if (_sel2Index < 4)
+					_sel2Index++;
+				if (_sel2Index == _sel1Index)
+					_sel2Index++;
+				if (_sel2Index > 4)
+					_sel2Index -= 2;
+				ChangeCharacter(1, _sel2Index);
+				SOUNDMANAGER.play("03StartScene_Button", 1.0f);
+			}
+			else if (KEYMANAGER.isOnceKeyDown(VK_NUMPAD4))
+			{
+				if (_sel2Index > 0)
+					_sel2Index--;
+				if (_sel2Index == _sel1Index)
+					_sel2Index--;
+				if (_sel2Index < 0)
+					_sel2Index += 2;
+				ChangeCharacter(1, _sel2Index);
+				SOUNDMANAGER.play("03StartScene_Button", 1.0f);
 			}
 		}
+		if (KEYMANAGER.isOnceKeyDown(VK_RETURN))
+		{
+			SOUNDMANAGER.play("04ButtonSelect", 1.0f);
+			_state = LAST;
+		}
+		break;
+	case SelectScene::LAST:
+		_offSet += 2;
+		if (_offSet > 255)
+		{
+			SOUNDMANAGER.stop("06PlayerSelect");
+			_offSet = 255;
+			if (_playerNum == 0)
+			{
+				if ((_sel1Index == 1 || _sel1Index == 2))
+				{
+					DATABASE.SaveData("1PCharacter", _sel1Index);
+					SCENEMANAGER.changeScene("스테이지1.1");
+				}
+			}
+			else if (_playerNum == 1)
+			{
+				if ((_sel1Index == 1 || _sel1Index == 2) && (_sel2Index == 1 || _sel2Index == 2))
+				{
+					DATABASE.SaveData("1PCharacter", _sel1Index);
+					DATABASE.SaveData("2PCharacter", _sel2Index);
+					SCENEMANAGER.changeScene("스테이지1.1");
+				}
+			}
+		}
+		
+		break;
 	}
+	
 
 
 	CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 0, false);

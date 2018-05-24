@@ -4,7 +4,6 @@
 
 Stage1_1::Stage1_1()
 {
-	IMAGEMANAGER.addImage("페이드아웃", PathFile("image", "검은화면").c_str(), 800, 600, false, NULL);
 	IMAGEMANAGER.addImage("1.1앞배경", PathFile("image", "1-1앞배경").c_str(), 3652, 400, true, RGB(255, 0, 255));
 	IMAGEMANAGER.addImage("1.1뒷배경", PathFile("image", "1-1뒷배경").c_str(), 3652, 400, true, RGB(255, 0, 255));
 	IMAGEMANAGER.addImage("1.1배경오브젝트", PathFile("image", "1-1제트오더").c_str(), 2864, 80, true, RGB(255, 0, 255));
@@ -39,6 +38,8 @@ HRESULT Stage1_1::Init()
 	offset = 255;
 	s1State = OPENNING;
 	changeView = false;
+
+	SOUNDMANAGER.play("07Stage1_1", 0.3f);
 
 	return S_OK;
 }
@@ -165,6 +166,7 @@ void Stage1_1::Update()
 			offset += 2;
 			if (offset > 255)
 			{
+				SOUNDMANAGER.stop("07Stage1_1");
 				SCENEMANAGER.changeScene("스테이지1.2");
 				offset = 0;
 			}

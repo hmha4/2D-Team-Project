@@ -4,7 +4,6 @@
 
 Stage1_3::Stage1_3()
 {
-	IMAGEMANAGER.addImage("페이드아웃", PathFile("image", "검은화면").c_str(), 800, 600, false, NULL);
 	IMAGEMANAGER.addImage("1.3배경", PathFile("image", "1-3배경").c_str(), 800, 400, true, NULL);
 }
 
@@ -32,6 +31,8 @@ HRESULT Stage1_3::Init()
 	
 	_time = 0;
 	_totalTime = 0;
+
+	SOUNDMANAGER.play("09Stage1_Boss", 0.3f);
 
 	return S_OK;
 }
@@ -73,6 +74,7 @@ void Stage1_3::Update()
 		{
 			s3State = WIN_STAGE;
 			_pm->ChangeAnim(34, "RightOther");
+			SOUNDMANAGER.play("10Victory");
 		}
 	}
 	break;
@@ -93,6 +95,7 @@ void Stage1_3::Update()
 		if (offset > 255)
 		{
 			offset = 255;
+			SOUNDMANAGER.stop("09Stage1_Boss");
 		}
 		_pm->Update();
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
