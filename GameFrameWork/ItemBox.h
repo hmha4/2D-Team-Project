@@ -16,8 +16,9 @@ typedef struct tagItemBox
 	{
 		type = (ITEM_TYPE)_type;
 		angle = (PI / 2) * (float)_type;
-		stock = 0;
+		gauge = 0;
 		select = false;
+		fullCharge = false;
 	}
 
 	enum ITEM_TYPE
@@ -30,9 +31,10 @@ typedef struct tagItemBox
 	
 	RECT		rc;
 	ITEM_TYPE	type;
-	int			stock;
+	float		gauge;
 	float		angle;
 	BOOL		select;
+	BOOL		fullCharge;
 	image*		img;
 
 }BOX;

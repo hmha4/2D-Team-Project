@@ -1,17 +1,21 @@
 #include "stdafx.h"
 #include "PlayUI.h"
 #include "ItemBox.h"
+#include "SkillThunder.h"
+#include "SkillWarrior.h"
+#include "SkillIce.h"
+#include "SkillFire.h"
 
 PlayUI::PlayUI()
+	:_insertCoinCount(0)
 {
-	_fighterFace = IMAGEMANAGER.addImage("UI_FIGHTER_FACE", PathFile("image", "UI_FIGHTER_FACE").c_str(), 80, 60, true, RGB(255, 0, 255));
-	_fighterEquip = IMAGEMANAGER.addFrameImage("UI_FIGHTER_EQUIP", PathFile("image", "UI_FIGHTER_EQUIP").c_str(), 240, 120, 5, 2, false, NULL);
-	_brick = IMAGEMANAGER.addImage("UI_BACKGROUND", PathFile("image", "UI_BACKGROUND").c_str(), 1047, 100, false, NULL);
-	_UItitle = IMAGEMANAGER.addImage("UI_TITLE", PathFile("image", "UI_TITLE").c_str(), 155, 90, true, RGB(255,0,255));
-	_hpGauge = IMAGEMANAGER.addImage("UI_HP", PathFile("image", "UI_HP").c_str(), 180, 15, true, RGB(255, 0, 255));
-	_player1.level = 1;
-	_player1.score = 12480;
-	_player1.job = 0;
+	_fighterFace = IMAGEMANAGER.addImage("UI_FIGHTER_FACE", PathFile("image\\UI", "UI_FIGHTER_FACE").c_str(), 80, 60, true, RGB(255, 0, 255));
+	_fighterEquip = IMAGEMANAGER.addFrameImage("UI_FIGHTER_EQUIP", PathFile("image\\UI", "UI_FIGHTER_EQUIP").c_str(), 240, 120, 5, 2, false, NULL);
+	_wizardFace = IMAGEMANAGER.addImage("UI_WIZARD_FACE", PathFile("image\\UI", "UI_WIZARD_FACE").c_str(), 80, 60, true, RGB(255, 0, 255));
+	_wizardEquip = IMAGEMANAGER.addFrameImage("UI_WIZARD_EQUIP", PathFile("image\\UI", "UI_WIZARD_EQUIP").c_str(), 240, 120, 5, 2, false, NULL);
+	_brick = IMAGEMANAGER.addImage("UI_BACKGROUND", PathFile("image\\UI", "UI_BACKGROUND").c_str(), 1047, 100, false, NULL);
+	_UItitle = IMAGEMANAGER.addImage("UI_TITLE", PathFile("image\\UI", "UI_TITLE").c_str(), 155, 90, true, RGB(255,0,255));
+	_hpGauge = IMAGEMANAGER.addImage("UI_HP", PathFile("image\\UI", "UI_HP").c_str(), 180, 15, true, RGB(255, 0, 255));
 }
 
 
@@ -19,10 +23,29 @@ PlayUI::~PlayUI()
 {
 }
 
-HRESULT PlayUI::Init()
+HRESULT PlayUI::Init(int playerNum)
 {
-	_itemBox[0] = new ItemBox;
-	_itemBox[1] = new ItemBox;
+	_playerNum = playerNum;
+
+	if (_playerNum == 0) _itemBox[0] = new ItemBox;
+	else
+	{
+		_itemBox[0] = new ItemBox;
+		_itemBox[1] = new ItemBox;
+	}
+
+	//스킬 이펙트 클래스 상속
+	_warrior = new SkillWarrior;
+	ZORDER.InputObj(_warrior);
+
+	_ice = new SkillIce;
+	ZORDER.InputObj(_ice);
+
+	for (int ii = 0; ii < 8; ++ii)
+	{
+		_fire[ii] = new SkillFire;
+		ZORDER.InputObj(_fire[ii]);
+	}
 
 	return S_OK;
 }
@@ -35,13 +58,35 @@ void PlayUI::Release()
 
 void PlayUI::Update()
 {
+	if (KEYMANAGER.isOnceKeyDown('E'))	MakeSkillThunder();
+	if (KEYMANAGER.isOnceKeyDown('R'))	MakeSkillFire();
+	if (KEYMANAGER.isOnceKeyDown('T'))	MakeSkillIce();
+
+	//UI Z-ORDER를 위한 렉트 업데이트
 	_zRC = RectMake(CAM.GetX(), CAM.GetY() + 600, 800, 100);
+
+	//스킬 클래스 업데이트
+	_warrior->Update();
+	_ice->Update();
+	for (int ii = 0; ii < 8; ++ii)
+	{
+		_fire[ii]->Update();
+	}
 }
 
 void PlayUI::Render()
 {
 	_brick->Render(getMemDC(), CAM.GetX(), CAM.GetY() + 400);
-	MakeTable(getMemDC(), 20, 0, _player1, 0);
+	if (_playerNum == 0)
+	{
+		MakeTable(getMemDC(), 20, 0, _player1, 0);
+		DrawInserCoin(getMemDC());
+	}
+	else
+	{
+		MakeTable(getMemDC(), 20, 0, _player1, 0);
+		MakeTable(getMemDC(), 420 + _UItitle->GetWidth() / 2, 0, _player2, 0);
+	}
 
 	_UItitle->Render(getMemDC(), CAM.GetX() + 400 - (_UItitle->GetWidth() / 2), CAM.GetY() + 450 - (_UItitle->GetHeight() / 2));
 }
@@ -73,19 +118,35 @@ void PlayUI::MakeTable(HDC hdc, int x, int y, tagPlayerInfo player, int itemNum)
 	Rectangle(hdc, face.right, p1.top, p1.right, p1.bottom);
 
 	//플레이어 얼굴 이미지 출력
-	IMAGEMANAGER.findImage("UI_FIGHTER_FACE")->Render(hdc, p1.left, p1.top);
-	//플레이어 장비 이미지 출력
-	for (int ii = 0; ii < 2; ++ii)
+	if (player.job == 1)
 	{
-		_fighterEquip->frameRender(hdc
-			, equip[ii].left
-			, equip[ii].bottom - _fighterEquip->GetFreamHeight()
-			, _player1.level, ii);
+		_wizardFace->Render(hdc, p1.left, p1.top);
+		for (int ii = 0; ii < 2; ++ii)
+		{
+			_wizardEquip->frameRender(hdc
+				, equip[ii].left
+				, equip[ii].bottom - _wizardEquip->GetFreamHeight()
+				, _player1.level - 1, ii);
+		}
 	}
+	else 
+	{ 
+		_fighterFace->Render(hdc, p1.left, p1.top);
+		for (int ii = 0; ii < 2; ++ii)
+		{
+			_fighterEquip->frameRender(hdc
+				, equip[ii].left
+				, equip[ii].bottom - _fighterEquip->GetFreamHeight()
+				, _player1.level - 1, ii);
+		}
+	}
+	//플레이어 장비 이미지 출력
+
 	//선택된 스킬 출력
 	_itemBox[itemNum]->DrawSelectItem(hdc, (equip[2].left + equipTitle[2].left) / 2, (equip[2].top + equip[2].bottom) / 2);
 
 	//HP 게이지 출력
+	DrawHPgauge(hdc, hpGauge.left - 3, hpGauge.top + 2, player.hp);
 	_hpGauge->Render(hdc, hpGauge.left - 3, hpGauge.top + 2);
 
 	//렉트 배경 투명으로 다시 변경
@@ -134,8 +195,8 @@ void PlayUI::DrawClass(HDC hdc, int x, int y, tagPlayerInfo player)
 	SetTextColor(hdc, RGB(255, 255, 255));
 
 	string tempClass;
-	if (player.job == 0) tempClass = "FIGHTER";
-	else tempClass = "MAGICIAN";
+	if (player.job == 1) tempClass = "MAGICIAN";
+	else tempClass = "FIGHTER";
 
 	const char* drawClass = tempClass.c_str();
 
@@ -197,6 +258,30 @@ void PlayUI::DrawHP(HDC hdc, int x, int y)
 	DeleteObject(font);
 }
 
+void PlayUI::DrawHPgauge(HDC hdc, int x, int y, int hp)
+{
+	RECT hpRC;
+	RECT blackRC;
+	HBRUSH brush, oldBrush;
+
+	int red = (10 - hp) * 25;
+	int green = hp * 25;
+
+	hpRC = RectMake(x, y, 180, 15);
+	blackRC = RectMake(x + 180 - (10 - hp) * 18, y, (10 - hp) * 18, 15);
+
+	brush = CreateSolidBrush(RGB(red, green, 0));
+	oldBrush = (HBRUSH)SelectObject(getMemDC(), brush);
+
+	Rectangle(getMemDC(), hpRC.left, hpRC.top, hpRC.right, hpRC.bottom);
+
+	SelectObject(getMemDC(), oldBrush);
+	DeleteObject(brush);
+
+	SelectObject(hdc, GetStockObject(BLACK_BRUSH));
+	Rectangle(getMemDC(), blackRC.left, blackRC.top, blackRC.right, blackRC.bottom);
+}
+
 void PlayUI::DrawLevel(HDC hdc, int x, int y, int level)
 {
 	//L글자 출력
@@ -224,7 +309,100 @@ void PlayUI::DrawLevel(HDC hdc, int x, int y, int level)
 	DeleteObject(font);
 }
 
-void PlayUI::DrawItemStock(HDC hdc, int x, int y, int stock)
+void PlayUI::DrawSkillGauge(HDC hdc, int x, int y, float gauge)
 {
+	
+}
+
+void PlayUI::DrawInserCoin(HDC hdc)
+{
+	_insertCoinCount++;
+
+	if (_insertCoinCount > 30)
+	{
+		_insertCoinCount = 0;
+		_insertCoinHide++;
+	}
+
+	if (_insertCoinHide > 1) _insertCoinHide = 0;
+
+	int left = CAM.GetX() + 635;
+	int top = CAM.GetY() + 430;
+
+	//코인 문구 입력
+	HFONT font, oldFont;
+
+	font = CreateFont(33, 0, 0, 0, 500, 0, 0, 0, DEFAULT_CHARSET,
+		OUT_STRING_PRECIS, CLIP_CHARACTER_PRECIS, PROOF_QUALITY,
+		DEFAULT_PITCH | FF_SWISS, TEXT("Algerian"));
+
+	oldFont = (HFONT)SelectObject(getMemDC(), font);
+	SetBkMode(getMemDC(), TRANSPARENT);
+	SetTextColor(hdc, RGB(255, 255, 255));
+
+	string coin = "Please Insert Coin";
+	const char* drawCoin = coin.c_str();
+
+	if (_insertCoinHide == 0)	TextOut(hdc, left, top, drawCoin, strlen(drawCoin));
+
+	SelectObject(hdc, oldFont);
+	DeleteObject(font);
+}
+
+void PlayUI::SetLvHp(int playerNum, int hp, int lv)
+{
+	if (playerNum == 0)
+	{
+		_player1.hp = hp;
+		_player1.level = lv;
+	}
+	else
+	{
+		_player2.hp = hp;
+		_player2.level = lv;
+	}
+}
+
+void PlayUI::MakeSkillThunder()
+{
+	_warrior->StartSkill();
+}
+
+void PlayUI::MakeSkillIce()
+{
+	_ice->StartSkill(_player1.x + 70, _player1.y + 90);
+}
+
+void PlayUI::MakeSkillFire()
+{
+	for (int ii = 0; ii < 8; ++ii)
+	{
+		int distance = 100;
+		float angle = PI / 4;
+		_fire[ii]->StartSkill(_player1.x - 23 + cosf(angle * ii) * distance, _player1.y + 75 - sinf(angle * ii) * distance / 4);
+	}
+}
+
+void PlayUI::SetPlayerPos(int playerNum, float x, float y)
+{
+	if (playerNum == 0)
+	{
+		_player1.x = x;
+		_player1.y = y;
+	}
+	else
+	{
+		_player2.x = x;
+		_player2.y = y;
+	}
+}
+
+void PlayUI::SetPlayerClass(int playerNum, int job)
+{
+	if (playerNum == 0)
+	{
+		_player1.job = job;
+	}
+	else _player2.job = job;
 }
 

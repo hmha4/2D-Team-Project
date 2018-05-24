@@ -22,7 +22,7 @@
     <ProjectGuid>{D53A2FE4-48DB-40FF-8117-6C155B169129}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>My15게임루프</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -168,7 +168,6 @@
     <ClInclude Include="mymecro.h" />
     <ClInclude Include="PixelCollision.h" />
     <ClInclude Include="PlayerManager.h" />
-    <ClInclude Include="PlayerSkill.h" />
     <ClInclude Include="PlayGround.h" />
     <ClInclude Include="PlayUI.h" />
     <ClInclude Include="RandomManager.h" />
@@ -177,6 +176,10 @@
     <ClInclude Include="SelectScene.h" />
     <ClInclude Include="SingleTonBase.h" />
     <ClInclude Include="skeleton.h" />
+    <ClInclude Include="SkillFire.h" />
+    <ClInclude Include="SkillIce.h" />
+    <ClInclude Include="SkillThunder.h" />
+    <ClInclude Include="SkillWarrior.h" />
     <ClInclude Include="soundManager.h" />
     <ClInclude Include="Stage1_1.h" />
     <ClInclude Include="Stage1_2.h" />
@@ -224,13 +227,16 @@
     <ClCompile Include="Mino.cpp" />
     <ClCompile Include="PixelCollision.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
-    <ClCompile Include="PlayerSkill.cpp" />
     <ClCompile Include="PlayGround.cpp" />
     <ClCompile Include="PlayUI.cpp" />
     <ClCompile Include="RandomManager.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="SelectScene.cpp" />
     <ClCompile Include="skeleton.cpp" />
+    <ClCompile Include="SkillFire.cpp" />
+    <ClCompile Include="SkillIce.cpp" />
+    <ClCompile Include="SkillThunder.cpp" />
+    <ClCompile Include="SkillWarrior.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="Stage1_1.cpp" />
     <ClCompile Include="Stage1_2.cpp" />

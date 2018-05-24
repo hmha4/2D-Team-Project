@@ -258,9 +258,6 @@
     <ClInclude Include="ItemBox.h">
       <Filter>PlayGround\Player\Skill</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerSkill.h">
-      <Filter>PlayGround\Player\Skill</Filter>
-    </ClInclude>
     <ClInclude Include="Stage1_3.h">
       <Filter>PlayGround\Stage1\Stage1-3</Filter>
     </ClInclude>
@@ -278,6 +275,18 @@
     </ClInclude>
     <ClInclude Include="Stage2_5.h">
       <Filter>PlayGround\Stage2\Stage2-5</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillFire.h">
+      <Filter>PlayGround\Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillIce.h">
+      <Filter>PlayGround\Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillThunder.h">
+      <Filter>PlayGround\Player\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillWarrior.h">
+      <Filter>PlayGround\Player\Skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -413,9 +422,6 @@
     <ClCompile Include="ItemBox.cpp">
       <Filter>PlayGround\Player\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerSkill.cpp">
-      <Filter>PlayGround\Player\Skill</Filter>
-    </ClCompile>
     <ClCompile Include="Stage1_3.cpp">
       <Filter>PlayGround\Stage1\Stage1-3</Filter>
     </ClCompile>
@@ -433,6 +439,18 @@
     </ClCompile>
     <ClCompile Include="Stage2_5.cpp">
       <Filter>PlayGround\Stage2\Stage2-5</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillFire.cpp">
+      <Filter>PlayGround\Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillIce.cpp">
+      <Filter>PlayGround\Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillThunder.cpp">
+      <Filter>PlayGround\Player\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillWarrior.cpp">
+      <Filter>PlayGround\Player\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

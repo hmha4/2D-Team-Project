@@ -4,7 +4,6 @@
 #include "Magician.h"
 #include "PlayUI.h"
 #include "ItemBox.h"
-#include "PlayerSkill.h"
 
 class PlayerManager :
 	public gameNode
@@ -33,7 +32,6 @@ private:
 
 	PlayUI*			UI;					//	UI
 	ItemBox*		_itemBox[2];		//  아이템 박스
-	PlayerSkill*	_skill[2];			//  스킬
 
 public:
 	PlayerManager();

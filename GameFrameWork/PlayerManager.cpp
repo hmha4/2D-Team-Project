@@ -34,6 +34,12 @@ HRESULT PlayerManager::Init()
 		_itemBox[1] = new ItemBox;
 	}
 
+	UI = new PlayUI;
+	UI->Init((int)_playerNum);
+	UI->SetLinkItemBox1(_itemBox[0]);
+	UI->SetLinkItemBox2(_itemBox[1]);
+	ZORDER.InputObj(UI);
+	
 	for (int i = 0; i < _playerNum + 1; i++)
 	{
 		if (_character[i] == 1)
@@ -47,36 +53,36 @@ HRESULT PlayerManager::Init()
 			_player[i]->Init(-50, WINSIZEY / 2, i);
 		}
 		ZORDER.InputObj(_player[i]);
+
+		//플레이어 직업 UI에 전달
+		UI->SetPlayerClass(i, (int)_character[i]);
 	}
 
-	UI = new PlayUI;
-	UI->Init();
-	UI->SetLinkItemBox1(_itemBox[0]);
-	UI->SetLinkItemBox2(_itemBox[1]);
-	ZORDER.InputObj(UI);
 
-	//_skill[0] = new PlayerSkill;
-	//_skill[0]->Init();
+
 
 	return S_OK;
 }
 
 void PlayerManager::Render()
 {
-	//UI->render();
 	_itemBox[0]->Render();
-	//_skill[0]->Render();
 }
 
 void PlayerManager::Update()
 {
 	UI->Update();
+	//플레이어 레벨, 체력 유아이로 전송
 	for (int i = 0; i < _playerNum + 1; i++)
 	{
 		Collision("웨어화살", i);
 		Collision("스켈검", i);
 		Collision("민호검", i);
 		_player[i]->Update();
+		//플레이어 체력, 레벨 UI로 전달
+		UI->SetLvHp(i, _player[i]->GetHP(), _player[i]->GetWeaponLv());
+		UI->SetPlayerPos(i, _player[i]->GetX(), _player[i]->GetY());
+
 		_itemBox[i]->Update(_player[i]->GetX(), _player[i]->GetY());
 		//_skill[i]->Update(_player[i]->GetX(), _player[i]->GetY());
 	}
