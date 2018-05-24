@@ -30,6 +30,7 @@ HRESULT Stage2_1::Init()
 	offset = 255;
 	s1State = OPENNING;
 
+	SOUNDMANAGER.play("14Stage2_1", 0.3f);
 	return S_OK;
 }
 
@@ -107,6 +108,8 @@ void Stage2_1::Update()
 		if (offset > 255)
 		{
 			offset = 255;
+			SOUNDMANAGER.stop("14Stage2_1");
+			SCENEMANAGER.changeScene("스테이지2.2");
 			break;
 		}
 
@@ -116,4 +119,6 @@ void Stage2_1::Update()
 
 void Stage2_1::Release()
 {
+	_pm->Release();
+	SAFE_DELETE(_pm);
 }

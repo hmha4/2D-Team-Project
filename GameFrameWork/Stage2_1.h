@@ -12,7 +12,6 @@ private:
 		OPENNING,
 		FIRST_STAGE,		//전반
 		SECOND_STAGE,		//후반
-		FINAL_STAGE,
 		WIN_STAGE,
 		NEXT_STAGE = 20
 	};
