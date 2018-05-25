@@ -10,6 +10,7 @@
 #include "Stage2_5.h"
 #include "SelectScene.h"
 #include "StartScene.h"
+#include "EndingScene.h"
 
 class PlayGround :public gameNode
 {

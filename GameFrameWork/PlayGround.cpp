@@ -56,6 +56,7 @@ HRESULT PlayGround::Init()
 	SCENEMANAGER.addScene("스테이지2.5", new Stage2_5);
 	SCENEMANAGER.addScene("SelectScene", new SelectScene);
 	SCENEMANAGER.addScene("StartScene", new StartScene);
+	SCENEMANAGER.addScene("EndingScene", new EndingScene);
 
 	SCENEMANAGER.changeScene("StartScene");
 

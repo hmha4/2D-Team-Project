@@ -109,6 +109,9 @@
     <Filter Include="PlayGround\StartScene">
       <UniqueIdentifier>{3b9b3107-7bfd-4cc9-adf7-74505e87711c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlayGround\EndingScene">
+      <UniqueIdentifier>{e3609d16-de4a-4e7e-b92b-1af0f2bc616c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -297,6 +300,9 @@
     <ClInclude Include="Cyclopes.h">
       <Filter>PlayGround\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="EndingScene.h">
+      <Filter>PlayGround\EndingScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -469,6 +475,9 @@
     </ClCompile>
     <ClCompile Include="Cyclopes.cpp">
       <Filter>PlayGround\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingScene.cpp">
+      <Filter>PlayGround\EndingScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
