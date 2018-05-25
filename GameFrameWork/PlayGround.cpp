@@ -44,6 +44,7 @@ HRESULT PlayGround::Init()
 	SOUNDMANAGER.addSound("24PlayerLand", "sound\\PlayerLand.mp3", false, false);
 
 	IMAGEMANAGER.addImage("페이드아웃", PathFile("image", "검은화면").c_str(), 800, 600, false, NULL);
+	IMAGEMANAGER.addFrameImage("STAGE_NUM", PathFile("image", "STAGE_NUM").c_str(), 247, 512, 1, 8, true, RGB(255, 0, 255));
 
 	SCENEMANAGER.addScene("스테이지1.1", new Stage1_1);
 	SCENEMANAGER.addScene("스테이지1.2", new Stage1_2);

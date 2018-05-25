@@ -77,9 +77,9 @@ void PlayUI::Release()
 
 void PlayUI::Update()
 {
-	if (KEYMANAGER.isOnceKeyDown('E'))	MakeSkillThunder();
-	if (KEYMANAGER.isOnceKeyDown('R'))	MakeSkillFire();
-	if (KEYMANAGER.isOnceKeyDown('T'))	MakeSkillIce();
+	//if (KEYMANAGER.isOnceKeyDown('E'))	MakeSkillThunder();
+	//if (KEYMANAGER.isOnceKeyDown('R'))	MakeSkillFire();
+	//if (KEYMANAGER.isOnceKeyDown('T'))	MakeSkillIce();
 
 	if (KEYMANAGER.isStayKeyDown('Q'))	ActiveSkillBox(0);
 	if (KEYMANAGER.isOnceKeyDown('Q'))  ChangeSkillBox(0);

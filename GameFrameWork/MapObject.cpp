@@ -18,7 +18,7 @@ HRESULT MapObject::Init()
 	return S_OK;
 }
 
-HRESULT MapObject::Init(int x, int y, int amount, bool fade)
+HRESULT MapObject::Init(int x, int y, int amount, int _stageNum, bool fade)
 {
 	setX = x;
 	setY = y;
@@ -27,16 +27,40 @@ HRESULT MapObject::Init(int x, int y, int amount, bool fade)
 	
 	isFade = fade;
 	alpha = 255;
+
+	isStageStart = true;
+	startFadeIn = false;
+	stageNum = _stageNum;
+	stageAlpha = 0;
+	minusAlpha = 1;
 	
 	return S_OK;
 }
 
 void MapObject::Render()
 {
-	if(isFade)
+	if (isFade)
+	{
 		img->alphaRender(getMemDC(), setX, setY, alpha);
-	else
-		img->Render(getMemDC(), setX, setY);
+		if (isStageStart)
+		{
+			if (alpha == 0) startFadeIn = true;
+			if (!startFadeIn) return;
+			IMAGEMANAGER.findImage("STAGE_NUM")->alphaFrameRender(getMemDC(), CAM.GetCenterX() - 123, CAM.GetY() + 80 - 32, 0, stageNum, stageAlpha);
+			stageAlpha += 3 * minusAlpha;
+				if (stageAlpha >= 255)
+				{
+					stageAlpha = 255;
+					minusAlpha = -1;
+				}
+				if (stageAlpha < 0)
+				{
+					isStageStart = false;
+				}
+		}
+	}
+	else	img->Render(getMemDC(), setX, setY);
+
 }
 
 void MapObject::Update(int opaque)
@@ -47,6 +71,7 @@ void MapObject::Update(int opaque)
 		setY = CAM.GetY();
 
 		alpha = opaque;
+		//stageAlpha = alpha;
 	}
 }
 

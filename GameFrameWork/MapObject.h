@@ -10,12 +10,18 @@ private:
 
 	bool isFade;
 	int alpha;
+
+	bool isStageStart;
+	bool startFadeIn;
+	int minusAlpha;
+	int stageNum;
+	int stageAlpha;
 public:
 	MapObject(image*img);
 	~MapObject();
 
 	HRESULT Init();
-	HRESULT Init(int x,int y, int amount, bool fade = false);
+	HRESULT Init(int x,int y, int amount, int _stageNum = 8, bool fade = false);
 	void Render();
 	void Update(int opaque);
 	void Release();

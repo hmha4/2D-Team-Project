@@ -18,7 +18,7 @@ HRESULT Stage2_5::Init()
 	CAM.SetPos(0, 0);
 
 	mObjfade = new MapObject(IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô"));
-	mObjfade->Init(0, 0, 500, true);
+	mObjfade->Init(0, 0, 500, 7, true);
 	ZORDER.InputObj(mObjfade);
 
 	_pm = new PlayerManager;

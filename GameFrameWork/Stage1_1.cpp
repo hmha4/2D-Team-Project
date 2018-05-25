@@ -25,7 +25,7 @@ HRESULT Stage1_1::Init()
 	ZORDER.InputObj(mObj);
 
 	mObjfade = new MapObject(IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô"));
-	mObjfade->Init(0, 0, 500, true);
+	mObjfade->Init(0, 0, 500, 0, true);
 	ZORDER.InputObj(mObjfade);
 
 	_pm = new PlayerManager;

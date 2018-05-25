@@ -20,7 +20,7 @@ HRESULT Stage1_3::Init()
 	CAM.SetSize(WINSIZEX, WINSIZEY);
 
 	mObjfade = new MapObject(IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô"));
-	mObjfade->Init(0, 0, 500, true);
+	mObjfade->Init(0, 0, 500, 2, true);
 	ZORDER.InputObj(mObjfade);
 
 	s3State = OPENNING;
