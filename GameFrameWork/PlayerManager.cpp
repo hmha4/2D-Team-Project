@@ -96,7 +96,9 @@ void PlayerManager::Release()
 	{
 		_player[i]->Release();
 		SAFE_DELETE(_player[i]);
+		SAFE_DELETE(_itemBox[i]);
 	}
+	SAFE_DELETE(UI);
 }
 
 Character * PlayerManager::GetPlayer(string player)

@@ -27,11 +27,17 @@ HRESULT PlayUI::Init(int playerNum)
 {
 	_playerNum = playerNum;
 
-	if (_playerNum == 0) _itemBox[0] = new ItemBox;
+	if (_playerNum == 0)
+	{
+		_itemBox[0] = new ItemBox;
+		_skill[0] = tagSkill(MAX_ICE, MAX_FIRE, MAX_THUNDER);
+	}
 	else
 	{
 		_itemBox[0] = new ItemBox;
 		_itemBox[1] = new ItemBox;
+		_skill[0] = tagSkill(MAX_ICE, MAX_FIRE, MAX_THUNDER);
+		_skill[1] = tagSkill(MAX_ICE, MAX_FIRE, MAX_THUNDER);
 	}
 
 	//스킬 이펙트 클래스 상속
@@ -52,8 +58,13 @@ HRESULT PlayUI::Init(int playerNum)
 
 void PlayUI::Release()
 {
-	SAFE_DELETE(_itemBox[0]);
-	SAFE_DELETE(_itemBox[1]);
+	_warrior->Release();
+	SAFE_DELETE(_warrior);
+	SAFE_DELETE(_ice);
+	for (int ii = 0; ii < 8; ++ii)
+	{
+		SAFE_DELETE(_fire[ii]);
+	}
 }
 
 void PlayUI::Update()
@@ -61,6 +72,11 @@ void PlayUI::Update()
 	if (KEYMANAGER.isOnceKeyDown('E'))	MakeSkillThunder();
 	if (KEYMANAGER.isOnceKeyDown('R'))	MakeSkillFire();
 	if (KEYMANAGER.isOnceKeyDown('T'))	MakeSkillIce();
+
+	if (KEYMANAGER.isStayKeyDown('Q'))	ActiveSkillBox(0);
+	if (KEYMANAGER.isOnceKeyDown('Q'))  ChangeSkillBox(0);
+	if (KEYMANAGER.isOnceKeyUp('Q'))	_skill[0].enterKeyTime = 0;
+	if (KEYMANAGER.isOnceKeyDown('W'))	SelectSkillBox(0);
 
 	//UI Z-ORDER를 위한 렉트 업데이트
 	_zRC = RectMake(CAM.GetX(), CAM.GetY() + 600, 800, 100);
@@ -143,7 +159,7 @@ void PlayUI::MakeTable(HDC hdc, int x, int y, tagPlayerInfo player, int itemNum)
 	//플레이어 장비 이미지 출력
 
 	//선택된 스킬 출력
-	_itemBox[itemNum]->DrawSelectItem(hdc, (equip[2].left + equipTitle[2].left) / 2, (equip[2].top + equip[2].bottom) / 2);
+	_itemBox[itemNum]->DrawSelectItem(hdc, (equip[2].left + equipTitle[2].left) / 2, (equip[2].top + equip[2].bottom) / 2, _skill[itemNum].selectSkill);
 
 	//HP 게이지 출력
 	DrawHPgauge(hdc, hpGauge.left - 3, hpGauge.top + 2, player.hp);
@@ -384,6 +400,36 @@ void PlayUI::MakeSkillFire()
 		_fire[ii]->StartSkill(_player1.x - 23 + cosf(angle * ii) * distance, _player1.y + 75 - sinf(angle * ii) * distance / 4);
 	}
 	SOUNDMANAGER.play("12Fire", 1.0f);
+}
+
+void PlayUI::ActiveSkillBox(int player)
+{
+	if (_itemBox[player]->GetState() != 0) return;
+	else
+	{
+		_skill[player].enterKeyTime += TIMEMANAGER.getElapsedTime();
+		if (_skill[player].enterKeyTime > 1) _itemBox[player]->SetState(1);
+	}
+}
+
+void PlayUI::ChangeSkillBox(int player)
+{
+	if (_itemBox[player]->GetState() != 2) return;
+	_itemBox[player]->SetChange(true);
+}
+
+void PlayUI::SelectSkillBox(int player)
+{
+	if (_itemBox[player]->GetState() == 2 && !_itemBox[player]->GetChange())
+	{
+		_skill[player].selectSkill = _itemBox[player]->GetSelectSkill();
+	}
+	else if (_itemBox[player]->GetState() == 0) UseSkill(player);
+	else return;
+}
+
+void PlayUI::UseSkill(int player)
+{
 }
 
 void PlayUI::SetPlayerPos(int playerNum, float x, float y, int state)

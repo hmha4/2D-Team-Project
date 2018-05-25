@@ -32,6 +32,10 @@ HRESULT SkillWarrior::Init()
 
 void SkillWarrior::Release()
 {
+	for (int ii = 0; ii < 5; ++ii)
+	{
+		SAFE_DELETE(_thunder[ii]);
+	}
 }
 
 void SkillWarrior::Update()

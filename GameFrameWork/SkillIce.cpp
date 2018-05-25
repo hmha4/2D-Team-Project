@@ -5,7 +5,7 @@
 SkillIce::SkillIce()
 	:_x(0), _y(0), _start(0), _replayAni(0), _skillCount(0)
 {
-	_ice = IMAGEMANAGER.addFrameImage("SKILL_ICE", PathFile("image\\Skill", "SKILL_ICE").c_str(), 1280, 115, 8, 1, true, RGB(255, 0, 255));
+	_ice = IMAGEMANAGER.addFrameImage("SKILL_ICE", PathFile("image\\Skill", "SKILL_ICE").c_str(), 1280, 230, 8, 2, true, RGB(255, 0, 255));
 
 	_iceAni = new animation;
 	_iceAni->init(1280, 115, 160, 115);

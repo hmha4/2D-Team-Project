@@ -40,9 +40,6 @@ void ItemBox::Update(float x, float y)
 	}
 
 	ChangeState();
-
-	if (KEYMANAGER.isOnceKeyDown('Q')) _state = 1;
-	if (KEYMANAGER.isOnceKeyDown('W')) _change = true;
 }
 
 void ItemBox::Render()
@@ -96,12 +93,22 @@ void ItemBox::ChangeState()
 	}
 }
 
-void ItemBox::DrawSelectItem(HDC hdc, int x, int y)
+void ItemBox::DrawSelectItem(HDC hdc, int x, int y, int select)
 {
-	for (int ii = 0; ii < 4; ++ii)
+	//for (int ii = 0; ii < 4; ++ii)
+	//{
+	//	if (_itemBox[ii].select != true) continue;
+	//	_itemBox[ii].img->Render(hdc, x - _itemBox[ii].img->GetWidth() / 2, y - _itemBox[ii].img->GetHeight() / 2);
+	//
+	_itemBox[select].img->Render(hdc, x - _itemBox[select].img->GetWidth() / 2, y - _itemBox[select].img->GetHeight() / 2);
+}
+
+int ItemBox::GetSelectSkill()
+{
+	for (int ii = 0; ii < 3; ++ii)
 	{
-		if (_itemBox[ii].select != true) continue;
-		_itemBox[ii].img->Render(hdc, x - _itemBox[ii].img->GetWidth() / 2, y - _itemBox[ii].img->GetHeight() / 2);
+		if (!_itemBox[ii].select) continue;
+		return ii;
 	}
 }
 

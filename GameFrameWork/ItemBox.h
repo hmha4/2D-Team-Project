@@ -77,8 +77,15 @@ public:
 
 	void ChangePos(int num);
 	void ChangeState();
-	void DrawSelectItem(HDC hdc, int x, int y);
+	void DrawSelectItem(HDC hdc, int x, int y, int select);
 
-	void SetState(BOOL state) { _state = state; }
+	int GetState() { return _state; }
+	BOOL GetChange() { return _change; }
+
+	//0 : ice, 1 : fire, 2 : thunder
+	int GetSelectSkill();
+
+	void SetState(int state) { _state = state; }
+	void SetChange(BOOL change) { _change = change; }
 };
 
