@@ -110,6 +110,7 @@ void Stage1_3::Update()
 			offset = 255;
 			SOUNDMANAGER.stop("09Stage1_Boss");
 			SCENEMANAGER.changeScene("스테이지2.1");
+			break;
 		}
 		_pm->Update();
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
