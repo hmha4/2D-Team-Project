@@ -23,12 +23,16 @@ HRESULT Stage2_4::Init()
 	mObj->Init(2555, 0, 400);
 	ZORDER.InputObj(mObj);
 
+	mObjfade = new MapObject(IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô"));
+	mObjfade->Init(0, 0, 500, true);
+	ZORDER.InputObj(mObjfade);
+
 	_pm = new PlayerManager;
 	_pm->Init();
 	_pm->ChangeAnim(0, "RightRun");
 	_pm->SetPlayerPos(-50, WINSIZEY / 2 - 50);
 
-	fadeOut = IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô");
+	//fadeOut = IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô");
 	offset = 255;
 	s4State = OPENNING;
 
@@ -44,7 +48,7 @@ void Stage2_4::Render()
 
 	_pm->Render();
 
-	fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
+	//fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
 }
 
 void Stage2_4::Update()
@@ -68,6 +72,7 @@ void Stage2_4::Update()
 			CAM.SetState("FOLLOW");
 			_pm->ChangeAnim(0, "RightIdle");
 		}
+		mObjfade->Update(offset);
 	}
 	break;
 	case FIRST_STAGE:
@@ -91,6 +96,7 @@ void Stage2_4::Update()
 			SOUNDMANAGER.stop("17Stage2_4");
 			break;
 		}
+		mObjfade->Update(offset);
 
 		break;
 	}
@@ -100,4 +106,7 @@ void Stage2_4::Release()
 {
 	_pm->Release();
 	SAFE_DELETE(_pm);
+
+	mObjfade->Release();
+	SAFE_DELETE(mObjfade);
 }

@@ -22,11 +22,15 @@ HRESULT Stage2_1::Init()
 	mObj->Init(0, 350, 62);
 	ZORDER.InputObj(mObj);
 
+	mObjfade = new MapObject(IMAGEMANAGER.findImage("페이드아웃"));
+	mObjfade->Init(0, 0, 500, true);
+	ZORDER.InputObj(mObjfade);
+
 	_pm = new PlayerManager;
 	_pm->Init();
 	_pm->ChangeAnim(0, "RightRun");
 
-	fadeOut = IMAGEMANAGER.findImage("페이드아웃");
+	//fadeOut = IMAGEMANAGER.findImage("페이드아웃");
 	offset = 255;
 	s1State = OPENNING;
 
@@ -41,7 +45,7 @@ void Stage2_1::Render()
 
 	_pm->Render();
 
-	fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
+	//fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
 }
 
 void Stage2_1::Update()
@@ -65,6 +69,7 @@ void Stage2_1::Update()
 			CAM.SetState("FOLLOW");
 			_pm->ChangeAnim(0, "RightIdle");
 		}
+		mObjfade->Update(offset);
 	}
 	break;
 	case FIRST_STAGE:
@@ -112,6 +117,7 @@ void Stage2_1::Update()
 			SCENEMANAGER.changeScene("스테이지2.2");
 			break;
 		}
+		mObjfade->Update(offset);
 
 		break;
 	}
@@ -121,4 +127,7 @@ void Stage2_1::Release()
 {
 	_pm->Release();
 	SAFE_DELETE(_pm);
+
+	mObjfade->Release();
+	SAFE_DELETE(mObjfade);
 }

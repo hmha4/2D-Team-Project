@@ -25,6 +25,10 @@ HRESULT Stage1_2::Init()
 	mObj->Init(1357, 0, 200);
 	ZORDER.InputObj(mObj);
 
+	mObjfade = new MapObject(IMAGEMANAGER.findImage("페이드아웃"));
+	mObjfade->Init(0, 0, 500, true);
+	ZORDER.InputObj(mObjfade);
+
 	_pm = new PlayerManager;
 	_pm->Init();
 	_pm->ChangeAnim(0, "RightRun");
@@ -35,7 +39,7 @@ HRESULT Stage1_2::Init()
 	_em->InputEnemy(WAREWOLF, 4);
 	_em->InputEnemy(SKELETON, 4);
 
-	fadeOut = IMAGEMANAGER.findImage("페이드아웃");
+	//fadeOut = IMAGEMANAGER.findImage("페이드아웃");
 	offset = 255;
 	s2State = OPENNING;
 	_time = 0;
@@ -59,7 +63,7 @@ void Stage1_2::Render()
 
 	_pm->Render();
 
-	fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
+	//fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
 }
 
 void Stage1_2::Update()
@@ -91,6 +95,7 @@ void Stage1_2::Update()
 			for (int i = 0; i < 3; i++)
 				_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
 		}
+		mObjfade->Update(offset);
 	}
 	break;
 	case FIRST_STAGE:
@@ -207,6 +212,7 @@ void Stage1_2::Update()
 				SCENEMANAGER.changeScene("스테이지1.3");
 				break;
 			}
+			mObjfade->Update(offset);
 		}
 		_pm->Update();
 		CAM.Update(3048 - WINSIZEX / 2, WINSIZEY / 2, 5, false);
@@ -219,4 +225,7 @@ void Stage1_2::Release()
 {
 	_pm->Release();
 	SAFE_DELETE(_pm);
+
+	mObjfade->Release();
+	SAFE_DELETE(mObjfade);
 }
