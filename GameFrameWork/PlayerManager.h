@@ -42,15 +42,18 @@ public:
 	void Update();
 	void Release();
 
-
+	//	플레이어 1
 	inline Character* GetPlayer1() { return _player[0]; }
+	//	플레이어 2
 	inline Character* GetPlayer2() { return _player[1]; }
-
+	//	이름으로 플레이어 받기
 	Character* GetPlayer(string player);
+	//	인덱스로 플레이어 받기(0:1, 1:2)
 	Character* GetPlayer(int playerNum);
 	void SetPlayerPos(float x, float y);
 	void ChangeAnim(int state, string anim);
 	void MoveRestrict(int stage);
 	void Collision(string bulletName, int playerNum);
+	void ChangeWeapon(int num);
 };
 

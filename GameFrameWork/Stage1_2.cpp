@@ -180,6 +180,7 @@ void Stage1_2::Update()
 		{
 			s2State = WIN_STAGE;
 			_pm->ChangeAnim(34, "RightOther");
+			_pm->ChangeWeapon(2);
 		}
 
 		break;

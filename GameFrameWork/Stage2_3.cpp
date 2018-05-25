@@ -76,6 +76,7 @@ void Stage2_3::Update()
 		{
 			s3State = WIN_STAGE;
 			_pm->ChangeAnim(34, "RightOther");
+			_pm->ChangeWeapon(4);
 		}
 	}
 	break;

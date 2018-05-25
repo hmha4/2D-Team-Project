@@ -178,3 +178,11 @@ void PlayerManager::Collision(string bulletName, int playerNum)
 		}
 	}
 }
+
+void PlayerManager::ChangeWeapon(int num)
+{
+	for (int i = 0; i < _playerNum + 1; i++)
+	{
+		_player[i]->SetWeaponLv(num);
+	}
+}

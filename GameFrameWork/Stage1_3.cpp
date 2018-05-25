@@ -99,6 +99,7 @@ void Stage1_3::Update()
 			s3State = WIN_STAGE;
 			_pm->ChangeAnim(34, "RightOther");
 			SOUNDMANAGER.play("10Victory");
+			_pm->ChangeWeapon(3);
 		}
 	}
 	break;
