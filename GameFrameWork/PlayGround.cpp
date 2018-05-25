@@ -36,6 +36,12 @@ HRESULT PlayGround::Init()
 	SOUNDMANAGER.addSound("16Stage2_3", "sound\\Stage2_3.mp3", true, true);
 	SOUNDMANAGER.addSound("17Stage2_4", "sound\\Stage2_4.mp3", true, true);
 	SOUNDMANAGER.addSound("18Stage2_5", "sound\\Stage2_5.mp3", true, true);
+	SOUNDMANAGER.addSound("19PlayerRoar", "sound\\PlayerRoar.mp3", false, false);
+	SOUNDMANAGER.addSound("20PlayerHurt1", "sound\\PlayerHurt1.mp3", false, false);
+	SOUNDMANAGER.addSound("21PlayerHurt2", "sound\\PlayerHurt2.mp3", false, false);
+	SOUNDMANAGER.addSound("22PlayerDie", "sound\\PlayerDie.mp3", false, false);
+	SOUNDMANAGER.addSound("23PlayerSwing", "sound\\PlayerSwing.mp3", false, false);
+	SOUNDMANAGER.addSound("24PlayerLand", "sound\\PlayerLand.mp3", false, false);
 
 	IMAGEMANAGER.addImage("페이드아웃", PathFile("image", "검은화면").c_str(), 800, 600, false, NULL);
 

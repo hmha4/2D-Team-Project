@@ -134,7 +134,7 @@ void StartScene::Update()
 
 		if (_changeScene)
 		{
-			_offSet += 2;
+			_offSet += 4;
 			if (_offSet > 255)
 			{
 				_offSet = 255;
