@@ -42,6 +42,7 @@ HRESULT PlayGround::Init()
 	SOUNDMANAGER.addSound("22PlayerDie", "sound\\PlayerDie.mp3", false, false);
 	SOUNDMANAGER.addSound("23PlayerSwing", "sound\\PlayerSwing.mp3", false, false);
 	SOUNDMANAGER.addSound("24PlayerLand", "sound\\PlayerLand.mp3", false, false);
+	SOUNDMANAGER.addSound("25EndingScene", "sound\\EndingScene.mp3", false, false);
 
 	IMAGEMANAGER.addImage("페이드아웃", PathFile("image", "검은화면").c_str(), 800, 600, false, NULL);
 	IMAGEMANAGER.addFrameImage("STAGE_NUM", PathFile("image", "STAGE_NUM").c_str(), 247, 512, 1, 8, true, RGB(255, 0, 255));
