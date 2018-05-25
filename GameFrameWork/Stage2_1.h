@@ -27,6 +27,8 @@ private:
 
 	PlayerManager * _pm;
 	EnemyManager*_em;
+
+	bool changeView;
 public:
 	Stage2_1();
 	~Stage2_1();

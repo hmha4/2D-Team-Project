@@ -342,7 +342,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 				shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 				shadowColRc = RectMakeCenter(posX, posY + 40, img->GetFrameWidth(), img->GetFreamHeight() / 3);
 
-				if (CAM.GetRC().left + 50 > posX)
+				if (CAM.GetRC().left + 50 > posX||posY<200||posY>350)
 				{
 					eState = RIGHT_MOVE;
 					*anim = *ANIMATIONKEY.findAnimation("moRightMove");
@@ -389,7 +389,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 				shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 				shadowColRc = RectMakeCenter(posX, posY + 30, img->GetFrameWidth(), img->GetFreamHeight() / 3);
 
-				if (CAM.GetRC().right - 50 < posX)
+				if (CAM.GetRC().right - 50 < posX || posY<200 || posY>350)
 				{
 					eState = LEFT_MOVE;
 					*anim = *ANIMATIONKEY.findAnimation("moLeftMove");

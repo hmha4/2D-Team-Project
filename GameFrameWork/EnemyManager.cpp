@@ -25,8 +25,12 @@ EnemyManager::EnemyManager()
 	BULLET.BulletShadowSetting("용기사검0", NULL, RectMake(0, 0, 200, 20), 50);
 
 	IMAGEMANAGER.addFrameImage("용기사검", PathFile("image\\Enemy", "용기사칼").c_str(), 1136, 70, 16, 1, true, RGB(255, 0, 255));
-	BULLET.BulletSetting("용기사검", IMAGEMANAGER.findImage("용기사검"), 30, true, 20, 1);
+	BULLET.BulletSetting("용기사검", IMAGEMANAGER.findImage("용기사검"), 30, true, 40, 1);
 	BULLET.BulletShadowSetting("용기사검", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(0, 0, 60, 10), 70);
+
+	IMAGEMANAGER.addFrameImage("블랙아처화살", PathFile("image\\Enemy", "블랙아처화살").c_str(), 80, 52, 1, 2, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("블랙아처화살", IMAGEMANAGER.findImage("블랙아처화살"), 30, 0, 0, 2);
+	BULLET.BulletShadowSetting("블랙아처화살", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(0, 0, 60, 10), 50);
 
 	for (int i = 0; i < 30; i++)
 	{
@@ -34,6 +38,7 @@ EnemyManager::EnemyManager()
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("스켈검")[i]);
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("용기사검")[i]);
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("용기사검0")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("블랙아처화살")[i]);
 	}
 }
 

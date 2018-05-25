@@ -1,9 +1,22 @@
 #pragma once
 #include "Enemy.h"
-class BlackArchor:public Enemy
+class BlackArchor :public Enemy
 {
 private:
 	float attackTime;
+
+	float attackTime2;
+
+	float initPosY;
+
+	float gravity;
+
+	float dieTime;
+
+	float getAlpha;
+
+	bool shot;
+	float shotTime;
 public:
 	BlackArchor(ENEMYTYPE _eType);
 	~BlackArchor();

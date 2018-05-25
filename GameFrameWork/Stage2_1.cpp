@@ -23,7 +23,7 @@ HRESULT Stage2_1::Init()
 	ZORDER.InputObj(mObj);
 
 	mObjfade = new MapObject(IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô"));
-	mObjfade->Init(0, 0, 500, 3, true);
+	mObjfade->Init(0, 0, 500, true);
 	ZORDER.InputObj(mObjfade);
 
 	_pm = new PlayerManager;
@@ -31,12 +31,15 @@ HRESULT Stage2_1::Init()
 	_pm->ChangeAnim(0, "RightRun");
 
 	_em = new EnemyManager;
-	_em->InputEnemy(BLACKARCHOR, 2);
+	_em->InputEnemy(BLACKARCHOR, 3);
+	_em->InputEnemy(SKELETON, 6);
+	_em->InputEnemy(MINO, 2);
+
 
 	//fadeOut = IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô");
 	offset = 255;
 	s1State = OPENNING;
-
+	changeView = false;
 	SOUNDMANAGER.play("14Stage2_1", 0.3f);
 	return S_OK;
 }
@@ -71,7 +74,10 @@ void Stage2_1::Update()
 			CAM.SetSize(1400, WINSIZEY);
 			CAM.SetState("FOLLOW");
 			_pm->ChangeAnim(0, "RightIdle");
-			_em->ShowEnemy(BLACKARCHOR, WINSIZEX, WINSIZEY/2, LEFT_IDLE);
+			for (int i = 0; i < 3; i++)
+				_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
+			for (int i = 0; i < 3; i++)
+				_em->ShowEnemy(BLACKARCHOR, WINSIZEX, 210 + i * 70, LEFT_IDLE);
 		}
 		mObjfade->Update(offset);
 	}
@@ -81,24 +87,108 @@ void Stage2_1::Update()
 		_pm->Update();
 		_em->Update(_pm);
 		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
-	
-		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
+
+		if (_pm->GetPlayer1()->GetX() > 500 && _pm->GetPlayer1()->GetX() <1000)
 		{
-			s1State = SECOND_STAGE;
-			CAM.SetSize(GAMESIZEX, WINSIZEY);
+			if (_em->GetEnemyNum() == 0 && !changeView)
+			{
+				static float showTime = 0;
+				showTime += TIMEMANAGER.getElapsedTime();
+
+				if (showTime > 2)
+				{
+					for (int i = 0; i < 6; i++)
+						_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
+
+					int rndNum = RND.GetFromTo(-1, 2);
+					if (rndNum == 0)
+						rndNum = 1;
+					for (int i = 0; i<3; i++)
+						_em->ShowEnemy(BLACKARCHOR, _pm->GetPlayer1()->GetX() + 500 * rndNum, 210 + i * 70, LEFT_IDLE);
+
+					showTime = 0;
+				}
+			}
+		}
+		else if (1000 <= _pm->GetPlayer1()->GetX())
+		{
+			changeView = true;
+			if (_em->GetEnemyNum() == 0)
+			{
+				static float showTime1 = 0;
+				showTime1 += TIMEMANAGER.getElapsedTime();
+
+				if (showTime1 > 3.5)
+				{
+					s1State = SECOND_STAGE;
+					CAM.SetSize(2800, WINSIZEY);
+					showTime1 = 0;
+					changeView = false;
+				}
+			}
 		}
 	}
 	break;
 	case SECOND_STAGE:
 	{
 		_pm->Update();
-		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
-	
-		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
+		_em->Update(_pm);
+
+		if (_pm->GetPlayer1()->GetX() < 1600)
 		{
-			s1State = WIN_STAGE;
+			CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
+		}
+		else if (_pm->GetPlayer1()->GetX() > 1600 && _pm->GetPlayer1()->GetX() <2400)
+		{
+			CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
+			if (_em->GetEnemyNum() == 0 && !changeView)
+			{
+				static float showTime = 0;
+				showTime += TIMEMANAGER.getElapsedTime();
+
+				if (showTime > 2)
+				{
+					for (int i = 0; i < 6; i++)
+						_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
+
+					int rndNum = RND.GetFromTo(-1, 2);
+					if (rndNum == 0)
+						rndNum = 1;
+					for (int i = 0; i<3; i++)
+						_em->ShowEnemy(BLACKARCHOR, _pm->GetPlayer1()->GetX() + 500 * rndNum, 210 + i * 70, LEFT_IDLE);
+
+					showTime = 0;
+				}
+			}
+		}
+		else if (2400 <= _pm->GetPlayer1()->GetX() && _pm->GetPlayer1()->GetX()<2700 && _em->GetEnemyNum() == 0)
+		{
+			CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
+			if (_em->GetEnemyNum() == 0 && !changeView)
+			{
+				_em->ShowEnemy(MINO, 3400, 220, LEFT_IDLE);
+				_em->ShowEnemy(MINO, 3400, 300, LEFT_IDLE);
+			}
+		}
+		else if (_pm->GetPlayer1()->GetX() >= 2700 && _em->GetEnemyNum() != 0)
+		{
 			CAM.SetSize(GAMESIZEX, WINSIZEY);
-			_pm->ChangeAnim(34, "RightOther");
+			CAM.Update(GAMESIZEX - WINSIZEX / 2, WINSIZEY / 2, 0, false);
+			changeView = true;
+			if (_em->GetEnemyNum() == 0)
+			{
+				static float showTime1 = 0;
+				showTime1 += TIMEMANAGER.getElapsedTime();
+
+				if (showTime1 > 1.5)
+				{
+					s1State = WIN_STAGE;
+					CAM.SetSize(GAMESIZEX, WINSIZEY);
+					_pm->ChangeAnim(34, "RightOther");
+					showTime1 = 0;
+					changeView = false;
+				}
+			}
 		}
 	}
 	break;
