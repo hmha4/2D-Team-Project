@@ -47,6 +47,9 @@ private:
 	image * _fade;
 	int _offSet;
 	bool _changeScene;
+
+	image* _img;
+	animation* _anim;
 public:
 	SelectScene();
 	~SelectScene();

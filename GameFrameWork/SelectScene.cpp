@@ -27,6 +27,13 @@ HRESULT SelectScene::Init()
 	IMAGEMANAGER.addFrameImage("SelectName", PathFile("image\\Scene", "SelectName").c_str(), 100, 150, 1, 5, true, RGB(255, 0, 255));
 	//셀렉트 포인트
 	IMAGEMANAGER.addFrameImage("Select1P2P", PathFile("image\\Scene", "Select1P2P").c_str(), 128, 48, 2, 1, true, RGB(255, 0, 255));
+	//애니메이션
+	IMAGEMANAGER.addFrameImage("SelectSceneCharacters", PathFile("image\\Scene", "SelectSceneCharacters").c_str(), 12000, 500, 15, 1, true, RGB(255, 0, 255));
+	_img = IMAGEMANAGER.findImage("SelectSceneCharacters");
+
+	ANIMATIONKEY.addDefaultFrameAnimation("Animation", "SelectSceneCharacters", 25, false, false);
+	_anim = ANIMATIONKEY.findAnimation("Animation");
+	_anim->start();
 
 	float num = WINSIZEX / 5;
 
@@ -63,15 +70,20 @@ void SelectScene::Render()
 {
 	IMAGEMANAGER.findImage("SelectSceneBackground")->Render(getMemDC(), CAM.GetX(), CAM.GetY());
 
-	for (int i = 0; i < 5; i++)
+	
+	_img->aniRender(getMemDC(), CAM.GetX(), CAM.GetY(), _anim);
+	if(_state != FIRST)
 	{
-		character[i].img->frameRender(getMemDC(), character[i].rc.left, character[i].rc.top, character[i].frameX, 0);
+		for (int i = 0; i < 5; i++)
+		{
+			//character[i].img->frameRender(getMemDC(), character[i].rc.left, character[i].rc.top, character[i].frameX, 0);
+		
+			character[i].imgName->frameRender(getMemDC(), character[i].rc.left, character[i].rc.bottom - 10, 0, character[i].frameY);
+		}
 
-		character[i].imgName->frameRender(getMemDC(), character[i].rc.left, character[i].rc.bottom - 10, 0, character[i].frameY);
+		for (int i = 0; i < _playerNum + 1; i++)
+			_sel[i].img->frameRender(getMemDC(), _sel[i].rc.left, _sel[i].rc.top, _sel[i].frameX, _sel[i].frameY);
 	}
-
-	for (int i = 0; i < _playerNum + 1; i++)
-		_sel[i].img->frameRender(getMemDC(), _sel[i].rc.left, _sel[i].rc.top, _sel[i].frameX, _sel[i].frameY);
 
 	_fade->alphaRender(getMemDC(), CAM.GetRC().left, CAM.GetRC().top, _offSet);
 }
@@ -82,10 +94,14 @@ void SelectScene::Update()
 	{
 	case SelectScene::FIRST:
 		_offSet -= 4;
-		if (_offSet < 0)
+		
+		if (!_anim->isPlay())
 		{
-			_state = SECOND;
-			_offSet = 0;
+			if (_offSet < 0)
+			{
+				_offSet = 0;
+				_state = SECOND;
+			}
 		}
 		break;
 	case SelectScene::SECOND:
