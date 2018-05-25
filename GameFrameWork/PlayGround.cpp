@@ -16,7 +16,7 @@ PlayGround::~PlayGround()
 HRESULT PlayGround::Init()
 {
 	gameNode::init(true);
-
+	EFFECTMANAGER.addEffect("에너미피격", PathFile("image\\Enemy", "에너미피격").c_str(), 484, 55, 60, 55, 30, 1, 30);
 	SOUNDMANAGER.addSound("00StartScene01", "sound\\StartScene_01.mp3", false, false);
 	SOUNDMANAGER.addSound("01StartScene02", "sound\\StartScene_02.mp3", false, false);
 	SOUNDMANAGER.addSound("02StartScene03", "sound\\StartScene_03.mp3", false, false);

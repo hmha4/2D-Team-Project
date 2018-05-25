@@ -36,7 +36,7 @@ public:
 	void ShowEnemy(ENEMYTYPE eType, float x, float y, ENEMYSTATE eState);
 	int DieUpdate();
 
-	void EnemyCollision();
+	void EnemyCollision(PlayerManager*pm);
 
 	void AllDieInit();
 

@@ -39,7 +39,7 @@ public:
 	void BulletRender();
 
 	//ÃÑ¾Ë ¹ß»çÇÔ¼ö
-	void Shot(string bulletName, float x, float y, float angle, float gravity, int speed,int frameYidx=0);
+	void Shot(string bulletName, float x, float y,float angle, float gravity, int speed,int frameYidx=0,float shadowY=0);
 
 	//ÃÑ¾Ë ÆÄ±«ÇÔ¼ö
 	void Destroy(string bulletName, int bulletIdx);

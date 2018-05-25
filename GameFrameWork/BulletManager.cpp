@@ -142,10 +142,20 @@ void BulletManager::BulletUpdate()
 
 			if ((*bIter)->useShadow)
 			{
-				if((*bIter)->shadowImg != NULL)
-					(*bIter)->shadowRc = RectMakeCenter((*bIter)->x, (*bIter)->y + (*bIter)->ShadowSetY, (*bIter)->shadowImg->GetWidth(), (*bIter)->shadowImg->GetHeight());
+				if ((*bIter)->shadowImg != NULL)
+				{
+					if ((*bIter)->initY == 0)
+						(*bIter)->shadowRc = RectMakeCenter((*bIter)->x, (*bIter)->y + (*bIter)->ShadowSetY, (*bIter)->shadowWidth, (*bIter)->shadowHeight);
+					else
+						(*bIter)->shadowRc = RectMakeCenter((*bIter)->x, (*bIter)->initY + (*bIter)->ShadowSetY, (*bIter)->shadowWidth, (*bIter)->shadowHeight);
+				}
 				else
-					(*bIter)->shadowRc = RectMakeCenter((*bIter)->x, (*bIter)->y + (*bIter)->ShadowSetY, (*bIter)->shadowWidth, (*bIter)->shadowHeight);
+				{
+					if ((*bIter)->initY == 0)
+						(*bIter)->shadowRc = RectMakeCenter((*bIter)->x, (*bIter)->y + (*bIter)->ShadowSetY, (*bIter)->shadowWidth, (*bIter)->shadowHeight);
+					else
+						(*bIter)->shadowRc = RectMakeCenter((*bIter)->x, (*bIter)->initY + (*bIter)->ShadowSetY, (*bIter)->shadowWidth, (*bIter)->shadowHeight);
+				}
 			}
 				
 
@@ -170,7 +180,7 @@ void BulletManager::BulletRender()
 	}
 }
 
-void BulletManager::Shot(string bulletName, float x, float y, float angle, float gravity, int speed, int frameYidx)
+void BulletManager::Shot(string bulletName, float x, float y, float angle, float gravity, int speed, int frameYidx,float shadowY)
 {
 	bulletMapIter bMapIter = bMap.find(bulletName);
 	bulletIdxMapIter bIdxMapIter = bIdxMap.find(bulletName);
@@ -180,7 +190,7 @@ void BulletManager::Shot(string bulletName, float x, float y, float angle, float
 		bMapIter->second[bIdxMapIter->second]->x = x;
 		bMapIter->second[bIdxMapIter->second]->y = y;
 		bMapIter->second[bIdxMapIter->second]->initX = x;
-		bMapIter->second[bIdxMapIter->second]->initY = y;
+		bMapIter->second[bIdxMapIter->second]->initY = shadowY;
 
 		bMapIter->second[bIdxMapIter->second]->rc = RectMakeCenter(x, y,
 			bMapIter->second[bIdxMapIter->second]->img->GetFrameWidth(),
@@ -201,7 +211,7 @@ void BulletManager::Shot(string bulletName, float x, float y, float angle, float
 		bMapIter->second[bIdxMapIter->second]->x = x;
 		bMapIter->second[bIdxMapIter->second]->y = y;
 		bMapIter->second[bIdxMapIter->second]->initX = x;
-		bMapIter->second[bIdxMapIter->second]->initY = y;
+		bMapIter->second[bIdxMapIter->second]->initY = shadowY;
 
 
 		bMapIter->second[bIdxMapIter->second]->rc = RectMakeCenter(x, y,

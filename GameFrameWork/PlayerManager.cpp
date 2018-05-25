@@ -81,6 +81,7 @@ void PlayerManager::Update()
 		Collision("용기사검", i);
 		Collision("용기사검0", i);
 		Collision("블랙아처화살", i);
+		Collision("외돌", i);
 		_player[i]->Update();
 		//플레이어 체력, 레벨 UI로 전달
 		UI->SetLvHp(i, _player[i]->GetHP(), _player[i]->GetWeaponLv());

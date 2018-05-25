@@ -7,7 +7,6 @@ EnemyManager::EnemyManager()
 {
 	IMAGEMANAGER.addImage("용기사그림자", PathFile("image\\Enemy", "용기사그림자").c_str(), 80, 40, true, RGB(255, 0, 255));
 	checkEnemyNum = 1;
-	EFFECTMANAGER.addEffect("에너미피격", PathFile("image\\Enemy", "에너미피격").c_str(), 484, 55, 60, 55, 30, 1, 30);
 
 	IMAGEMANAGER.addFrameImage("웨어울프화살", PathFile("image\\Enemy", "웨어울프화살").c_str(), 60, 20, 1, 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER.addFrameImage("웨어총알그림자", PathFile("image\\Enemy", "웨어총알그림자").c_str(), 60, 10, 1, 1, true, RGB(255, 0, 255));
@@ -32,6 +31,10 @@ EnemyManager::EnemyManager()
 	BULLET.BulletSetting("블랙아처화살", IMAGEMANAGER.findImage("블랙아처화살"), 30, 0, 0, 2);
 	BULLET.BulletShadowSetting("블랙아처화살", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(0, 0, 60, 10), 50);
 
+	IMAGEMANAGER.addFrameImage("외눈거인돌", PathFile("image\\Enemy", "외눈거인돌").c_str(), 60, 83, 1, 2, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("외돌", IMAGEMANAGER.findImage("외눈거인돌"), 30, 0, 0, 2);
+	BULLET.BulletShadowSetting("외돌", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(0, 0, 60, 10), 50);
+
 	for (int i = 0; i < 30; i++)
 	{
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("웨어화살")[i]);
@@ -39,6 +42,7 @@ EnemyManager::EnemyManager()
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("용기사검")[i]);
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("용기사검0")[i]);
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("블랙아처화살")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("외돌")[i]);
 	}
 
 	_enemyUI = new EnemyUI;
@@ -133,14 +137,16 @@ void EnemyManager::Update(PlayerManager*pm)
 			if (emIter->second[i]->getShowState() && !emIter->second[i]->getDie())
 			{
 				emIter->second[i]->Update(pm);
+				
+				if(emIter->second[i]->getEnemyType()== DRAGONKNIGHT)
+					_enemyUI->HpUpdate(emIter->second[i]->getHp()*3.333f);
 			}
 		}
 	}
 	checkEnemyNum = DieUpdate();
-	EnemyCollision();
+	EnemyCollision(pm);
 
 	//보스체력 동기화 함수
-	//_enemyUI->HpUpdate(100);
 }
 
 void EnemyManager::Release()
@@ -196,7 +202,7 @@ int EnemyManager::DieUpdate()
 	return enemyNum;
 }
 
-void EnemyManager::EnemyCollision()
+void EnemyManager::EnemyCollision(PlayerManager*pm)
 {
 	enemyMapIter emIter = enemyMap.begin();
 
@@ -206,16 +212,16 @@ void EnemyManager::EnemyCollision()
 		{
 			if (!emIter->second[i]->getShowState() || emIter->second[i]->getDie())continue;
 
-			for (int j = 0; j < BULLET.GetBulletVec("Warrior_Weapon_1_B").size(); j++)
+			for (int j = 0; j < BULLET.GetBulletVec("Warrior_Weapon_" + to_string(pm->GetPlayer1()->GetWeaponLv()) + "_B").size(); j++)
 			{
-				if (!BULLET.GetBulletVec("Warrior_Weapon_1_B")[j]->isShot)continue;
+				if (!BULLET.GetBulletVec("Warrior_Weapon_"+ to_string(pm->GetPlayer1()->GetWeaponLv()) +"_B")[j]->isShot)continue;
 				RECT rc;
-				if (IntersectRect(&rc, &emIter->second[i]->getRc(), &BULLET.GetBulletVec("Warrior_Weapon_1_B")[j]->getRc()))
+				if (IntersectRect(&rc, &emIter->second[i]->getRc(), &BULLET.GetBulletVec("Warrior_Weapon_" + to_string(pm->GetPlayer1()->GetWeaponLv()) + "_B")[j]->getRc()))
 				{
 					int randomSet = RND.GetFromTo(-10, 11);
-					EFFECTMANAGER.play("에너미피격", GetCenterPos(emIter->second[i]->getRc()).x + randomSet, GetCenterPos(emIter->second[i]->getRc()).y -40);
+					EFFECTMANAGER.play("에너미피격", GetCenterPos(emIter->second[i]->getRc()).x + randomSet, GetCenterPos(emIter->second[i]->getRc()).y - 40);
 					emIter->second[i]->Damaged();
-					BULLET.Destroy("Warrior_Weapon_1_B", j);
+					BULLET.Destroy("Warrior_Weapon_" +to_string(pm->GetPlayer1()->GetWeaponLv())+ "_B", j);
 					break;
 				}
 			}

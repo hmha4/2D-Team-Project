@@ -3,7 +3,20 @@
 class Cyclopes :public Enemy
 {
 private:
+	bool isAttack;
+	float atkWaitTime;
+	float attack1Time;
 
+	int state;
+	float initY;
+	float gravity;
+
+	bool isShot;
+	int attack[4];
+	int idx;
+
+	float dieTime;
+	int getAlpha;
 public:
 	Cyclopes(ENEMYTYPE _eType);
 	~Cyclopes();

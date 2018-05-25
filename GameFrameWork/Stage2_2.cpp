@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Stage2_2.h"
-
+#include "Bullet.h"
 
 Stage2_2::Stage2_2()
 {
@@ -27,6 +27,11 @@ HRESULT Stage2_2::Init()
 	_pm->ChangeAnim(0, "RightRun");
 	_pm->SetPlayerPos(-50, WINSIZEY / 2 - 50);
 
+	_em = new EnemyManager;
+	_em->InputEnemy(BLACKARCHOR, 3);
+	_em->InputEnemy(WAREWOLF, 4);
+	_em->InputEnemy(SKELETON, 5);
+	_em->InputEnemy(CYCLOPSE, 1);
 	//fadeOut = IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô");
 	offset = 255;
 	s2State = OPENNING;
@@ -65,16 +70,40 @@ void Stage2_2::Update()
 			CAM.SetSize(2438, WINSIZEY);
 			CAM.SetState("FOLLOW");
 			_pm->ChangeAnim(0, "RightIdle");
+			for (int i = 0; i < 4; i++)
+				_em->ShowEnemy(WAREWOLF, WINSIZEX +200, 120 + i * 60, LEFT_IDLE);
+			for (int i = 0; i < 2; i++)
+				_em->ShowEnemy(BLACKARCHOR, WINSIZEX+200, 180 + i * 60, LEFT_IDLE);
 		}
 		mObjfade->Update(offset);
 	}
 	break;
 	case FIRST_STAGE:
 	{
+		CAM.SetSize(1800, WINSIZEY);
+		_em->Update(_pm);
 		_pm->Update();
 		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
 
-		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
+		if (_em->GetEnemyNum() == 0&&_pm->GetPlayer1()->GetX()>1700)
+		{
+			s2State = SECOND_STAGE;
+			CAM.SetSize(GAMESIZEX, WINSIZEY);
+			
+			for (int i = 0; i < 5; i++)
+				_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(200, 400), RND.GetFromTo(200, 350), LEFT_IDLE);
+			for (int i = 0; i < 1; i++)
+				_em->ShowEnemy(CYCLOPSE, 2200, 220, LEFT_IDLE);
+		}
+	}
+	break;
+	case SECOND_STAGE:
+	{
+		CAM.Update(2438 - WINSIZEX / 2, WINSIZEY / 2, 5, false);
+		_pm->Update();
+		_em->Update(_pm);
+
+		if (_em->GetEnemyNum() == 0)
 		{
 			s2State = WIN_STAGE;
 			CAM.SetSize(GAMESIZEX, WINSIZEY);
