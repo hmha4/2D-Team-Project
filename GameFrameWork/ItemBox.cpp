@@ -91,6 +91,15 @@ void ItemBox::ChangeState()
 			_state = 2;
 		}
 	}
+	else if (_state == 3)
+	{
+		_distance -= DISTANCE_SPEED;
+		if (_distance < 0)
+		{
+			_distance = 0;
+			_state = 0;
+		}
+	}
 }
 
 void ItemBox::DrawSelectItem(HDC hdc, int x, int y, int select)
