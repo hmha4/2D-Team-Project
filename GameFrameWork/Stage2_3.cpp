@@ -118,7 +118,6 @@ void Stage2_3::Release()
 
 void Stage2_3::Save()
 {
-	//DATABASE.SaveData("1PHP", _pm->GetPlayer1()->GetHP());
 	DATABASE.SaveData("1PWeapon", _pm->GetPlayer1()->GetWeaponLv());
 	if (DATABASE.LoadData("1P2P") == 1)
 	{
