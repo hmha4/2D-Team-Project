@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "MapObject.h"
 #include "PlayerManager.h"
+#include "EnemyManager.h"
 
 class Stage2_1 :
 	public gameNode
@@ -25,6 +26,7 @@ private:
 	int offset;
 
 	PlayerManager * _pm;
+	EnemyManager*_em;
 public:
 	Stage2_1();
 	~Stage2_1();

@@ -30,6 +30,9 @@ HRESULT Stage2_1::Init()
 	_pm->Init();
 	_pm->ChangeAnim(0, "RightRun");
 
+	_em = new EnemyManager;
+	_em->InputEnemy(BLACKARCHOR, 2);
+
 	//fadeOut = IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô");
 	offset = 255;
 	s1State = OPENNING;
@@ -68,6 +71,7 @@ void Stage2_1::Update()
 			CAM.SetSize(1400, WINSIZEY);
 			CAM.SetState("FOLLOW");
 			_pm->ChangeAnim(0, "RightIdle");
+			_em->ShowEnemy(BLACKARCHOR, WINSIZEX, WINSIZEY/2, LEFT_IDLE);
 		}
 		mObjfade->Update(offset);
 	}
@@ -75,6 +79,7 @@ void Stage2_1::Update()
 	case FIRST_STAGE:
 	{
 		_pm->Update();
+		_em->Update(_pm);
 		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
 	
 		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))

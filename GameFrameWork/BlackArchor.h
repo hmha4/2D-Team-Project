@@ -3,7 +3,7 @@
 class BlackArchor:public Enemy
 {
 private:
-
+	float attackTime;
 public:
 	BlackArchor(ENEMYTYPE _eType);
 	~BlackArchor();
