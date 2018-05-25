@@ -82,6 +82,7 @@ HRESULT DragonKnight::Init(int x, int y, ENEMYSTATE eState)
 	hp = 30;
 	dieTime = 0;
 	initPosY = rc.bottom - img->GetFreamHeight() / 3 + 15;
+	setShadowY = 0;
 	return S_OK;
 }
 
@@ -91,6 +92,7 @@ void DragonKnight::Release()
 
 void DragonKnight::EnemyUpdate(PlayerManager * pm)
 {
+	UpdateAttackArr();
 	anim->frameUpdate(TIMEMANAGER.getElapsedTime());
 	switch (eState)
 	{
@@ -249,8 +251,8 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
 					GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
 
-				posX -= cosf(angle) * 3;
-				posY += -sinf(angle) * 3;
+				posX -= cosf(angle) * 5;
+				posY += -sinf(angle) * 5;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 				shadowRc = RectMake(rc.right - 180, rc.bottom - img->GetFreamHeight() / 3 + 15, 80, img->GetFreamHeight() / 3);
 			}
@@ -293,8 +295,8 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
 					GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
 
-				posX -= cosf(angle) * 3;
-				posY += -sinf(angle) * 3;
+				posX -= cosf(angle) * 5;
+				posY += -sinf(angle) * 5;
 				rc = RectMakeCenter(posX + 150, posY, img->GetFrameWidth(), img->GetFreamHeight());
 				shadowRc = RectMake(rc.right - 330, rc.bottom - img->GetFreamHeight() / 3 + 15, 80, img->GetFreamHeight() / 3);
 			}
@@ -358,6 +360,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 								anim->start();
 							}
 							attackTime = 0;
+							setShadowY = 0;
 						}
 					}
 					else
@@ -434,6 +437,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 							shadowRc = RectMake(rc.right - 180, rc.bottom - img->GetFreamHeight() / 3 + 15, 80, img->GetFreamHeight() / 3);
 						}
 						attackTime = 0;
+						setShadowY = 0;
 					}
 				}
 				else
@@ -469,8 +473,10 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 				if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
 					GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 200)
 				{
-					int rndNum = RND.GetFromTo(0, 10);
-					RandomAttack(rndNum);
+					RandomAttack(atkArr[atkIdx]);
+					atkIdx++;
+					if (atkIdx > 7)
+						atkIdx = 0;
 				}
 			}
 
@@ -501,8 +507,10 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 				if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
 					GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 200)
 				{
-					int rndNum = RND.GetFromTo(0, 10);
-					RandomAttack(rndNum);
+					RandomAttack(atkArr[atkIdx]);
+					atkIdx++;
+					if (atkIdx > 7)
+						atkIdx = 0;
 				}
 			}
 
@@ -580,145 +588,83 @@ void DragonKnight::Damaged()
 
 void DragonKnight::RandomAttack(int num)
 {
-	if (hp > 20)
+	if (eState == LEFT_MOVE)
 	{
-		if (eState == LEFT_MOVE)
+		if (num==0)
 		{
-			if (num>=0&&num<6)
-			{
-				eState = LEFT_ATTACK;
-				*anim = *ANIMATIONKEY.findAnimation("dkLeftAttack");
-				anim->start();
-			}
-			else if (num>=6&&num<8)
-			{
-				eState = LEFT_ATTACK2;
-				*anim = *ANIMATIONKEY.findAnimation("dkLeftAttack2");
-				anim->start();
-			}
-			else
-			{
-				eState = LEFT_ATTACK3;
-				*anim = *ANIMATIONKEY.findAnimation("dkLeftJump");
-				anim->start();
-				sState = LEFT_JUMP;
-			}
+			eState = LEFT_ATTACK;
+			*anim = *ANIMATIONKEY.findAnimation("dkLeftAttack");
+			anim->start();
 		}
-		else if (eState == RIGHT_MOVE)
+		else if (num==1)
 		{
-			if (num >= 0 && num<6)
-			{
-				eState = RIGHT_ATTACK;
-				*anim = *ANIMATIONKEY.findAnimation("dkRightAttack");
-				anim->start();
-			}
-			else if (num >= 6 && num<8)
-			{
-				eState = RIGHT_ATTACK2;
-				*anim = *ANIMATIONKEY.findAnimation("dkRightAttack2");
-				anim->start();
-			}
-			else
-			{
-				eState = RIGHT_ATTACK3;
-				*anim = *ANIMATIONKEY.findAnimation("dkRightJump");
-				anim->start();
-				sState = RIGHT_JUMP;
-			}
+			eState = LEFT_ATTACK2;
+			*anim = *ANIMATIONKEY.findAnimation("dkLeftAttack2");
+			anim->start();
+		}
+		else
+		{
+			eState = LEFT_ATTACK3;
+			*anim = *ANIMATIONKEY.findAnimation("dkLeftJump");
+			anim->start();
+			sState = LEFT_JUMP;
 		}
 	}
-	else if (hp > 10 && hp <= 20)
+	else if (eState == RIGHT_MOVE)
 	{
-		if (eState == LEFT_MOVE)
+		if (num==0)
 		{
-			if (num>=0&&num<4)
-			{
-				eState = LEFT_ATTACK;
-				*anim = *ANIMATIONKEY.findAnimation("dkLeftAttack");
-				anim->start();
-			}
-			else if (num>=4&&num<6)
-			{
-				eState = LEFT_ATTACK2;
-				*anim = *ANIMATIONKEY.findAnimation("dkLeftAttack2");
-				anim->start();
-			}
-			else
-			{
-				eState = LEFT_ATTACK3;
-				*anim = *ANIMATIONKEY.findAnimation("dkLeftJump");
-				anim->start();
-				sState = LEFT_JUMP;
-			}
+			eState = RIGHT_ATTACK;
+			*anim = *ANIMATIONKEY.findAnimation("dkRightAttack");
+			anim->start();
 		}
-		else if (eState == RIGHT_MOVE)
+		else if (num==1)
 		{
-			if (num >= 0 && num<4)
-			{
-				eState = RIGHT_ATTACK;
-				*anim = *ANIMATIONKEY.findAnimation("dkRightAttack");
-				anim->start();
-			}
-			else if (num >= 4 && num<6)
-			{
-				eState = RIGHT_ATTACK2;
-				*anim = *ANIMATIONKEY.findAnimation("dkRightAttack2");
-				anim->start();
-			}
-			else
-			{
-				eState = RIGHT_ATTACK3;
-				*anim = *ANIMATIONKEY.findAnimation("dkRightJump");
-				anim->start();
-				sState = RIGHT_JUMP;
-			}
+			eState = RIGHT_ATTACK2;
+			*anim = *ANIMATIONKEY.findAnimation("dkRightAttack2");
+			anim->start();
 		}
+		else
+		{
+			eState = RIGHT_ATTACK3;
+			*anim = *ANIMATIONKEY.findAnimation("dkRightJump");
+			anim->start();
+			sState = RIGHT_JUMP;
+		}
+	}
+}
+
+void DragonKnight::UpdateAttackArr()
+{
+	if (hp > 20)
+	{
+		for (int i = 0; i < 3; i++)
+			atkArr[i] = 0;
+		atkArr[3] = 1;
+		for (int i = 4; i < 7; i++)
+			atkArr[i] = 0;
+		atkArr[7] = 1;
+	}
+	else if (hp <= 20 && hp > 10)
+	{
+		for (int i = 0; i < 2; i++)
+			atkArr[i] = 0;
+		atkArr[2] = 2;
+		atkArr[3] = 0;
+		atkArr[4] = 1;
+		atkArr[5] = 0;
+		atkArr[6] = 2;
+		atkArr[7] = 2;
 	}
 	else
 	{
-		if (eState == LEFT_MOVE)
-		{
-			if (num>=0&&num<3)
-			{
-				eState = LEFT_ATTACK;
-				*anim = *ANIMATIONKEY.findAnimation("dkLeftAttack");
-				anim->start();
-			}
-			else if (num>=3&&num<7)
-			{
-				eState = LEFT_ATTACK2;
-				*anim = *ANIMATIONKEY.findAnimation("dkLeftAttack2");
-				anim->start();
-			}
-			else
-			{
-				eState = LEFT_ATTACK3;
-				*anim = *ANIMATIONKEY.findAnimation("dkLeftJump");
-				anim->start();
-				sState = LEFT_JUMP;
-			}
-		}
-		else if (eState == RIGHT_MOVE)
-		{
-			if (num >= 0 && num<3)
-			{
-				eState = RIGHT_ATTACK;
-				*anim = *ANIMATIONKEY.findAnimation("dkRightAttack");
-				anim->start();
-			}
-			else if (num >= 3 && num<7)
-			{
-				eState = RIGHT_ATTACK2;
-				*anim = *ANIMATIONKEY.findAnimation("dkRightAttack2");
-				anim->start();
-			}
-			else if (num == 2)
-			{
-				eState = RIGHT_ATTACK3;
-				*anim = *ANIMATIONKEY.findAnimation("dkRightJump");
-				anim->start();
-				sState = RIGHT_JUMP;
-			}
-		}
+		for (int i = 0; i < 2; i++)
+			atkArr[i] = 0;
+		atkArr[2] = 1;
+		atkArr[3] = 0;
+		atkArr[4] = 1;
+		atkArr[5] = 0;
+		atkArr[6] = 2;
+		atkArr[7] = 1;
 	}
 }

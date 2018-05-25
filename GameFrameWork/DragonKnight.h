@@ -24,7 +24,8 @@ private:
 	float gravity;
 	float angle;
 
-
+	int atkArr[8];
+	int atkIdx = 0;
 public:
 	DragonKnight(ENEMYTYPE _eType);
 	~DragonKnight();
@@ -40,5 +41,7 @@ public:
 	virtual void Damaged();
 
 	void RandomAttack(int num);
+
+	void UpdateAttackArr();
 };
 
