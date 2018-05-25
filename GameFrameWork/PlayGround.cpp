@@ -59,7 +59,8 @@ HRESULT PlayGround::Init()
 
 	SCENEMANAGER.changeScene("StartScene");
 
-
+	DATABASE.SaveData("1PWeapon", 1);
+	DATABASE.SaveData("2PWeapon", 1);
 
 	return S_OK;
 }

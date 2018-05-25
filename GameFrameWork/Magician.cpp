@@ -110,7 +110,7 @@ HRESULT Magician::Init(float x, float y, int player)
 
 	// ============================== //
 
-	_hp = 10;
+	//_hp = 10;
 
 	//총알 초기화
 	InitBullet();

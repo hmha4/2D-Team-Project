@@ -17,7 +17,6 @@ HRESULT Character::Init(float x, float y, int player)
 {
     _x = x;
     _y = y;
-	_weapon = WEAPON_1;
 	_alpha = 255;
 	_alphaCount = 0;
 	_deadTime = 0;
@@ -33,6 +32,8 @@ HRESULT Character::Init(float x, float y, int player)
 		_mControl.insert(make_pair("Down", 'H'));
 		_mControl.insert(make_pair("Left", 'G'));
 		_mControl.insert(make_pair("Right", 'J'));
+		int weaponlv = DATABASE.LoadData("1PWeapon");
+		_weapon = (WEAPON)(weaponlv - 1);
 	}
 	else if (player == 1)
 	{
@@ -43,6 +44,7 @@ HRESULT Character::Init(float x, float y, int player)
 		_mControl.insert(make_pair("Down", VK_DOWN));
 		_mControl.insert(make_pair("Left", VK_LEFT));
 		_mControl.insert(make_pair("Right", VK_RIGHT));
+		_weapon = (WEAPON)(DATABASE.LoadData("2PWeapon") - 1);
 	}
     return S_OK;
 }

@@ -77,7 +77,7 @@ public:
 	//	캐릭터 atk
 	inline int GetATK() { return _atk; }
 	//	캐릭터 무기 레벨
-	inline int GetWeaponLv() { return _weapon + 1; }
+	inline int GetWeaponLv() { return (int)_weapon + 1; }
 	//	캐릭터 무기 설정자(무기 레벨)
 	void SetWeaponLv(int weaponLv) { _weapon = (WEAPON)(weaponLv - 1); }
 	//	캐릭터 좌표 설정

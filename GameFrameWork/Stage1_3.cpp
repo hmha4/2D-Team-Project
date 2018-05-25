@@ -120,6 +120,7 @@ void Stage1_3::Update()
 		if (offset > 255)
 		{
 			offset = 255;
+			Save();
 			SOUNDMANAGER.stop("09Stage1_Boss");
 			SCENEMANAGER.changeScene("스테이지2.1");
 			break;
@@ -139,4 +140,13 @@ void Stage1_3::Release()
 
 	mObjfade->Release();
 	SAFE_DELETE(mObjfade);
+}
+
+void Stage1_3::Save()
+{
+	DATABASE.SaveData("1PWeapon", _pm->GetPlayer1()->GetWeaponLv());
+	if (DATABASE.LoadData("1P2P") == 1)
+	{
+		DATABASE.SaveData("2PWeapon", _pm->GetPlayer2()->GetWeaponLv());
+	}
 }

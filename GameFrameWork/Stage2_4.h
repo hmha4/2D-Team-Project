@@ -33,5 +33,7 @@ public:
 	void Render();
 	void Update();
 	void Release();
+
+	void Save();
 };
 

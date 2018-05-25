@@ -172,7 +172,7 @@ void SelectScene::Update()
 				if ((_sel1Index == 1 || _sel1Index == 2))
 				{
 					DATABASE.SaveData("1PCharacter", _sel1Index);
-					SCENEMANAGER.changeScene("스테이지2.1");
+					SCENEMANAGER.changeScene("스테이지2.3");
 				}
 			}
 			else if (_playerNum == 1)
