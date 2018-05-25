@@ -6,6 +6,7 @@
 #include "Mino.h"
 #include "DragonKnight.h"
 #include "BlackArchor.h"
+#include "Cyclopes.h"
 
 class EnemyManager :public gameNode
 {

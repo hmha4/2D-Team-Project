@@ -36,4 +36,6 @@ public:
 	void Render();
 	
 	virtual inline RECT&getRc() { return shadowRc; }
+	
+	void Release();
 };

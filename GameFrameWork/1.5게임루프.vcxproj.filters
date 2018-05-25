@@ -294,6 +294,9 @@
     <ClInclude Include="BlackArchor.h">
       <Filter>PlayGround\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Cyclopes.h">
+      <Filter>PlayGround\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -462,6 +465,9 @@
       <Filter>PlayGround\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="BlackArchor.cpp">
+      <Filter>PlayGround\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Cyclopes.cpp">
       <Filter>PlayGround\Enemy</Filter>
     </ClCompile>
   </ItemGroup>

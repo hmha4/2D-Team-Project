@@ -55,43 +55,51 @@ void EnemyManager::InputEnemy(ENEMYTYPE eType, int enemyNum)
 	{
 		switch (eType)
 		{
-		case WAREWOLF:
-		{
-			Enemy*enemy = new Warewolf(eType);
-			enemy->Init();
-			enemyVec.push_back(enemy);
+			case WAREWOLF:
+			{
+				Enemy*enemy = new Warewolf(eType);
+				enemy->Init();
+				enemyVec.push_back(enemy);
 
+			}
+			break;
+			case SKELETON:
+			{
+				Enemy*enemy = new Skeleton(eType);
+				enemy->Init();
+				enemyVec.push_back(enemy);
+			}
+			break;
+			case MINO:
+			{
+				Enemy*enemy = new Mino(eType);
+				enemy->Init();
+				enemyVec.push_back(enemy);
+			}
+			break;
+			case DRAGONKNIGHT:
+			{
+				Enemy*enemy = new DragonKnight(eType);
+				enemy->Init();
+				enemyVec.push_back(enemy);
+			}
+			break;
+			case BLACKARCHOR:
+			{
+				Enemy*enemy = new BlackArchor(eType);
+				enemy->Init();
+				enemyVec.push_back(enemy);
+			}
+			break;
+			case CYCLOPSE:
+			{
+				Enemy*enemy = new Cyclopes(eType);
+				enemy->Init();
+				enemyVec.push_back(enemy);
+			}
+			break;
 		}
-		break;
-		case SKELETON:
-		{
-			Enemy*enemy = new Skeleton(eType);
-			enemy->Init();
-			enemyVec.push_back(enemy);
-		}
-		break;
-		case MINO:
-		{
-			Enemy*enemy = new Mino(eType);
-			enemy->Init();
-			enemyVec.push_back(enemy);
-		}
-		break;
-		case DRAGONKNIGHT:
-		{
-			Enemy*enemy = new DragonKnight(eType);
-			enemy->Init();
-			enemyVec.push_back(enemy);
-		}
-		break;
-		case BLACKARCHOR:
-		{
-			Enemy*enemy = new BlackArchor(eType);
-			enemy->Init();
-			enemyVec.push_back(enemy);
-		}
-		break;
-		}
+	
 	}
 	enemyMap[eType] = enemyVec;
 	enemyIdxMap[eType] = 0;

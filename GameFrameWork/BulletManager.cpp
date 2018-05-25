@@ -11,6 +11,22 @@ BulletManager::~BulletManager()
 {
 }
 
+void BulletManager::Release()
+{
+	bulletMapIter bmIter = bMap.begin();
+
+	for (; bmIter != bMap.end(); bmIter++)
+	{
+		for (int i = 0; i < bmIter->second.size(); i++)
+		{
+			bmIter->second[i]->Release();
+			SAFE_DELETE(bmIter->second[i]);
+		}
+	}
+	bMap.clear();
+	bIdxMap.clear();
+}
+
 //이미지메니저로 미리만든 이미지삽입해야함
 void BulletManager::BulletSetting(string bulletName, image * img, int bulletNum, bool isAnim, int animSpeed, int frameYnum )
 {

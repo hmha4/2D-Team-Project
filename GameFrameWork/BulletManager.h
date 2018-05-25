@@ -24,6 +24,8 @@ public:
 	BulletManager();
 	~BulletManager();
 
+	void Release();
+
 	//ÃÑ¾Ë »ðÀÔÇÔ¼ö
 	void BulletSetting(string bulletName, image*img, int bulletNum, bool isAnim = false, int animSpeed = 60, int frameYnum = 1);
 

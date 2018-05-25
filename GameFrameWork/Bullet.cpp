@@ -36,3 +36,8 @@ void Bullet::Render()
 		}
 	}
 }
+
+void Bullet::Release()
+{
+	SAFE_DELETE(pcol);
+}
