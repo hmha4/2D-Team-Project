@@ -6,7 +6,6 @@ DragonKnight::DragonKnight(ENEMYTYPE _eType)
 	:Enemy(_eType)
 {
 	IMAGEMANAGER.addFrameImage("용기사", PathFile("image\\Enemy", "용기사").c_str(), 4230, 2100, 10, 14, true, RGB(255, 0, 255));
-	IMAGEMANAGER.addImage("용기사그림자", PathFile("image\\Enemy", "용기사그림자").c_str(), 80, 40,true, RGB(255, 0, 255));
 	EFFECTMANAGER.addEffect("변신", PathFile("image\\Enemy", "식물폭발").c_str(), 1470, 80, 82, 80, 60, 1, 30);
 }
 
@@ -470,13 +469,38 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 			if (GetCenterPos(pm->GetPlayer1()->getRc()).y+10>GetCenterPos(shadowRc).y&&
 				GetCenterPos(pm->GetPlayer1()->getRc()).y - 10<GetCenterPos(shadowRc).y)
 			{
-				if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
-					GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 200)
+				if (atkArr[atkIdx] == 0)
 				{
-					RandomAttack(atkArr[atkIdx]);
-					atkIdx++;
-					if (atkIdx > 7)
-						atkIdx = 0;
+					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 200)
+					{
+						RandomAttack(atkArr[atkIdx]);
+						atkIdx++;
+						if (atkIdx > 7)
+							atkIdx = 0;
+					}
+				}
+				else if (atkArr[atkIdx] == 1)
+				{
+					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 300)
+					{
+						RandomAttack(atkArr[atkIdx]);
+						atkIdx++;
+						if (atkIdx > 7)
+							atkIdx = 0;
+					}
+				}
+				else
+				{
+					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 50)
+					{
+						RandomAttack(atkArr[atkIdx]);
+						atkIdx++;
+						if (atkIdx > 7)
+							atkIdx = 0;
+					}
 				}
 			}
 
@@ -504,13 +528,38 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 			if (GetCenterPos(pm->GetPlayer1()->getRc()).y + 10>GetCenterPos(shadowRc).y&&
 				GetCenterPos(pm->GetPlayer1()->getRc()).y - 10<GetCenterPos(shadowRc).y)
 			{
-				if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
-					GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 200)
+				if (atkArr[atkIdx] == 0)
 				{
-					RandomAttack(atkArr[atkIdx]);
-					atkIdx++;
-					if (atkIdx > 7)
-						atkIdx = 0;
+					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 200)
+					{
+						RandomAttack(atkArr[atkIdx]);
+						atkIdx++;
+						if (atkIdx > 7)
+							atkIdx = 0;
+					}
+				}
+				else if (atkArr[atkIdx] == 1)
+				{
+					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 300)
+					{
+						RandomAttack(atkArr[atkIdx]);
+						atkIdx++;
+						if (atkIdx > 7)
+							atkIdx = 0;
+					}
+				}
+				else
+				{
+					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 50)
+					{
+						RandomAttack(atkArr[atkIdx]);
+						atkIdx++;
+						if (atkIdx > 7)
+							atkIdx = 0;
+					}
 				}
 			}
 

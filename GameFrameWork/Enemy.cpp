@@ -5,6 +5,7 @@
 Enemy::Enemy(ENEMYTYPE _eType)
 	:eType(_eType)
 {
+	IMAGEMANAGER.addImage("용기사그림자", PathFile("image\\Enemy", "용기사그림자").c_str(), 80, 40, true, RGB(255, 0, 255));
 }
 
 
