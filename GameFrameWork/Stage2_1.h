@@ -29,6 +29,7 @@ private:
 	EnemyManager*_em;
 
 	bool changeView;
+	bool isLast;
 public:
 	Stage2_1();
 	~Stage2_1();

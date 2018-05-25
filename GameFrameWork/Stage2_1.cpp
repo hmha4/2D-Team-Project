@@ -40,6 +40,7 @@ HRESULT Stage2_1::Init()
 	offset = 255;
 	s1State = OPENNING;
 	changeView = false;
+	isLast = false;
 	SOUNDMANAGER.play("14Stage2_1", 0.3f);
 	return S_OK;
 }
@@ -161,20 +162,26 @@ void Stage2_1::Update()
 				}
 			}
 		}
-		else if (2400 <= _pm->GetPlayer1()->GetX() && _pm->GetPlayer1()->GetX()<2700 && _em->GetEnemyNum() == 0)
+		else if (2400 <= _pm->GetPlayer1()->GetX() && _pm->GetPlayer1()->GetX()<2800 && _em->GetEnemyNum() == 0)
 		{
 			CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
 			if (_em->GetEnemyNum() == 0 && !changeView)
 			{
 				_em->ShowEnemy(MINO, 3400, 220, LEFT_IDLE);
 				_em->ShowEnemy(MINO, 3400, 300, LEFT_IDLE);
+				changeView = true;
 			}
 		}
-		else if (_pm->GetPlayer1()->GetX() >= 2700 && _em->GetEnemyNum() != 0)
+		else if (_pm->GetPlayer1()->GetX() >= 2700 && _em->GetEnemyNum() != 0 && changeView)
 		{
 			CAM.SetSize(GAMESIZEX, WINSIZEY);
 			CAM.Update(GAMESIZEX - WINSIZEX / 2, WINSIZEY / 2, 0, false);
-			changeView = true;
+			isLast = true;
+		}
+		else if (_pm->GetPlayer1()->GetX() >= 2700 && isLast)
+		{
+			CAM.SetSize(GAMESIZEX, WINSIZEY);
+			CAM.Update(GAMESIZEX - WINSIZEX / 2, WINSIZEY / 2, 0, false);
 			if (_em->GetEnemyNum() == 0)
 			{
 				static float showTime1 = 0;
