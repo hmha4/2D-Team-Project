@@ -291,6 +291,9 @@
     <ClInclude Include="DragonKnight.h">
       <Filter>PlayGround\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="BlackArchor.h">
+      <Filter>PlayGround\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -456,6 +459,9 @@
       <Filter>PlayGround\Player\Skill</Filter>
     </ClCompile>
     <ClCompile Include="DragonKnight.cpp">
+      <Filter>PlayGround\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackArchor.cpp">
       <Filter>PlayGround\Enemy</Filter>
     </ClCompile>
   </ItemGroup>

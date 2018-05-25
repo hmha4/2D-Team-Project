@@ -5,6 +5,7 @@
 #include "skeleton.h"
 #include "Mino.h"
 #include "DragonKnight.h"
+#include "BlackArchor.h"
 
 class EnemyManager :public gameNode
 {

@@ -5,6 +5,7 @@
 EnemyManager::EnemyManager()
 	:enemyNum(0)
 {
+	IMAGEMANAGER.addImage("용기사그림자", PathFile("image\\Enemy", "용기사그림자").c_str(), 80, 40, true, RGB(255, 0, 255));
 	checkEnemyNum = 1;
 	EFFECTMANAGER.addEffect("에너미피격", PathFile("image\\Enemy", "에너미피격").c_str(), 484, 55, 60, 55, 30, 1, 30);
 
@@ -74,6 +75,13 @@ void EnemyManager::InputEnemy(ENEMYTYPE eType, int enemyNum)
 		case DRAGONKNIGHT:
 		{
 			Enemy*enemy = new DragonKnight(eType);
+			enemy->Init();
+			enemyVec.push_back(enemy);
+		}
+		break;
+		case BLACKARCHOR:
+		{
+			Enemy*enemy = new BlackArchor(eType);
 			enemy->Init();
 			enemyVec.push_back(enemy);
 		}

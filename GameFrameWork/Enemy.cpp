@@ -5,7 +5,6 @@
 Enemy::Enemy(ENEMYTYPE _eType)
 	:eType(_eType)
 {
-	IMAGEMANAGER.addImage("용기사그림자", PathFile("image\\Enemy", "용기사그림자").c_str(), 80, 40, true, RGB(255, 0, 255));
 }
 
 
@@ -17,6 +16,7 @@ HRESULT Enemy::Init()
 {
 	isDie = false;
 	isShow = false;
+	isShadow = false;
 	alpha = 0;
 	shadowColRc = RectMake(0, 0, 0, 0);
 	return S_OK;
