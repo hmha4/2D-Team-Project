@@ -303,6 +303,9 @@
     <ClInclude Include="EndingScene.h">
       <Filter>PlayGround\EndingScene</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyUI.h">
+      <Filter>PlayGround</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -478,6 +481,9 @@
     </ClCompile>
     <ClCompile Include="EndingScene.cpp">
       <Filter>PlayGround\EndingScene</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyUI.cpp">
+      <Filter>PlayGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

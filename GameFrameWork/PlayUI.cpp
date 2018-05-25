@@ -5,6 +5,7 @@
 #include "SkillWarrior.h"
 #include "SkillIce.h"
 #include "SkillFire.h"
+#include "EnemyUI.h"
 
 PlayUI::PlayUI()
 	:_insertCoinCount(0)
@@ -221,13 +222,14 @@ void PlayUI::DrawClass(HDC hdc, int x, int y, tagPlayerInfo player)
 	oldFont = (HFONT)SelectObject(getMemDC(), font);
 	SetBkMode(getMemDC(), TRANSPARENT);
 	SetTextColor(hdc, RGB(255, 255, 255));
+	
 
 	string tempClass;
 	if (player.job == 1) tempClass = "MAGICIAN";
 	else tempClass = "FIGHTER";
 
 	const char* drawClass = tempClass.c_str();
-
+	SetTextAlign(hdc, TA_CENTER);
 	TextOut(hdc, x, y, drawClass, strlen(drawClass));
 
 	SelectObject(hdc, oldFont);

@@ -47,6 +47,7 @@ class ItemBox;
 class SkillWarrior;
 class SkillIce;
 class SkillFire;
+class EnemyUI;
 
 class PlayUI :	public gameNode
 {

@@ -7,6 +7,7 @@
 #include "DragonKnight.h"
 #include "BlackArchor.h"
 #include "Cyclopes.h"
+#include "EnemyUI.h"
 
 class EnemyManager :public gameNode
 {
@@ -21,6 +22,8 @@ private:
 	int initEnemyNum;
 	int enemyNum;
 	int checkEnemyNum;
+
+	EnemyUI*	_enemyUI;
 public:
 	EnemyManager();
 	~EnemyManager();

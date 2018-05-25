@@ -40,6 +40,14 @@ EnemyManager::EnemyManager()
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("용기사검0")[i]);
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("블랙아처화살")[i]);
 	}
+
+	_enemyUI = new EnemyUI;
+	//보스체력 초기화
+	//			maxHP, 에너지바 너비, 이름 입력
+	_enemyUI->Init(100, 400, "Red Dragon");
+	ZORDER.InputObj(_enemyUI);
+	//보스체력 활성화
+	_enemyUI->SetDrawHP(true);
 }
 
 
@@ -130,6 +138,9 @@ void EnemyManager::Update(PlayerManager*pm)
 	}
 	checkEnemyNum = DieUpdate();
 	EnemyCollision();
+
+	//보스체력 동기화 함수
+	//_enemyUI->HpUpdate(100);
 }
 
 void EnemyManager::Release()
