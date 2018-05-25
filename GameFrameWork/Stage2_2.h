@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "MapObject.h"
 #include "PlayerManager.h"
 
 class Stage2_2 :
@@ -16,6 +17,8 @@ private:
 
 private:
 	STAGE2STATE s2State;
+
+	MapObject*mObjfade;
 
 	image*fadeOut;
 	int offset;

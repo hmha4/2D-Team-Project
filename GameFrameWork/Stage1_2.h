@@ -21,6 +21,8 @@ private:
 private:
 	STAGE2STATE s2State;
 
+	MapObject*mObjfade;
+
 	image*fadeOut;
 	int offset;
 

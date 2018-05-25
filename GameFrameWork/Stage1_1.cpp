@@ -24,6 +24,10 @@ HRESULT Stage1_1::Init()
 	mObj->Init(0, 320, 40);
 	ZORDER.InputObj(mObj);
 
+	mObjfade = new MapObject(IMAGEMANAGER.findImage("페이드아웃"));
+	mObjfade->Init(0, 0, 500, true);
+	ZORDER.InputObj(mObjfade);
+
 	_pm = new PlayerManager;
 	_pm->Init();
 	_pm->ChangeAnim(0, "RightRun");
@@ -34,7 +38,7 @@ HRESULT Stage1_1::Init()
 	_em->InputEnemy(SKELETON, 3);
 
 	//정적 배경은 따로넣어서 렌더에서 처리하면됨
-	fadeOut = IMAGEMANAGER.findImage("페이드아웃");
+	//fadeOut = IMAGEMANAGER.findImage("페이드아웃");
 	offset = 255;
 	s1State = OPENNING;
 	changeView = false;
@@ -51,7 +55,7 @@ void Stage1_1::Render()
 	IMAGEMANAGER.findImage("1.1앞배경")->Render(getMemDC(), CAM.GetX(), CAM.GetY(), CAM.GetX(), CAM.GetY(), WINSIZEX, GAMESIZEY);
 
 	_pm->Render();
-	fadeOut->alphaRender(getMemDC(), CAM.GetRC().left, CAM.GetRC().top, offset);
+	//fadeOut->alphaRender(getMemDC(), CAM.GetRC().left, CAM.GetRC().top, offset);
 }
 
 
@@ -78,6 +82,7 @@ void Stage1_1::Update()
 					_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
 			}
 
+			mObjfade->Update(offset);
 		}
 		break;
 		case FIRST_STAGE:
@@ -167,10 +172,12 @@ void Stage1_1::Update()
 			offset += 2;
 			if (offset > 255)
 			{
+				offset = 0;
 				SOUNDMANAGER.stop("07Stage1_1");
 				SCENEMANAGER.changeScene("스테이지1.2");
-				offset = 0;
+				break;
 			}
+			mObjfade->Update(offset);
 		}
 		break;
 	}
@@ -182,4 +189,7 @@ void Stage1_1::Release()
 	SAFE_DELETE(_pm);
 	_em->Release();
 	SAFE_DELETE(_em);
+
+	mObjfade->Release();
+	SAFE_DELETE(mObjfade);
 }

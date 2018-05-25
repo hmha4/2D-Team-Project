@@ -19,6 +19,10 @@ HRESULT Stage1_3::Init()
 	CAM.SetPos(0, 0);
 	CAM.SetSize(WINSIZEX, WINSIZEY);
 
+	mObjfade = new MapObject(IMAGEMANAGER.findImage("페이드아웃"));
+	mObjfade->Init(0, 0, 500, true);
+	ZORDER.InputObj(mObjfade);
+
 	s3State = OPENNING;
 
 	_pm = new PlayerManager;
@@ -30,7 +34,7 @@ HRESULT Stage1_3::Init()
 	_em->Init();
 	_em->InputEnemy(DRAGONKNIGHT, 1);
 
-	fadeOut = IMAGEMANAGER.findImage("페이드아웃");
+	//fadeOut = IMAGEMANAGER.findImage("페이드아웃");
 	offset = 255;
 	
 	_time = 0;
@@ -47,7 +51,7 @@ void Stage1_3::Render()
 	
 	_pm->Render();
 
-	fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
+	//fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
 
 	Rectangle(getMemDC(), _em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc().left, _em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc().top, _em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc().right, _em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc().bottom);
 }
@@ -75,6 +79,7 @@ void Stage1_3::Update()
 			offset = 0;
 			s3State = FIRST_STAGE;
 		}
+		mObjfade->Update(offset);
 	}
 	break;
 	case FIRST_STAGE:
@@ -112,6 +117,7 @@ void Stage1_3::Update()
 			SCENEMANAGER.changeScene("스테이지2.1");
 			break;
 		}
+		mObjfade->Update(offset);
 		_pm->Update();
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
@@ -123,4 +129,7 @@ void Stage1_3::Release()
 {
 	_pm->Release();
 	SAFE_DELETE(_pm);
+
+	mObjfade->Release();
+	SAFE_DELETE(mObjfade);
 }
