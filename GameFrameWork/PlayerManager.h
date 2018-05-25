@@ -42,11 +42,12 @@ public:
 	void Update();
 	void Release();
 
-	
+
 	inline Character* GetPlayer1() { return _player[0]; }
 	inline Character* GetPlayer2() { return _player[1]; }
 
 	Character* GetPlayer(string player);
+	Character* GetPlayer(int playerNum);
 	void SetPlayerPos(float x, float y);
 	void ChangeAnim(int state, string anim);
 	void MoveRestrict(int stage);

@@ -168,7 +168,7 @@ void Magician::Update()
 			SOUNDMANAGER.play("23PlayerSwing");
 			BULLET.Shot(_weaponEffectName, _colX - 40, _colY - 20, 0, 0, -7, 1);
 		}
-			
+
 
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN)
 			ChangeAnim((int)RIGHT_ATTACK, "MagicianRightAttack");
@@ -631,18 +631,30 @@ void Magician::ChangeWeapon()
 	case Character::WEAPON_1:
 		_img = IMAGEMANAGER.findImage("Magician1");
 		_weaponEffectName = "Magician_Weapon_1_B";
+		_hp = 4;
+		_maxHp = 4;
+		_atk = 2;
 		break;
 	case Character::WEAPON_2:
 		_img = IMAGEMANAGER.findImage("Magician2");
 		_weaponEffectName = "Magician_Weapon_2_B";
+		_hp = 8;
+		_maxHp = 8;
+		_atk = 4;
 		break;
 	case Character::WEAPON_3:
 		_img = IMAGEMANAGER.findImage("Magician3");
 		_weaponEffectName = "Magician_Weapon_3_B";
+		_hp = 12;
+		_maxHp = 12;
+		_atk = 6;
 		break;
 	case Character::WEAPON_4:
 		_img = IMAGEMANAGER.findImage("Magician4");
 		_weaponEffectName = "Magician_Weapon_4_B";
+		_hp = 16;
+		_maxHp = 16;
+		_atk = 8;
 		break;
 	}
 }

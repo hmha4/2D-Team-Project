@@ -20,7 +20,7 @@ HRESULT Stage1_3::Init()
 	CAM.SetSize(WINSIZEX, WINSIZEY);
 
 	mObjfade = new MapObject(IMAGEMANAGER.findImage("페이드아웃"));
-	mObjfade->Init(0, 0, 500, 2, true);
+	mObjfade->Init(0, 0, 500, true);
 	ZORDER.InputObj(mObjfade);
 
 	s3State = OPENNING;
@@ -36,7 +36,7 @@ HRESULT Stage1_3::Init()
 
 	//fadeOut = IMAGEMANAGER.findImage("페이드아웃");
 	offset = 255;
-	
+
 	_time = 0;
 	_totalTime = 0;
 
@@ -48,7 +48,7 @@ HRESULT Stage1_3::Init()
 void Stage1_3::Render()
 {
 	IMAGEMANAGER.findImage("1.3배경")->Render(getMemDC(), CAM.GetX(), CAM.GetY(), CAM.GetX(), CAM.GetY(), WINSIZEX, GAMESIZEY);
-	
+
 	_pm->Render();
 
 	//fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
@@ -60,6 +60,12 @@ void Stage1_3::Update()
 {
 	_pm->MoveRestrict((int)s3State);
 
+	RECT temp;
+	if (IntersectRect(&temp, &_em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc(), &_pm->GetPlayer1()->getRc()))
+	{
+		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc());
+	}
+
 	switch (s3State)
 	{
 	case OPENNING:
@@ -69,7 +75,7 @@ void Stage1_3::Update()
 
 		if (!isOnceShow)
 		{
-			_em->ShowEnemy(DRAGONKNIGHT, WINSIZEX / 2 + 200, WINSIZEY / 2+30 , LEFT_IDLE);
+			_em->ShowEnemy(DRAGONKNIGHT, WINSIZEX / 2 + 200, WINSIZEY / 2 + 30, LEFT_IDLE);
 			isOnceShow = true;
 		}
 
@@ -88,7 +94,7 @@ void Stage1_3::Update()
 		_em->Update(_pm);
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
-		if (_em->GetEnemyNum()==0)
+		if (_em->GetEnemyNum() == 0)
 		{
 			s3State = WIN_STAGE;
 			_pm->ChangeAnim(34, "RightOther");

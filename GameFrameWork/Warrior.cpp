@@ -648,18 +648,30 @@ void Warrior::ChangeWeapon()
 	case Character::WEAPON_1:
 		_img = IMAGEMANAGER.findImage("Warrior1");
 		_weaponEffectName = "Warrior_Weapon_1_B";
+		_hp = 10;
+		_maxHp = 10;
+		_atk = 1;
 		break;
 	case Character::WEAPON_2:
 		_img = IMAGEMANAGER.findImage("Warrior2");
 		_weaponEffectName = "Warrior_Weapon_2_B";
+		_hp = 15;
+		_maxHp = 15;
+		_atk = 2;
 		break;
 	case Character::WEAPON_3:
 		_img = IMAGEMANAGER.findImage("Warrior3");
 		_weaponEffectName = "Warrior_Weapon_3_B";
+		_hp = 20;
+		_maxHp = 20;
+		_atk = 3;
 		break;
 	case Character::WEAPON_4:
 		_img = IMAGEMANAGER.findImage("Warrior4");
 		_weaponEffectName = "Warrior_Weapon_4_B";
+		_hp = 20;
+		_maxHp = 20;
+		_atk = 4;
 		break;
 	}
 }
@@ -680,7 +692,7 @@ void Warrior::Collision(RECT rc)
 		_state == RIGHT_DIE_P3 || _state == LEFT_DIE_P3 ||
 		_state == RIGHT_DIE_P4 || _state == LEFT_DIE_P4 ||
 		_state == RIGHT_BLOCK || _state == LEFT_BLOCK ||
-		_state == RIGHT_OTHER || _state == LEFT_OTHER || 
+		_state == RIGHT_OTHER || _state == LEFT_OTHER ||
 		_state == RIGHT_JUMP || _state == LEFT_JUMP ||
 		_state == RIGHT_FALL || _state == LEFT_FALL ||
 		_state == RIGHT_JUMP_ATTACK || _state == LEFT_JUMP_ATTACK || _deadTime > 0) return;
@@ -736,7 +748,7 @@ void Warrior::MovementRestrict(int stage)
 	{
 		if (_y > 0)
 		{
-			if(_x < WINSIZEX/2)
+			if (_x < WINSIZEX / 2)
 				_x += 3;
 		}
 		else

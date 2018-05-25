@@ -39,7 +39,7 @@ HRESULT PlayerManager::Init()
 	UI->SetLinkItemBox1(_itemBox[0]);
 	UI->SetLinkItemBox2(_itemBox[1]);
 	ZORDER.InputObj(UI);
-	
+
 	for (int i = 0; i < _playerNum + 1; i++)
 	{
 		if (_character[i] == 1)
@@ -115,6 +115,11 @@ Character * PlayerManager::GetPlayer(string player)
 			return _player[i];
 		}
 	}
+}
+
+Character * PlayerManager::GetPlayer(int playerNum)
+{
+	return _player[playerNum];
 }
 
 void PlayerManager::SetPlayerPos(float x, float y)
