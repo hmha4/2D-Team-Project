@@ -16,6 +16,7 @@ PlayUI::PlayUI()
 	_brick = IMAGEMANAGER.addImage("UI_BACKGROUND", PathFile("image\\UI", "UI_BACKGROUND").c_str(), 1047, 100, false, NULL);
 	_UItitle = IMAGEMANAGER.addImage("UI_TITLE", PathFile("image\\UI", "UI_TITLE").c_str(), 155, 90, true, RGB(255,0,255));
 	_hpGauge = IMAGEMANAGER.addImage("UI_HP", PathFile("image\\UI", "UI_HP").c_str(), 180, 15, true, RGB(255, 0, 255));
+	_skillGauge = IMAGEMANAGER.addImage("UI_SKILLGAUGE", PathFile("image\\UI", "UI_SKILLGAUGE").c_str(), 25, 43, true, RGB(255, 0, 255));
 }
 
 
@@ -53,6 +54,13 @@ HRESULT PlayUI::Init(int playerNum)
 		ZORDER.InputObj(_fire[ii]);
 	}
 
+	//색상 정보
+	_red = RGB(255, 0, 0);
+	_orange = RGB(255, 100, 0);
+	_yellow = RGB(255, 255, 0);
+	_green = RGB(0, 255, 0);
+	_rnd = RGB(0, 0, 0);
+
 	return S_OK;
 }
 
@@ -88,6 +96,7 @@ void PlayUI::Update()
 	{
 		_fire[ii]->Update();
 	}
+	ChargeSkillGauge(_playerNum);
 }
 
 void PlayUI::Render()
@@ -101,13 +110,13 @@ void PlayUI::Render()
 	else
 	{
 		MakeTable(getMemDC(), 20, 0, _player1, 0);
-		MakeTable(getMemDC(), 420 + _UItitle->GetWidth() / 2, 0, _player2, 0);
+		MakeTable(getMemDC(), 420 + _UItitle->GetWidth() / 2, 0, _player2, 1);
 	}
 
 	_UItitle->Render(getMemDC(), CAM.GetX() + 400 - (_UItitle->GetWidth() / 2), CAM.GetY() + 450 - (_UItitle->GetHeight() / 2));
 }
 
-void PlayUI::MakeTable(HDC hdc, int x, int y, tagPlayerInfo player, int itemNum)
+void PlayUI::MakeTable(HDC hdc, int x, int y, tagPlayerInfo player, int playerNum)
 {
 	int left = x + CAM.GetX();
 	int top =  y + CAM.GetY() + 400;
@@ -159,7 +168,7 @@ void PlayUI::MakeTable(HDC hdc, int x, int y, tagPlayerInfo player, int itemNum)
 	//플레이어 장비 이미지 출력
 
 	//선택된 스킬 출력
-	_itemBox[itemNum]->DrawSelectItem(hdc, (equip[2].left + equipTitle[2].left) / 2, (equip[2].top + equip[2].bottom) / 2, _skill[itemNum].selectSkill);
+	_itemBox[playerNum]->DrawSelectItem(hdc, (equip[2].left + equipTitle[2].left) / 2, (equip[2].top + equip[2].bottom) / 2, _skill[playerNum].selectSkill);
 
 	//HP 게이지 출력
 	DrawHPgauge(hdc, hpGauge.left - 3, hpGauge.top + 2, player.hp);
@@ -189,6 +198,9 @@ void PlayUI::MakeTable(HDC hdc, int x, int y, tagPlayerInfo player, int itemNum)
 	//장비 레벨 출력
 	DrawLevel(hdc, (equipTitle[0].left + equipTitle[0].right) / 2, equipTitle[0].top + 5, player.level);
 	DrawLevel(hdc, (equipTitle[1].left + equipTitle[1].right) / 2, equipTitle[1].top + 5, player.level);
+
+	//스킬 게이지 출력
+	DrawSkillGauge(hdc, equipTitle[2], playerNum, _skill[playerNum].selectSkill);
 
 	Rectangle(hdc, face.right, p1.top, p1.right, p1.bottom);
 
@@ -325,9 +337,39 @@ void PlayUI::DrawLevel(HDC hdc, int x, int y, int level)
 	DeleteObject(font);
 }
 
-void PlayUI::DrawSkillGauge(HDC hdc, int x, int y, float gauge)
+void PlayUI::DrawSkillGauge(HDC hdc, RECT rc, int player, int selectSkill)
 {
+	HBRUSH brush, oldBrush;
+
+	int height;
 	
+	for (int ii = 0; ii < 3; ++ii)
+	{
+		if (ii != selectSkill) continue;
+		height = (_skill[player].currentGauge[ii] / _skill[player].maxGauge[ii]) * (rc.bottom - rc.top);
+	}
+
+	COLORREF color;
+	if (height < (rc.bottom - rc.top) / 4) color = _red;
+	else if (height < (rc.bottom - rc.top) / 2 && height > (rc.bottom - rc.top) / 4) color = _orange;
+	else if (height < (rc.bottom - rc.top) / 4 * 3 && height > (rc.bottom - rc.top) / 2) color = _yellow;
+	else if (height < (rc.bottom - rc.top) / 1 && height > (rc.bottom - rc.top) / 4 * 3) color = _green;
+	else if (height >= (rc.bottom - rc.top))	color = RGB(RND.GetInt(255), RND.GetInt(255), RND.GetInt(255));
+
+	brush = CreateSolidBrush(color);
+	oldBrush = (HBRUSH)SelectObject(hdc, brush);
+
+	Rectangle(hdc, rc.left, rc.bottom - height, rc.right, rc.bottom);
+
+	SelectObject(hdc, oldBrush);
+	DeleteObject(brush);
+
+	_skillGauge->Render(hdc, rc.left, rc.top);
+
+	//char status[128];
+	//sprintf_s(status, "count_ice : %f, count_fire : %f, count_thunder : %f"
+	//	, _skill[0].currentGauge[0], _skill[0].currentGauge[1], _skill[0].currentGauge[2]);
+	//TextOut(hdc, CAM.GetX() + 200, CAM.GetY() + 100, status, strlen(status));
 }
 
 void PlayUI::DrawInserCoin(HDC hdc)
@@ -423,6 +465,7 @@ void PlayUI::SelectSkillBox(int player)
 	if (_itemBox[player]->GetState() == 2 && !_itemBox[player]->GetChange())
 	{
 		_skill[player].selectSkill = _itemBox[player]->GetSelectSkill();
+		_itemBox[player]->SetState(3);
 	}
 	else if (_itemBox[player]->GetState() == 0) UseSkill(player);
 	else return;
@@ -430,6 +473,37 @@ void PlayUI::SelectSkillBox(int player)
 
 void PlayUI::UseSkill(int player)
 {
+	if (!_skill[player].fullCharge[_skill[player].selectSkill]) return;
+	if (_skill[player].selectSkill == 0)
+	{
+		MakeSkillIce();
+	}
+	else if (_skill[player].selectSkill == 1)
+	{
+		MakeSkillFire();
+	}
+	else if (_skill[player].selectSkill == 2)
+	{
+		MakeSkillThunder();
+	}
+	_skill[player].currentGauge[_skill[player].selectSkill] = 0;
+	_skill[player].fullCharge[_skill[player].selectSkill] = false;
+}
+
+
+void PlayUI::ChargeSkillGauge(int playerNum)
+{
+	for (int ii = 0; ii < 3; ++ii)
+	{
+		if (_skill[playerNum].fullCharge[ii]) continue;
+		_skill[playerNum].currentGauge[ii] += TIMEMANAGER.getElapsedTime();
+		if (_skill[playerNum].currentGauge[ii] > _skill[playerNum].maxGauge[ii])
+		{
+			_skill[playerNum].fullCharge[ii] = true;
+			_skill[playerNum].currentGauge[ii] = _skill[playerNum].maxGauge[ii];
+		}
+	}
+
 }
 
 void PlayUI::SetPlayerPos(int playerNum, float x, float y, int state)

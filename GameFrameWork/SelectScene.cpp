@@ -81,7 +81,7 @@ void SelectScene::Update()
 	switch (_state)
 	{
 	case SelectScene::FIRST:
-		_offSet -= 2;
+		_offSet -= 4;
 		if (_offSet < 0)
 		{
 			_state = SECOND;
@@ -146,7 +146,7 @@ void SelectScene::Update()
 		}
 		break;
 	case SelectScene::LAST:
-		_offSet += 2;
+		_offSet += 4;
 		if (_offSet > 255)
 		{
 			SOUNDMANAGER.stop("06PlayerSelect");

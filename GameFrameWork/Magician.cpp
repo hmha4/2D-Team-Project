@@ -158,10 +158,17 @@ void Magician::Update()
 	{
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN ||
 			_state == RIGHT_JUMP || _state == RIGHT_FALL)
+		{
+			SOUNDMANAGER.play("23PlayerSwing");
 			BULLET.Shot(_weaponEffectName, _colX + 40, _colY - 20, 0, 0, 7, 0);
+		}
 		else if (_state == LEFT_IDLE || _state == LEFT_RUN ||
 			_state == LEFT_JUMP || _state == LEFT_FALL)
+		{
+			SOUNDMANAGER.play("23PlayerSwing");
 			BULLET.Shot(_weaponEffectName, _colX - 40, _colY - 20, 0, 0, -7, 1);
+		}
+			
 
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN)
 			ChangeAnim((int)RIGHT_ATTACK, "MagicianRightAttack");
@@ -205,6 +212,7 @@ void Magician::Update()
 		{
 			_hp = 10;
 			ChangeAnim((int)RIGHT_OTHER, "MagicianRightOther");
+			SOUNDMANAGER.play("19PlayerRoar");
 			break;
 		}
 		if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
@@ -233,6 +241,7 @@ void Magician::Update()
 		{
 			_hp = 10;
 			ChangeAnim((int)LEFT_OTHER, "MagicianLeftOther");
+			SOUNDMANAGER.play("19PlayerRoar");
 			break;
 		}
 		if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
@@ -368,6 +377,7 @@ void Magician::Update()
 			_gravity = 0;
 			ChangeAnim((int)RIGHT_IDLE, "MagicianRightIdle");
 			BULLET.Destroy(_weaponEffectName, 0);
+			SOUNDMANAGER.play("24PlayerLand");
 		}
 		break;
 	case Magician::LEFT_FALL:
@@ -378,6 +388,7 @@ void Magician::Update()
 			_gravity = 0;
 			ChangeAnim((int)LEFT_IDLE, "MagicianLeftIdle");
 			BULLET.Destroy(_weaponEffectName, 0);
+			SOUNDMANAGER.play("24PlayerLand");
 		}
 		break;
 	case Magician::RIGHT_ATTACK:
@@ -521,11 +532,13 @@ void Magician::Update()
 			_gravity = 0;
 			_y = _startY;
 			ChangeAnim((int)RIGHT_DIE_P3, "MagicianRightDie3");
+			SOUNDMANAGER.play("24PlayerLand");
 		}
 		else if (_friction > 0 && _y >= _startY)
 		{
 			_jumpPower = 2;
 			_gravity = 0.3f;
+			SOUNDMANAGER.play("24PlayerLand");
 		}
 		break;
 	case Magician::LEFT_DIE_P2:
@@ -540,11 +553,13 @@ void Magician::Update()
 			_gravity = 0;
 			_y = _startY;
 			ChangeAnim((int)LEFT_DIE_P3, "MagicianLeftDie3");
+			SOUNDMANAGER.play("24PlayerLand");
 		}
 		else if (_friction > 0 && _y >= _startY)
 		{
 			_jumpPower = 2;
 			_gravity = 0.3f;
+			SOUNDMANAGER.play("24PlayerLand");
 		}
 		break;
 	case Magician::RIGHT_DIE_P3:
@@ -662,6 +677,7 @@ void Magician::Collision(RECT rc)
 
 	if (_hp <= 0)
 	{
+		SOUNDMANAGER.play("22PlayerDie");
 		_friction = 5;
 		_jumpPower = 5;
 		_gravity = 0.3f;
@@ -680,6 +696,7 @@ void Magician::Collision(RECT rc)
 
 	if (rnd == 0)
 	{
+		SOUNDMANAGER.play("20PlayerHurt1");
 		if (!isLeft)
 			ChangeAnim((int)RIGHT_HIT_1, "MagicianRightHit1");
 		else if (isLeft)
@@ -687,6 +704,7 @@ void Magician::Collision(RECT rc)
 	}
 	else
 	{
+		SOUNDMANAGER.play("21PlayerHurt2");
 		if (!isLeft)
 			ChangeAnim((int)RIGHT_HIT_2, "MagicianRightHit2");
 		else if (isLeft)

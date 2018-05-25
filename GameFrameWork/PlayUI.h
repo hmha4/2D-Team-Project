@@ -1,9 +1,9 @@
 #pragma once
 #include "gameNode.h"
 
-#define MAX_ICE 10
-#define MAX_FIRE 20
-#define MAX_THUNDER 60
+#define MAX_ICE 10.0f
+#define MAX_FIRE 20.0f
+#define MAX_THUNDER 60.0f
 
 struct tagSkill
 {
@@ -16,6 +16,7 @@ struct tagSkill
 		for (int ii = 0; ii < 3; ++ii)
 		{
 			currentGauge[ii] = 0;
+			fullCharge[ii] = false;
 		}
 		maxGauge[0] = maxIce;
 		maxGauge[1] = maxFire;
@@ -23,10 +24,11 @@ struct tagSkill
 		enterKeyTime = 0;
 	}
 
-	int selectSkill;
-	float currentGauge[3];
-	float maxGauge[3];
-	float enterKeyTime;
+	int		selectSkill;
+	float	currentGauge[3];
+	float	maxGauge[3];
+	BOOL	fullCharge[3];
+	float	enterKeyTime;
 };
 
 struct tagPlayerInfo
@@ -69,6 +71,7 @@ private:
 	image*			_brick;
 	image*			_UItitle;
 	image*			_hpGauge;
+	image*			_skillGauge;
 
 	RECT			_zRC;
 
@@ -77,6 +80,11 @@ private:
 	SkillIce*		_ice;
 	SkillFire*		_fire[8];
 
+	COLORREF		_red;
+	COLORREF		_orange;
+	COLORREF		_yellow;
+	COLORREF		_green;
+	COLORREF		_rnd;
 public:
 	PlayUI();
 	~PlayUI();
@@ -92,7 +100,7 @@ public:
 	void DrawHP(HDC hdc, int x, int y);
 	void DrawHPgauge(HDC hdc, int x, int y, int hp);
 	void DrawLevel(HDC hdc, int x, int y, int level);
-	void DrawSkillGauge(HDC hdc, int x, int y, float gauge);
+	void DrawSkillGauge(HDC hdc, RECT rc, int player, int selectSkill);
 	void DrawInserCoin(HDC hdc);
 
 	void MakeSkillThunder();
@@ -102,6 +110,7 @@ public:
 	void ChangeSkillBox(int player);
 	void SelectSkillBox(int player);
 	void UseSkill(int player);
+	void ChargeSkillGauge(int playerNum);
 
 	void SetLvHp(int playerNum, int hp, int lv);
 	void SetPlayerPos(int playerNum, float x, float y, int state);

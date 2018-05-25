@@ -162,10 +162,16 @@ void Warrior::Update()
 	{
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN ||
 			_state == RIGHT_JUMP || _state == RIGHT_FALL)
+		{
 			BULLET.Shot(_weaponEffectName, _colX + 40, _colY - 20, 0, 0, 2, 0);
+			SOUNDMANAGER.play("23PlayerSwing");
+		}
 		else if (_state == LEFT_IDLE || _state == LEFT_RUN ||
 			_state == LEFT_JUMP || _state == LEFT_FALL)
+		{
 			BULLET.Shot(_weaponEffectName, _colX - 40, _colY - 20, 0, 0, -2, 1);
+			SOUNDMANAGER.play("23PlayerSwing");
+		}
 
 		if (_state == RIGHT_IDLE || _state == RIGHT_RUN)
 			ChangeAnim((int)RIGHT_ATTACK, "WarriorRightAttack");
@@ -214,6 +220,7 @@ void Warrior::Update()
 		{
 			_hp = 10;
 			ChangeAnim((int)RIGHT_OTHER, "WarriorRightOther");
+			SOUNDMANAGER.play("19PlayerRoar");
 			break;
 		}
 		if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
@@ -242,6 +249,7 @@ void Warrior::Update()
 		{
 			_hp = 10;
 			ChangeAnim((int)LEFT_OTHER, "WarriorLeftOther");
+			SOUNDMANAGER.play("19PlayerRoar");
 			break;
 		}
 		if (KEYMANAGER.isStayKeyDown(_mControl["Right"]))
@@ -376,6 +384,7 @@ void Warrior::Update()
 			_jumpPower = 0;
 			_gravity = 0;
 			ChangeAnim((int)RIGHT_IDLE, "WarriorRightIdle");
+			SOUNDMANAGER.play("24PlayerLand");
 		}
 		break;
 	case Warrior::LEFT_FALL:
@@ -385,6 +394,7 @@ void Warrior::Update()
 			_jumpPower = 0;
 			_gravity = 0;
 			ChangeAnim((int)LEFT_IDLE, "WarriorLeftIdle");
+			SOUNDMANAGER.play("24PlayerLand");
 		}
 		break;
 	case Warrior::RIGHT_ATTACK:
@@ -537,11 +547,13 @@ void Warrior::Update()
 			_gravity = 0;
 			_y = _startY;
 			ChangeAnim((int)RIGHT_DIE_P3, "WarriorRightDie3");
+			SOUNDMANAGER.play("24PlayerLand");
 		}
 		else if (_friction > 0 && _y >= _startY)
 		{
 			_jumpPower = 2;
 			_gravity = 0.3f;
+			SOUNDMANAGER.play("24PlayerLand");
 		}
 		break;
 	case Warrior::LEFT_DIE_P2:
@@ -556,9 +568,11 @@ void Warrior::Update()
 			_gravity = 0;
 			_y = _startY;
 			ChangeAnim((int)LEFT_DIE_P3, "WarriorLeftDie3");
+			SOUNDMANAGER.play("24PlayerLand");
 		}
 		else if (_friction > 0 && _y >= _startY)
 		{
+			SOUNDMANAGER.play("24PlayerLand");
 			_jumpPower = 2;
 			_gravity = 0.3f;
 		}
@@ -681,6 +695,7 @@ void Warrior::Collision(RECT rc)
 
 	if (_hp <= 0)
 	{
+		SOUNDMANAGER.play("22PlayerDie");
 		_friction = 5;
 		_jumpPower = 5;
 		_gravity = 0.3f;
@@ -699,6 +714,7 @@ void Warrior::Collision(RECT rc)
 
 	if (rnd == 0)
 	{
+		SOUNDMANAGER.play("20PlayerHurt1");
 		if (!isLeft)
 			ChangeAnim((int)RIGHT_HIT_1, "WarriorRightHit1");
 		else if (isLeft)
@@ -706,6 +722,7 @@ void Warrior::Collision(RECT rc)
 	}
 	else
 	{
+		SOUNDMANAGER.play("21PlayerHurt2");
 		if (!isLeft)
 			ChangeAnim((int)RIGHT_HIT_2, "WarriorRightHit2");
 		else if (isLeft)
