@@ -62,7 +62,6 @@ void Stage2_3::Update()
 			offset = 0;
 			CAM.SetSize(WINSIZEX, WINSIZEY);
 			CAM.SetState("FOLLOW");
-			_pm->ChangeAnim(34, "RightOther");
 		}
 		mObjfade->Update(offset);
 	}

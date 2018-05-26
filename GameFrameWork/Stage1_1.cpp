@@ -18,6 +18,7 @@ Stage1_1::~Stage1_1()
 HRESULT Stage1_1::Init()
 {
 	ZORDER.Release();
+	CAM.SetPos(0, 0);
 
 	//맵오브젝트 제트오더 추가
 	MapObject*mObj = new MapObject(IMAGEMANAGER.findImage("1.1배경오브젝트"));

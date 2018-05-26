@@ -98,7 +98,8 @@ void Stage1_3::Update()
 		{
 			s3State = WIN_STAGE;
 			_pm->ChangeAnim(34, "RightOther");
-			SOUNDMANAGER.play("10Victory");
+			SOUNDMANAGER.stop("09Stage1_Boss");
+			SOUNDMANAGER.play("10Victory", 0.3f);
 			_pm->ChangeWeapon(3);
 		}
 	}
@@ -121,7 +122,6 @@ void Stage1_3::Update()
 		{
 			offset = 255;
 			Save();
-			SOUNDMANAGER.stop("09Stage1_Boss");
 			SCENEMANAGER.changeScene("스테이지2.1");
 			break;
 		}

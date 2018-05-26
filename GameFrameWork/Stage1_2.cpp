@@ -20,6 +20,7 @@ Stage1_2::~Stage1_2()
 HRESULT Stage1_2::Init()
 {
 	ZORDER.Release();
+	CAM.SetPos(0, 0);
 
 	MapObject*mObj = new MapObject(IMAGEMANAGER.findImage("1.2배경오브젝트"));
 	mObj->Init(1357, 0, 200);

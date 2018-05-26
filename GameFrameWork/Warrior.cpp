@@ -14,7 +14,8 @@ Warrior::~Warrior()
 HRESULT Warrior::Init(float x, float y, int player)
 {
 	Character::Init(x, y, player);
-
+	ChangeWeapon();
+	_hp = _maxHp;
 	// ======== 이미지 초기화 ======== //
 	IMAGEMANAGER.addFrameImage("Warrior1", PathFile("image\\Character", "Warrior_Weapon_1").c_str(), 1200, 1400, 10, 7, true, RGB(255, 0, 255));
 	IMAGEMANAGER.addFrameImage("Warrior2", PathFile("image\\Character", "Warrior_Weapon_2").c_str(), 1200, 1400, 10, 7, true, RGB(255, 0, 255));
@@ -650,28 +651,24 @@ void Warrior::ChangeWeapon()
 	case Character::WEAPON_1:
 		_img = IMAGEMANAGER.findImage("Warrior1");
 		_weaponEffectName = "Warrior_Weapon_1_B";
-		_hp = 10;
 		_maxHp = 10;
 		_atk = 1;
 		break;
 	case Character::WEAPON_2:
 		_img = IMAGEMANAGER.findImage("Warrior2");
 		_weaponEffectName = "Warrior_Weapon_2_B";
-		_hp = 15;
 		_maxHp = 15;
 		_atk = 2;
 		break;
 	case Character::WEAPON_3:
 		_img = IMAGEMANAGER.findImage("Warrior3");
 		_weaponEffectName = "Warrior_Weapon_3_B";
-		_hp = 20;
 		_maxHp = 20;
 		_atk = 3;
 		break;
 	case Character::WEAPON_4:
 		_img = IMAGEMANAGER.findImage("Warrior4");
 		_weaponEffectName = "Warrior_Weapon_4_B";
-		_hp = 20;
 		_maxHp = 20;
 		_atk = 4;
 		break;
