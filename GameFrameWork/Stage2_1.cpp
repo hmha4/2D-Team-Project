@@ -125,7 +125,7 @@ void Stage2_1::Update()
 			{
 				static float showTime1 = 0;
 				showTime1 += TIMEMANAGER.getElapsedTime();
-
+				_em->GetUI()->SetDrawGo(false);
 				if (showTime1 > 3.5)
 				{
 					s1State = SECOND_STAGE;
@@ -176,6 +176,7 @@ void Stage2_1::Update()
 			{
 				_em->ShowEnemy(MINO, 3400, 220, LEFT_IDLE);
 				_em->ShowEnemy(MINO, 3400, 300, LEFT_IDLE);
+				_em->GetUI()->SetDrawGo(false);
 				changeView = true;
 			}
 		}
@@ -201,6 +202,7 @@ void Stage2_1::Update()
 					_pm->ChangeAnim(34, "RightOther");
 					showTime1 = 0;
 					changeView = false;
+					_em->GetUI()->SetDrawGo(true);
 				}
 			}
 		}

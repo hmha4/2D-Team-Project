@@ -48,5 +48,7 @@ public:
 		return enemyMap.find(eType)->second;
 	}
 	inline int&GetEnemyNum() { return checkEnemyNum; }
+
+	inline EnemyUI* GetUI() { return _enemyUI; }
 };
 

@@ -134,9 +134,10 @@ void Stage1_2::Update()
 			changeView = true;
 			if (_em->GetEnemyNum() == 0)
 			{
+				_em->GetUI()->SetDrawGo(false);
 				static float showTime1 = 0;
 				showTime1 += TIMEMANAGER.getElapsedTime();
-
+				_em->GetUI()->SetDrawGo(false);
 				if (showTime1 > 3.5)
 				{
 					s2State = SECOND_STAGE;

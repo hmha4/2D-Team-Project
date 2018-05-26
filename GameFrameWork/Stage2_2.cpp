@@ -84,7 +84,8 @@ void Stage2_2::Update()
 		_em->Update(_pm);
 		_pm->Update();
 		CAM.Update(_pm->GetPlayer1()->GetX(), _pm->GetPlayer1()->GetY(), 5, false);
-
+		if (_em->GetEnemyNum() == 0)
+			_em->GetUI()->SetDrawGo(false);
 		if (_em->GetEnemyNum() == 0&&_pm->GetPlayer1()->GetX()>1700)
 		{
 			s2State = SECOND_STAGE;
@@ -108,6 +109,7 @@ void Stage2_2::Update()
 			s2State = WIN_STAGE;
 			CAM.SetSize(GAMESIZEX, WINSIZEY);
 			_pm->ChangeAnim(34, "RightOther");
+			_em->GetUI()->SetDrawGo(true);
 		}
 	}
 	break;

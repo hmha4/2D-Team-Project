@@ -65,8 +65,9 @@ EnemyManager::EnemyManager()
 	_enemyUI = new EnemyUI;
 	//보스체력 초기화
 	//			maxHP, 에너지바 너비, 이름 입력
-	_enemyUI->Init(100, 400, "Red Dragon");
+	_enemyUI->Init(90, 400, "DragonKnight");
 	ZORDER.InputObj(_enemyUI);
+
 	//보스체력 활성화
 	_enemyUI->SetDrawHP(true);
 }
@@ -133,6 +134,12 @@ void EnemyManager::InputEnemy(ENEMYTYPE eType, int enemyNum)
 				enemy->Init();
 				enemyVec.push_back(enemy);
 			}
+			case DRAGON:
+			{
+				Enemy*enemy = new EvilMage(eType);
+				enemy->Init();
+				enemyVec.push_back(enemy);
+			}
 		}
 	
 	}
@@ -154,10 +161,6 @@ void EnemyManager::Update(PlayerManager*pm)
 {
 	//보스 체력 또는 화살표그리기 위한 업데이트 함수
 	_enemyUI->Update();
-	
-	//										rawGo 활성화(true면 화살표 위로)
-	if (KEYMANAGER.isOnceKeyDown('E')) _enemyUI->SetDrawGo(true);
-	if (KEYMANAGER.isOnceKeyDown('R')) _enemyUI->SetDrawGo(false);
 
 	enemyMapIter emIter = enemyMap.begin();
 	for (; emIter != enemyMap.end(); emIter++)
@@ -169,7 +172,11 @@ void EnemyManager::Update(PlayerManager*pm)
 				emIter->second[i]->Update(pm);
 				
 				if(emIter->second[i]->getEnemyType()== DRAGONKNIGHT)
-					_enemyUI->HpUpdate(emIter->second[i]->getHp()*3.333f);
+					_enemyUI->HpUpdate(emIter->second[i]->getHp()*3);
+				if (emIter->second[i]->getEnemyType() == EVILMAGE)
+					_enemyUI->HpUpdate(emIter->second[i]->getHp() * 3);
+				if (emIter->second[i]->getEnemyType() == DRAGON)
+					_enemyUI->HpUpdate(emIter->second[i]->getHp() * 3);
 			}
 		}
 	}

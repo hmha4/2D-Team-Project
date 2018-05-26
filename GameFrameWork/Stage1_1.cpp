@@ -111,7 +111,7 @@ void Stage1_1::Update()
 				{
 					static float showTime1 = 0;
 					showTime1 += TIMEMANAGER.getElapsedTime();
-
+					_em->GetUI()->SetDrawGo(false);
 					if (showTime1 > 3.5)
 					{
 						//_em->AllDieInit();
@@ -154,6 +154,8 @@ void Stage1_1::Update()
 			else if (_pm->GetPlayer1()->GetX() >= 3200&& _pm->GetPlayer1()->GetX()<3600)
 			{
 				changeView = true;
+				if(_em->GetEnemyNum()==0)
+					_em->GetUI()->SetDrawGo(false);
 			}
 			else if (_pm->GetPlayer1()->GetX()>=3600)
 			{
