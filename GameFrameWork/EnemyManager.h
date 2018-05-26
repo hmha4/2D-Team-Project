@@ -7,7 +7,9 @@
 #include "DragonKnight.h"
 #include "BlackArchor.h"
 #include "Cyclopes.h"
+#include "EvilMage.h"
 #include "EnemyUI.h"
+
 
 class EnemyManager :public gameNode
 {
@@ -39,6 +41,8 @@ public:
 	void EnemyCollision(PlayerManager*pm);
 
 	void AllDieInit();
+
+	void BulletShadowCollision();
 
 	inline vector<Enemy*>&GetEnemyVec(ENEMYTYPE eType) {
 		return enemyMap.find(eType)->second;

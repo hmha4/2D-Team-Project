@@ -26,6 +26,8 @@ HRESULT Stage2_3::Init()
 	_pm->SetPlayerPos(WINSIZEX/2, -50);
 	_pm->ChangeAnim(10, "RightFall");
 
+	_em = new EnemyManager;
+	_em->InputEnemy(EVILMAGE, 1);
 	//fadeOut = IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô");
 	offset = 255;
 	s3State = OPENNING;
@@ -62,6 +64,7 @@ void Stage2_3::Update()
 			offset = 0;
 			CAM.SetSize(WINSIZEX, WINSIZEY);
 			CAM.SetState("FOLLOW");
+			_em->ShowEnemy(EVILMAGE, WINSIZEX / 2 + 200, -100, LEFT_IDLE);
 		}
 		mObjfade->Update(offset);
 	}
@@ -69,9 +72,10 @@ void Stage2_3::Update()
 	case FIRST_STAGE:
 	{
 		_pm->Update();
+		_em->Update(_pm);
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
-		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
+		if (_em->GetEnemyNum() == 0)
 		{
 			s3State = WIN_STAGE;
 			_pm->ChangeAnim(34, "RightOther");
@@ -83,8 +87,12 @@ void Stage2_3::Update()
 		_pm->Update();
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
-		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
+		static float time = 0;
+		time += TIMEMANAGER.getElapsedTime();
+
+		if (time > 2)
 		{
+			time = 0;
 			s3State = NEXT_STAGE;
 		}
 		break;

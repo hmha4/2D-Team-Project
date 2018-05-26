@@ -28,7 +28,7 @@ void BulletManager::Release()
 }
 
 //이미지메니저로 미리만든 이미지삽입해야함
-void BulletManager::BulletSetting(string bulletName, image * img, int bulletNum, bool isAnim, int animSpeed, int frameYnum )
+void BulletManager::BulletSetting(string bulletName, image * img, int bulletNum, bool isAnim, int animSpeed, int frameYnum, bool onceAnim)
 {
 	bulletVec bVec;
 	if (isAnim)//에니메이션 총알이미지일때
@@ -52,7 +52,7 @@ void BulletManager::BulletSetting(string bulletName, image * img, int bulletNum,
 				{
 					animArr[k] = k + j*img->GetWidth() / img->GetFrameWidth();
 				}
-				bullet->anim[j].setPlayFrame(animArr, img->GetWidth() / img->GetFrameWidth(), true);
+				bullet->anim[j].setPlayFrame(animArr, img->GetWidth() / img->GetFrameWidth(), onceAnim);
 				bullet->anim[j].stop();
 			}
 
@@ -136,6 +136,13 @@ void BulletManager::BulletUpdate()
 			{
 				(*bIter)->rc = RectMakeCenter((*bIter)->x, (*bIter)->y, (*bIter)->img->GetFrameWidth(), (*bIter)->img->GetFreamHeight());
 				(*bIter)->anim[(*bIter)->frameYidx].frameUpdate(TIMEMANAGER.getElapsedTime());
+				if (!(*bIter)->anim[(*bIter)->frameYidx].isPlay())
+				{
+					(*bIter)->isShot = false;
+					(*bIter)->rc = { 0,0,0,0 };
+					(*bIter)->gravity = 0;
+					(*bIter)->addGravity = 0;
+				}
 			}
 			else
 				(*bIter)->rc = RectMakeCenter((*bIter)->x, (*bIter)->y, (*bIter)->img->GetWidth(), (*bIter)->img->GetHeight());

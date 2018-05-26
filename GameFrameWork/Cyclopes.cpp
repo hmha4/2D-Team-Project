@@ -63,7 +63,7 @@ HRESULT Cyclopes::Init(int x, int y, ENEMYSTATE eState)
 	hp = 25;
 	idx = 0;
 	
-	attack[0] = 0;
+	attack[0] = 1;
 	attack[1] = 0;
 	attack[2] = 1;
 	attack[3] = 0;
@@ -450,7 +450,7 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 
 void Cyclopes::DieEnemy()
 {
-	if (hp > 15)
+	if (hp > 18)
 		state = 0;
 	else
 		state = 1;
