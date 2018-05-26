@@ -73,7 +73,7 @@ void Stage1_1::Update()
 			offset -= 2;
 			if (offset < 0)
 			{
-				_pm->ChangeAnim(0, "RightIdle");
+				_pm->ChangeAnim(34, "RightOther");
 				s1State = FIRST_STAGE;
 				offset = 0;
 				CAM.SetSize(GAMESIZEX / 2, WINSIZEY);

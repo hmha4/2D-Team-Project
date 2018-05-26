@@ -69,7 +69,7 @@ void Stage2_2::Update()
 			offset = 0;
 			CAM.SetSize(2438, WINSIZEY);
 			CAM.SetState("FOLLOW");
-			_pm->ChangeAnim(0, "RightIdle");
+			_pm->ChangeAnim(34, "RightOther");
 			for (int i = 0; i < 4; i++)
 				_em->ShowEnemy(WAREWOLF, WINSIZEX +200, 120 + i * 60, LEFT_IDLE);
 			for (int i = 0; i < 2; i++)

@@ -74,7 +74,7 @@ void Stage2_1::Update()
 			offset = 0;
 			CAM.SetSize(1400, WINSIZEY);
 			CAM.SetState("FOLLOW");
-			_pm->ChangeAnim(0, "RightIdle");
+			_pm->ChangeAnim(34, "RightOther");
 			for (int i = 0; i < 3; i++)
 				_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
 			for (int i = 0; i < 3; i++)

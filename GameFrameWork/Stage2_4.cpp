@@ -70,7 +70,7 @@ void Stage2_4::Update()
 			offset = 0;
 			CAM.SetSize(GAMESIZEX, WINSIZEY);
 			CAM.SetState("FOLLOW");
-			_pm->ChangeAnim(0, "RightIdle");
+			_pm->ChangeAnim(34, "RightOther");
 		}
 		mObjfade->Update(offset);
 	}
