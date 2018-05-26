@@ -662,6 +662,9 @@ void Magician::ChangeWeapon()
 void Magician::ChangeAnim(int state, string animKey)
 {
 	_state = (STATE)state;
+	if (_state == RIGHT_OTHER || _state == LEFT_OTHER)
+		SOUNDMANAGER.play("19PlayerRoar");
+
 	_anim = ANIMATIONKEY.findAnimation(animKey);
 	_anim->start();
 }

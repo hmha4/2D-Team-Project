@@ -597,12 +597,14 @@ void Warrior::Update()
 		if (!_anim->isPlay())
 		{
 			ChangeAnim((int)RIGHT_IDLE, "WarriorRightIdle");
+			
 		}
 		break;
 	case Warrior::LEFT_DIE_P4:
 		if (!_anim->isPlay())
 		{
 			ChangeAnim((int)LEFT_IDLE, "WarriorLeftIdle");
+			
 		}
 		break;
 	case Warrior::RIGHT_OTHER:
@@ -679,6 +681,9 @@ void Warrior::ChangeWeapon()
 void Warrior::ChangeAnim(int state, string animKey)
 {
 	_state = (STATE)state;
+	if(_state == RIGHT_OTHER || _state == LEFT_OTHER)
+		SOUNDMANAGER.play("19PlayerRoar");
+
 	_anim = ANIMATIONKEY.findAnimation(animKey);
 	_anim->start();
 }

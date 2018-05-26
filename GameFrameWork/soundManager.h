@@ -15,7 +15,7 @@ class soundManager:public SingleTonBase<soundManager>
 {
 private:
 	typedef map<string, Sound**>						arrSounds;
-	typedef map<string, Sound**>::iterator		arrSoundsIter;
+	typedef map<string, Sound**>::iterator				arrSoundsIter;
 
 	typedef map<string, Channel**>					arrChannels;
 	typedef map<string, Channel**>::iterator		arrChannelsIter;
@@ -26,6 +26,7 @@ private:
 	Channel**			_channel;
 
 	arrSounds			_mTotalSounds;
+	arrChannels			_mTotalChannels;
 
 public:
 	soundManager();
