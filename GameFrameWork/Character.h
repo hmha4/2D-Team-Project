@@ -80,6 +80,8 @@ public:
 	inline int GetWeaponLv() { return (int)_weapon + 1; }
 	//	캐릭터 무기 설정자(무기 레벨)
 	void SetWeaponLv(int weaponLv) { _weapon = (WEAPON)(weaponLv - 1); }
+	//	캐릭터 불릿 이름
+	inline string GetBulletName() { return _weaponEffectName; }
 	//	캐릭터 좌표 설정
 	void SetPos(float x, float y) { _x = x; _y = y; }
 
