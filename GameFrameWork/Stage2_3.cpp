@@ -65,6 +65,7 @@ void Stage2_3::Update()
 			CAM.SetSize(WINSIZEX, WINSIZEY);
 			CAM.SetState("FOLLOW");
 			_em->ShowEnemy(EVILMAGE, WINSIZEX / 2 + 200, -100, LEFT_IDLE);
+			SOUNDMANAGER.play("48DarkMage");
 		}
 		mObjfade->Update(offset);
 	}

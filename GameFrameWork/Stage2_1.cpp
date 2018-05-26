@@ -86,6 +86,8 @@ void Stage2_1::Update()
 				_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
 			for (int i = 0; i < 3; i++)
 				_em->ShowEnemy(BLACKARCHOR, WINSIZEX, 210 + i * 70, LEFT_IDLE);
+			SOUNDMANAGER.play("26Skeleton");
+			SOUNDMANAGER.play("45BlackArcher");
 		}
 		mObjfade->Update(offset);
 	}
@@ -107,13 +109,13 @@ void Stage2_1::Update()
 				{
 					for (int i = 0; i < 6; i++)
 						_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
-
+					SOUNDMANAGER.play("26Skeleton");
 					int rndNum = RND.GetFromTo(-1, 2);
 					if (rndNum == 0)
 						rndNum = 1;
 					for (int i = 0; i<3; i++)
 						_em->ShowEnemy(BLACKARCHOR, _pm->GetPlayer1()->GetX() + 500 * rndNum, 210 + i * 70, LEFT_IDLE);
-
+					SOUNDMANAGER.play("45BlackArcher");
 					showTime = 0;
 				}
 			}
@@ -158,13 +160,13 @@ void Stage2_1::Update()
 				{
 					for (int i = 0; i < 6; i++)
 						_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
-
+					SOUNDMANAGER.play("26Skeleton");
 					int rndNum = RND.GetFromTo(-1, 2);
 					if (rndNum == 0)
 						rndNum = 1;
 					for (int i = 0; i<3; i++)
 						_em->ShowEnemy(BLACKARCHOR, _pm->GetPlayer1()->GetX() + 500 * rndNum, 210 + i * 70, LEFT_IDLE);
-
+					SOUNDMANAGER.play("45BlackArcher");
 					showTime = 0;
 				}
 			}
@@ -178,6 +180,7 @@ void Stage2_1::Update()
 				_em->ShowEnemy(MINO, 3400, 300, LEFT_IDLE);
 				_em->GetUI()->SetDrawGo(false);
 				changeView = true;
+				SOUNDMANAGER.play("29Mino");
 			}
 		}
 		else if (_pm->GetPlayer1()->GetX() >= 2700 && _em->GetEnemyNum() != 0 && changeView)

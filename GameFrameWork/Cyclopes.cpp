@@ -278,6 +278,7 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 						atkWaitTime += TIMEMANAGER.getElapsedTime();
 						if (atkWaitTime > 0.5)
 						{
+							SOUNDMANAGER.play("47CyclopseAttack");
 							atkWaitTime = 0;
 							isAttack = false;
 							eState = LEFT_ATTACK;
@@ -294,6 +295,7 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 							atkWaitTime += TIMEMANAGER.getElapsedTime();
 							if (atkWaitTime > 0.5)
 							{
+								SOUNDMANAGER.play("47CyclopseAttack");
 								atkWaitTime = 0;
 								isAttack = false;
 								eState = LEFT_ATTACK;
@@ -307,6 +309,7 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 						}
 						else
 						{
+							SOUNDMANAGER.play("46Cyclopse");
 							initY = posY;
 							isAttack = false;
 							eState = LEFT_ATTACK2;
@@ -353,6 +356,7 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 					atkWaitTime += TIMEMANAGER.getElapsedTime();
 					if (atkWaitTime > 0.5)
 					{
+						SOUNDMANAGER.play("47CyclopseAttack");
 						atkWaitTime = 0;
 						isAttack = false;
 						eState = RIGHT_ATTACK;
@@ -372,6 +376,7 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 						atkWaitTime += TIMEMANAGER.getElapsedTime();
 						if (atkWaitTime > 0.5)
 						{
+							SOUNDMANAGER.play("47CyclopseAttack");
 							atkWaitTime = 0;
 							isAttack = false;
 							eState = RIGHT_ATTACK;
@@ -385,6 +390,7 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 					}
 					else
 					{
+						SOUNDMANAGER.play("46Cyclopse");
 						initY = posY;
 						isAttack = false;
 						eState = RIGHT_ATTACK2;
@@ -457,6 +463,7 @@ void Cyclopes::DieEnemy()
 
 	if (hp <= 0)
 	{
+		SOUNDMANAGER.play("46Cyclopse");
 		initY = posY;
 
 		if (eState == LEFT_IDLE || eState == LEFT_ATTACK || eState == LEFT_MOVE)

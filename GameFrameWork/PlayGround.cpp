@@ -62,6 +62,12 @@ HRESULT PlayGround::Init()
 	SOUNDMANAGER.addSound("42DragonKnightFly", "sound\\DragonKnightFly.mp3", false, false);
 	SOUNDMANAGER.addSound("43DragonKnightWoman", "sound\\DragonKnightWoman.mp3", false, false);
 	SOUNDMANAGER.addSound("44DragonKnightChange", "sound\\DragonKnightChange.mp3", false, false);
+	SOUNDMANAGER.addSound("45BlackArcher", "sound\\BlackArcher.mp3", false, false);
+	SOUNDMANAGER.addSound("46Cyclopse", "sound\\Cyclopse.mp3", false, false);
+	SOUNDMANAGER.addSound("47CyclopseAttack", "sound\\CyclopseAttack.mp3", false, false);
+	SOUNDMANAGER.addSound("48DarkMage", "sound\\DarkMage.mp3", false, false);
+	SOUNDMANAGER.addSound("49DarkMageDie", "sound\\DarkMageDie.mp3", false, false);
+	SOUNDMANAGER.addSound("50DarkMageFly", "sound\\DarkMageFly.mp3", false, false);
 
 	IMAGEMANAGER.addImage("페이드아웃", PathFile("image", "검은화면").c_str(), 800, 600, false, NULL);
 	IMAGEMANAGER.addFrameImage("STAGE_NUM", PathFile("image", "STAGE_NUM").c_str(), 247, 512, 1, 8, true, RGB(255, 0, 255));

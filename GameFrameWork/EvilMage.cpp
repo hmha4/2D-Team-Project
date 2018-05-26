@@ -109,6 +109,7 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 				{
 					if (shot1Time > 0.3)
 					{
+						SOUNDMANAGER.play("39DragonKnightKnife");
 						BULLET.Shot("¸¶ÃÑ1", posX, posY + ypos, PI, 0, 5, 0);
 						BULLET.Shot("¸¶ÃÑ1", posX, posY + 70 + ypos, PI, 0, 5, 0);
 						BULLET.Shot("¸¶ÃÑ1", posX, posY - 70 + ypos, PI, 0, 5, 0);
@@ -158,6 +159,7 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 				{
 					if (shot1Time > 0.3)
 					{
+						SOUNDMANAGER.play("39DragonKnightKnife");
 						BULLET.Shot("¸¶ÃÑ1", posX, posY + ypos, 0, 0, 5, 0);
 						BULLET.Shot("¸¶ÃÑ1", posX, posY + 70 + ypos, 0, 0, 5, 0);
 						BULLET.Shot("¸¶ÃÑ1", posX, posY - 70 + ypos, 0, 0, 5, 0);
@@ -256,6 +258,7 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 						atk2X += cosf(atk2Angle) * 40;
 						atk2Y += -sinf(atk2Angle) * 40;
 						BULLET.Shot("¸¶ÃÑ2", atk2X, atk2Y, 0, 0, 0, 0);
+						SOUNDMANAGER.play("39DragonKnightKnife");
 						at2time = 0;
 					}
 				}
@@ -325,6 +328,7 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 						atk2X += cosf(atk2Angle) * 40;
 						atk2Y += -sinf(atk2Angle) * 40;
 						BULLET.Shot("¸¶ÃÑ2", atk2X, atk2Y, 0, 0, 0, 0);
+						SOUNDMANAGER.play("39DragonKnightKnife");
 						at2time = 0;
 					}
 				}
@@ -623,6 +627,7 @@ void EvilMage::DieEnemy()
 {
 	if (hp <= 0)
 	{
+		SOUNDMANAGER.play("49DarkMageDie");
 		if (eState == LEFT_IDLE || eState == LEFT_ATTACK || eState == LEFT_MOVE || eState == LEFT_ATTACK3 || eState == LEFT_ATTACK2)
 		{
 			eState = LEFT_DIE;
@@ -698,6 +703,7 @@ void EvilMage::RandomAttack(int num)
 		}
 		else
 		{
+			SOUNDMANAGER.play("50DarkMageFly");
 			eState = LEFT_ATTACK3;
 			*anim = *ANIMATIONKEY.findAnimation("emAttack3");
 			anim->start();
@@ -721,6 +727,7 @@ void EvilMage::RandomAttack(int num)
 		}
 		else
 		{
+			SOUNDMANAGER.play("50DarkMageFly");
 			eState = RIGHT_ATTACK3;
 			*anim = *ANIMATIONKEY.findAnimation("emAttack3");
 			anim->start();

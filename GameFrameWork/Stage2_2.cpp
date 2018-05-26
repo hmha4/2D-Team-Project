@@ -74,6 +74,8 @@ void Stage2_2::Update()
 				_em->ShowEnemy(WAREWOLF, WINSIZEX +200, 120 + i * 60, LEFT_IDLE);
 			for (int i = 0; i < 2; i++)
 				_em->ShowEnemy(BLACKARCHOR, WINSIZEX+200, 180 + i * 60, LEFT_IDLE);
+			SOUNDMANAGER.play("27WareWolf");
+			SOUNDMANAGER.play("45BlackArcher");
 		}
 		mObjfade->Update(offset);
 	}
@@ -95,6 +97,8 @@ void Stage2_2::Update()
 				_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(200, 400), RND.GetFromTo(200, 350), LEFT_IDLE);
 			for (int i = 0; i < 1; i++)
 				_em->ShowEnemy(CYCLOPSE, 2200, 220, LEFT_IDLE);
+			SOUNDMANAGER.play("26Skeleton");
+			SOUNDMANAGER.play("46Cyclopse");
 		}
 	}
 	break;

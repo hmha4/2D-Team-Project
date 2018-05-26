@@ -126,6 +126,7 @@ void BlackArchor::EnemyUpdate(PlayerManager * pm)
 		{
 			if (!shot)
 			{
+				SOUNDMANAGER.play("37ArrowShoot");
 				BULLET.Shot("블랙아처화살", posX, posY, PI, 0, 9, 1);
 				shot = true;
 			}
@@ -169,6 +170,7 @@ void BlackArchor::EnemyUpdate(PlayerManager * pm)
 		{
 			if (!shot)
 			{
+				SOUNDMANAGER.play("37ArrowShoot");
 				BULLET.Shot("블랙아처화살", posX, posY, 0, 0, 9, 0);
 				shot = true;
 			}
@@ -320,6 +322,7 @@ void BlackArchor::DieEnemy()
 {
 	if (hp <= 0)
 	{
+		SOUNDMANAGER.play("45BlackArcher");
 		initPosY = posY;
 
 		if (eState == LEFT_IDLE || eState == LEFT_ATTACK || eState == LEFT_MOVE)
