@@ -77,6 +77,7 @@ void Stage1_3::Update()
 		{
 			_em->ShowEnemy(DRAGONKNIGHT, WINSIZEX / 2 + 200, WINSIZEY / 2 + 30, LEFT_IDLE);
 			isOnceShow = true;
+			SOUNDMANAGER.play("43DragonKnightWoman");
 		}
 
 		offset -= 2;

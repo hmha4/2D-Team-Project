@@ -82,6 +82,7 @@ HRESULT DragonKnight::Init(int x, int y, ENEMYSTATE eState)
 	dieTime = 0;
 	initPosY = rc.bottom - img->GetFreamHeight() / 3 + 15;
 	setShadowY = 0;
+	chainAttackSound = false;
 	return S_OK;
 }
 
@@ -102,9 +103,10 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 				case CHANGE_BEGIN:
 				{
 					startTime += TIMEMANAGER.getElapsedTime();
-					
+
 					if (startTime > 2)
 					{
+						SOUNDMANAGER.play("40DragonKnight");
 						EFFECTMANAGER.play("변신", posX + 70, posY+30);
 						startTime = 0;
 						sState = CHANGE_END;
@@ -143,6 +145,11 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 			{
 				BULLET.Shot("용기사검0", posX - 80, posY, 0, 0, 0, 0);
 				stime = 0;
+				if (chainAttackSound)
+				{
+					SOUNDMANAGER.play("38DragonKnightChain", 0.5f);
+					chainAttackSound = false;
+				}
 			}
 			if (!anim->isPlay())
 			{
@@ -182,6 +189,11 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 			{
 				BULLET.Shot("용기사검0", posX + 170, posY, 0, 0, 0, 0);
 				stime = 0;
+				if (chainAttackSound)
+				{
+					SOUNDMANAGER.play("38DragonKnightChain", 0.5f);
+					chainAttackSound = false;
+				}
 			}
 
 			if (!anim->isPlay())
@@ -224,6 +236,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 				
 				if (btime > 0.3)
 				{
+					SOUNDMANAGER.play("39DragonKnightKnife", 0.6f);
 					BULLET.Shot("용기사검", posX, posY, PI , 0, 5, 0);
 					btime = 0;
 				}
@@ -269,6 +282,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 
 				if (btime1 > 0.3)
 				{
+					SOUNDMANAGER.play("39DragonKnightKnife", 0.6f);
 					BULLET.Shot("용기사검", posX, posY, 0, 0, 5, 0);
 					btime1 = 0;
 				}
@@ -614,6 +628,7 @@ void DragonKnight::DieEnemy()
 {
 	if (hp <= 0)
 	{
+		SOUNDMANAGER.play("41DragonKnightDie");
 		if (eState == LEFT_IDLE || eState == LEFT_ATTACK || eState == LEFT_MOVE||eState==LEFT_ATTACK3||eState==LEFT_ATTACK2)
 		{
 			eState = LEFT_DIE;
@@ -641,6 +656,7 @@ void DragonKnight::RandomAttack(int num)
 	{
 		if (num==0)
 		{
+			chainAttackSound = true;
 			eState = LEFT_ATTACK;
 			*anim = *ANIMATIONKEY.findAnimation("dkLeftAttack");
 			anim->start();
@@ -653,6 +669,7 @@ void DragonKnight::RandomAttack(int num)
 		}
 		else
 		{
+			SOUNDMANAGER.play("42DragonKnightFly");
 			eState = LEFT_ATTACK3;
 			*anim = *ANIMATIONKEY.findAnimation("dkLeftJump");
 			anim->start();
@@ -663,6 +680,7 @@ void DragonKnight::RandomAttack(int num)
 	{
 		if (num==0)
 		{
+			chainAttackSound = true;
 			eState = RIGHT_ATTACK;
 			*anim = *ANIMATIONKEY.findAnimation("dkRightAttack");
 			anim->start();
@@ -675,6 +693,7 @@ void DragonKnight::RandomAttack(int num)
 		}
 		else
 		{
+			SOUNDMANAGER.play("42DragonKnightFly");
 			eState = RIGHT_ATTACK3;
 			*anim = *ANIMATIONKEY.findAnimation("dkRightJump");
 			anim->start();

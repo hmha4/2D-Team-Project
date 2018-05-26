@@ -26,6 +26,8 @@ private:
 
 	int atkArr[8];
 	int atkIdx = 0;
+
+	bool chainAttackSound;
 public:
 	DragonKnight(ENEMYTYPE _eType);
 	~DragonKnight();
