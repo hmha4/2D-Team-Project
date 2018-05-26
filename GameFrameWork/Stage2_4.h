@@ -10,7 +10,7 @@ private:
 	enum STAGE4STATE
 	{
 		OPENNING,
-		FIRST_STAGE,		//전반
+		FIRST_STAGE = 30,		//전반
 		WIN_STAGE,
 		NEXT_STAGE = 23
 	};
