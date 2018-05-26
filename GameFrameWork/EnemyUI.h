@@ -8,7 +8,10 @@ private:
 	BOOL	_isDrawHP;
 	BOOL	_isDrawGo;
 
+	BOOL	_goBlink;
 	int		_goCount;
+	int		_goTimeCount;
+	BOOL	_up;
 
 	string	_name;
 	int		_maxHP;
@@ -34,15 +37,17 @@ public:
 	HRESULT Init(int maxHP, int width, string name);
 	void Release();
 	void HpUpdate(int currentHP);
-	void Update(int currentHP);
+	void Update();
 	void Render();
 
 	void DrawHP(HDC hdc);
 	void DrawName(HDC hdc, int right, int top, bool shadow = false);
 	void MakeBlink();
 
+	void DrawGo(HDC hdc, int right, int top, bool shadow = false, bool up = false);
+
 	void SetDrawHP(BOOL draw) { _isDrawHP = draw; }
-	void SetDrawGo(BOOL go);
+	void SetDrawGo(bool up = false);
 
 	inline RECT &getRc() { return _zRC; }
 };

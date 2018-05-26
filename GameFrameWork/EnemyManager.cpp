@@ -129,6 +129,13 @@ void EnemyManager::InputEnemy(ENEMYTYPE eType, int enemyNum)
 
 void EnemyManager::Update(PlayerManager*pm)
 {
+	//보스 체력 또는 화살표그리기 위한 업데이트 함수
+	_enemyUI->Update();
+	
+	//										rawGo 활성화(true면 화살표 위로)
+	if (KEYMANAGER.isOnceKeyDown('E')) _enemyUI->SetDrawGo(true);
+	if (KEYMANAGER.isOnceKeyDown('R')) _enemyUI->SetDrawGo(false);
+
 	enemyMapIter emIter = enemyMap.begin();
 	for (; emIter != enemyMap.end(); emIter++)
 	{
