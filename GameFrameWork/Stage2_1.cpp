@@ -65,6 +65,11 @@ void Stage2_1::Update()
 	{
 		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(MINO)[0]->getShadowColRc());
 	}
+	RECT temp2;
+	if (IntersectRect(&temp2, &_em->GetEnemyVec(MINO)[1]->getShadowColRc(), &_pm->GetPlayer1()->getRc()))
+	{
+		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(MINO)[1]->getShadowColRc());
+	}
 
 	switch (s1State)
 	{

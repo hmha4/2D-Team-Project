@@ -67,6 +67,8 @@ public:
 	virtual void Damaged() = 0;
 	virtual void EnemyUpdate(PlayerManager*pm) = 0;
 
+	//용만쓸거임
+	virtual void DragonRender();
 
 	virtual inline RECT&getRc() { return shadowRc; }
 	inline RECT&getColRc() { return rc; }
@@ -75,6 +77,6 @@ public:
 	inline bool&getDie() { return isDie; }
 	inline int&getHp() { return hp; }
 	inline RECT&getShadowColRc() { return shadowColRc; }
-
+	virtual inline RECT&getDragonFootRc() { return RectMake(0, 0, 0, 0); }
 };
 

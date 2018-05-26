@@ -151,6 +151,7 @@
     <ClInclude Include="Cyclopes.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="DataBase.h" />
+    <ClInclude Include="Dragon.h" />
     <ClInclude Include="DragonKnight.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Cyclopes.cpp" />
     <ClCompile Include="DataBase.cpp" />
+    <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="DragonKnight.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />

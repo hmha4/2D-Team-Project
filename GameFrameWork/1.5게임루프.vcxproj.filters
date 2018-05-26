@@ -309,6 +309,9 @@
     <ClInclude Include="EvilMage.h">
       <Filter>PlayGround\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Dragon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -489,6 +492,9 @@
       <Filter>PlayGround</Filter>
     </ClCompile>
     <ClCompile Include="EvilMage.cpp">
+      <Filter>PlayGround\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Dragon.cpp">
       <Filter>PlayGround\Enemy</Filter>
     </ClCompile>
   </ItemGroup>

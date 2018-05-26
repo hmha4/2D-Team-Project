@@ -85,6 +85,8 @@ void PlayerManager::Update()
 		Collision("¸¶ÃÑ1", i);
 		Collision("¸¶ÃÑ2", i);
 		Collision("¸¶ÃÑ3", i);
+		Collision("µåÃÑ", i);
+		Collision("µåºê", i);
 		_player[i]->Update();
 		//ÇÃ·¹ÀÌ¾î Ã¼·Â, ·¹º§ UI·Î Àü´Þ
 		UI->SetLvHp(i, _player[i]->GetHP(), _player[i]->GetWeaponLv());

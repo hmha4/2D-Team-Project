@@ -47,6 +47,14 @@ EnemyManager::EnemyManager()
 	BULLET.BulletSetting("¸¶ÃÑ3", IMAGEMANAGER.findImage("¸¶ÃÑ3"), 30, true, 10, 1);
 	BULLET.BulletShadowSetting("¸¶ÃÑ3", IMAGEMANAGER.findImage("¿þ¾îÃÑ¾Ë±×¸²ÀÚ"), RectMake(0, 0, 60, 10), 70);
 
+	IMAGEMANAGER.addFrameImage("µåºê", PathFile("image\\Enemy", "µå·¡°ïºê·¹½º").c_str(), 1200, 132, 4, 1, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("µåºê", IMAGEMANAGER.findImage("µåºê"), 30, true, 20, 1,false);
+	BULLET.BulletShadowSetting("µåºê", NULL, RectMake(0, 0, 300, 80), 60);
+
+	IMAGEMANAGER.addFrameImage("µåÃÑ", PathFile("image\\Enemy", "µå·¡°ïÃÑ").c_str(), 240, 60, 4, 1, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("µåÃÑ", IMAGEMANAGER.findImage("µåÃÑ"), 30, true, 60, 1);
+	BULLET.BulletShadowSetting("µåÃÑ", IMAGEMANAGER.findImage("¿þ¾îÃÑ¾Ë±×¸²ÀÚ"), RectMake(0, 0, 60, 10), 70);
+
 	EFFECTMANAGER.addEffect("¸¶3Æø", PathFile("image\\Enemy", "¸¶ÃÑ3Æø¹ß").c_str(), 400, 60, 80, 60, 30, 1, 20);
 	EFFECTMANAGER.addEffect("µ¹Æø¹ß", PathFile("image\\Enemy", "µ¹Æø¹ßÀÌÆåÆ®").c_str(), 420, 100, 84, 100, 20, 1, 20);
 	for (int i = 0; i < 30; i++)
@@ -60,6 +68,8 @@ EnemyManager::EnemyManager()
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("¸¶ÃÑ1")[i]);
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("¸¶ÃÑ2")[i]);
 		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("¸¶ÃÑ3")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("µåºê")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("µåÃÑ")[i]);
 	}
 
 	_enemyUI = new EnemyUI;
@@ -136,7 +146,7 @@ void EnemyManager::InputEnemy(ENEMYTYPE eType, int enemyNum)
 			}
 			case DRAGON:
 			{
-				Enemy*enemy = new EvilMage(eType);
+				Enemy*enemy = new Dragon(eType);
 				enemy->Init();
 				enemyVec.push_back(enemy);
 			}
@@ -176,7 +186,7 @@ void EnemyManager::Update(PlayerManager*pm)
 				if (emIter->second[i]->getEnemyType() == EVILMAGE)
 					_enemyUI->HpUpdate(emIter->second[i]->getHp() * 3);
 				if (emIter->second[i]->getEnemyType() == DRAGON)
-					_enemyUI->HpUpdate(emIter->second[i]->getHp() * 3);
+					_enemyUI->HpUpdate(emIter->second[i]->getHp() * 2);
 			}
 		}
 	}
@@ -309,6 +319,20 @@ void EnemyManager::BulletShadowCollision()
 		{
 			EFFECTMANAGER.play("µ¹Æø¹ß", GetCenterPos(rc).x-30, GetCenterPos(rc).y-80);
 			BULLET.Destroy("¿Üµ¹", i);
+		}
+	}
+	for (int i = 0; i < BULLET.GetBulletVec("µåÃÑ").size(); i++)
+	{
+		if (!BULLET.GetBulletVec("µåÃÑ")[i]->isShot)continue;
+		RECT temp;
+		RECT rc = RectMakeCenter(GetCenterPos(BULLET.GetBulletVec("µåÃÑ")[i]->shadowRc).x,
+			GetCenterPos(BULLET.GetBulletVec("µåÃÑ")[i]->shadowRc).y + 20,
+			BULLET.GetBulletVec("µåÃÑ")[i]->shadowWidth,
+			BULLET.GetBulletVec("µåÃÑ")[i]->shadowHeight);
+		if (IntersectRect(&temp, &rc, &BULLET.GetBulletVec("µåÃÑ")[i]->rc))
+		{
+			EFFECTMANAGER.play("¸¶3Æø", GetCenterPos(rc).x, GetCenterPos(rc).y - 40);
+			BULLET.Destroy("µåÃÑ", i);
 		}
 	}
 }

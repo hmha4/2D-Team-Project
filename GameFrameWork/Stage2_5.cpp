@@ -4,6 +4,8 @@
 
 Stage2_5::Stage2_5()
 {
+	IMAGEMANAGER.addFrameImage("µå·¡°ï¸öÅë", PathFile("image\\Enemy", "µå·¡°ï¸öÅë").c_str(), 5600, 282, 8, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER.addFrameImage("¿ëÁ×À½", PathFile("image\\Enemy", "¿ëÁ×À½").c_str(), 700, 266, 1, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER.addImage("2.5¾Õ¹è°æ", PathFile("image", "2-5¾Õ¹è°æ").c_str(), 800, 400, true, RGB(255, 0, 255));
 }
 
@@ -14,6 +16,14 @@ Stage2_5::~Stage2_5()
 
 HRESULT Stage2_5::Init()
 {
+	int dBodyIdle[] = { 0,2,3,4,5,6,7 };
+	ANIMATIONKEY.addArrayFrameAnimation("drIdle", "µå·¡°ï¸öÅë", dBodyIdle, 7, 7, true);
+
+	img = IMAGEMANAGER.findImage("µå·¡°ï¸öÅë");
+	anim = new animation;
+	anim = ANIMATIONKEY.findAnimation("drIdle");
+	anim->start();
+
 	ZORDER.Release();
 	CAM.SetPos(0, 0);
 
@@ -26,6 +36,9 @@ HRESULT Stage2_5::Init()
 	_pm->ChangeAnim(0, "RightRun");
 	_pm->SetPlayerPos(-50, WINSIZEY / 2 - 50);
 
+	_em = new EnemyManager;
+	_em->InputEnemy(DRAGON, 1);
+	
 	//fadeOut = IMAGEMANAGER.findImage("ÆäÀÌµå¾Æ¿ô");
 	offset = 255;
 	s5State = OPENNING;
@@ -38,14 +51,23 @@ HRESULT Stage2_5::Init()
 void Stage2_5::Render()
 {
 	IMAGEMANAGER.findImage("2.5¾Õ¹è°æ")->Render(getMemDC(), CAM.GetX(), CAM.GetY(), CAM.GetX(), CAM.GetY(), WINSIZEX, GAMESIZEY);
-
+	if (s5State != WIN_STAGE)
+		img->aniRender(getMemDC(), WINSIZEX / 2 - 400, WINSIZEY / 2 - 250, anim);
+	else if(s5State == WIN_STAGE|| s5State == NEXT_STAGE)
+		img->Render(getMemDC(), WINSIZEX / 2 - 400, WINSIZEY / 2 - 250);
 	_pm->Render();
-
+	
 	//fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
 }
 
 void Stage2_5::Update()
 {
+	RECT temp;
+	if (IntersectRect(&temp, &_em->GetEnemyVec(DRAGON)[0]->getDragonFootRc(), &_pm->GetPlayer1()->getRc()))
+	{
+		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(DRAGON)[0]->getDragonFootRc());
+	}
+
 	_pm->MoveRestrict((int)s5State);
 
 	switch (s5State)
@@ -53,8 +75,15 @@ void Stage2_5::Update()
 	case OPENNING:
 	{
 		_pm->Update();
-
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
+
+		static bool isOnce = false;
+
+		if (!isOnce)
+		{
+			_em->ShowEnemy(DRAGON, WINSIZEX / 2-100, WINSIZEY / 2-120, LEFT_IDLE);
+			isOnce = true;
+		}
 
 		offset -= 2;
 		if (offset < 0)
@@ -70,13 +99,21 @@ void Stage2_5::Update()
 	break;
 	case FIRST_STAGE:
 	{
+		_em->Update(_pm);
 		_pm->Update();
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
-		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
+		if (_em->GetEnemyNum() == 0)
 		{
-			s5State = WIN_STAGE;
-			_pm->ChangeAnim(34, "RightOther");
+			offset += 2;
+			mObjfade->Update(offset);
+
+			if (offset > 255)
+			{
+				offset = 0;
+				s5State = WIN_STAGE;
+				img = IMAGEMANAGER.findImage("¿ëÁ×À½");
+			}
 		}
 	}
 	break;
@@ -85,9 +122,14 @@ void Stage2_5::Update()
 		_pm->Update();
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
-		if (KEYMANAGER.isOnceKeyDown(VK_SPACE))
+		static float nextTime = 0;
+		nextTime += TIMEMANAGER.getElapsedTime();
+
+		if (nextTime > 4)
 		{
+			_pm->ChangeAnim(34, "RightOther");
 			s5State = NEXT_STAGE;
+			nextTime = 0;
 		}
 	}
 	break;

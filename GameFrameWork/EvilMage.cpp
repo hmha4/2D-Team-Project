@@ -6,7 +6,7 @@ EvilMage::EvilMage(ENEMYTYPE _eType)
 	:Enemy(_eType)
 {
 	IMAGEMANAGER.addFrameImage("다크메이지", PathFile("image\\Enemy", "마법사").c_str(), 1294, 720, 10, 6, true, RGB(255, 0, 255));
-	EFFECTMANAGER.addEffect("마죽", PathFile("image\\Enemy", "마법사죽음").c_str(), 1425, 84, 95, 84, 60, 1, 20);
+	EFFECTMANAGER.addEffect("마죽", PathFile("image\\Enemy", "마법사죽음").c_str(), 1425, 84, 95, 84, 60, 1, 40);
 }
 
 

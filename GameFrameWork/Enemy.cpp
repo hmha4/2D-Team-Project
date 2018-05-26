@@ -24,12 +24,14 @@ HRESULT Enemy::Init()
 
 HRESULT Enemy::Init(int x, int y, ENEMYSTATE eState)
 {
-	rc = RectMakeCenter(x, y, img->GetFrameWidth(), img->GetFreamHeight());
-	shadowRc = RectMake(rc.right - img->GetFrameWidth(), (rc.bottom - img->GetFreamHeight() / 3) + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
+	if (eType != DRAGON)
+	{
+		rc = RectMakeCenter(x, y, img->GetFrameWidth(), img->GetFreamHeight());
+		shadowRc = RectMake(rc.right - img->GetFrameWidth(), (rc.bottom - img->GetFreamHeight() / 3) + 15, img->GetFrameWidth(), img->GetFreamHeight() / 3);
 
-	posX = GetCenterPos(rc).x;
-	posY = GetCenterPos(rc).y;
-
+		posX = GetCenterPos(rc).x;
+		posY = GetCenterPos(rc).y;
+	}
 	this->eState = eState;
 	isDie = false;
 	isShow = false;
@@ -42,11 +44,15 @@ void Enemy::Render()
 {
 	if (isShow && !isDie)
 	{
-		if (eState != END)
-			img->aniRender(getMemDC(), rc.left, rc.top, anim);
-		else
-			img->alphaAniRender(getMemDC(), rc.left, rc.top, anim, alpha);
+		if (eType != DRAGON)
+		{
+			if (eState != END)
+				img->aniRender(getMemDC(), rc.left, rc.top, anim);
+			else
+				img->alphaAniRender(getMemDC(), rc.left, rc.top, anim, alpha);
+		}
 	}
+	DragonRender();
 	if (isShadow)
 		shadowImg->Render(getMemDC(), shadowRc.left, shadowRc.top);
 	//Rectangle(getMemDC(), shadowRc.left, shadowRc.top, shadowRc.right, shadowRc.bottom);
@@ -58,6 +64,10 @@ void Enemy::Update(PlayerManager*pm)
 }
 
 void Enemy::Release()
+{
+}
+
+void Enemy::DragonRender()
 {
 }
 

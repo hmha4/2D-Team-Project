@@ -460,7 +460,7 @@ void image::frameRender(HDC hdc, int destX, int destY, int curFrameX, int curFra
 
 void image::aniRender(HDC hdc, int destX, int destY, animation * ani)
 {
-    if (!FrustumCull(destX, destY)) return;
+   if (!FrustumCull(destX, destY)) return;
 
     Render(hdc, destX, destY, ani->getFramePos().x, ani->getFramePos().y, ani->getFrameWidth(), ani->getFrameHeight());
 }

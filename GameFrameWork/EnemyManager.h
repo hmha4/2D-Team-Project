@@ -8,6 +8,7 @@
 #include "BlackArchor.h"
 #include "Cyclopes.h"
 #include "EvilMage.h"
+#include "Dragon.h"
 #include "EnemyUI.h"
 
 
