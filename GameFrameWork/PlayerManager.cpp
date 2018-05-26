@@ -180,7 +180,8 @@ void PlayerManager::Collision(string bulletName, int playerNum)
 		if (IntersectRect(&rc, &_player[playerNum]->getRc(), &BULLET.GetBulletVec(bulletName)[j]->getRc()))
 		{
 			_player[playerNum]->Collision(BULLET.GetBulletVec(bulletName)[j]->getRc());
-			BULLET.Destroy(bulletName, j);
+			if(bulletName!= "µåºê")
+				BULLET.Destroy(bulletName, j);
 			break;
 		}
 	}

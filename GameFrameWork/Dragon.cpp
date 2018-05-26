@@ -366,11 +366,13 @@ void Dragon::UpdateAttackArr()
 {
 	if (hp > 30)
 	{
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 2; i++)
 			atkArr[i] = 0;
-		atkArr[3] = 1;
-		for (int i = 4; i < 6; i++)
+		atkArr[2] = 1;
+		atkArr[3] = 0;
+		for (int i = 4; i < 5; i++)
 			atkArr[i] = 0;
+		atkArr[5] = 1;
 		atkArr[6] = 2;
 		atkArr[7] = 1;
 	}
@@ -387,8 +389,9 @@ void Dragon::UpdateAttackArr()
 	}
 	else
 	{
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 1; i++)
 			atkArr[i] = 0;
+		atkArr[2] = 1;
 		atkArr[2] = 2;
 		atkArr[3] = 0;
 		atkArr[4] = 2;
