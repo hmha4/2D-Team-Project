@@ -82,7 +82,8 @@ void EndingScene::Render()
 	}
 
 	SetBkMode(getMemDC(), TRANSPARENT);
-	
+	SetTextColor(getMemDC(), RGB(0, 0, 0));
+	SetTextAlign(getMemDC(), TA_LEFT);
 	HFONT hFont = CreateFont(30, 0, 0, 0, 300, 0, 0, 0, DEFAULT_CHARSET,
 		OUT_STRING_PRECIS, CLIP_CHARACTER_PRECIS, PROOF_QUALITY,
 		DEFAULT_PITCH | FF_SWISS, TEXT("ÈÞ¸Õ¸ÅÁ÷Ã¼"));

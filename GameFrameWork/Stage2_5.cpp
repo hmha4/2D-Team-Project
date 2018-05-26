@@ -97,7 +97,7 @@ void Stage2_5::Update()
 		if (offset > 255)
 		{
 			offset = 255;
-			SCENEMANAGER.changeScene("StartScene");
+			SCENEMANAGER.changeScene("EndingScene");
 			SOUNDMANAGER.stop("18Stage2_5");
 			break;
 		}
