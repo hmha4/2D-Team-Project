@@ -63,46 +63,41 @@ void soundManager::addSound(string keyName, string soundName, bool bgm, bool loo
 		}
 	}
 	_mTotalSounds.insert(make_pair(keyName, &_sound[_mTotalSounds.size()]));
-	_mTotalChannels.insert(make_pair(keyName, &_channel[_mTotalChannels.size()]));
 }
 
 void soundManager::play(string keyName, float volume)
 {
-	_system->playSound(FMOD_CHANNEL_REUSE, (*_mTotalSounds[keyName]), false, _mTotalChannels[keyName]);
-	(*_mTotalChannels[keyName])->setVolume(volume);
-
-	//arrSoundsIter iter = _mTotalSounds.begin();
-	//
-	//int count = 0;
-	//
-	//for (iter; iter != _mTotalSounds.end(); iter++, count++)
-	//{
-	//	if (keyName == iter->first)
-	//	{
-	//		_system->playSound(FMOD_CHANNEL_FREE, _sound[count], false, &_channel[count]);
-	//
-	//		_channel[count]->setVolume(volume);
-	//		break;
-	//	}
-	//}
+	arrSoundsIter iter = _mTotalSounds.begin();
+	
+	int count = 0;
+	
+	for (iter; iter != _mTotalSounds.end(); iter++, count++)
+	{
+		if (keyName == iter->first)
+		{
+			_system->playSound(FMOD_CHANNEL_REUSE, _sound[count], false, &_channel[count]);
+	
+			_channel[count]->setVolume(volume);
+			break;
+		}
+	}
 }
 
 void soundManager::stop(string keyName)
 {
-	(*_mTotalChannels[keyName])->stop();
-	//arrSoundsIter iter = _mTotalSounds.begin();
-	//
-	//int count = 0;
-	//
-	//for (iter; iter != _mTotalSounds.end();iter++, count++)
-	//{
-	//	if (keyName == iter->first)
-	//	{
-	//		//노래를 아애 종료하는 개념
-	//		_channel[count]->stop();
-	//		break;
-	//	}
-	//}
+	arrSoundsIter iter = _mTotalSounds.begin();
+	
+	int count = 0;
+	
+	for (iter; iter != _mTotalSounds.end();iter++, count++)
+	{
+		if (keyName == iter->first)
+		{
+			//노래를 아애 종료하는 개념
+			_channel[count]->stop();
+			break;
+		}
+	}
 }
 
 void soundManager::pause(string keyName)

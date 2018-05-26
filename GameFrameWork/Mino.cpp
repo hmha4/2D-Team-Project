@@ -79,6 +79,7 @@ HRESULT Mino::Init(int x, int y, ENEMYSTATE eState)
 	dieTime = 0;
 	hp = 20;
 	rndValue = 0;
+	attackSoundTime = 0;
 
 	return S_OK;
 }
@@ -134,6 +135,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			atkWaitTime += TIMEMANAGER.getElapsedTime();
 			if (atkWaitTime > 0.5)
 			{
+				SOUNDMANAGER.play("33MinoAxe");
 				rndValue = RND.GetFromTo(0, 10);
 				atkWaitTime = 0;
 				isAttack = false;
@@ -172,6 +174,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			atkWaitTime += TIMEMANAGER.getElapsedTime();
 			if (atkWaitTime > 0.5)
 			{
+				SOUNDMANAGER.play("33MinoAxe");
 				rndValue = RND.GetFromTo(0, 10);
 				atkWaitTime = 0;
 				isAttack = false;
@@ -186,8 +189,15 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 	break;
 	case LEFT_ATTACK:
 	{
+		attackSoundTime += TIMEMANAGER.getElapsedTime();
+		if (attackSoundTime >= 0.5f)
+		{
+			attackSoundTime = 0;
+			SOUNDMANAGER.play("33MinoAxe");
+		}
 		if (!anim->isPlay())
 		{
+			attackSoundTime = 0;
 			for (int i = 0; i < BULLET.GetBulletVec("¹ÎÈ£°Ë").size(); i++)
 				BULLET.Destroy("¹ÎÈ£°Ë", i);
 			if (hp >= 11)
@@ -250,10 +260,17 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 	break;
 	case RIGHT_ATTACK:
 	{
+		attackSoundTime += TIMEMANAGER.getElapsedTime();
+		if (attackSoundTime >= 0.5f)
+		{
+			attackSoundTime = 0;
+			SOUNDMANAGER.play("33MinoAxe");
+		}
 		for (int i = 0; i < BULLET.GetBulletVec("¹ÎÈ£°Ë").size(); i++)
 			BULLET.Destroy("¹ÎÈ£°Ë", i);
 		if (!anim->isPlay())
 		{
+			attackSoundTime = 0;
 			if (hp >= 11)
 			{
 				attack1Time += TIMEMANAGER.getElapsedTime();
@@ -324,6 +341,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			}
 			else
 			{
+				SOUNDMANAGER.play("35MinoHead");
 				isAttack2 = true;
 				*anim = *ANIMATIONKEY.findAnimation("moLeftAttack2");
 			}
@@ -371,6 +389,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			}
 			else
 			{
+				SOUNDMANAGER.play("35MinoHead");
 				isAttack2 = true;
 				*anim = *ANIMATIONKEY.findAnimation("moRightAttack2");
 			}
@@ -530,6 +549,7 @@ void Mino::DieEnemy()
 {
 	if (hp <= 0)
 	{
+		SOUNDMANAGER.play("32MinoDie");
 		initPosY = posY;
 
 		if (eState == LEFT_IDLE || eState == LEFT_ATTACK || eState == LEFT_MOVE)
@@ -553,6 +573,7 @@ void Mino::Damaged()
 		hp--;
 	if (hp % 4 == 0 && hp != 0)
 	{
+		SOUNDMANAGER.play("34MinoDeezy");
 		if (eState == LEFT_IDLE || eState == LEFT_MOVE || eState == LEFT_ATTACK)
 		{
 			eState = LEFT_DAMAGE;

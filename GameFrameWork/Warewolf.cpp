@@ -124,6 +124,7 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 	{
 		if (!anim->isPlay())
 		{
+			SOUNDMANAGER.play("37ArrowShoot");
 			BULLET.Shot("웨어화살", posX, posY, PI, 0, 5, 0);
 			eState = LEFT_IDLE;
 			*anim = *ANIMATIONKEY.findAnimation("wwLeftIdle");
@@ -137,6 +138,7 @@ void Warewolf::EnemyUpdate(PlayerManager*pm)
 	{
 		if (!anim->isPlay())
 		{
+			SOUNDMANAGER.play("37ArrowShoot");
 			BULLET.Shot("웨어화살", posX, posY, 0, 0, 5, 1);
 			eState = RIGHT_IDLE;
 			*anim = *ANIMATIONKEY.findAnimation("wwRightIdle");
@@ -265,6 +267,7 @@ void Warewolf::DieEnemy()
 {
 	if (hp <= 0)
 	{
+		SOUNDMANAGER.play("31WareWolfDie");
 		initPosY = posY;
 
 		if (eState == LEFT_IDLE || eState == LEFT_ATTACK || eState == LEFT_MOVE)

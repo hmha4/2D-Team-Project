@@ -43,6 +43,18 @@ HRESULT PlayGround::Init()
 	SOUNDMANAGER.addSound("23PlayerSwing", "sound\\PlayerSwing.mp3", false, false);
 	SOUNDMANAGER.addSound("24PlayerLand", "sound\\PlayerLand.mp3", false, false);
 	SOUNDMANAGER.addSound("25EndingScene", "sound\\EndingScene.mp3", false, false);
+	SOUNDMANAGER.addSound("26Skeleton", "sound\\Skeleton.mp3", false, false);
+	SOUNDMANAGER.addSound("27WareWolf", "sound\\WareWolf.mp3", false, false);
+	SOUNDMANAGER.addSound("28Hit", "sound\\Hit.mp3", false, false);
+	SOUNDMANAGER.addSound("29Mino", "sound\\Mino.mp3", false, false);
+	SOUNDMANAGER.addSound("30SkeletonDie", "sound\\SkeletonDie.mp3", false, false);
+	SOUNDMANAGER.addSound("31WareWolfDie", "sound\\WareWolfDie.mp3", false, false);
+	SOUNDMANAGER.addSound("32MinoDie", "sound\\MinoDie.mp3", false, false);
+	SOUNDMANAGER.addSound("33MinoAxe", "sound\\MinoAxeAttack.mp3", false, false);
+	SOUNDMANAGER.addSound("34MinoDeezy", "sound\\MinoDeezy.mp3", false, false);
+	SOUNDMANAGER.addSound("35MinoHead", "sound\\MinoHead.mp3", false, false);
+	SOUNDMANAGER.addSound("36SkeletonAttack", "sound\\SkeletonAttack.mp3", false, false);
+	SOUNDMANAGER.addSound("37ArrowShoot", "sound\\ArrowShoot.mp3", false, false);
 
 	IMAGEMANAGER.addImage("페이드아웃", PathFile("image", "검은화면").c_str(), 800, 600, false, NULL);
 	IMAGEMANAGER.addFrameImage("STAGE_NUM", PathFile("image", "STAGE_NUM").c_str(), 247, 512, 1, 8, true, RGB(255, 0, 255));

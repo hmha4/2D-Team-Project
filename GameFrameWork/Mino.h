@@ -20,6 +20,7 @@ private:
 	
 	bool isAttack2;
 	
+	float attackSoundTime;
 public:
 	Mino(ENEMYTYPE _eType);
 	~Mino();

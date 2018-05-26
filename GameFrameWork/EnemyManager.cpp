@@ -255,6 +255,7 @@ void EnemyManager::EnemyCollision(PlayerManager*pm)
 				RECT rc;
 				if (IntersectRect(&rc, &emIter->second[i]->getRc(), &BULLET.GetBulletVec("Warrior_Weapon_" + to_string(pm->GetPlayer1()->GetWeaponLv()) + "_B")[j]->getRc()))
 				{
+					SOUNDMANAGER.play("28Hit");
 					int randomSet = RND.GetFromTo(-10, 11);
 					EFFECTMANAGER.play("에너미피격", GetCenterPos(emIter->second[i]->getRc()).x + randomSet, GetCenterPos(emIter->second[i]->getRc()).y - 40);
 					emIter->second[i]->Damaged();

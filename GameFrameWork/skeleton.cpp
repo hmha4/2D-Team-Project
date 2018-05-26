@@ -184,6 +184,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 		{
 			if (!isAttack)
 			{
+				SOUNDMANAGER.play("36SkeletonAttack");
 				BULLET.Shot("½ºÄÌ°Ë", posX-30, posY, PI, 0, 0, 0);
 				isAttack = true;
 			}
@@ -225,6 +226,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 		{
 			if (!isAttack)
 			{
+				SOUNDMANAGER.play("36SkeletonAttack");
 				BULLET.Shot("½ºÄÌ°Ë", posX+30, posY, 0, 0, 0, 0);
 				isAttack = true;
 			}
@@ -320,6 +322,7 @@ void Skeleton::DieEnemy()
 {
 	if (hp <= 0)
 	{
+		SOUNDMANAGER.play("30SkeletonDie");
 		EFFECTMANAGER.play("ÇØ°ñÆø¹ß", posX, posY);
 		isDie = true;
 		isShow = false;

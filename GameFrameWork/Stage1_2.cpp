@@ -95,6 +95,7 @@ void Stage1_2::Update()
 			_pm->ChangeAnim(34, "RightOther");
 			for (int i = 0; i < 3; i++)
 				_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
+			SOUNDMANAGER.play("26Skeleton");
 		}
 		mObjfade->Update(offset);
 	}
@@ -116,7 +117,7 @@ void Stage1_2::Update()
 				{
 					for (int i = 0; i < 4; i++)
 						_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
-
+					SOUNDMANAGER.play("26Skeleton");
 					for (int i = 0; i < 2; i++)
 					{
 						int rndNum = RND.GetFromTo(-1, 2);
@@ -124,7 +125,7 @@ void Stage1_2::Update()
 							rndNum = 1;
 						_em->ShowEnemy(WAREWOLF, _pm->GetPlayer1()->GetX() + 800 * rndNum, RND.GetFromTo(200, 350), LEFT_IDLE);
 					}
-
+					SOUNDMANAGER.play("27WareWolf");
 					showTime = 0;
 				}
 			}
@@ -161,6 +162,7 @@ void Stage1_2::Update()
 			{
 				for (int i = 0; i < 4; i++)
 					_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-600, 601), RND.GetFromTo(200, 350), LEFT_IDLE);
+				SOUNDMANAGER.play("26Skeleton");
 				changeView = true;
 			}
 		}
@@ -169,8 +171,8 @@ void Stage1_2::Update()
 			s2State = FINAL_STAGE;
 			changeView = false;
 			_em->ShowEnemy(MINO, 2800,230, LEFT_IDLE);
+			SOUNDMANAGER.play("29Mino");
 		}
-		
 	}
 	break;
 	case FINAL_STAGE:
