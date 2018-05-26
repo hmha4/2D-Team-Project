@@ -48,7 +48,7 @@ HRESULT EndingScene::Init()
 	SOUNDMANAGER.play("25EndingScene", 0.3f);
 
 	_y = WINSIZEY;
-	_rc = RectMake(0, _y, WINSIZEX / 2 - 50, WINSIZEY + 100);
+	_rc = RectMake(0, _y, WINSIZEX / 2 - 50, WINSIZEY + 200);
 	_str = "감사합니다\n\n"
 		   "The King Of Dragons\n\n"
 		   "Team NONA\n\n"
@@ -64,7 +64,8 @@ HRESULT EndingScene::Init()
 		   "Player\n"
 		   "Data\n"
 		   "Scene\n"
-		   "Camera\n";
+		   "Camera\n"
+		   "Sound\n";
 
 	return S_OK;
 }
@@ -122,7 +123,7 @@ void EndingScene::Update()
 		}
 		break;
 	}
-	_rc = RectMake(0, _y, WINSIZEX / 2 - 50, WINSIZEY + 100);
+	_rc = RectMake(0, _y, WINSIZEX / 2 - 50, WINSIZEY + 200);
 }
 
 void EndingScene::Release()
