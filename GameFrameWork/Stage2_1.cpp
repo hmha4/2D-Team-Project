@@ -60,6 +60,12 @@ void Stage2_1::Update()
 {
 	_pm->MoveRestrict((int)s1State);
 
+	RECT temp;
+	if (IntersectRect(&temp, &_em->GetEnemyVec(MINO)[0]->getShadowColRc(), &_pm->GetPlayer1()->getRc()))
+	{
+		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(MINO)[0]->getShadowColRc());
+	}
+
 	switch (s1State)
 	{
 	case OPENNING:

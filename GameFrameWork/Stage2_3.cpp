@@ -84,6 +84,7 @@ void Stage2_3::Update()
 	}
 	break;
 	case WIN_STAGE:
+	{
 		_pm->Update();
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
@@ -95,6 +96,7 @@ void Stage2_3::Update()
 			time = 0;
 			s3State = NEXT_STAGE;
 		}
+	}
 		break;
 	case NEXT_STAGE:
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);

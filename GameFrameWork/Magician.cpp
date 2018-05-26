@@ -744,12 +744,36 @@ void Magician::MovementRestrict(int stage)
 	}
 	else if (stage == 10)
 	{
-		_x += 3;
+		//_x += 3;
 	}
 	else if (stage == 11)
 	{
 		_gravity = 0.3f;
 		_startY = WINSIZEY + 100;
+	}
+	else if (stage >= 30)
+	{
+		if (_shadow.left < CAM.GetRC().left)
+		{
+			_x = CAM.GetRC().left + (_colRC.right - _colRC.left) / 2;
+			_speedX = 0;
+		}
+		else if (_shadow.right > CAM.GetRC().right)
+		{
+			_x = CAM.GetRC().right - (_colRC.right - _colRC.left) / 2;
+			_speedX = 0;
+		}
+
+		if (_shadow.top < WINSIZEY / 2 - 85)
+		{
+			_y = WINSIZEY / 2 - 85 + (_shadow.bottom - _shadow.top) - _img->GetFreamHeight() / 2;
+			_speedY = 0;
+		}
+		else if (_shadow.bottom > 300)
+		{
+			_y = 300 - _img->GetFreamHeight() / 2;
+			_speedY = 0;
+		}
 	}
 	else
 	{

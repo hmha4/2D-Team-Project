@@ -170,6 +170,7 @@ void Stage1_1::Update()
 		break;
 		case NEXT_STAGE:
 		{
+			_pm->Update();
 			offset += 2;
 			if (offset > 255)
 			{
