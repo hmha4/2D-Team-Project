@@ -7,8 +7,8 @@
 
 using namespace FMOD;
 
-#define SOUNDBUFFER					100
-#define EXTRACHANNELBUFFER		50
+#define SOUNDBUFFER					500
+#define EXTRACHANNELBUFFER			100
 #define TOTALSOUNDBUFFER SOUNDBUFFER+EXTRACHANNELBUFFER
 
 class soundManager:public SingleTonBase<soundManager>
