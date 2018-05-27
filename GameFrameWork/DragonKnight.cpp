@@ -78,7 +78,7 @@ HRESULT DragonKnight::Init(int x, int y, ENEMYSTATE eState)
 	startTime = 0;
 	sState = CHANGE_BEGIN;
 	attackTime = 0;
-	hp = 30;
+	hp = 45;
 	dieTime = 0;
 	initPosY = rc.bottom - img->GetFreamHeight() / 3 + 15;
 	setShadowY = 0;
@@ -716,7 +716,7 @@ void DragonKnight::RandomAttack(int num)
 
 void DragonKnight::UpdateAttackArr()
 {
-	if (hp > 20)
+	if (hp > 30)
 	{
 		for (int i = 0; i < 3; i++)
 			atkArr[i] = 0;
@@ -725,7 +725,7 @@ void DragonKnight::UpdateAttackArr()
 			atkArr[i] = 0;
 		atkArr[7] = 1;
 	}
-	else if (hp <= 20 && hp > 10)
+	else if (hp <= 30 && hp > 15)
 	{
 		for (int i = 0; i < 2; i++)
 			atkArr[i] = 0;
