@@ -49,7 +49,8 @@ public:
 	bool IsCollision(string bulletName, int*bulletPosX, int*bulletPosY, bool isMapCollision, HDC hdc, RECT rc);
 
 	//ÃÑ¾Ë Á¢±ÙÀÚ
-	inline bulletVec&GetBulletVec(string bulletName) {
+	inline bulletVec&GetBulletVec(string bulletName) 
+	{
 		return bMap.find(bulletName)->second;
 	}
 };

@@ -29,6 +29,7 @@ private:
 	EnemyUI*	_enemyUI;
 public:
 	EnemyManager();
+	EnemyManager(string bossName);
 	~EnemyManager();
 
 	void InputEnemy(ENEMYTYPE eType, int enemyNum);

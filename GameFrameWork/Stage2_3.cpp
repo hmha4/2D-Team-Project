@@ -26,7 +26,7 @@ HRESULT Stage2_3::Init()
 	_pm->SetPlayerPos(WINSIZEX/2, -50);
 	_pm->ChangeAnim(10, "RightFall");
 
-	_em = new EnemyManager;
+	_em = new EnemyManager("Dark Mage");
 	_em->InputEnemy(EVILMAGE, 1);
 	//fadeOut = IMAGEMANAGER.findImage("페이드아웃");
 	offset = 255;

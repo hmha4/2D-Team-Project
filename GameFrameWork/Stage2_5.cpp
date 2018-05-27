@@ -36,7 +36,7 @@ HRESULT Stage2_5::Init()
 	_pm->ChangeAnim(0, "RightRun");
 	_pm->SetPlayerPos(-50, WINSIZEY / 2 - 50);
 
-	_em = new EnemyManager;
+	_em = new EnemyManager("Red Dragon");
 	_em->InputEnemy(DRAGON, 1);
 	
 	//fadeOut = IMAGEMANAGER.findImage("페이드아웃");

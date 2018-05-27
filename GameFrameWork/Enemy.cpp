@@ -37,6 +37,11 @@ HRESULT Enemy::Init(int x, int y, ENEMYSTATE eState)
 	isShow = false;
 	isShadow = false;
 	alpha = 0;
+
+	if (DATABASE.LoadData("1P2P") == 0)
+		playerNumber = 0;
+	else
+		playerNumber = RND.GetFromTo(0, 2);
 	return S_OK;
 }
 
