@@ -63,7 +63,7 @@ void Stage1_3::Update()
 	RECT temp;
 	if (IntersectRect(&temp, &_em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc(), &_pm->GetPlayer1()->getRc()))
 	{
-		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc());
+		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc(), "normal");
 	}
 
 	switch (s3State)
@@ -102,6 +102,11 @@ void Stage1_3::Update()
 			SOUNDMANAGER.stop("09Stage1_Boss");
 			SOUNDMANAGER.play("10Victory", 0.3f);
 			_pm->ChangeWeapon(3);
+
+			for (int i = 0; i < DATABASE.LoadData("1P2P") + 1; i++)
+				EFFECTMANAGER.play("PlayerLvUp", _pm->GetPlayer(i)->GetX(), _pm->GetPlayer(i)->GetY());
+			SOUNDMANAGER.play("57LevelUp");
+
 		}
 	}
 	break;

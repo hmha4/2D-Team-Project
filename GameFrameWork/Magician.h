@@ -45,7 +45,7 @@ public:
 	//	캐릭터 애니메이션 변경(상태, 애니메이션 이름)
 	void ChangeAnim(int state, string animKey);
 	//	캐릭터 충돌(RECT)
-	void Collision(RECT rc);
+	void Collision(RECT rc, string type, string direction = "deffault");
 	//	캐릭터 이동 제한(스테이지 번호)
 	void MovementRestrict(int stage);
 	//	캐릭터 상태

@@ -685,11 +685,12 @@ void Warrior::ChangeAnim(int state, string animKey)
 	_anim->start();
 }
 
-void Warrior::Collision(RECT rc)
+void Warrior::Collision(RECT rc, string type, string direction)
 {
 	if (_state == RIGHT_HIT_1 || _state == LEFT_HIT_1 ||
 		_state == RIGHT_HIT_2 || _state == LEFT_HIT_2 ||
 		_state == RIGHT_DIE_P1 || _state == LEFT_DIE_P1 ||
+		_state == RIGHT_DIE_PF || _state == LEFT_DIE_PF ||
 		_state == RIGHT_DIE_P2 || _state == LEFT_DIE_P2 ||
 		_state == RIGHT_DIE_P3 || _state == LEFT_DIE_P3 ||
 		_state == RIGHT_DIE_P4 || _state == LEFT_DIE_P4 ||
@@ -699,15 +700,62 @@ void Warrior::Collision(RECT rc)
 		_state == RIGHT_FALL || _state == LEFT_FALL ||
 		_state == RIGHT_JUMP_ATTACK || _state == LEFT_JUMP_ATTACK || _deadTime > 0) return;
 
-	_hp -= 1;
+	if (type == "normal")
+		_hp -= 1;
+	else if (type == "fire")
+		_hp -= 3;
 
 	POINT pos = GetCenterPos(rc);
-
 	bool isLeft = false;
-	if (pos.x > _x) isLeft = false;
-	else isLeft = true;
+	if (direction == "deffault")
+	{
+		if (pos.x > _x) isLeft = false;
+		else isLeft = true;
+	}
+	else if (direction == "left")
+		isLeft = false;
+	else if (direction == "right")
+		isLeft = true;
 
-	if (_hp <= 0)
+	if (type == "normal")
+	{
+		if (_hp <= 0)
+		{
+			SOUNDMANAGER.play("22PlayerDie");
+			_friction = 5;
+			_jumpPower = 5;
+			_gravity = 0.3f;
+			_startY = _y;
+			if (!isLeft)
+				ChangeAnim((int)RIGHT_DIE_P1, "WarriorRightDie1");
+			else if (isLeft)
+				ChangeAnim((int)LEFT_DIE_P1, "WarriorLeftDie1");
+
+			return;
+		}
+
+		_friction = 5;
+
+		int rnd = RND.GetInt(2);
+
+		if (rnd == 0)
+		{
+			SOUNDMANAGER.play("20PlayerHurt1");
+			if (!isLeft)
+				ChangeAnim((int)RIGHT_HIT_1, "WarriorRightHit1");
+			else if (isLeft)
+				ChangeAnim((int)LEFT_HIT_1, "WarriorLeftHit1");
+		}
+		else
+		{
+			SOUNDMANAGER.play("21PlayerHurt2");
+			if (!isLeft)
+				ChangeAnim((int)RIGHT_HIT_2, "WarriorRightHit2");
+			else if (isLeft)
+				ChangeAnim((int)LEFT_HIT_2, "WarriorLeftHit2");
+		}
+	}
+	else if (type == "fire")
 	{
 		SOUNDMANAGER.play("22PlayerDie");
 		_friction = 5;
@@ -715,32 +763,9 @@ void Warrior::Collision(RECT rc)
 		_gravity = 0.3f;
 		_startY = _y;
 		if (!isLeft)
-			ChangeAnim((int)RIGHT_DIE_P1, "WarriorRightDie1");
+			ChangeAnim((int)RIGHT_DIE_PF, "WarriorRightDie1Fire");
 		else if (isLeft)
-			ChangeAnim((int)LEFT_DIE_P1, "WarriorLeftDie1");
-
-		return;
-	}
-
-	_friction = 5;
-
-	int rnd = RND.GetInt(2);
-
-	if (rnd == 0)
-	{
-		SOUNDMANAGER.play("20PlayerHurt1");
-		if (!isLeft)
-			ChangeAnim((int)RIGHT_HIT_1, "WarriorRightHit1");
-		else if (isLeft)
-			ChangeAnim((int)LEFT_HIT_1, "WarriorLeftHit1");
-	}
-	else
-	{
-		SOUNDMANAGER.play("21PlayerHurt2");
-		if (!isLeft)
-			ChangeAnim((int)RIGHT_HIT_2, "WarriorRightHit2");
-		else if (isLeft)
-			ChangeAnim((int)LEFT_HIT_2, "WarriorLeftHit2");
+			ChangeAnim((int)LEFT_DIE_PF, "WarriorLeftDie1Fire");
 	}
 }
 

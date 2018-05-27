@@ -180,7 +180,13 @@ void PlayerManager::Collision(string bulletName, int playerNum)
 		RECT rc;
 		if (IntersectRect(&rc, &_player[playerNum]->getRc(), &BULLET.GetBulletVec(bulletName)[j]->getRc()))
 		{
-			_player[playerNum]->Collision(BULLET.GetBulletVec(bulletName)[j]->getRc());
+			if(bulletName == "드브")
+				_player[playerNum]->Collision(BULLET.GetBulletVec(bulletName)[j]->getRc(), "fire", "left");
+			else if(bulletName == "드총")
+				_player[playerNum]->Collision(BULLET.GetBulletVec(bulletName)[j]->getRc(), "fire");
+			else
+				_player[playerNum]->Collision(BULLET.GetBulletVec(bulletName)[j]->getRc(), "normal");
+			
 			if(bulletName!= "드브")
 				BULLET.Destroy(bulletName, j);
 			break;

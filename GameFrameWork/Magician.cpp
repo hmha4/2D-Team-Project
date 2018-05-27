@@ -669,11 +669,12 @@ void Magician::ChangeAnim(int state, string animKey)
 	_anim->start();
 }
 
-void Magician::Collision(RECT rc)
+void Magician::Collision(RECT rc, string type, string direction)
 {
 	if (_state == RIGHT_HIT_1 || _state == LEFT_HIT_1 ||
 		_state == RIGHT_HIT_2 || _state == LEFT_HIT_2 ||
 		_state == RIGHT_DIE_P1 || _state == LEFT_DIE_P1 ||
+		_state == RIGHT_DIE_PF || _state == LEFT_DIE_PF ||
 		_state == RIGHT_DIE_P2 || _state == LEFT_DIE_P2 ||
 		_state == RIGHT_DIE_P3 || _state == LEFT_DIE_P3 ||
 		_state == RIGHT_DIE_P4 || _state == LEFT_DIE_P4 ||
@@ -682,15 +683,63 @@ void Magician::Collision(RECT rc)
 		_state == RIGHT_FALL || _state == LEFT_FALL ||
 		_state == RIGHT_JUMP_ATTACK || _state == LEFT_JUMP_ATTACK || _deadTime > 0) return;
 
-	_hp -= 1;
+	if (type == "normal")
+		_hp -= 1;
+	else if (type == "fire")
+		_hp -= 3;
 
 	POINT pos = GetCenterPos(rc);
-
 	bool isLeft = false;
-	if (pos.x > _x) isLeft = false;
-	else isLeft = true;
 
-	if (_hp <= 0)
+	if (direction == "deffault")
+	{
+		if (pos.x > _x) isLeft = false;
+		else isLeft = true;
+	}
+	else if (direction == "left")
+		isLeft = false;
+	else if (direction == "right")
+		isLeft = true;
+
+	if (type == "normal")
+	{
+		if (_hp <= 0)
+		{
+			SOUNDMANAGER.play("22PlayerDie");
+			_friction = 5;
+			_jumpPower = 5;
+			_gravity = 0.3f;
+			_startY = _y;
+			if (!isLeft)
+				ChangeAnim((int)RIGHT_DIE_P1, "MagicianRightDie1");
+			else if (isLeft)
+				ChangeAnim((int)LEFT_DIE_P1, "MagicianLeftDie1");
+
+			return;
+		}
+
+		_friction = 5;
+
+		int rnd = RND.GetInt(2);
+
+		if (rnd == 0)
+		{
+			SOUNDMANAGER.play("20PlayerHurt1");
+			if (!isLeft)
+				ChangeAnim((int)RIGHT_HIT_1, "MagicianRightHit1");
+			else if (isLeft)
+				ChangeAnim((int)LEFT_HIT_1, "MagicianLeftHit1");
+		}
+		else
+		{
+			SOUNDMANAGER.play("21PlayerHurt2");
+			if (!isLeft)
+				ChangeAnim((int)RIGHT_HIT_2, "MagicianRightHit2");
+			else if (isLeft)
+				ChangeAnim((int)LEFT_HIT_2, "MagicianLeftHit2");
+		}
+	}
+	else if (type == "fire")
 	{
 		SOUNDMANAGER.play("22PlayerDie");
 		_friction = 5;
@@ -698,32 +747,9 @@ void Magician::Collision(RECT rc)
 		_gravity = 0.3f;
 		_startY = _y;
 		if (!isLeft)
-			ChangeAnim((int)RIGHT_DIE_P1, "MagicianRightDie1");
+			ChangeAnim((int)RIGHT_DIE_PF, "MagicianRightDie1Fire");
 		else if (isLeft)
-			ChangeAnim((int)LEFT_DIE_P1, "MagicianLeftDie1");
-
-		return;
-	}
-
-	_friction = 5;
-
-	int rnd = RND.GetInt(2);
-
-	if (rnd == 0)
-	{
-		SOUNDMANAGER.play("20PlayerHurt1");
-		if (!isLeft)
-			ChangeAnim((int)RIGHT_HIT_1, "MagicianRightHit1");
-		else if (isLeft)
-			ChangeAnim((int)LEFT_HIT_1, "MagicianLeftHit1");
-	}
-	else
-	{
-		SOUNDMANAGER.play("21PlayerHurt2");
-		if (!isLeft)
-			ChangeAnim((int)RIGHT_HIT_2, "MagicianRightHit2");
-		else if (isLeft)
-			ChangeAnim((int)LEFT_HIT_2, "MagicianLeftHit2");
+			ChangeAnim((int)LEFT_DIE_PF, "MagicianLeftDie1Fire");
 	}
 }
 

@@ -63,12 +63,12 @@ void Stage2_1::Update()
 	RECT temp;
 	if (IntersectRect(&temp, &_em->GetEnemyVec(MINO)[0]->getShadowColRc(), &_pm->GetPlayer1()->getRc()))
 	{
-		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(MINO)[0]->getShadowColRc());
+		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(MINO)[0]->getShadowColRc(), "normal");
 	}
 	RECT temp2;
 	if (IntersectRect(&temp2, &_em->GetEnemyVec(MINO)[1]->getShadowColRc(), &_pm->GetPlayer1()->getRc()))
 	{
-		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(MINO)[1]->getShadowColRc());
+		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(MINO)[1]->getShadowColRc(), "normal");
 	}
 
 	switch (s1State)

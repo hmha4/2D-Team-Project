@@ -65,7 +65,7 @@ void Stage2_5::Update()
 	RECT temp;
 	if (IntersectRect(&temp, &_em->GetEnemyVec(DRAGON)[0]->getDragonFootRc(), &_pm->GetPlayer1()->getRc()))
 	{
-		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(DRAGON)[0]->getDragonFootRc());
+		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(DRAGON)[0]->getDragonFootRc(), "normal");
 	}
 
 	_pm->MoveRestrict((int)s5State);

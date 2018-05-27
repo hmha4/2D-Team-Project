@@ -74,7 +74,7 @@ void Stage1_2::Update()
 	RECT temp;
 	if (IntersectRect(&temp, &_em->GetEnemyVec(MINO)[0]->getShadowColRc(), &_pm->GetPlayer1()->getRc()))
 	{
-		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(MINO)[0]->getShadowColRc());
+		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(MINO)[0]->getShadowColRc(), "normal");
 	}
 
 	switch (s2State)
@@ -185,6 +185,9 @@ void Stage1_2::Update()
 			s2State = WIN_STAGE;
 			_pm->ChangeAnim(34, "RightOther");
 			_pm->ChangeWeapon(2);
+			for (int i = 0; i < DATABASE.LoadData("1P2P") + 1; i++)
+				EFFECTMANAGER.play("PlayerLvUp", _pm->GetPlayer(i)->GetX(), _pm->GetPlayer(i)->GetY());
+			SOUNDMANAGER.play("57LevelUp");
 		}
 
 		break;
