@@ -181,7 +181,7 @@ void SelectScene::Update()
 				{
 					DATABASE.SaveData("1PCharacter", _sel1Index);
 					DATABASE.SaveData("2PCharacter", _sel2Index);
-					SCENEMANAGER.changeScene("스테이지1.1");
+					SCENEMANAGER.changeScene("스테이지2.3");
 				}
 			}
 		}

@@ -159,7 +159,9 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 
 				if (attackTime > 1)
 				{
-					if (GetCenterPos(pm->GetPlayer1()->getRc()).x > GetCenterPos(shadowRc).x)
+					if (DATABASE.LoadData("1P2P") == 1)
+						playerNumber = RND.GetFromTo(0, 2);
+					if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x > GetCenterPos(shadowRc).x)
 					{
 						eState = RIGHT_MOVE;
 						*anim = *ANIMATIONKEY.findAnimation("dkRightMove");
@@ -204,7 +206,9 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 
 				if (attackTime > 1)
 				{
-					if (GetCenterPos(pm->GetPlayer1()->getRc()).x > GetCenterPos(shadowRc).x)
+					if (DATABASE.LoadData("1P2P") == 1)
+						playerNumber = RND.GetFromTo(0, 2);
+					if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x > GetCenterPos(shadowRc).x)
 					{
 						eState = RIGHT_MOVE;
 						*anim = *ANIMATIONKEY.findAnimation("dkRightMove");
@@ -241,7 +245,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 					btime = 0;
 				}
 
-				if (GetCenterPos(pm->GetPlayer1()->getRc()).y > GetCenterPos(shadowRc).y)
+				if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y > GetCenterPos(shadowRc).y)
 					angle = 3 * PI / 2;
 				else
 					angle = PI / 2;
@@ -251,6 +255,8 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 
 				if (attackTime > 1.5)
 				{
+					if (DATABASE.LoadData("1P2P") == 1)
+						playerNumber = RND.GetFromTo(0, 2);
 					attackTime = 0;
 					btime = 0;
 					eState = LEFT_MOVE;
@@ -261,7 +267,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 			else
 			{
 				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
-					GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+					GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 
 				posX -= cosf(angle) * 5;
 				posY += -sinf(angle) * 5;
@@ -287,7 +293,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 					btime1 = 0;
 				}
 
-				if (GetCenterPos(pm->GetPlayer1()->getRc()).y > GetCenterPos(shadowRc).y)
+				if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y > GetCenterPos(shadowRc).y)
 					angle = 3 * PI / 2;
 				else
 					angle = PI / 2;
@@ -297,6 +303,8 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 
 				if (attackTime > 1.5)
 				{
+					if (DATABASE.LoadData("1P2P") == 1)
+						playerNumber = RND.GetFromTo(0, 2);
 					attackTime = 0;
 					eState = RIGHT_MOVE;
 					*anim = *ANIMATIONKEY.findAnimation("dkRightMove");
@@ -306,7 +314,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 			else
 			{
 				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
-					GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+					GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 
 				posX -= cosf(angle) * 5;
 				posY += -sinf(angle) * 5;
@@ -334,12 +342,12 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 					else
 					{
 						angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(rc).y,
-							GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+							GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 						*anim = *ANIMATIONKEY.findAnimation("dkLeftAttack3");
 						anim->stop();
 						sState = LEFT_JUMPATTACK;
 						//에너미그림자와 플레이어그림자의 각도
-						setAngle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+						setAngle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 					}
 				}
 				break;
@@ -358,7 +366,9 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 
 						if (attackTime > 2)
 						{
-							if (GetCenterPos(pm->GetPlayer1()->getRc()).x > GetCenterPos(shadowRc).x)
+							if (DATABASE.LoadData("1P2P") == 1)
+								playerNumber = RND.GetFromTo(0, 2);
+							if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x > GetCenterPos(shadowRc).x)
 							{
 								eState = RIGHT_MOVE;
 								*anim = *ANIMATIONKEY.findAnimation("dkRightMove");
@@ -411,12 +421,12 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 				else
 				{
 					angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(rc).y,
-						GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+						GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 					*anim = *ANIMATIONKEY.findAnimation("dkRightAttack3");
 					anim->stop();
 					sState = RIGHT_JUMPATTACK;
 					//에너미그림자와 플레이어그림자의 각도
-					setAngle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+					setAngle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
 				}
 			}
 			break;
@@ -435,7 +445,9 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 
 					if (attackTime > 2)
 					{
-						if (GetCenterPos(pm->GetPlayer1()->getRc()).x > GetCenterPos(shadowRc).x)
+						if (DATABASE.LoadData("1P2P") == 1)
+							playerNumber = RND.GetFromTo(0, 2);
+						if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x > GetCenterPos(shadowRc).x)
 						{
 							eState = RIGHT_MOVE;
 							*anim = *ANIMATIONKEY.findAnimation("dkRightMove");
@@ -473,19 +485,19 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 		{
 			DieEnemy();
 			angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
-				GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+				GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 
 			posX += cosf(angle) * 1;
 			posY += -sinf(angle) * 1;
 			rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 			shadowRc = RectMake(rc.right - 180, rc.bottom - img->GetFreamHeight() / 3 + 15, 80, img->GetFreamHeight() / 3);
 
-			if (GetCenterPos(pm->GetPlayer1()->getRc()).y+10>GetCenterPos(shadowRc).y&&
-				GetCenterPos(pm->GetPlayer1()->getRc()).y - 10<GetCenterPos(shadowRc).y)
+			if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y+10>GetCenterPos(shadowRc).y&&
+				GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y - 10<GetCenterPos(shadowRc).y)
 			{
 				if (atkArr[atkIdx] == 0)
 				{
-					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+					if (getDistance(GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y,
 						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 200)
 					{
 						RandomAttack(atkArr[atkIdx]);
@@ -496,7 +508,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 				}
 				else if (atkArr[atkIdx] == 1)
 				{
-					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+					if (getDistance(GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y,
 						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 300)
 					{
 						RandomAttack(atkArr[atkIdx]);
@@ -507,7 +519,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 				}
 				else
 				{
-					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+					if (getDistance(GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y,
 						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 50)
 					{
 						RandomAttack(atkArr[atkIdx]);
@@ -518,7 +530,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 				}
 			}
 
-			if (GetCenterPos(pm->GetPlayer1()->getRc()).x > GetCenterPos(shadowRc).x)
+			if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x > GetCenterPos(shadowRc).x)
 			{
 				eState = RIGHT_MOVE;
 				*anim = *ANIMATIONKEY.findAnimation("dkRightMove");
@@ -532,19 +544,19 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 		{
 			DieEnemy();
 			angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
-				GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+				GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 
 			posX += cosf(angle) * 1;
 			posY += -sinf(angle) * 1;
 			rc = RectMakeCenter(posX+150, posY, img->GetFrameWidth(), img->GetFreamHeight());
 			shadowRc = RectMake(rc.right - 330, rc.bottom - img->GetFreamHeight() / 3 + 15, 80, img->GetFreamHeight() / 3);
 
-			if (GetCenterPos(pm->GetPlayer1()->getRc()).y + 10>GetCenterPos(shadowRc).y&&
-				GetCenterPos(pm->GetPlayer1()->getRc()).y - 10<GetCenterPos(shadowRc).y)
+			if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y + 10>GetCenterPos(shadowRc).y&&
+				GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y - 10<GetCenterPos(shadowRc).y)
 			{
 				if (atkArr[atkIdx] == 0)
 				{
-					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+					if (getDistance(GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y,
 						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 200)
 					{
 						RandomAttack(atkArr[atkIdx]);
@@ -555,7 +567,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 				}
 				else if (atkArr[atkIdx] == 1)
 				{
-					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+					if (getDistance(GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y,
 						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 300)
 					{
 						RandomAttack(atkArr[atkIdx]);
@@ -566,7 +578,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 				}
 				else
 				{
-					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+					if (getDistance(GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y,
 						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 50)
 					{
 						RandomAttack(atkArr[atkIdx]);
@@ -577,7 +589,7 @@ void DragonKnight::EnemyUpdate(PlayerManager * pm)
 				}
 			}
 
-			if (GetCenterPos(pm->GetPlayer1()->getRc()).x < GetCenterPos(shadowRc).x)
+			if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x < GetCenterPos(shadowRc).x)
 			{
 				eState = LEFT_MOVE;
 				*anim = *ANIMATIONKEY.findAnimation("dkLeftMove");
@@ -647,7 +659,8 @@ void DragonKnight::DieEnemy()
 
 void DragonKnight::Damaged()
 {
-	hp--;
+	if(eState!=LEFT_ATTACK&&eState!=RIGHT_ATTACK)
+		hp--;
 }
 
 void DragonKnight::RandomAttack(int num)

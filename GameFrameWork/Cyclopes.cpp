@@ -84,14 +84,13 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 	{
 		case LEFT_IDLE:
 		{
-			if (getDistance(pm->GetPlayer1()->GetX(), pm->GetPlayer1()->GetY(),
+			if (getDistance(pm->GetPlayer(playerNumber)->GetX(), pm->GetPlayer(playerNumber)->GetY(),
 				posX, posY) < 300)
 			{
 				eState = LEFT_MOVE;
 				*anim = *ANIMATIONKEY.findAnimation("ccLeftMove");
 				anim->start();
 			}
-			
 		}
 		break;
 		case RIGHT_IDLE:
@@ -110,8 +109,10 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 				if (attack1Time > 1)
 				{
 					attack1Time = 0;
+					if (DATABASE.LoadData("1P2P") == 1)
+						playerNumber = RND.GetFromTo(0, 2);
 					//플레이어가 왼쪽에있으면
-					if (pm->GetPlayer1()->GetX() < posX)
+					if (pm->GetPlayer(playerNumber)->GetX() < posX)
 					{
 						eState = LEFT_MOVE;
 						*anim = *ANIMATIONKEY.findAnimation("ccLeftMove");
@@ -138,8 +139,10 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 				if (attack1Time > 1)
 				{
 					attack1Time = 0;
+					if (DATABASE.LoadData("1P2P") == 1)
+						playerNumber = RND.GetFromTo(0, 2);
 					//플레이어가 왼쪽에있으면
-					if (pm->GetPlayer1()->GetX() < posX)
+					if (pm->GetPlayer(playerNumber)->GetX() < posX)
 					{
 						eState = LEFT_MOVE;
 						*anim = *ANIMATIONKEY.findAnimation("ccLeftMove");
@@ -183,7 +186,9 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 				{
 					attack1Time = 0;
 					//플레이어가 왼쪽에있으면
-					if (pm->GetPlayer1()->GetX() < posX)
+					if (DATABASE.LoadData("1P2P") == 1)
+						playerNumber = RND.GetFromTo(0, 2);
+					if (pm->GetPlayer(playerNumber)->GetX() < posX)
 					{
 						eState = LEFT_MOVE;
 						*anim = *ANIMATIONKEY.findAnimation("ccLeftMove");
@@ -195,6 +200,7 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 						*anim = *ANIMATIONKEY.findAnimation("ccRightMove");
 						anim->start();
 					}
+
 					gravity = 0;
 					isShot = false;
 				}
@@ -228,8 +234,10 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 				if (attack1Time > 1)
 				{
 					attack1Time = 0;
+					if (DATABASE.LoadData("1P2P") == 1)
+						playerNumber = RND.GetFromTo(0, 2);
 					//플레이어가 왼쪽에있으면
-					if (pm->GetPlayer1()->GetX() < posX)
+					if (pm->GetPlayer(playerNumber)->GetX() < posX)
 					{
 						eState = LEFT_MOVE;
 						*anim = *ANIMATIONKEY.findAnimation("ccLeftMove");
@@ -252,9 +260,10 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 			DieEnemy();
 			if (!isAttack)
 			{
+				
 				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
-					GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
-
+					GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
+				
 				posX += cosf(angle) * 2;
 				posY += -sinf(angle) * 2;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
@@ -263,12 +272,15 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 
 			RECT temp;
 			RECT temp2 = RectMakeCenter(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, 80, 10);
-			if (IntersectRect(&temp, &temp2, &pm->GetPlayer1()->getRc()))
+			
+			
+			if (IntersectRect(&temp, &temp2, &pm->GetPlayer(playerNumber)->getRc()))
 			{
 				isAttack = true;
 				anim->stop();
 			}
-
+			
+		
 			if (isAttack)
 			{
 				switch (state)
@@ -330,9 +342,10 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 			DieEnemy();
 			if (!isAttack)
 			{
+				
 				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
-					GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
-
+					GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
+				
 				posX += cosf(angle) * 2;
 				posY += -sinf(angle) * 2;
 				rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
@@ -341,11 +354,14 @@ void Cyclopes::EnemyUpdate(PlayerManager * pm)
 
 			RECT temp;
 			RECT temp2 = RectMakeCenter(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, 80, 10);
-			if (IntersectRect(&temp, &temp2, &pm->GetPlayer1()->getRc()))
+			
+		
+			if (IntersectRect(&temp, &temp2, &pm->GetPlayer(playerNumber)->getRc()))
 			{
 				isAttack = true;
 				anim->stop();
 			}
+			
 
 			if (isAttack)
 			{

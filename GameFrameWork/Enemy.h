@@ -53,6 +53,8 @@ protected:
 	bool isDie;
 	bool isShow;
 	int alpha;
+
+	int playerNumber;
 public:
 	Enemy(ENEMYTYPE _eType);
 	~Enemy();

@@ -95,7 +95,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 	{
 	case LEFT_IDLE:
 	{
-		if (getDistance(pm->GetPlayer1()->GetX(), pm->GetPlayer1()->GetY(),
+		if (getDistance(pm->GetPlayer(playerNumber)->GetX(), pm->GetPlayer(playerNumber)->GetY(),
 			posX, posY) < 300)
 		{
 			eState = LEFT_MOVE;
@@ -114,7 +114,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 		if (!isAttack)
 		{
 			angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
-				GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+				GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 
 			posX += cosf(angle) * 2;
 			posY += -sinf(angle) * 2;
@@ -124,7 +124,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 
 		RECT temp;
 		RECT temp2 = RectMakeCenter(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, 80, 10);
-		if (IntersectRect(&temp, &temp2, &pm->GetPlayer1()->getRc()))
+		if (IntersectRect(&temp, &temp2, &pm->GetPlayer(playerNumber)->getRc()))
 		{
 			isAttack = true;
 			anim->stop();
@@ -153,7 +153,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 		if (!isAttack)
 		{
 			angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
-				GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+				GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 
 			posX += cosf(angle) * 2;
 			posY += -sinf(angle) * 2;
@@ -163,7 +163,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 
 		RECT temp;
 		RECT temp2 = RectMakeCenter(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, 80, 10);
-		if (IntersectRect(&temp, &temp2, &pm->GetPlayer1()->getRc()))
+		if (IntersectRect(&temp, &temp2, &pm->GetPlayer(playerNumber)->getRc()))
 		{
 			isAttack = true;
 			anim->stop();
@@ -206,8 +206,10 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 				if (attack1Time > 1)
 				{
 					attack1Time = 0;
+					if (DATABASE.LoadData("1P2P") == 1)
+						playerNumber = RND.GetFromTo(0, 2);
 					//플레이어가 왼쪽에있으면
-					if (pm->GetPlayer1()->GetX() < posX)
+					if (pm->GetPlayer(playerNumber)->GetX() < posX)
 					{
 						eState = LEFT_MOVE;
 						*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
@@ -237,7 +239,9 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 					else
 					{
 						//플레이어가 왼쪽에있으면
-						if (pm->GetPlayer1()->GetX() < posX)
+						if (DATABASE.LoadData("1P2P") == 1)
+							playerNumber = RND.GetFromTo(0, 2);
+						if (pm->GetPlayer(playerNumber)->GetX() < posX)
 						{
 							eState = LEFT_MOVE;
 							*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
@@ -277,8 +281,10 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 				if (attack1Time > 1)
 				{
 					attack1Time = 0;
+					if (DATABASE.LoadData("1P2P") == 1)
+						playerNumber = RND.GetFromTo(0, 2);
 					//플레이어가 왼쪽에있으면
-					if (pm->GetPlayer1()->GetX() < posX)
+					if (pm->GetPlayer(playerNumber)->GetX() < posX)
 					{
 						eState = LEFT_MOVE;
 						*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
@@ -308,7 +314,9 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 					else
 					{
 						//플레이어가 왼쪽에있으면
-						if (pm->GetPlayer1()->GetX() < posX)
+						if (DATABASE.LoadData("1P2P") == 1)
+							playerNumber = RND.GetFromTo(0, 2);
+						if (pm->GetPlayer(playerNumber)->GetX() < posX)
 						{
 							eState = LEFT_MOVE;
 							*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
@@ -362,6 +370,8 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 
 				if (CAM.GetRC().left + 50 > posX||posY<200||posY>350)
 				{
+					if (DATABASE.LoadData("1P2P") == 1)
+						playerNumber = RND.GetFromTo(0, 2);
 					eState = RIGHT_MOVE;
 					*anim = *ANIMATIONKEY.findAnimation("moRightMove");
 					anim->start();
@@ -371,7 +381,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 				}
 			}
 			else
-				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 		
 		}
 		
@@ -410,6 +420,8 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 
 				if (CAM.GetRC().right - 50 < posX || posY<200 || posY>350)
 				{
+					if (DATABASE.LoadData("1P2P") == 1)
+						playerNumber = RND.GetFromTo(0, 2);
 					eState = LEFT_MOVE;
 					*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
 					anim->start();
@@ -419,7 +431,7 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 				}
 			}
 			else
-				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+				angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 
 		}
 
@@ -446,7 +458,9 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			totalPower = 0;
 			Friction = 0;
 			damagedTime = 0;
-			if (pm->GetPlayer1()->GetX() < posX)
+			if (DATABASE.LoadData("1P2P") == 1)
+				playerNumber = RND.GetFromTo(0, 2);
+			if (pm->GetPlayer(playerNumber)->GetX() < posX)
 			{
 				eState = LEFT_MOVE;
 				*anim = *ANIMATIONKEY.findAnimation("moLeftMove");
@@ -482,7 +496,9 @@ void Mino::EnemyUpdate(PlayerManager * pm)
 			totalPower = 0;
 			Friction = 0;
 			damagedTime = 0;
-			if (pm->GetPlayer1()->GetX() < posX)
+			if (DATABASE.LoadData("1P2P") == 1)
+				playerNumber = RND.GetFromTo(0, 2);
+			if (pm->GetPlayer(playerNumber)->GetX() < posX)
 			{
 				eState = LEFT_MOVE;
 				*anim = *ANIMATIONKEY.findAnimation("moLeftMove");

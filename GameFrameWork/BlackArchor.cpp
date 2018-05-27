@@ -79,9 +79,10 @@ void BlackArchor::EnemyUpdate(PlayerManager * pm)
 	case LEFT_IDLE:
 	{
 		DieEnemy();
+	
 		if (!anim->isPlay())
 		{
-			if (pm->GetPlayer1()->GetX() < posX)
+			if (pm->GetPlayer(playerNumber)->GetX() < posX)
 			{
 				eState = LEFT_MOVE;
 				*anim = *ANIMATIONKEY.findAnimation("baLeftMove");
@@ -99,9 +100,10 @@ void BlackArchor::EnemyUpdate(PlayerManager * pm)
 	case RIGHT_IDLE:
 	{
 		DieEnemy();
+		
 		if (!anim->isPlay())
 		{
-			if (pm->GetPlayer1()->GetX() < posX)
+			if (pm->GetPlayer(playerNumber)->GetX() < posX)
 			{
 				eState = LEFT_MOVE;
 				*anim = *ANIMATIONKEY.findAnimation("baLeftMove");
@@ -121,7 +123,6 @@ void BlackArchor::EnemyUpdate(PlayerManager * pm)
 		DieEnemy();
 
 		shotTime += TIMEMANAGER.getElapsedTime();
-
 		if (shotTime > 0.8)
 		{
 			if (!shot)
@@ -140,7 +141,7 @@ void BlackArchor::EnemyUpdate(PlayerManager * pm)
 			{
 				if (!anim->isPlay())
 				{
-					if (pm->GetPlayer1()->GetX() < posX)
+					if (pm->GetPlayer(playerNumber)->GetX() < posX)
 					{
 						eState = LEFT_MOVE;
 						*anim = *ANIMATIONKEY.findAnimation("baLeftMove");
@@ -152,6 +153,8 @@ void BlackArchor::EnemyUpdate(PlayerManager * pm)
 						*anim = *ANIMATIONKEY.findAnimation("baRightMove");
 						anim->start();
 					}
+					if (DATABASE.LoadData("1P2P") == 1)
+						playerNumber = RND.GetFromTo(0, 2);
 					attackTime = 0;
 					shotTime = 0;
 					shot = false;
@@ -183,7 +186,7 @@ void BlackArchor::EnemyUpdate(PlayerManager * pm)
 
 			if (attackTime > 1.3)
 			{
-				if (pm->GetPlayer1()->GetX() < posX)
+				if (pm->GetPlayer(playerNumber)->GetX() < posX)
 				{
 					eState = LEFT_MOVE;
 					*anim = *ANIMATIONKEY.findAnimation("baLeftMove");
@@ -195,6 +198,8 @@ void BlackArchor::EnemyUpdate(PlayerManager * pm)
 					*anim = *ANIMATIONKEY.findAnimation("baRightMove");
 					anim->start();
 				}
+				if (DATABASE.LoadData("1P2P") == 1)
+					playerNumber = RND.GetFromTo(0, 2);
 				attackTime = 0;
 				shotTime = 0;
 				shot = false;
@@ -205,13 +210,14 @@ void BlackArchor::EnemyUpdate(PlayerManager * pm)
 	case LEFT_MOVE:
 	{
 		DieEnemy();
-		if (getDistance(pm->GetPlayer1()->GetX(), pm->GetPlayer1()->GetY(), posX, posY) > 300)
+		
+		if (getDistance(pm->GetPlayer(playerNumber)->GetX(), pm->GetPlayer(playerNumber)->GetY(), posX, posY) > 300)
 		{
 			posX += cosf(PI) * 2;
 			rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 			shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 
-			if (pm->GetPlayer1()->GetX() + 400 > posX)
+			if (pm->GetPlayer(playerNumber)->GetX() + 400 > posX)
 			{
 				eState = LEFT_ATTACK;
 				*anim = *ANIMATIONKEY.findAnimation("baLeftAttack");
@@ -239,13 +245,14 @@ void BlackArchor::EnemyUpdate(PlayerManager * pm)
 	case RIGHT_MOVE:
 	{
 		DieEnemy();
-		if (getDistance(pm->GetPlayer1()->GetX(), pm->GetPlayer1()->GetY(), posX, posY) > 300)
+
+		if (getDistance(pm->GetPlayer(playerNumber)->GetX(), pm->GetPlayer(playerNumber)->GetY(), posX, posY) > 300)
 		{
 			posX += cosf(0) * 2;
 			rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 			shadowRc = RectMake(rc.right - 80, rc.bottom - img->GetFreamHeight() / 3 + 15, 40, img->GetFreamHeight() / 3);
 
-			if (pm->GetPlayer1()->GetX() - 400 < posX)
+			if (pm->GetPlayer(playerNumber)->GetX() - 400 < posX)
 			{
 				eState = RIGHT_ATTACK;
 				*anim = *ANIMATIONKEY.findAnimation("baRightAttack");

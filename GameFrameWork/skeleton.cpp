@@ -82,7 +82,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 	{
 		if (!anim->isPlay())
 		{
-			if (pm->GetPlayer1()->GetX() < posX)
+			if (pm->GetPlayer(playerNumber)->GetX() < posX)
 			{
 				eState = LEFT_MOVE;
 				*anim = *ANIMATIONKEY.findAnimation("skLeftMove");
@@ -101,7 +101,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 	{
 		if (!anim->isPlay())
 		{
-			if (pm->GetPlayer1()->GetX() < posX)
+			if (pm->GetPlayer(playerNumber)->GetX() < posX)
 			{
 				eState = LEFT_MOVE;
 				*anim = *ANIMATIONKEY.findAnimation("skLeftMove");
@@ -118,14 +118,14 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 	break;
 	case LEFT_MOVE:
 	{
-		if (pm->GetPlayer1()->GetX() > posX)
+		if (pm->GetPlayer(playerNumber)->GetX() > posX)
 		{
 			eState = RIGHT_MOVE;
 			*anim = *ANIMATIONKEY.findAnimation("skRightMove");
 			anim->start();
 		}
 		angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
-			GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+			GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 
 		posX += cosf(angle) * speed;
 		posY += -sinf(angle) * speed;
@@ -134,7 +134,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 
 		RECT temp;
 		RECT temp2 = RectMakeCenter(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, 10, 10);
-		if (IntersectRect(&temp, &temp2, &pm->GetPlayer1()->getRc()))
+		if (IntersectRect(&temp, &temp2, &pm->GetPlayer(playerNumber)->getRc()))
 		{
 			eState = LEFT_ATTACK;
 
@@ -146,7 +146,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 	break;
 	case RIGHT_MOVE:
 	{
-		if (pm->GetPlayer1()->GetX() < posX)
+		if (pm->GetPlayer(playerNumber)->GetX() < posX)
 		{
 			eState = LEFT_MOVE;
 			*anim = *ANIMATIONKEY.findAnimation("skLeftMove");
@@ -154,7 +154,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 		}
 
 		angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
-			GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+			GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 
 		posX += cosf(angle) * speed;
 		posY += -sinf(angle) * speed;
@@ -163,7 +163,7 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 
 		RECT temp;
 		RECT temp2 = RectMakeCenter(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y, 10, 10);
-		if (IntersectRect(&temp, &temp2, &pm->GetPlayer1()->getRc()))
+		if (IntersectRect(&temp, &temp2, &pm->GetPlayer(playerNumber)->getRc()))
 		{
 			eState = RIGHT_ATTACK;
 
@@ -190,7 +190,9 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 			}
 			if (!anim->isPlay())
 			{
-				if (pm->GetPlayer1()->GetX() < posX)
+				if (DATABASE.LoadData("1P2P") == 1)
+					playerNumber = RND.GetFromTo(0, 2);
+				if (pm->GetPlayer(playerNumber)->GetX() < posX)
 				{
 					eState = LEFT_MOVE;
 					*anim = *ANIMATIONKEY.findAnimation("skLeftMove");
@@ -232,7 +234,9 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 			}
 			if (!anim->isPlay())
 			{
-				if (pm->GetPlayer1()->GetX() < posX)
+				if (DATABASE.LoadData("1P2P") == 1)
+					playerNumber = RND.GetFromTo(0, 2);
+				if (pm->GetPlayer(playerNumber)->GetX() < posX)
 				{
 					eState = LEFT_MOVE;
 					*anim = *ANIMATIONKEY.findAnimation("skLeftMove");
@@ -269,7 +273,9 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 		{
 			totalPower = 0;
 			Friction = 0;
-			if (pm->GetPlayer1()->GetX() < posX)
+			if (DATABASE.LoadData("1P2P") == 1)
+				playerNumber = RND.GetFromTo(0, 2);
+			if (pm->GetPlayer(playerNumber)->GetX() < posX)
 			{
 				eState = LEFT_MOVE;
 				*anim = *ANIMATIONKEY.findAnimation("skLeftMove");
@@ -298,7 +304,9 @@ void Skeleton::EnemyUpdate(PlayerManager * pm)
 		{
 			totalPower = 0;
 			Friction = 0;
-			if (pm->GetPlayer1()->GetX() < posX)
+			if (DATABASE.LoadData("1P2P") == 1)
+				playerNumber = RND.GetFromTo(0, 2);
+			if (pm->GetPlayer(playerNumber)->GetX() < posX)
 			{
 				eState = LEFT_MOVE;
 				*anim = *ANIMATIONKEY.findAnimation("skLeftMove");

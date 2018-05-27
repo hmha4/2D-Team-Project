@@ -259,18 +259,35 @@ void EnemyManager::EnemyCollision(PlayerManager*pm)
 		{
 			if (!emIter->second[i]->getShowState() || emIter->second[i]->getDie())continue;
 
-			for (int j = 0; j < BULLET.GetBulletVec("Warrior_Weapon_" + to_string(pm->GetPlayer1()->GetWeaponLv()) + "_B").size(); j++)
+			for (int k = 0; k < DATABASE.LoadData("1P2P")+1; k++)
 			{
-				if (!BULLET.GetBulletVec("Warrior_Weapon_"+ to_string(pm->GetPlayer1()->GetWeaponLv()) +"_B")[j]->isShot)continue;
-				RECT rc;
-				if (IntersectRect(&rc, &emIter->second[i]->getRc(), &BULLET.GetBulletVec("Warrior_Weapon_" + to_string(pm->GetPlayer1()->GetWeaponLv()) + "_B")[j]->getRc()))
+				for (int j = 0; j < BULLET.GetBulletVec("Magician_Weapon_" + to_string(pm->GetPlayer(k)->GetWeaponLv()) + "_B").size(); j++)
 				{
-					SOUNDMANAGER.play("28Hit");
-					int randomSet = RND.GetFromTo(-10, 11);
-					EFFECTMANAGER.play("에너미피격", GetCenterPos(emIter->second[i]->getRc()).x + randomSet, GetCenterPos(emIter->second[i]->getRc()).y - 40);
-					emIter->second[i]->Damaged();
-					BULLET.Destroy("Warrior_Weapon_" +to_string(pm->GetPlayer1()->GetWeaponLv())+ "_B", j);
-					break;
+					if (!BULLET.GetBulletVec("Magician_Weapon_" + to_string(pm->GetPlayer(k)->GetWeaponLv()) + "_B")[j]->isShot)continue;
+					RECT rc;
+					if (IntersectRect(&rc, &emIter->second[i]->getRc(), &BULLET.GetBulletVec("Magician_Weapon_" + to_string(pm->GetPlayer(k)->GetWeaponLv()) + "_B")[j]->getRc()))
+					{
+						SOUNDMANAGER.play("28Hit");
+						int randomSet = RND.GetFromTo(-10, 11);
+						EFFECTMANAGER.play("에너미피격", GetCenterPos(emIter->second[i]->getRc()).x + randomSet, GetCenterPos(emIter->second[i]->getRc()).y - 40);
+						emIter->second[i]->Damaged();
+						BULLET.Destroy("Magician_Weapon_" + to_string(pm->GetPlayer(k)->GetWeaponLv()) + "_B", j);
+						break;
+					}
+				}
+				for (int j = 0; j < BULLET.GetBulletVec("Warrior_Weapon_" + to_string(pm->GetPlayer(k)->GetWeaponLv()) + "_B").size(); j++)
+				{
+					if (!BULLET.GetBulletVec("Warrior_Weapon_" + to_string(pm->GetPlayer(k)->GetWeaponLv()) + "_B")[j]->isShot)continue;
+					RECT rc;
+					if (IntersectRect(&rc, &emIter->second[i]->getRc(), &BULLET.GetBulletVec("Warrior_Weapon_" + to_string(pm->GetPlayer(k)->GetWeaponLv()) + "_B")[j]->getRc()))
+					{
+						SOUNDMANAGER.play("28Hit");
+						int randomSet = RND.GetFromTo(-10, 11);
+						EFFECTMANAGER.play("에너미피격", GetCenterPos(emIter->second[i]->getRc()).x + randomSet, GetCenterPos(emIter->second[i]->getRc()).y - 40);
+						emIter->second[i]->Damaged();
+						BULLET.Destroy("Warrior_Weapon_" + to_string(pm->GetPlayer(k)->GetWeaponLv()) + "_B", j);
+						break;
+					}
 				}
 			}
 		}

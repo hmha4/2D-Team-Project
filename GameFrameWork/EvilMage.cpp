@@ -128,7 +128,9 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 			}
 			if (showTime > 6)
 			{
-				if (GetCenterPos(pm->GetPlayer1()->getRc()).x > GetCenterPos(shadowRc).x)
+				if (DATABASE.LoadData("1P2P") == 1)
+					playerNumber = RND.GetFromTo(0, 2);
+				if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x > GetCenterPos(shadowRc).x)
 				{
 					eState = RIGHT_MOVE;
 					*anim = *ANIMATIONKEY.findAnimation("emRightMove");
@@ -178,7 +180,9 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 			}
 			if (showTime > 6)
 			{
-				if (GetCenterPos(pm->GetPlayer1()->getRc()).x > GetCenterPos(shadowRc).x)
+				if (DATABASE.LoadData("1P2P") == 1)
+					playerNumber = RND.GetFromTo(0, 2);
+				if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x > GetCenterPos(shadowRc).x)
 				{
 					eState = RIGHT_MOVE;
 					*anim = *ANIMATIONKEY.findAnimation("emRightMove");
@@ -218,7 +222,9 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 
 					if (wTime > 2)
 					{
-						if (GetCenterPos(pm->GetPlayer1()->getRc()).x > GetCenterPos(shadowRc).x)
+						if (DATABASE.LoadData("1P2P") == 1)
+							playerNumber = RND.GetFromTo(0, 2);
+						if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x > GetCenterPos(shadowRc).x)
 						{
 							eState = RIGHT_MOVE;
 							*anim = *ANIMATIONKEY.findAnimation("emRightMove");
@@ -247,12 +253,12 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 							if (i == 0)
 							{
 								atk2Angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(rc).y,
-									GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+									GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 							}
 							else
 							{
 								atk2Angle = getAngle(GetCenterPos(BULLET.GetBulletVec("¸¶ÃÑ2")[i]->shadowRc).x, GetCenterPos(BULLET.GetBulletVec("¸¶ÃÑ2")[i]->shadowRc).y,
-									GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+									GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 							}
 						}
 						atk2X += cosf(atk2Angle) * 40;
@@ -288,7 +294,9 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 
 					if (wTime > 2)
 					{
-						if (GetCenterPos(pm->GetPlayer1()->getRc()).x > GetCenterPos(shadowRc).x)
+						if (DATABASE.LoadData("1P2P") == 1)
+							playerNumber = RND.GetFromTo(0, 2);
+						if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x > GetCenterPos(shadowRc).x)
 						{
 							eState = RIGHT_MOVE;
 							*anim = *ANIMATIONKEY.findAnimation("emRightMove");
@@ -317,12 +325,12 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 							if (i == 0)
 							{
 								atk2Angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(rc).y,
-									GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+									GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 							}
 							else
 							{
 								atk2Angle = getAngle(GetCenterPos(BULLET.GetBulletVec("¸¶ÃÑ2")[i]->shadowRc).x, GetCenterPos(BULLET.GetBulletVec("¸¶ÃÑ2")[i]->shadowRc).y,
-									GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+									GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 							}
 						}
 						atk2X += cosf(atk2Angle) * 40;
@@ -347,7 +355,9 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 
 					if (exitTime > 1)
 					{
-						if (GetCenterPos(pm->GetPlayer1()->getRc()).x > GetCenterPos(shadowRc).x)
+						if (DATABASE.LoadData("1P2P") == 1)
+							playerNumber = RND.GetFromTo(0, 2);
+						if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x > GetCenterPos(shadowRc).x)
 						{
 							eState = RIGHT_MOVE;
 							*anim = *ANIMATIONKEY.findAnimation("emRightMove");
@@ -419,7 +429,9 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 
 					if (exitTime > 1)
 					{
-						if (GetCenterPos(pm->GetPlayer1()->getRc()).x > GetCenterPos(shadowRc).x)
+						if (DATABASE.LoadData("1P2P") == 1)
+							playerNumber = RND.GetFromTo(0, 2);
+						if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x > GetCenterPos(shadowRc).x)
 						{
 							eState = RIGHT_MOVE;
 							*anim = *ANIMATIONKEY.findAnimation("emRightMove");
@@ -483,26 +495,26 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 		{
 			DieEnemy();
 			angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
-				GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+				GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 
 			posX += cosf(angle) * 2;
 			posY += -sinf(angle) * 2;
 			rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 			shadowRc = RectMake(rc.right - 105, rc.bottom - img->GetFreamHeight() / 3 + 15, 80, img->GetFreamHeight() / 3);
 
-			if (GetCenterPos(pm->GetPlayer1()->getRc()).x >= GetCenterPos(shadowRc).x)
+			if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x >= GetCenterPos(shadowRc).x)
 			{
 				eState = RIGHT_MOVE;
 				*anim = *ANIMATIONKEY.findAnimation("emRightMove");
 				anim->start();
 			}
 
-			if (GetCenterPos(pm->GetPlayer1()->getRc()).y + 10>GetCenterPos(shadowRc).y&&
-				GetCenterPos(pm->GetPlayer1()->getRc()).y - 10<GetCenterPos(shadowRc).y)
+			if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y + 10>GetCenterPos(shadowRc).y&&
+				GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y - 10<GetCenterPos(shadowRc).y)
 			{
 				if (atkArr[atkIdx] == 0)
 				{
-					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+					if (getDistance(GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y,
 						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 200)
 					{
 						RandomAttack(atkArr[atkIdx]);
@@ -513,7 +525,7 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 				}
 				else if (atkArr[atkIdx] == 1)
 				{
-					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+					if (getDistance(GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y,
 						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 100)
 					{
 						RandomAttack(atkArr[atkIdx]);
@@ -524,7 +536,7 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 				}
 				else
 				{
-					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+					if (getDistance(GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y,
 						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 70)
 					{
 						RandomAttack(atkArr[atkIdx]);
@@ -540,26 +552,26 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 		{
 			DieEnemy();
 			angle = getAngle(GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y,
-				GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+				GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 
 			posX += cosf(angle) * 2;
 			posY += -sinf(angle) * 2;
 			rc = RectMakeCenter(posX, posY, img->GetFrameWidth(), img->GetFreamHeight());
 			shadowRc = RectMake(rc.right - 105, rc.bottom - img->GetFreamHeight() / 3 + 15, 80, img->GetFreamHeight() / 3);
 
-			if (GetCenterPos(pm->GetPlayer1()->getRc()).x < GetCenterPos(shadowRc).x)
+			if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x < GetCenterPos(shadowRc).x)
 			{
 				eState = LEFT_MOVE;
 				*anim = *ANIMATIONKEY.findAnimation("emLeftMove");
 				anim->start();
 			}
 
-			if (GetCenterPos(pm->GetPlayer1()->getRc()).y + 10>GetCenterPos(shadowRc).y&&
-				GetCenterPos(pm->GetPlayer1()->getRc()).y - 10<GetCenterPos(shadowRc).y)
+			if (GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y + 10>GetCenterPos(shadowRc).y&&
+				GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y - 10<GetCenterPos(shadowRc).y)
 			{
 				if (atkArr[atkIdx] == 0)
 				{
-					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+					if (getDistance(GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y,
 						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 200)
 					{
 						RandomAttack(atkArr[atkIdx]);
@@ -570,7 +582,7 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 				}
 				else if (atkArr[atkIdx] == 1)
 				{
-					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+					if (getDistance(GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y,
 						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 100)
 					{
 						RandomAttack(atkArr[atkIdx]);
@@ -581,7 +593,7 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 				}
 				else
 				{
-					if (getDistance(GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y,
+					if (getDistance(GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y,
 						GetCenterPos(shadowRc).x, GetCenterPos(shadowRc).y) < 70)
 					{
 						RandomAttack(atkArr[atkIdx]);
@@ -646,7 +658,8 @@ void EvilMage::DieEnemy()
 
 void EvilMage::Damaged()
 {
-	hp--;
+	if(eState!=LEFT_ATTACK&&eState!=RIGHT_ATTACK)
+		hp--;
 }
 
 void EvilMage::UpdateAttackArr()

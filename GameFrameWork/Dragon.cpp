@@ -116,7 +116,7 @@ void Dragon::EnemyUpdate(PlayerManager * pm)
 				case HAND_FOLLOW:
 				{
 					isShadow = true;
-					handAngle = getAngle(shadowX, shadowY, GetCenterPos(pm->GetPlayer1()->getRc()).x, GetCenterPos(pm->GetPlayer1()->getRc()).y);
+					handAngle = getAngle(shadowX, shadowY, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).x, GetCenterPos(pm->GetPlayer(playerNumber)->getRc()).y);
 					shadowX += cosf(handAngle) * 5;
 					shadowY += -sinf(handAngle) * 5;
 					shadowRc = RectMakeCenter(shadowX, shadowY, 80, 60);
@@ -127,7 +127,7 @@ void Dragon::EnemyUpdate(PlayerManager * pm)
 					colRect = RectMakeCenter(handX, handY, dHand->GetFrameWidth()/2, dHand->GetFreamHeight()+40);
 					RECT temp;
 					RECT rc = RectMakeCenter(shadowX, shadowY , 80, 2);
-					if(IntersectRect(&temp,&rc,&pm->GetPlayer1()->getRc()))
+					if(IntersectRect(&temp,&rc,&pm->GetPlayer(playerNumber)->getRc()))
 					{
 						SOUNDMANAGER.stop("52DragonBreath");
 						SOUNDMANAGER.play("53DragonHand");
@@ -175,6 +175,8 @@ void Dragon::EnemyUpdate(PlayerManager * pm)
 						waitTime = 0;
 						eState = LEFT_MOVE;
 						*dHandAnim = *ANIMATIONKEY.findAnimation("dhaIdle");
+						if (DATABASE.LoadData("1P2P") == 1)
+							playerNumber = RND.GetFromTo(0, 2);
 					}
 				}
 				break;
