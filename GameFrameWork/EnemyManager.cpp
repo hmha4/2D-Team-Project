@@ -75,7 +75,86 @@ EnemyManager::EnemyManager()
 	_enemyUI = new EnemyUI;
 	//보스체력 초기화
 	//			maxHP, 에너지바 너비, 이름 입력
-	_enemyUI->Init(90, 400, "DragonKnight");
+	_enemyUI->Init(90, 400, "enemy");
+	ZORDER.InputObj(_enemyUI);
+
+	//보스체력 활성화
+	_enemyUI->SetDrawHP(true);
+}
+
+EnemyManager::EnemyManager(string bossName)
+{
+	IMAGEMANAGER.addImage("용기사그림자", PathFile("image\\Enemy", "용기사그림자").c_str(), 80, 40, true, RGB(255, 0, 255));
+	checkEnemyNum = 1;
+
+	IMAGEMANAGER.addFrameImage("웨어울프화살", PathFile("image\\Enemy", "웨어울프화살").c_str(), 60, 20, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER.addFrameImage("웨어총알그림자", PathFile("image\\Enemy", "웨어총알그림자").c_str(), 60, 10, 1, 1, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("웨어화살", IMAGEMANAGER.findImage("웨어울프화살"), 30, false, 0, 2);
+	BULLET.BulletShadowSetting("웨어화살", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(0, 0, 60, 10), 50);
+
+	IMAGEMANAGER.addFrameImage("스켈레톤검", PathFile("image\\Enemy", "스켈레톤검").c_str(), 60, 60, 1, 1, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("스켈검", IMAGEMANAGER.findImage("스켈레톤검"), 30, false, 0, 1);
+	BULLET.BulletShadowSetting("스켈검", NULL, RectMake(0, 0, 40, 10), 50);
+
+	BULLET.BulletSetting("민호검", IMAGEMANAGER.findImage("스켈레톤검"), 30, false, 0, 1);
+	BULLET.BulletShadowSetting("민호검", NULL, RectMake(0, 0, 120, 20), 50);
+
+	BULLET.BulletSetting("용기사검0", IMAGEMANAGER.findImage("스켈레톤검"), 30, false, 0, 1);
+	BULLET.BulletShadowSetting("용기사검0", NULL, RectMake(0, 0, 200, 20), 50);
+
+	IMAGEMANAGER.addFrameImage("용기사검", PathFile("image\\Enemy", "용기사칼").c_str(), 1136, 70, 16, 1, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("용기사검", IMAGEMANAGER.findImage("용기사검"), 30, true, 40, 1);
+	BULLET.BulletShadowSetting("용기사검", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(0, 0, 60, 10), 70);
+
+	IMAGEMANAGER.addFrameImage("블랙아처화살", PathFile("image\\Enemy", "블랙아처화살").c_str(), 80, 52, 1, 2, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("블랙아처화살", IMAGEMANAGER.findImage("블랙아처화살"), 30, 0, 0, 2);
+	BULLET.BulletShadowSetting("블랙아처화살", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(0, 0, 60, 10), 50);
+
+	IMAGEMANAGER.addFrameImage("외눈거인돌", PathFile("image\\Enemy", "외눈거인돌").c_str(), 60, 83, 1, 2, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("외돌", IMAGEMANAGER.findImage("외눈거인돌"), 30, 0, 0, 2);
+	BULLET.BulletShadowSetting("외돌", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(0, 0, 60, 10), 50);
+
+	IMAGEMANAGER.addFrameImage("마총1", PathFile("image\\Enemy", "마법사총1").c_str(), 209, 60, 4, 1, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("마총1", IMAGEMANAGER.findImage("마총1"), 30, true, 20, 1);
+	BULLET.BulletShadowSetting("마총1", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(0, 0, 60, 10), 70);
+
+	IMAGEMANAGER.addFrameImage("마총2", PathFile("image\\Enemy", "마법사총2").c_str(), 187, 140, 5, 1, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("마총2", IMAGEMANAGER.findImage("마총2"), 30, true, 10, 1, false);
+	BULLET.BulletShadowSetting("마총2", NULL, RectMake(0, 0, 60, 10), 70);
+
+	IMAGEMANAGER.addFrameImage("마총3", PathFile("image\\Enemy", "마법사총3").c_str(), 180, 60, 3, 1, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("마총3", IMAGEMANAGER.findImage("마총3"), 30, true, 10, 1);
+	BULLET.BulletShadowSetting("마총3", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(0, 0, 60, 10), 70);
+
+	IMAGEMANAGER.addFrameImage("드브", PathFile("image\\Enemy", "드래곤브레스").c_str(), 1200, 132, 4, 1, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("드브", IMAGEMANAGER.findImage("드브"), 30, true, 20, 1, false);
+	BULLET.BulletShadowSetting("드브", NULL, RectMake(0, 0, 300, 80), 60);
+
+	IMAGEMANAGER.addFrameImage("드총", PathFile("image\\Enemy", "드래곤총").c_str(), 240, 60, 4, 1, true, RGB(255, 0, 255));
+	BULLET.BulletSetting("드총", IMAGEMANAGER.findImage("드총"), 30, true, 60, 1);
+	BULLET.BulletShadowSetting("드총", IMAGEMANAGER.findImage("웨어총알그림자"), RectMake(0, 0, 60, 10), 70);
+
+	EFFECTMANAGER.addEffect("마3폭", PathFile("image\\Enemy", "마총3폭발").c_str(), 400, 60, 80, 60, 30, 1, 20);
+	EFFECTMANAGER.addEffect("돌폭발", PathFile("image\\Enemy", "돌폭발이펙트").c_str(), 420, 100, 84, 100, 20, 1, 20);
+	for (int i = 0; i < 30; i++)
+	{
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("웨어화살")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("스켈검")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("용기사검")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("용기사검0")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("블랙아처화살")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("외돌")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("마총1")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("마총2")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("마총3")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("드브")[i]);
+		ZORDER.InputObj((gameNode*)BULLET.GetBulletVec("드총")[i]);
+	}
+
+	_enemyUI = new EnemyUI;
+	//보스체력 초기화
+	//			maxHP, 에너지바 너비, 이름 입력
+	_enemyUI->Init(90, 400, bossName);
 	ZORDER.InputObj(_enemyUI);
 
 	//보스체력 활성화

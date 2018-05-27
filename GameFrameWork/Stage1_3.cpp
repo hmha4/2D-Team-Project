@@ -30,7 +30,7 @@ HRESULT Stage1_3::Init()
 	_pm->SetPlayerPos(WINSIZEX / 2, -50);
 	_pm->ChangeAnim(10, "RightFall");
 
-	_em = new EnemyManager;
+	_em = new EnemyManager("Dragon Knight");
 	_em->Init();
 	_em->InputEnemy(DRAGONKNIGHT, 1);
 
