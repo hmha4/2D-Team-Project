@@ -384,7 +384,8 @@ void EnemyManager::EnemyCollision(PlayerManager*pm)
 		{
 			if (!emIter1->second[i]->getShowState() || emIter1->second[i]->getDie())continue;
 
-			if (emIter1->second[i]->getEnemyType() == DRAGON || emIter1->second[i]->getEnemyType() == EVILMAGE || emIter1->second[i]->getEnemyType() == DRAGONKNIGHT)
+			if (emIter1->second[i]->getEnemyType() == DRAGON || emIter1->second[i]->getEnemyType() == EVILMAGE || emIter1->second[i]->getEnemyType() == DRAGONKNIGHT||
+				emIter1->second[i]->getEnemyType()==CYCLOPSE|| emIter1->second[i]->getEnemyType() == MINO)
 				continue;
 			
 			RECT rc;

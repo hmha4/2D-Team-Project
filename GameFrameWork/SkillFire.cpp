@@ -36,14 +36,15 @@ void SkillFire::Update()
 
 void SkillFire::Render()
 {
-	if (_fireAni->isPlay()) 
+	if (_fireAni->isPlay())
 	{
 		_fire->aniRender(getMemDC()
 			, (_zRC.left + _zRC.right) / 2 - _fire->GetFrameWidth() / 2
 			, _zRC.bottom - _fire->GetFreamHeight(),
 			_fireAni);
-		Rectangle(getMemDC(), _zRC.left, _zRC.top, _zRC.right, _zRC.bottom);
 	}
+	else
+		_zRC = RectMake(0, 0, 0, 0);
 }
 
 void SkillFire::StartAni()

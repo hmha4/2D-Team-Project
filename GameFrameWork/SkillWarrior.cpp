@@ -74,6 +74,8 @@ void SkillWarrior::Render()
 							, CAM.GetCenterY() - _warrior->GetFreamHeight() / 2 - 30
 							, _warriorAni);
 	}
+	else
+		_zRC = RectMake(0, 0, 0, 0);
 }
 
 void SkillWarrior::StartAni()

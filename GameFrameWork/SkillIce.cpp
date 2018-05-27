@@ -46,7 +46,10 @@ void SkillIce::Render()
 			, (_zRC.left + _zRC.right) / 2 - _ice->GetFrameWidth() / 2
 			, _zRC.bottom - _ice->GetFreamHeight()
 			, _iceAni);
-		Rectangle(getMemDC(), _zRC.left, _zRC.top, _zRC.right, _zRC.bottom);
+	}
+	else
+	{
+		_zRC=RectMake(0, 0, 0, 0);
 	}
 }
 

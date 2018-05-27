@@ -36,7 +36,9 @@ void SkillThunder::Update()
 
 void SkillThunder::Render()
 {
-	if (_thunderAni->isPlay()) _thunder->aniRender(getMemDC(), (_zRC.left + _zRC.right) / 2 - (_thunder->GetFrameWidth() / 2), _zRC.top - _thunder->GetFreamHeight(), _thunderAni);
+	if (_thunderAni->isPlay()) 
+		_thunder->aniRender(getMemDC(), (_zRC.left + _zRC.right) / 2 - (_thunder->GetFrameWidth() / 2), _zRC.top - _thunder->GetFreamHeight(), _thunderAni);
+
 }
 
 void SkillThunder::StartAni()
