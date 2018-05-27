@@ -125,5 +125,9 @@ public:
 
 	//	Z-ORDER¸¦ À§ÇÑ RC
 	inline RECT &getRc() { return _zRC; }
+	inline SkillWarrior*GetSkill1() {return _warrior;}
+	inline SkillIce*GetSkill2() { return _ice; }
+	inline SkillFire*GetSkill3(int idx) { return _fire[idx]; }
+
 };
 

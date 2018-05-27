@@ -100,7 +100,7 @@ void Stage1_1::Update()
 
 					if (showTime > 2)
 					{
-						for (int i = 0; i < 3; i++)
+						for (int i = 0; i < 5; i++)
 							_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
 
 						SOUNDMANAGER.play("26Skeleton");

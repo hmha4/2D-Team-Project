@@ -55,5 +55,7 @@ public:
 	void MoveRestrict(int stage);
 	void Collision(string bulletName, int playerNum);
 	void ChangeWeapon(int num);
+
+	inline PlayUI*GetPlayUI() { return UI; }
 };
 

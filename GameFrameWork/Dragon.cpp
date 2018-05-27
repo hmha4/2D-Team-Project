@@ -56,7 +56,7 @@ HRESULT Dragon::Init(int x, int y, ENEMYSTATE eState)
 	dHandRc = RectMake(WINSIZEX / 2-300, -200, dHand->GetFrameWidth(), dHand->GetFreamHeight());
 	handX = GetCenterPos(dHandRc).x;
 	handY = GetCenterPos(dHandRc).y;
-	colRect = RectMakeCenter(handX, handY, dHand->GetFrameWidth()/2, dHand->GetFreamHeight()+40);
+	colRect = RectMakeCenter(handX, handY, dHand->GetFrameWidth()/2, dHand->GetFreamHeight()+60);
 	initHandX = handX;
 	initHandY = handY;
 
@@ -124,7 +124,7 @@ void Dragon::EnemyUpdate(PlayerManager * pm)
 					handX = GetCenterPos(shadowRc).x;
 					handY = initHandY;
 					dHandRc = RectMakeCenter(handX, handY , dHand->GetFrameWidth(), dHand->GetFreamHeight());
-					colRect = RectMakeCenter(handX, handY, dHand->GetFrameWidth()/2, dHand->GetFreamHeight()+40);
+					colRect = RectMakeCenter(handX, handY, dHand->GetFrameWidth()/2, dHand->GetFreamHeight()+60);
 					RECT temp;
 					RECT rc = RectMakeCenter(shadowX, shadowY , 80, 2);
 					if(IntersectRect(&temp,&rc,&pm->GetPlayer(playerNumber)->getRc()))
@@ -139,7 +139,7 @@ void Dragon::EnemyUpdate(PlayerManager * pm)
 				{
 					handY += 6;
 					dHandRc = RectMakeCenter(handX, handY , dHand->GetFrameWidth(), dHand->GetFreamHeight());
-					colRect = RectMakeCenter(handX, handY, dHand->GetFrameWidth()/2, dHand->GetFreamHeight()+40);
+					colRect = RectMakeCenter(handX, handY, dHand->GetFrameWidth()/2, dHand->GetFreamHeight()+60);
 					*dHandAnim = *ANIMATIONKEY.findAnimation("dhaAttack");
 					if (!dHandAnim->isPlay())
 						dHandAnim->start();
@@ -168,7 +168,7 @@ void Dragon::EnemyUpdate(PlayerManager * pm)
 						if (handY<initHandY - 20 || handY>initHandY + 20)
 							handY += -sinf(handAngle) * 3;
 						dHandRc = RectMakeCenter(handX, handY, dHand->GetFrameWidth(), dHand->GetFreamHeight());
-						colRect = RectMakeCenter(handX, handY, dHand->GetFrameWidth()/2, dHand->GetFreamHeight()+40);
+						colRect = RectMakeCenter(handX, handY, dHand->GetFrameWidth()/2, dHand->GetFreamHeight()+60);
 					}
 					if (waitTime > 2.5)
 					{

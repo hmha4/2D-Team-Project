@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "EnemyManager.h"
 #include "Bullet.h"
+#include "SkillIce.h"
+#include "SkillWarrior.h"
+#include "SkillFire.h"
 
 EnemyManager::EnemyManager()
 	:enemyNum(0)
@@ -339,7 +342,7 @@ void EnemyManager::EnemyCollision(PlayerManager*pm)
 		{
 			if (!emIter->second[i]->getShowState() || emIter->second[i]->getDie())continue;
 
-			for (int k = 0; k < DATABASE.LoadData("1P2P")+1; k++)
+			for (int k = 0; k < DATABASE.LoadData("1P2P") + 1; k++)
 			{
 				for (int j = 0; j < BULLET.GetBulletVec("Magician_Weapon_" + to_string(pm->GetPlayer(k)->GetWeaponLv()) + "_B").size(); j++)
 				{
@@ -368,6 +371,39 @@ void EnemyManager::EnemyCollision(PlayerManager*pm)
 						BULLET.Destroy("Warrior_Weapon_" + to_string(pm->GetPlayer(k)->GetWeaponLv()) + "_B", j);
 						break;
 					}
+				}
+			}
+		}
+	}
+
+	enemyMapIter emIter1 = enemyMap.begin();
+
+	for (; emIter1 != enemyMap.end(); emIter1++)
+	{
+		for (int i = 0; i < emIter1->second.size(); i++)
+		{
+			if (!emIter1->second[i]->getShowState() || emIter1->second[i]->getDie())continue;
+
+			if (emIter1->second[i]->getEnemyType() == DRAGON || emIter1->second[i]->getEnemyType() == EVILMAGE || emIter1->second[i]->getEnemyType() == DRAGONKNIGHT)
+				continue;
+			
+			RECT rc;
+			if (IntersectRect(&rc, &pm->GetPlayUI()->GetSkill2()->getRc(), &emIter1->second[i]->getRc()))
+			{
+				emIter1->second[i]->getHp() -= 0.0001;
+			}
+			RECT rc2;
+			if (IntersectRect(&rc2, &pm->GetPlayUI()->GetSkill1()->getRc(), &emIter1->second[i]->getRc()))
+			{
+				emIter1->second[i]->getHp() -= 0.0001;
+			}
+
+			for (int j = 0; j < 8; j++)
+			{
+				RECT rc3;
+				if (IntersectRect(&rc3, &pm->GetPlayUI()->GetSkill3(j)->getRc(), &emIter1->second[i]->getRc()))
+				{
+					emIter1->second[i]->getHp() -= 0.0001;
 				}
 			}
 		}
