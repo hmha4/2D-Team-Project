@@ -35,6 +35,7 @@ struct tagPlayerInfo
 {
 	int		job;
 	int		hp;
+	int		maxHp;
 	int		level;
 	int		skill;
 	int		score;
@@ -99,7 +100,7 @@ public:
 	void DrawClass(HDC hdc, int x, int y, tagPlayerInfo player);
 	void DrawScore(HDC hdc, int x, int y, int score);
 	void DrawHP(HDC hdc, int x, int y);
-	void DrawHPgauge(HDC hdc, int x, int y, int hp);
+	void DrawHPgauge(HDC hdc, int x, int y, int hp, int maxHp);
 	void DrawLevel(HDC hdc, int x, int y, int level);
 	void DrawSkillGauge(HDC hdc, RECT rc, int player, int selectSkill);
 	void DrawInserCoin(HDC hdc);
@@ -113,7 +114,7 @@ public:
 	void UseSkill(int player);
 	void ChargeSkillGauge(int playerNum);
 
-	void SetLvHp(int playerNum, int hp, int lv);
+	void SetLvHp(int playerNum, int maxhp, int hp, int lv);
 	void SetPlayerPos(int playerNum, float x, float y, int state);
 	void SetPlayerClass(int playerNum, int job);
 

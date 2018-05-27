@@ -183,7 +183,7 @@ void PlayUI::MakeTable(HDC hdc, int x, int y, tagPlayerInfo player, int playerNu
 	_itemBox[playerNum]->DrawSelectItem(hdc, (equip[2].left + equipTitle[2].left) / 2, (equip[2].top + equip[2].bottom) / 2, _skill[playerNum].selectSkill);
 
 	//HP 게이지 출력
-	DrawHPgauge(hdc, hpGauge.left - 3, hpGauge.top + 2, player.hp);
+	DrawHPgauge(hdc, hpGauge.left - 3, hpGauge.top + 2, player.hp, player.maxHp);
 	_hpGauge->Render(hdc, hpGauge.left - 3, hpGauge.top + 2);
 
 	//렉트 배경 투명으로 다시 변경
@@ -205,7 +205,7 @@ void PlayUI::MakeTable(HDC hdc, int x, int y, tagPlayerInfo player, int playerNu
 	//직업, HP, 점수 출력
 	DrawClass(hdc, (face.left + face.right) / 2, top + 5, player);
 	DrawHP(hdc, (hp.left + hp.right) / 2, hp.top + 5);
-	DrawScore(hdc, (hpGauge.left + hpGauge.right) / 2 + 10, top + 5, player.score);
+	//DrawScore(hdc, (hpGauge.left + hpGauge.right) / 2 + 10, top + 5, player.score);
 	
 	//장비 레벨 출력
 	DrawLevel(hdc, (equipTitle[0].left + equipTitle[0].right) / 2, equipTitle[0].top + 5, player.level);
@@ -299,19 +299,27 @@ void PlayUI::DrawHP(HDC hdc, int x, int y)
 	DeleteObject(font);
 }
 
-void PlayUI::DrawHPgauge(HDC hdc, int x, int y, int hp)
+void PlayUI::DrawHPgauge(HDC hdc, int x, int y, int hp, int maxHp)
 {
 	RECT hpRC;
 	RECT blackRC;
 	HBRUSH brush, oldBrush;
 
-	int red = (10 - hp) * 25;
-	int green = hp * 25;
+	//int red = (10 - hp) * 25;
+	//int green = hp * 25;
+	
+	int currentGauge = 180 * ((float)hp / float(maxHp));
+
+	COLORREF hpColor;
+	if (currentGauge <= 36) hpColor = RGB(255, 0, 0);
+	else if (currentGauge <= 135 && currentGauge > 36) hpColor = RGB(248, 155, 21);
+	else if (currentGauge > 135) hpColor = RGB(0, 255, 0);
 
 	hpRC = RectMake(x, y, 180, 15);
-	blackRC = RectMake(x + 180 - (10 - hp) * 18, y, (10 - hp) * 18, 15);
+	blackRC = RectMake(x + 180, y, -(180 - currentGauge), 15);
 
-	brush = CreateSolidBrush(RGB(red, green, 0));
+
+	brush = CreateSolidBrush(hpColor);
 	oldBrush = (HBRUSH)SelectObject(getMemDC(), brush);
 
 	Rectangle(getMemDC(), hpRC.left, hpRC.top, hpRC.right, hpRC.bottom);
@@ -427,15 +435,17 @@ void PlayUI::DrawInserCoin(HDC hdc)
 	DeleteObject(font);
 }
 
-void PlayUI::SetLvHp(int playerNum, int hp, int lv)
+void PlayUI::SetLvHp(int playerNum, int maxhp, int hp, int lv)
 {
 	if (playerNum == 0)
 	{
+		_player1.maxHp = maxhp;
 		_player1.hp = hp;
 		_player1.level = lv;
 	}
 	else
 	{
+		_player2.maxHp = maxhp;
 		_player2.hp = hp;
 		_player2.level = lv;
 	}
