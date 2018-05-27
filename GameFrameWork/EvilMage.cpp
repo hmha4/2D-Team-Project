@@ -61,7 +61,7 @@ HRESULT EvilMage::Init(int x, int y, ENEMYSTATE eState)
 	atk2Y = 0;
 	shot2Time = 0;
 	setangle2 = 0;
-	hp = 30;
+	hp = 45;
 	shot3Time = 0;
 	dieTime = 0;
 	return S_OK;
@@ -665,7 +665,7 @@ void EvilMage::Damaged()
 
 void EvilMage::UpdateAttackArr()
 {
-	if (hp > 20)
+	if (hp > 30)
 	{
 		for (int i = 0; i < 3; i++)
 			atkArr[i] = 0;
@@ -675,7 +675,7 @@ void EvilMage::UpdateAttackArr()
 		atkArr[6] = 2;
 		atkArr[7] = 1;
 	}
-	else if (hp <= 20 && hp > 10)
+	else if (hp <= 30 && hp > 15)
 	{
 		for (int i = 0; i < 2; i++)
 			atkArr[i] = 0;

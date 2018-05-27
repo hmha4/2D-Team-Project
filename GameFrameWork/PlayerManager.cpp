@@ -188,7 +188,7 @@ void PlayerManager::Collision(string bulletName, int playerNum)
 			else
 				_player[playerNum]->Collision(BULLET.GetBulletVec(bulletName)[j]->getRc(), "normal");
 			
-			if(bulletName!= "드브")
+			if(bulletName!= "드브"&&bulletName != "마총2")
 				BULLET.Destroy(bulletName, j);
 			break;
 		}
