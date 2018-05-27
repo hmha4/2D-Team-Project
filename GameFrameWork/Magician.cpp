@@ -14,6 +14,8 @@ Magician::~Magician()
 HRESULT Magician::Init(float x, float y, int player)
 {
 	Character::Init(x, y, player);
+	ChangeWeapon();
+	_hp = _maxHp;
 
 	// ======== 이미지 초기화 ======== //
 	IMAGEMANAGER.addFrameImage("Magician1", PathFile("image\\Character", "Magician_Weapon_1").c_str(), 1500, 1050, 10, 7, true, RGB(255, 0, 255));
@@ -631,28 +633,24 @@ void Magician::ChangeWeapon()
 	case Character::WEAPON_1:
 		_img = IMAGEMANAGER.findImage("Magician1");
 		_weaponEffectName = "Magician_Weapon_1_B";
-		_hp = 4;
 		_maxHp = 4;
 		_atk = 2;
 		break;
 	case Character::WEAPON_2:
 		_img = IMAGEMANAGER.findImage("Magician2");
 		_weaponEffectName = "Magician_Weapon_2_B";
-		_hp = 8;
 		_maxHp = 8;
 		_atk = 4;
 		break;
 	case Character::WEAPON_3:
 		_img = IMAGEMANAGER.findImage("Magician3");
 		_weaponEffectName = "Magician_Weapon_3_B";
-		_hp = 12;
 		_maxHp = 12;
 		_atk = 6;
 		break;
 	case Character::WEAPON_4:
 		_img = IMAGEMANAGER.findImage("Magician4");
 		_weaponEffectName = "Magician_Weapon_4_B";
-		_hp = 16;
 		_maxHp = 16;
 		_atk = 8;
 		break;
