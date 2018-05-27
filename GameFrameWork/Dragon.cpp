@@ -303,6 +303,7 @@ void Dragon::EnemyUpdate(PlayerManager * pm)
 		break;
 		case LEFT_DIE:
 		{
+			isShadow = false;
 			dieTime += TIMEMANAGER.getElapsedTime();
 
 			static float dtime = 0;
