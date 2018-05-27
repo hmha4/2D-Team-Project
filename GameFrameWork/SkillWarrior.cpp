@@ -44,6 +44,11 @@ void SkillWarrior::Update()
 
 	if (_start) StartAni();
 
+	if (_warriorAni->isPlay())
+	{
+		_zRC = RectMake(CAM.GetX(), CAM.GetY(), 800, 800);
+	}
+
 	for (int ii = 0; ii < 5; ++ii)
 	{
 		_thunder[ii]->Update();

@@ -126,10 +126,6 @@ void PlayUI::Render()
 	}
 
 	_UItitle->Render(getMemDC(), CAM.GetX() + 400 - (_UItitle->GetWidth() / 2), CAM.GetY() + 450 - (_UItitle->GetHeight() / 2));
-
-	char status[128];
-	sprintf_s(status, "p1.job : %d", _player1.job);
-	TextOut(getMemDC(), CAM.GetX() + 120, CAM.GetY() + 20, status, strlen(status));
 }
 
 void PlayUI::MakeTable(HDC hdc, int x, int y, tagPlayerInfo player, int playerNum)
