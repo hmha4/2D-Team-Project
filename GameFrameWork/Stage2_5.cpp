@@ -82,12 +82,14 @@ void Stage2_5::Update()
 		if (!isOnce)
 		{
 			_em->ShowEnemy(DRAGON, WINSIZEX / 2-100, WINSIZEY / 2-120, LEFT_IDLE);
+			SOUNDMANAGER.play("51Dragon");
 			isOnce = true;
 		}
 
 		offset -= 2;
 		if (offset < 0)
 		{
+			SOUNDMANAGER.play("52DragonBreath");
 			s5State = FIRST_STAGE;
 			offset = 0;
 			CAM.SetSize(WINSIZEX, WINSIZEY);
@@ -110,7 +112,7 @@ void Stage2_5::Update()
 
 			if (offset > 255)
 			{
-				offset = 0;
+				offset = 255;
 				s5State = WIN_STAGE;
 				img = IMAGEMANAGER.findImage("¿ëÁ×À½");
 			}
@@ -119,6 +121,10 @@ void Stage2_5::Update()
 	break;
 	case WIN_STAGE:
 	{
+		offset -= 2;
+		if (offset < 0)
+			offset = 0;
+		
 		_pm->Update();
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
 
@@ -127,6 +133,8 @@ void Stage2_5::Update()
 
 		if (nextTime > 4)
 		{
+			SOUNDMANAGER.stop("18Stage2_5");
+			SOUNDMANAGER.play("10Victory", 0.3f);
 			_pm->ChangeAnim(34, "RightOther");
 			s5State = NEXT_STAGE;
 			nextTime = 0;
@@ -135,12 +143,11 @@ void Stage2_5::Update()
 	break;
 	case NEXT_STAGE:
 		CAM.Update(WINSIZEX / 2, WINSIZEY / 2, 5, false);
-		offset += 2;
+		offset += 1;
 		if (offset > 255)
 		{
 			offset = 255;
 			SCENEMANAGER.changeScene("EndingScene");
-			SOUNDMANAGER.stop("18Stage2_5");
 			break;
 		}
 		mObjfade->Update(offset);

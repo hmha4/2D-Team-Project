@@ -310,7 +310,7 @@
       <Filter>PlayGround\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Dragon.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>PlayGround\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

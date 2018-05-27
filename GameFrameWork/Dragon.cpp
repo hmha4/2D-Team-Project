@@ -129,6 +129,8 @@ void Dragon::EnemyUpdate(PlayerManager * pm)
 					RECT rc = RectMakeCenter(shadowX, shadowY , 80, 2);
 					if(IntersectRect(&temp,&rc,&pm->GetPlayer1()->getRc()))
 					{
+						SOUNDMANAGER.stop("52DragonBreath");
+						SOUNDMANAGER.play("53DragonHand");
 						dAttack = HAND_DOWN;
 					}
 				}
@@ -144,6 +146,7 @@ void Dragon::EnemyUpdate(PlayerManager * pm)
 
 					if (handY > GetCenterPos(shadowRc).y-200)
 					{
+						SOUNDMANAGER.play("52DragonBreath");
 						dAttack = HAND_UP;
 					}
 				}
@@ -197,6 +200,7 @@ void Dragon::EnemyUpdate(PlayerManager * pm)
 			
 			if (ont > 4)
 			{
+				SOUNDMANAGER.play("52DragonBreath");
 				ont = 0;
 				st = 0;
 				eState = LEFT_MOVE;
@@ -221,6 +225,7 @@ void Dragon::EnemyUpdate(PlayerManager * pm)
 
 				if (et > 4)
 				{
+					SOUNDMANAGER.play("52DragonBreath");
 					eState = LEFT_MOVE;
 					*dHeadAnim = *ANIMATIONKEY.findAnimation("dhIdle");
 					dHeadAnim->start();
@@ -231,6 +236,7 @@ void Dragon::EnemyUpdate(PlayerManager * pm)
 				f += TIMEMANAGER.getElapsedTime();
 				if (f > 0.7)
 				{
+					SOUNDMANAGER.play("39DragonKnightKnife");
 					f = 0;
 					static float s1 = PI / 6;
 					static float s2 = PI / 9;
@@ -322,6 +328,8 @@ void Dragon::DieEnemy()
 {
 	if (hp <= 0)
 	{
+		SOUNDMANAGER.stop("52DragonBreath");
+		SOUNDMANAGER.play("56DragonDie");
 		if (eState == LEFT_IDLE || eState == LEFT_ATTACK || eState == LEFT_MOVE || eState == LEFT_ATTACK3 || eState == LEFT_ATTACK2)
 		{
 			eState = LEFT_DIE;
@@ -348,6 +356,8 @@ void Dragon::RandomAttack(int num)
 	}
 	else if (num == 1)
 	{
+		SOUNDMANAGER.stop("52DragonBreath");
+		SOUNDMANAGER.play("54DragonFire");
 		eState = LEFT_ATTACK2;
 		*dHeadAnim = *ANIMATIONKEY.findAnimation("dhAttack");
 		dHeadAnim->start();
@@ -355,6 +365,8 @@ void Dragon::RandomAttack(int num)
 	}
 	else
 	{
+		SOUNDMANAGER.stop("52DragonBreath");
+		SOUNDMANAGER.play("55DragonFire2");
 		eState = LEFT_ATTACK3;
 		*dHeadAnim = *ANIMATIONKEY.findAnimation("dhAttack");
 		dHeadAnim->start();
