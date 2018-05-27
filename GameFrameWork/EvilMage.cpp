@@ -395,6 +395,7 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 
 					if (t > 0.8)
 					{
+						SOUNDMANAGER.play("39DragonKnightKnife");
 						static int power1 = 100;
 						static int power2 = 200;
 						BULLET.Shot("¸¶ÃÑ3", posX, posY, 3 * PI / 2, 0, 10, 0, posY + power1);
@@ -469,6 +470,7 @@ void EvilMage::EnemyUpdate(PlayerManager * pm)
 
 					if (t > 0.8)
 					{
+						SOUNDMANAGER.play("39DragonKnightKnife");
 						static int power1 = 100;
 						static int power2 = 200;
 						BULLET.Shot("¸¶ÃÑ3", posX, posY, 3 * PI / 2, 0, 10, 0, posY + power1);
