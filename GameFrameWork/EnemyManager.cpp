@@ -265,9 +265,9 @@ void EnemyManager::Update(PlayerManager*pm)
 				emIter->second[i]->Update(pm);
 				
 				if(emIter->second[i]->getEnemyType()== DRAGONKNIGHT)
-					_enemyUI->HpUpdate(emIter->second[i]->getHp()*3);
+					_enemyUI->HpUpdate(emIter->second[i]->getHp()*2);
 				if (emIter->second[i]->getEnemyType() == EVILMAGE)
-					_enemyUI->HpUpdate(emIter->second[i]->getHp() * 3);
+					_enemyUI->HpUpdate(emIter->second[i]->getHp() * 2);
 				if (emIter->second[i]->getEnemyType() == DRAGON)
 					_enemyUI->HpUpdate(emIter->second[i]->getHp() * 2);
 			}

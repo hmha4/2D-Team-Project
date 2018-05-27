@@ -52,9 +52,6 @@ void Stage1_3::Render()
 	_pm->Render();
 
 	//fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
-	char temp[255];
-	sprintf(temp, "%d", _em->GetEnemyNum());
-	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, temp, strlen(temp));
 }
 
 void Stage1_3::Update()
