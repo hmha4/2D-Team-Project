@@ -77,7 +77,7 @@ HRESULT PlayGround::Init()
 	SOUNDMANAGER.addSound("57LevelUp", "sound\\LvUp.mp3", false, false);
 
 	IMAGEMANAGER.addFrameImage("LevelUp", PathFile("image\\Character", "LevelUp").c_str(), 256, 71, 4, 1, true, RGB(255, 0, 255));
-	EFFECTMANAGER.addEffect("PlayerLvUp", "LevelUp", 256, 71, 256/4, 71, 10, 1, 1);
+	EFFECTMANAGER.addEffect("PlayerLvUp", "LevelUp", 256, 71, 256/4, 71, 10, 1, 2);
 
 	IMAGEMANAGER.addImage("페이드아웃", PathFile("image", "검은화면").c_str(), 800, 600, false, NULL);
 	IMAGEMANAGER.addFrameImage("STAGE_NUM", PathFile("image", "STAGE_NUM").c_str(), 247, 512, 1, 8, true, RGB(255, 0, 255));
