@@ -658,8 +658,7 @@ void EvilMage::DieEnemy()
 
 void EvilMage::Damaged()
 {
-	if(eState!=LEFT_ATTACK&&eState!=RIGHT_ATTACK)
-		hp--;
+	hp--;
 }
 
 void EvilMage::UpdateAttackArr()

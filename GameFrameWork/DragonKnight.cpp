@@ -659,8 +659,7 @@ void DragonKnight::DieEnemy()
 
 void DragonKnight::Damaged()
 {
-	if(eState!=LEFT_ATTACK&&eState!=RIGHT_ATTACK)
-		hp--;
+	hp--;
 }
 
 void DragonKnight::RandomAttack(int num)

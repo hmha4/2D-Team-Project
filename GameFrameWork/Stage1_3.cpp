@@ -39,7 +39,7 @@ HRESULT Stage1_3::Init()
 
 	_time = 0;
 	_totalTime = 0;
-
+	isOnceShow = false;
 	SOUNDMANAGER.play("09Stage1_Boss", 0.3f);
 
 	return S_OK;
@@ -52,8 +52,9 @@ void Stage1_3::Render()
 	_pm->Render();
 
 	//fadeOut->alphaRender(getMemDC(), CAM.GetX(), CAM.GetY(), offset);
-
-	Rectangle(getMemDC(), _em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc().left, _em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc().top, _em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc().right, _em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc().bottom);
+	char temp[255];
+	sprintf(temp, "%d", _em->GetEnemyNum());
+	TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, temp, strlen(temp));
 }
 
 void Stage1_3::Update()
@@ -66,6 +67,14 @@ void Stage1_3::Update()
 		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc(), "normal");
 	}
 
+	if (DATABASE.LoadData("1P2P") == 1)
+	{
+		RECT temp3;
+		if (IntersectRect(&temp3, &_em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc(), &_pm->GetPlayer2()->getRc()))
+		{
+			_pm->GetPlayer2()->Collision(_em->GetEnemyVec(DRAGONKNIGHT)[0]->getShadowColRc(), "normal");
+		}
+	}
 	switch (s3State)
 	{
 	case OPENNING:
