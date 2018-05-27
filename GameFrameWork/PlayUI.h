@@ -1,9 +1,9 @@
 #pragma once
 #include "gameNode.h"
 
-#define MAX_ICE 30.0f
-#define MAX_FIRE 60.0f
-#define MAX_THUNDER 120.0f
+#define MAX_ICE 10.0f
+#define MAX_FIRE 20.0f
+#define MAX_THUNDER 60.0f
 
 struct tagSkill
 {
@@ -104,9 +104,9 @@ public:
 	void DrawSkillGauge(HDC hdc, RECT rc, int player, int selectSkill);
 	void DrawInserCoin(HDC hdc);
 
-	void MakeSkillThunder(int player);
-	void MakeSkillIce(int player);
-	void MakeSkillFire(int player);
+	void MakeSkillThunder();
+	void MakeSkillIce();
+	void MakeSkillFire();
 	void ActiveSkillBox(int player);
 	void ChangeSkillBox(int player);
 	void SelectSkillBox(int player);

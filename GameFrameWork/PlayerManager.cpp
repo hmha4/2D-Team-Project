@@ -67,7 +67,6 @@ HRESULT PlayerManager::Init()
 void PlayerManager::Render()
 {
 	_itemBox[0]->Render();
-	if (_playerNum == 1) _itemBox[1]->Render();
 }
 
 void PlayerManager::Update()

@@ -40,7 +40,7 @@ void SkillFire::Render()
 	{
 		_fire->aniRender(getMemDC()
 			, (_zRC.left + _zRC.right) / 2 - _fire->GetFrameWidth() / 2
-			, _zRC.bottom - _fire->GetFreamHeight(),
+			, _zRC.top - _fire->GetFreamHeight(),
 			_fireAni);
 		Rectangle(getMemDC(), _zRC.left, _zRC.top, _zRC.right, _zRC.bottom);
 	}
@@ -59,5 +59,5 @@ void SkillFire::StartSkill(float x, float y)
 	_x = x;
 	_y = y;
 
-	_zRC = RectMake(_x, _y, 70, 50);
+	_zRC = RectMake(_x, _y, 70, 10);
 }

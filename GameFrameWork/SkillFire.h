@@ -7,7 +7,6 @@ private:
 	float			_x;
 	float			_y;
 	RECT			_zRC;
-	RECT			_collisionRC;
 	BOOL			_start;
 	BOOL			_playAni;
 

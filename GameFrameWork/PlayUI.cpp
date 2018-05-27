@@ -78,22 +78,14 @@ void PlayUI::Release()
 
 void PlayUI::Update()
 {
-	if (KEYMANAGER.isOnceKeyDown('E'))	MakeSkillThunder(1);
-	if (KEYMANAGER.isOnceKeyDown('R'))	MakeSkillFire(0);
-	if (KEYMANAGER.isOnceKeyDown('T'))	MakeSkillIce(0);
+	//if (KEYMANAGER.isOnceKeyDown('E'))	MakeSkillThunder();
+	//if (KEYMANAGER.isOnceKeyDown('R'))	MakeSkillFire();
+	//if (KEYMANAGER.isOnceKeyDown('T'))	MakeSkillIce();
 
 	if (KEYMANAGER.isStayKeyDown('Q'))	ActiveSkillBox(0);
 	if (KEYMANAGER.isOnceKeyDown('Q'))  ChangeSkillBox(0);
 	if (KEYMANAGER.isOnceKeyUp('Q'))	_skill[0].enterKeyTime = 0;
 	if (KEYMANAGER.isOnceKeyDown('W'))	SelectSkillBox(0);
-
-	if (_playerNum == 1)
-	{
-		if (KEYMANAGER.isStayKeyDown('O'))	ActiveSkillBox(1);
-		if (KEYMANAGER.isOnceKeyDown('O'))  ChangeSkillBox(1);
-		if (KEYMANAGER.isOnceKeyUp('O'))	_skill[1].enterKeyTime = 0;
-		if (KEYMANAGER.isOnceKeyDown('P'))	SelectSkillBox(1);
-	}
 
 	//UI Z-ORDER를 위한 렉트 업데이트
 	_zRC = RectMake(CAM.GetX(), CAM.GetY() + 600, 800, 100);
@@ -105,10 +97,7 @@ void PlayUI::Update()
 	{
 		_fire[ii]->Update();
 	}
-	for (int ii = 0; ii < _playerNum + 1; ++ii)
-	{
-		ChargeSkillGauge(ii);
-	}
+	ChargeSkillGauge(_playerNum);
 }
 
 void PlayUI::Render()
@@ -126,10 +115,6 @@ void PlayUI::Render()
 	}
 
 	_UItitle->Render(getMemDC(), CAM.GetX() + 400 - (_UItitle->GetWidth() / 2), CAM.GetY() + 450 - (_UItitle->GetHeight() / 2));
-
-	char status[128];
-	sprintf_s(status, "p1.job : %d", _player1.job);
-	TextOut(getMemDC(), CAM.GetX() + 120, CAM.GetY() + 20, status, strlen(status));
 }
 
 void PlayUI::MakeTable(HDC hdc, int x, int y, tagPlayerInfo player, int playerNum)
@@ -367,18 +352,11 @@ void PlayUI::DrawSkillGauge(HDC hdc, RECT rc, int player, int selectSkill)
 	}
 
 	COLORREF color;
-	float percent = ((float)height) / ((float)((rc.bottom - rc.top)));
-	//if (height < (rc.bottom - rc.top) / 4) color = _red;
-	//else if (height < (rc.bottom - rc.top) / 2 && height > (rc.bottom - rc.top) / 4) color = _orange;
-	//else if (height < (rc.bottom - rc.top) / 4 * 3 && height > (rc.bottom - rc.top) / 2) color = _yellow;
-	//else if (height < (rc.bottom - rc.top) / 1 && height > (rc.bottom - rc.top) / 4 * 3) color = _green;
-	//else if (height >= (rc.bottom - rc.top))	color = RGB(RND.GetInt(255), RND.GetInt(255), RND.GetInt(255));
-
-	if (percent < 0.25) color = _red;
-	if (percent < 0.5 && percent >= 0.25)  color = _orange;
-	if (percent < 0.75 && percent >= 0.5)  color = _yellow;
-	if (percent < 1.0f && percent >= 0.75) color = _green;
-	if (percent >= 1.0f) color = RGB(RND.GetInt(255), RND.GetInt(255), RND.GetInt(255));
+	if (height < (rc.bottom - rc.top) / 4) color = _red;
+	else if (height < (rc.bottom - rc.top) / 2 && height > (rc.bottom - rc.top) / 4) color = _orange;
+	else if (height < (rc.bottom - rc.top) / 4 * 3 && height > (rc.bottom - rc.top) / 2) color = _yellow;
+	else if (height < (rc.bottom - rc.top) / 1 && height > (rc.bottom - rc.top) / 4 * 3) color = _green;
+	else if (height >= (rc.bottom - rc.top))	color = RGB(RND.GetInt(255), RND.GetInt(255), RND.GetInt(255));
 
 	brush = CreateSolidBrush(color);
 	oldBrush = (HBRUSH)SelectObject(hdc, brush);
@@ -445,67 +423,25 @@ void PlayUI::SetLvHp(int playerNum, int hp, int lv)
 	}
 }
 
-void PlayUI::MakeSkillThunder(int player)
+void PlayUI::MakeSkillThunder()
 {
 	_warrior->StartSkill();
 	SOUNDMANAGER.play("11Thunder", 1.0f);
 }
 
-void PlayUI::MakeSkillIce(int player)
+void PlayUI::MakeSkillIce()
 {
-	if (player == 0)
-	{
-		if (_player1.state == 0 || _player1.state == 2 || _player1.state == 4 || _player1.state == 6)
-		{
-			//job = 1  마법사
-			if (_player1.job == 1)	_ice->StartSkill(_player1.x + 60, _player1.y + 25, false);
-			else _ice->StartSkill(_player1.x + 60, _player1.y + 45, false);
-		}
-		if (_player1.state == 1 || _player1.state == 3 || _player1.state == 5 || _player1.state == 7)
-		{
-			//job = 1 마법사
-			if (_player1.job == 1)	_ice->StartSkill(_player1.x - 165, _player1.y + 25, true);
-			else _ice->StartSkill(_player1.x - 165, _player1.y + 45, true);
-		}
-	}
-	else
-	{
-		if (_player2.state == 0 || _player2.state == 2 || _player2.state == 4 || _player2.state == 6)
-		{
-			if (_player2.job == 1)	_ice->StartSkill(_player2.x + 70, _player2.y + 25, true);
-			else _ice->StartSkill(_player2.x + 70, _player2.y + 45, true);
-		}
-		else
-		{
-			if (_player2.job == 1)	_ice->StartSkill(_player2.x + 70, _player2.y + 25, true);
-			else _ice->StartSkill(_player2.x + 70, _player2.y + 45, true);
-		}
-	}
+	_ice->StartSkill(_player1.x + 70, _player1.y + 90);
 	SOUNDMANAGER.play("13Ice", 1.0f);
 }
 
-void PlayUI::MakeSkillFire(int player)
+void PlayUI::MakeSkillFire()
 {
-	if (player == 0)
+	for (int ii = 0; ii < 8; ++ii)
 	{
-		for (int ii = 0; ii < 8; ++ii)
-		{
-			int distance = 100;
-			float angle = PI / 4;
-			if (_player1.job == 0)	_fire[ii]->StartSkill(_player1.x - 23 + cosf(angle * ii) * distance, _player1.y + 75 - sinf(angle * ii) * distance / 4);
-			else	_fire[ii]->StartSkill(_player1.x - 35 + cosf(angle * ii) * distance, _player1.y + 55 - sinf(angle * ii) * distance / 4);
-
-		}
-	}
-	else
-	{
-		for (int ii = 0; ii < 8; ++ii)
-		{
-			int distance = 100;
-			float angle = PI / 4;
-			if (_player2.job == 0)	_fire[ii]->StartSkill(_player2.x - 23 + cosf(angle * ii) * distance, _player2.y + 75 - sinf(angle * ii) * distance / 4);
-			else	_fire[ii]->StartSkill(_player2.x - 35 + cosf(angle * ii) * distance, _player2.y + 55 - sinf(angle * ii) * distance / 4);
-		}
+		int distance = 100;
+		float angle = PI / 4;
+		_fire[ii]->StartSkill(_player1.x - 23 + cosf(angle * ii) * distance, _player1.y + 75 - sinf(angle * ii) * distance / 4);
 	}
 	SOUNDMANAGER.play("12Fire", 1.0f);
 }
@@ -542,15 +478,15 @@ void PlayUI::UseSkill(int player)
 	if (!_skill[player].fullCharge[_skill[player].selectSkill]) return;
 	if (_skill[player].selectSkill == 0)
 	{
-		MakeSkillIce(player);
+		MakeSkillIce();
 	}
 	else if (_skill[player].selectSkill == 1)
 	{
-		MakeSkillFire(player);
+		MakeSkillFire();
 	}
 	else if (_skill[player].selectSkill == 2)
 	{
-		MakeSkillThunder(player);
+		MakeSkillThunder();
 	}
 	_skill[player].currentGauge[_skill[player].selectSkill] = 0;
 	_skill[player].fullCharge[_skill[player].selectSkill] = false;
@@ -580,14 +516,12 @@ void PlayUI::SetPlayerPos(int playerNum, float x, float y, int state)
 		_player1.x = x;
 		_player1.y = y;
 		_player1.state = state;
-		_player1.score = 0;
 	}
 	else
 	{
 		_player2.x = x;
 		_player2.y = y;
 		_player2.state = state;
-		_player2.score = 0;
 	}
 }
 
