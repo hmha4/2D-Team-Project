@@ -77,6 +77,15 @@ void Stage1_2::Update()
 		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(MINO)[0]->getShadowColRc(), "normal");
 	}
 
+	if (DATABASE.LoadData("1P2P") == 1)
+	{
+		RECT temp2;
+		if (IntersectRect(&temp2, &_em->GetEnemyVec(MINO)[0]->getShadowColRc(), &_pm->GetPlayer2()->getRc()))
+		{
+			_pm->GetPlayer2()->Collision(_em->GetEnemyVec(MINO)[0]->getShadowColRc(), "normal");
+		}
+	}
+
 	switch (s2State)
 	{
 	case OPENNING:

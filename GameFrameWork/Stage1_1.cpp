@@ -36,7 +36,7 @@ HRESULT Stage1_1::Init()
 	_em = new EnemyManager;
 	_em->InputEnemy(MINO, 1);
 	_em->InputEnemy(WAREWOLF, 3);
-	_em->InputEnemy(SKELETON, 3);
+	_em->InputEnemy(SKELETON, 5);
 
 	//정적 배경은 따로넣어서 렌더에서 처리하면됨
 	//fadeOut = IMAGEMANAGER.findImage("페이드아웃");
@@ -79,7 +79,7 @@ void Stage1_1::Update()
 				offset = 0;
 				CAM.SetSize(GAMESIZEX / 2, WINSIZEY);
 				CAM.SetState("FOLLOW");
-				for (int i = 0; i < 3; i++)
+				for (int i = 0; i < 5; i++)
 				{
 					_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-300, 301), RND.GetFromTo(200, 350), LEFT_IDLE);
 				}
@@ -142,7 +142,7 @@ void Stage1_1::Update()
 
 					if (showTime2 > 2)
 					{
-						for (int i = 0; i < 2; i++)
+						for (int i = 0; i < 4; i++)
 							_em->ShowEnemy(SKELETON, _pm->GetPlayer1()->GetX() + RND.GetFromTo(-600, 601), RND.GetFromTo(200, 350), LEFT_IDLE);
 						SOUNDMANAGER.play("26Skeleton");
 						for (int i = 0; i < 2; i++)

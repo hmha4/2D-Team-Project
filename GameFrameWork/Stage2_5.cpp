@@ -68,6 +68,15 @@ void Stage2_5::Update()
 		_pm->GetPlayer1()->Collision(_em->GetEnemyVec(DRAGON)[0]->getDragonFootRc(), "normal");
 	}
 
+	if (DATABASE.LoadData("1P2P") == 1)
+	{
+		RECT temp2;
+		if (IntersectRect(&temp2, &_em->GetEnemyVec(DRAGON)[0]->getDragonFootRc(), &_pm->GetPlayer2()->getRc()))
+		{
+			_pm->GetPlayer2()->Collision(_em->GetEnemyVec(DRAGON)[0]->getDragonFootRc(), "normal");
+		}
+	}
+
 	_pm->MoveRestrict((int)s5State);
 
 	switch (s5State)
